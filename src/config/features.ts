@@ -1,20 +1,22 @@
-import { FiBox, FiStar, FiZap } from "react-icons/fi";
+import { FaShieldAlt } from "react-icons/fa";
+import { TbAdCircleOff } from "react-icons/tb";
+import { TbFreeRights } from "react-icons/tb";
 import type { Feature } from "./types";
 
 export const features: Feature[] = [
 	{
-		title: "Main Feature",
-		description: "Describe your main feature here. What makes it special?",
-		icon: FiStar,
+		title: "隐私保护",
+		description: "无服务器上传，所有数据只会缓存在本地，所有通讯直接和哔哩哔哩服务器交互。",
+		icon: FaShieldAlt,
 	},
 	{
-		title: "Another Feature",
-		description: "What else can your app do? Tell users about it here.",
-		icon: FiZap,
+		title: "无广告",
+		description: "整个app没有任何广告干扰你的体验。",
+		icon: TbAdCircleOff,
 	},
 	{
-		title: "One More Feature",
-		description: "Add another key feature of your application here.",
-		icon: FiBox,
+		title: "完全免费",
+		description: "现在和将来都不会向用户收取任何费用。",
+		icon: TbFreeRights,
 	},
 ];

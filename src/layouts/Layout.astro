@@ -1,6 +1,5 @@
 ---
 import Footer from "@components/sections/Footer";
-import GithubCorner from "@components/ui/GithubCorner";
 import PageAnimation from "@components/ui/PageAnimation";
 
 interface Props {
@@ -44,7 +43,6 @@ const { title, description, showFooter = true } = Astro.props;
     </script>
   </head>
   <body class="transition-colors duration-300 bg-gray-50 text-gray-900 dark:bg-black dark:text-white">
-    <GithubCorner href="https://github.com/bohd4nx/mobile-landing" />
     <div class="mx-auto min-h-screen max-w-[800px]">
       <PageAnimation client:load>
         <main><slot /></main>

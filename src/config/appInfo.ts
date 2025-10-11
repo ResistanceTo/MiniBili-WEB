@@ -1,14 +1,13 @@
 import type { StoreLinks } from "./types";
 
 export const appInfo = {
-	title: "Your App Name",
+	title: "MiniBili",
 	description:
-		"Here you can write a brief description of your application. Tell users about its main features and benefits in 1-2 sentences.",
+		"免费、无广告、无跟踪器的iOS第三方哔哩哔哩客户端。",
 	logo: {
-		src: "favicon-512.svg",
+		src: "MiniBili.png",
 	},
 	storeLinks: {
 		apple: "#",
-		google: "#",
 	} as StoreLinks,
 };

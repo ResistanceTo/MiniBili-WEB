@@ -4,7 +4,7 @@ import { memo } from "react";
 const Features = ({ items }: FeaturesProps) => (
 	<div className="mb-16">
 		<h2 className="mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-			Features
+			特点
 		</h2>
 		<div className="grid grid-cols-1 gap-6 md:grid-cols-3">
 			{items.map(({ icon: Icon, title, description }) => (

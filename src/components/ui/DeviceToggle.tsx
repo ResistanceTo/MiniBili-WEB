@@ -12,13 +12,13 @@ const DeviceToggle = ({ activeDevice, onToggle }: DeviceToggleProps) => {
 				key="iphone"
 				isActive={activeDevice === "iphone"}
 				onClick={handleIphoneClick}
-				label="Iphone"
+				label="iPhone"
 			/>
 			<DeviceButton
 				key="ipad"
 				isActive={activeDevice === "ipad"}
 				onClick={handleIpadClick}
-				label="Ipad"
+				label="iPad"
 			/>
 		</div>
 	);

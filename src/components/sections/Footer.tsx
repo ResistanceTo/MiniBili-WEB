@@ -57,8 +57,8 @@ const Footer = () => {
 
 						<div className="flex items-center gap-6">
 							{[
-								{ href: "/privacy", icon: FiShield, text: "Privacy" },
-								{ href: "/terms", icon: FiFileText, text: "Terms" },
+								{ href: "/privacy", icon: FiShield, text: "隐私协议" },
+								{ href: "/terms", icon: FiFileText, text: "条款" },
 							].map(({ href, icon: Icon, text }) => (
 								<a
 									key={text}

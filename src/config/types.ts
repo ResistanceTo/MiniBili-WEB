@@ -18,7 +18,6 @@ export interface FAQ {
 
 export interface StoreLinks {
 	apple: string;
-	google: string;
 }
 
 export interface SocialLink {
@@ -47,7 +46,6 @@ export interface AppData {
 	storeLinks: StoreLinks;
 	socialLinks: SocialLink[];
 	logo: AppLogo;
-	reviews: Review[];
 }
 
 export interface WithImages {
@@ -59,7 +57,6 @@ export interface WithItems<T> {
 }
 
 export interface StoreButtonProps {
-	store: "apple" | "google";
 	href: string;
 	label: string;
 	storeName: string;

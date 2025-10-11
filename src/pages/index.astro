@@ -2,13 +2,12 @@
 import AppHero from "@components/sections/AppHero";
 import FAQ from "@components/sections/FAQ";
 import Features from "@components/sections/Features";
-import Reviews from "@components/sections/Reviews";
 import Screenshots from "@components/sections/Screenshots";
 import Lightbox from "@components/ui/Lightbox";
 import Layout from "@layouts/Layout.astro";
 import { siteConfig } from "../config";
 
-const { title, description, screenshots, features, faqs, storeLinks, logo, reviews } = siteConfig;
+const { title, description, screenshots, features, faqs, storeLinks, logo } = siteConfig;
 ---
 
 <Layout title={title} description={description}>
@@ -16,7 +15,6 @@ const { title, description, screenshots, features, faqs, storeLinks, logo, revie
     <AppHero {title} {description} {storeLinks} {logo} />
     <div class="mb-16"><Screenshots images={screenshots} client:load /></div>
     <Features items={features} />
-    <Reviews items={reviews} client:visible />
     <FAQ items={faqs} client:visible />
   </main>
 </Layout>

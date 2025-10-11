@@ -123,7 +123,6 @@ export const appInfo = {
     },
     storeLinks: {
         apple: "https://apps.apple.com/app/your-app", // App Store link
-        google: "https://play.google.com/store/apps/details?id=your.app" // Google Play link
     }
 };
 ```

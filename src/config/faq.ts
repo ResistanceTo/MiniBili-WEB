@@ -2,15 +2,7 @@ import type { FAQ } from "./types";
 
 export const faq: FAQ[] = [
 	{
-		question: "Question 1?",
-		answer: "Answer to question 1 goes here.",
-	},
-	{
-		question: "Question 2?",
-		answer: "Answer to question 2 goes here.",
-	},
-	{
-		question: "Question 3?",
-		answer: "Answer to question 3 goes here.",
+		question: "iPad兼容？",
+		answer: "主要面向平台是iPhone，iPad会使用拉伸的方式展示，可能部分内容不那么优雅",
 	},
 ];

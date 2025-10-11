@@ -18,7 +18,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 		<div className="mb-16">
 			<div className="mb-6 flex items-center justify-between">
 				<h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-					Screenshots
+					屏幕截图
 				</h2>
 				<DeviceToggle activeDevice={activeDevice} onToggle={setActiveDevice} />
 			</div>
