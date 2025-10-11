@@ -8,6 +8,6 @@ export const appInfo = {
 		src: "MiniBili.png",
 	},
 	storeLinks: {
-		apple: "#",
+		apple: "https://testflight.apple.com/join/TgcHSGwb",
 	} as StoreLinks,
 };
