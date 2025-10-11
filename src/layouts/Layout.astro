@@ -1,0 +1,85 @@
+---
+import Footer from "@components/sections/Footer";
+import GithubCorner from "@components/ui/GithubCorner";
+import PageAnimation from "@components/ui/PageAnimation";
+
+interface Props {
+  title: string;
+  description?: string;
+  showFooter?: boolean;
+}
+
+const { title, description, showFooter = true } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content={Astro.generator}>
+    
+    <link rel="icon" type="image/webp" href="/favicon-512.svg">
+    
+    <title>{title}</title>
+    {description && <meta name="description" content={description}>}
+    
+    <meta property="og:title" content={title}>
+    {description && <meta property="og:description" content={description}>}
+    <meta property="og:image" content={new URL('/favicon-512.svg', Astro.url).href}>
+    
+    <script is:inline>
+      const theme = localStorage.getItem('theme') || 'system';
+      const root = document.documentElement;
+      root.classList.remove('light', 'dark');
+      
+      if (theme === 'system') {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        root.classList.add(prefersDark ? 'dark' : 'light');
+      } else {
+        root.classList.add(theme);
+      }
+      
+      !localStorage.getItem('theme') && localStorage.setItem('theme', 'system');
+    </script>
+  </head>
+  <body class="transition-colors duration-300 bg-gray-50 text-gray-900 dark:bg-black dark:text-white">
+    <GithubCorner href="https://github.com/bohd4nx/mobile-landing" />
+    <div class="mx-auto min-h-screen max-w-[800px]">
+      <PageAnimation client:load>
+        <main><slot /></main>
+        {showFooter && <Footer client:load />}
+      </PageAnimation>
+    </div>
+  </body>
+</html>
+
+
+<style is:global>
+  * { transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
+  html.light { color-scheme: light; }
+  html.dark { color-scheme: dark; }
+
+  .screenshots-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(255 255 255 / 0.1) transparent;
+  }
+  
+  .light .screenshots-scroll { scrollbar-color: rgb(0 0 0 / 0.2) transparent; }
+  
+  .screenshots-scroll::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .screenshots-scroll::-webkit-scrollbar-track { background: transparent; }
+  
+  .screenshots-scroll::-webkit-scrollbar-thumb {
+    background-color: rgb(255 255 255 / 0.1);
+    border-radius: 3px;
+  }
+  
+  .light .screenshots-scroll::-webkit-scrollbar-thumb { background-color: rgb(0 0 0 / 0.2); }
+</style>

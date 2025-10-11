@@ -1,0 +1,20 @@
+/* TEAM */
+
+Developer: Bohdan
+Contact: hello@bohd4n.dev
+GitHub: github.com/bohd4nx
+Location: Ukraine
+
+/* THANKS */
+
+Astro: astro.build
+Tailwind CSS: tailwindcss.com
+React: reactjs.org
+
+/* SITE */
+
+Last update: 2025/09/30
+Language: English
+Doctype: HTML5
+IDE: Visual Studio Code
+Technologies: Astro, React, TypeScript, Tailwind CSS
