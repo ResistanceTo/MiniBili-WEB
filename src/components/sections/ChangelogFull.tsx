@@ -88,9 +88,9 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 											{updates.feature.map((content, idx) => (
 												<li
 													key={idx}
-													className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed flex items-start gap-2"
+													className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed flex items-center gap-2"
 												>
-													<span className="text-green-600 dark:text-green-400 mt-1">•</span>
+													<span className="text-green-600 dark:text-green-400">•</span>
 													<span>{content}</span>
 												</li>
 											))}
@@ -108,9 +108,9 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 											{updates.improvement.map((content, idx) => (
 												<li
 													key={idx}
-													className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed flex items-start gap-2"
+													className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed flex items-center gap-2"
 												>
-													<span className="text-blue-600 dark:text-blue-400 mt-1">•</span>
+													<span className="text-blue-600 dark:text-blue-400">•</span>
 													<span>{content}</span>
 												</li>
 											))}
@@ -128,9 +128,9 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 											{updates.bugfix.map((content, idx) => (
 												<li
 													key={idx}
-													className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed flex items-start gap-2"
+													className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed flex items-center gap-2"
 												>
-													<span className="text-orange-600 dark:text-orange-400 mt-1">•</span>
+													<span className="text-orange-600 dark:text-orange-400">•</span>
 													<span>{content}</span>
 												</li>
 											))}
