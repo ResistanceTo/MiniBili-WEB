@@ -1,0 +1,18 @@
+---
+import BackToTop from "@components/ui/BackToTop";
+import Breadcrumbs from "@components/ui/Breadcrumbs";
+import ChangelogFull from "@components/sections/ChangelogFull";
+import Layout from "@layouts/Layout.astro";
+import { changelog } from "../config/changelog";
+import { siteConfig } from "../config";
+---
+
+<Layout
+  title={`${siteConfig.title} · 更新日志`}
+>
+  <main class="min-h-screen max-w-3xl mx-auto px-4 py-8">
+    <Breadcrumbs items={[{ label: "更新日志" }]} />
+    <ChangelogFull items={changelog} client:load />
+  </main>
+  <BackToTop client:load />
+</Layout>

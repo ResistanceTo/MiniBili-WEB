@@ -37,6 +37,20 @@ export interface Review {
 	avatar?: string;
 }
 
+export interface ChangelogUpdates {
+	feature?: string[];
+	improvement?: string[];
+	bugfix?: string[];
+}
+
+export interface ChangelogVersion {
+	version: string;
+	build: number;
+	date: string;
+	title?: string;
+	updates: ChangelogUpdates;
+}
+
 export interface AppData {
 	title: string;
 	description: string;
@@ -46,6 +60,7 @@ export interface AppData {
 	storeLinks: StoreLinks;
 	socialLinks: SocialLink[];
 	logo: AppLogo;
+	changelog?: ChangelogVersion[];
 }
 
 export interface WithImages {
@@ -89,6 +104,7 @@ export interface FeaturesProps extends WithItems<Feature> {}
 export interface FAQProps extends WithItems<FAQ> {}
 export interface ReviewsProps extends WithItems<Review> {}
 export interface SocialLinksProps extends WithItems<SocialLink> {}
+export interface ChangelogProps extends WithItems<ChangelogVersion> {}
 
 export type ScreenshotsProps = WithImages;
 export type LightboxProps = WithImages;

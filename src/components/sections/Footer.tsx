@@ -1,6 +1,6 @@
 import { siteConfig } from "config";
 import { memo } from "react";
-import { FiFileText, FiShield } from "react-icons/fi";
+import { FiClock, FiFileText, FiShield } from "react-icons/fi";
 import ThemeToggle from "../ui/ThemeToggle";
 
 const Footer = () => {
@@ -12,7 +12,7 @@ const Footer = () => {
 						<div className="flex flex-col gap-3 max-w-lg">
 							<div className="flex items-center justify-between">
 								<div className="flex items-center gap-2">
-									<img src="/favicon-512.svg" alt="Logo" className="w-6 h-6 rounded-md shadow-sm" />
+									<img src="/favicon-512.png" alt="Logo" className="w-6 h-6 rounded-md shadow-sm" />
 									<span className="font-semibold text-neutral-800 dark:text-white">
 										{siteConfig.title}
 									</span>
@@ -51,7 +51,7 @@ const Footer = () => {
 								))}
 							</div>
 							<div className="text-sm text-neutral-500 dark:text-neutral-400">
-								&copy; {new Date().getFullYear()} All rights reserved.
+								&copy; {new Date().getFullYear()} MiniBili. All rights reserved.
 							</div>
 						</div>
 
@@ -59,6 +59,7 @@ const Footer = () => {
 							{[
 								{ href: "/privacy", icon: FiShield, text: "隐私协议" },
 								{ href: "/terms", icon: FiFileText, text: "条款" },
+								{ href: "/changelog", icon: FiClock, text: "更新日志" },
 							].map(({ href, icon: Icon, text }) => (
 								<a
 									key={text}

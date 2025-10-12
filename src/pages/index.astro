@@ -1,10 +1,12 @@
 ---
 import AppHero from "@components/sections/AppHero";
+import Changelog from "@components/sections/Changelog";
 import FAQ from "@components/sections/FAQ";
 import Features from "@components/sections/Features";
 import Screenshots from "@components/sections/Screenshots";
 import Lightbox from "@components/ui/Lightbox";
 import Layout from "@layouts/Layout.astro";
+import { changelog } from "../config/changelog";
 import { siteConfig } from "../config";
 
 const { title, description, screenshots, features, faqs, storeLinks, logo } = siteConfig;
@@ -15,6 +17,7 @@ const { title, description, screenshots, features, faqs, storeLinks, logo } = si
     <AppHero {title} {description} {storeLinks} {logo} />
     <div class="mb-16"><Screenshots images={screenshots} client:load /></div>
     <Features items={features} />
+    <Changelog items={changelog} client:visible />
     <FAQ items={faqs} client:visible />
   </main>
 </Layout>

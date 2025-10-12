@@ -1,4 +1,5 @@
 import { appInfo } from "./appInfo";
+import { changelog } from "./changelog";
 import { faq } from "./faq";
 import { features } from "./features";
 import { screenshots } from "./screenshots";
@@ -11,6 +12,7 @@ export const siteConfig: AppData = {
 	faqs: faq,
 	screenshots,
 	socialLinks,
+	changelog,
 };
 
 // Re-export types for easier imports

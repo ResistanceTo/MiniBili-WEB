@@ -1,25 +1,33 @@
 {
-  "name": "Your App Name",
-  "short_name": "YourApp",
-  "description": "Here you can write a brief description of your application. Tell users about its main features and benefits in 1-2 sentences.",
+  "name": "MiniBili",
+  "short_name": "MiniBili",
+  "description": "免费、无广告、无跟踪器的iOS第三方哔哩哔哩客户端。",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#3b82f6",
   "orientation": "portrait-primary",
   "scope": "/",
-  "lang": "en",
-  "categories": ["productivity", "utilities"],
+  "lang": "zh-CN",
+  "categories": ["entertainment", "video"],
   "icons": [
     {
-      "src": "/favicon-192.svg",
+      "src": "/favicon-192.png",
       "sizes": "192x192",
-      "type": "image/svg+xml"
+      "type": "image/png+xml",
+      "purpose": "any"
     },
     {
-      "src": "/favicon-512.svg",
+      "src": "/favicon-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml"
+      "type": "image/png+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/MiniBili.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

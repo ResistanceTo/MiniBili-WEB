@@ -12,20 +12,32 @@ const { title, description, showFooter = true } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content={Astro.generator}>
     
-    <link rel="icon" type="image/webp" href="/favicon-512.svg">
-    
+    <link rel="icon" type="image/webp" href="/favicon-512.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
     <title>{title}</title>
     {description && <meta name="description" content={description}>}
-    
+    <meta name="keywords" content="MiniBili,哔哩哔哩,bilibili,第三方客户端,iOS,iPhone,iPad,免费,无广告">
+    <meta name="author" content="ResistanceTo">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content={Astro.url.href}>
     <meta property="og:title" content={title}>
     {description && <meta property="og:description" content={description}>}
-    <meta property="og:image" content={new URL('/favicon-512.svg', Astro.url).href}>
+    <meta property="og:image" content={new URL('/MiniBili.png', Astro.url).href}>
+    <meta property="og:site_name" content="MiniBili">
+
+    <!-- Apple Mobile Web App -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MiniBili">
     
     <script is:inline>
       const theme = localStorage.getItem('theme') || 'system';
