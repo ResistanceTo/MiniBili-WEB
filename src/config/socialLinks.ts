@@ -1,7 +1,7 @@
 import {
 	RiGithubFill,
 	RiTelegram2Fill,
-	RiTwitterXFill,
+	RiHomeSmileFill,
 } from "react-icons/ri";
 import type { SocialLink } from "./types";
 
@@ -16,9 +16,9 @@ export const socialLinks: SocialLink[] = [
 		icon: RiTelegram2Fill,
 		label: "Telegram",
 	},
-	// {
-	// 	url: "#",
-	// 	icon: RiTwitterXFill,
-	// 	label: "Twitter",
-	// },
+	{
+		url: "https://zhaohe.org/zh-cn/",
+		icon: RiHomeSmileFill,
+		label: "Homepage",
+	},
 ];
