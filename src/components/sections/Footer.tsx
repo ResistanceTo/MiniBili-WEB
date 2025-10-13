@@ -1,6 +1,6 @@
 import { siteConfig } from "config";
 import { memo } from "react";
-import { FiClock, FiFileText, FiShield } from "react-icons/fi";
+import { FiClock, FiFileText, FiShield, FiMap } from "react-icons/fi";
 import ThemeToggle from "../ui/ThemeToggle";
 
 const Footer = () => {
@@ -57,9 +57,10 @@ const Footer = () => {
 
 						<div className="flex items-center gap-6">
 							{[
-								{ href: "/privacy", icon: FiShield, text: "隐私协议" },
+								{ href: "/privacy", icon: FiShield, text: "隐私" },
 								{ href: "/terms", icon: FiFileText, text: "条款" },
-								{ href: "/changelog", icon: FiClock, text: "更新日志" },
+								{ href: "/changelog", icon: FiClock, text: "日志" },
+								{ href: "/roadmap", icon: FiMap, text: "路线" },
 							].map(({ href, icon: Icon, text }) => (
 								<a
 									key={text}

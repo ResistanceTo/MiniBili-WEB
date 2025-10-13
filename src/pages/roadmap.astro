@@ -1,0 +1,19 @@
+---
+import BackToTop from "@components/ui/BackToTop";
+import Breadcrumbs from "@components/ui/Breadcrumbs";
+import RoadmapFull from "@components/sections/RoadmapFull";
+import Layout from "@layouts/Layout.astro";
+import { roadmap } from "../config/roadmap";
+import { siteConfig } from "../config";
+---
+
+<Layout
+  title={`${siteConfig.title} · 开发路线图`}
+  description={`${siteConfig.title} 的开发路线图 - 查看已完成、开发中和计划中的功能`}
+>
+  <main class="min-h-screen max-w-3xl mx-auto px-4 py-8">
+    <Breadcrumbs items={[{ label: "开发路线图" }]} />
+    <RoadmapFull items={roadmap} client:load />
+  </main>
+  <BackToTop client:load />
+</Layout>

@@ -51,6 +51,22 @@ export interface ChangelogVersion {
 	updates: ChangelogUpdates;
 }
 
+// 状态枚举：0=已完成, 1=开发中, 2=计划中, 3=Bug修复
+export enum TodoStatus {
+	Completed = 0,
+	InProgress = 1,
+	Planned = 2,
+	Bug = 3,
+}
+
+export interface TodoItem {
+	title: string;
+	status?: TodoStatus;
+	children?: TodoNode[];
+}
+
+export type TodoNode = TodoItem;
+
 export interface AppData {
 	title: string;
 	description: string;
@@ -105,6 +121,7 @@ export interface FAQProps extends WithItems<FAQ> {}
 export interface ReviewsProps extends WithItems<Review> {}
 export interface SocialLinksProps extends WithItems<SocialLink> {}
 export interface ChangelogProps extends WithItems<ChangelogVersion> {}
+export interface RoadmapProps extends WithItems<TodoNode> {}
 
 export type ScreenshotsProps = WithImages;
 export type LightboxProps = WithImages;
