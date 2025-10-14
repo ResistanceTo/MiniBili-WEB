@@ -173,11 +173,19 @@ export const roadmap: TodoNode[] = [
 			},
 			{
 				title: "设置",
-				status: TodoStatus.Planned,
 				children: [
 					{
 						title: "隐私",
 						status: TodoStatus.Planned,
+					},
+					{
+						title: "缓存",
+						children: [
+							{
+								title: "清理缓存",
+								status: TodoStatus.Planned,
+							},
+						]
 					}
 				]
 			}
@@ -237,6 +245,31 @@ export const roadmap: TodoNode[] = [
 					},
 					{
 						title: "关注",
+						status: TodoStatus.Planned,
+					},
+				]
+			},
+			{
+				title: "下载",
+				children: [
+					{
+						title: "下载",
+						status: TodoStatus.Planned,
+					},
+					{
+						title: "任务队列",
+						status: TodoStatus.Planned,
+					},
+					{
+						title: "任务恢复",
+						status: TodoStatus.Planned,
+					},
+					{
+						title: "错误处理",
+						status: TodoStatus.Planned,
+					},
+					{
+						title: "缓存资源删除",
 						status: TodoStatus.Planned,
 					},
 				]
