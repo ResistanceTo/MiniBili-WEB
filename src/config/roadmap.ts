@@ -61,6 +61,23 @@ export const roadmap: TodoNode[] = [
 		title: "我的",
 		children: [
 			{
+				title: "登陆",
+				children: [
+					{
+						title: "短信验证码登陆",
+						status: TodoStatus.Completed,
+					},
+					{
+						title: "iPad扫码登陆",
+						status: TodoStatus.Bug,
+					},
+					{
+						title: "密码登陆",
+						status: TodoStatus.Planned,
+					},
+				]
+			},
+			{
 				title: "个人信息",
 				children: [
 					{
