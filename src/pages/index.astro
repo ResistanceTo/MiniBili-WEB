@@ -4,16 +4,26 @@ import Changelog from "@components/sections/Changelog";
 import FAQ from "@components/sections/FAQ";
 import Features from "@components/sections/Features";
 import Screenshots from "@components/sections/Screenshots";
+import AnnouncementBanner from "@components/ui/AnnouncementBanner";
 import Lightbox from "@components/ui/Lightbox";
 import Layout from "@layouts/Layout.astro";
 import { changelog } from "../config/changelog";
 import { siteConfig } from "../config";
 
-const { title, description, screenshots, features, faqs, storeLinks, logo } = siteConfig;
+const { title, description, screenshots, features, faqs, storeLinks, logo, announcement } = siteConfig;
 ---
 
 <Layout title={title} description={description}>
   <main class="min-h-screen max-w-5xl mx-auto px-4 py-8">
+    {announcement && announcement.show && (
+      <AnnouncementBanner 
+        message={announcement.message}
+        type={announcement.type}
+        dismissible={announcement.dismissible}
+        show={announcement.show}
+        client:load
+      />
+    )}
     <AppHero {title} {description} {storeLinks} {logo} />
     <div class="mb-16"><Screenshots images={screenshots} client:load /></div>
     <Features items={features} />

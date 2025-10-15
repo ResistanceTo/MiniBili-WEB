@@ -30,6 +30,13 @@ export interface AppLogo {
 	src: string;
 }
 
+export interface Announcement {
+	message: string;
+	type?: "warning" | "info" | "success";
+	dismissible?: boolean;
+	show?: boolean;
+}
+
 export interface Review {
 	author: string;
 	rating: number;
@@ -77,6 +84,7 @@ export interface AppData {
 	socialLinks: SocialLink[];
 	logo: AppLogo;
 	changelog?: ChangelogVersion[];
+	announcement?: Announcement;
 }
 
 export interface WithImages {
