@@ -3,6 +3,27 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 7,
+		date: "2025-10-15",
+		updates: {
+			bugfix: [
+				"全屏幕下长按无法2倍速",
+				"搜索结果页无法正确显示UP主头像",
+			],
+			improvement: [
+				"部分数据添加缓存",
+			],
+			feature: [
+				"在系统锁定方向的状态下，点击视频全屏，自动横屏播放",
+				"可以设置视频列表是单列还是双列",
+				"主题设置",
+				"视频缓存（游客模式也可以）",
+				"缓存视频管理",
+			]
+		},
+	},
+	{
+		version: "1.0",
 		build: 5,
 		date: "2025-10-14",
 		updates: {

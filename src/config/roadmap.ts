@@ -203,7 +203,15 @@ export const roadmap: TodoNode[] = [
 					},
 					{
 						title: "长按倍速播放",
-						status: TodoStatus.InProgress,
+						status: TodoStatus.Completed,
+					},
+					{
+						title: "全屏自动横屏",
+						status: TodoStatus.Completed,
+					},
+					{
+						title: "播放设置",
+						status: TodoStatus.Planned,
 					},
 				]
 			},
