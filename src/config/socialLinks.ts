@@ -12,7 +12,7 @@ export const socialLinks: SocialLink[] = [
 		label: "GitHub",
 	},
 	{
-		url: "https://t.me/ResistanceTo",
+		url: "https://t.me/MiniBiliGroup",
 		icon: RiTelegram2Fill,
 		label: "Telegram",
 	},
