@@ -3,6 +3,22 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 10,
+		date: "2025-10-16",
+		updates: {
+			improvement: [
+				"个人信息页UI优化",
+				"视频详情页UI优化",
+			],
+			feature: [
+				"自定义双列模式下，卡片显示的信息",
+				"画中画模式",
+				"视频是竖屏，全屏自动竖屏；视频是横屏，全屏自动横屏，此功能在手机设定方向锁定时依旧生效",
+			]
+		},
+	},
+	{
+		version: "1.0",
 		build: 7,
 		date: "2025-10-15",
 		updates: {
