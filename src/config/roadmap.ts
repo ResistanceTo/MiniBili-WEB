@@ -39,7 +39,15 @@ export const roadmap: TodoNode[] = [
 					{
 						title: "点赞投币等信息",
 						status: TodoStatus.Completed,
-					}
+					},
+					{
+						title: "单列或双列显示视频卡片",
+						status: TodoStatus.Completed,
+					},
+					{
+						title: "自定义双列模式下，卡片要展示的信息",
+						status: TodoStatus.Completed,
+					},
 				]
 			},
 		],
@@ -206,12 +214,16 @@ export const roadmap: TodoNode[] = [
 						status: TodoStatus.Completed,
 					},
 					{
-						title: "全屏自动横屏",
+						title: "横向视频全屏自动横屏",
 						status: TodoStatus.Completed,
 					},
 					{
 						title: "播放设置",
 						status: TodoStatus.Planned,
+					},
+					{
+						title: "画中画",
+						status: TodoStatus.Completed,
 					},
 				]
 			},
