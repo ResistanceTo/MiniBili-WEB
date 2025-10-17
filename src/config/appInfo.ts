@@ -8,11 +8,11 @@ export const appInfo = {
 		src: "MiniBili.png",
 	},
 	storeLinks: {
-		apple: "#",
+		apple: "https://testflight.apple.com/join/TgcHSGwb",
 	} as StoreLinks,
 	announcement: {
-		message: "⚠️⚠️⚠️ 重要通知：TF被意外下架，暂时判断是：https://developer.apple.com/forums/thread/691372 此类问题，正在解决，请关注官网通知或TF邀请链接可用性，有任何进展官网会第一时间同步",
-		type: "warning" as const,
+		message: "已经恢复TF，点击下方链接可直接加入",
+		type: "success" as const,
 		dismissible: true,
 		show: true,
 	},
