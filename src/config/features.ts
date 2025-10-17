@@ -16,7 +16,7 @@ export const features: Feature[] = [
 	},
 	{
 		title: "完全免费",
-		description: "现在和将来都不会向用户收取任何费用。",
+		description: "iPhone和iPad版本，现在和将来都不会向用户收取任何费用。",
 		icon: TbFreeRights,
 	},
 ];
