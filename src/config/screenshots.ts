@@ -5,10 +5,12 @@ export const screenshots: DeviceScreenshots = {
 		"screenshots/iphone/shouye.webp",
 		"screenshots/iphone/shipin.webp",
 		"screenshots/iphone/dongtai.webp",
+		"screenshots/iphone/guanyu.webp",
 	],
 	ipad: [
-		"screenshots/ipad/remen.webp",
+		"screenshots/ipad/shouye.webp",
 		"screenshots/ipad/shipin.webp",
 		"screenshots/ipad/shipin-quanping.webp",
+		"screenshots/ipad/guanyu.webp",
 	],
 };
