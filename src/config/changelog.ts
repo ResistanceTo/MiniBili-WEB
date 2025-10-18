@@ -3,6 +3,32 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 12,
+		date: "2025-10-18",
+		updates: {
+			improvement: [
+				"iPhone和iPad均支持二维码登录",
+			]
+		},
+	},
+	{
+		version: "1.0",
+		build: 11,
+		date: "2025-10-17",
+		updates: {
+			improvement: [
+				"支持全球手机号登录",
+				"优化首页掉帧问题（未完善）",
+			],
+			feature: [
+				"现在可以关注、取关up",
+				"添加黑暗模式的Logo",
+				"显示更多缓存管理项",
+			]
+		},
+	},
+	{
+		version: "1.0",
 		build: 10,
 		date: "2025-10-16",
 		updates: {
