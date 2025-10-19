@@ -3,6 +3,19 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 13,
+		date: "2025-10-19",
+		updates: {
+			feature: [
+				"可以查看UP主空间（投稿、动态）",
+			],
+			bugfix: [
+				"修复视频页关注按钮颜色异常问题",
+			]
+		},
+	},
+	{
+		version: "1.0",
 		build: 12,
 		date: "2025-10-18",
 		updates: {

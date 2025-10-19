@@ -48,6 +48,10 @@ export const roadmap: TodoNode[] = [
 						title: "自定义双列模式下，卡片要展示的信息",
 						status: TodoStatus.Completed,
 					},
+					{
+						title: "不看这个视频和不看这个UP主功能",
+						status: TodoStatus.Completed,
+					},
 				]
 			},
 		],
@@ -61,7 +65,7 @@ export const roadmap: TodoNode[] = [
 			},
 			{
 				title: "综合",
-				status: TodoStatus.Planned,
+				status: TodoStatus.Completed,
 			}
 		],
 	},
@@ -77,7 +81,7 @@ export const roadmap: TodoNode[] = [
 					},
 					{
 						title: "iPad扫码登陆",
-						status: TodoStatus.Bug,
+						status: TodoStatus.Completed,
 					},
 					{
 						title: "密码登陆",
@@ -105,7 +109,7 @@ export const roadmap: TodoNode[] = [
 							},
 							{
 								title: "二级列表",
-								status: TodoStatus.Planned,
+								status: TodoStatus.Completed,
 							}
 						]
 					},
@@ -114,11 +118,11 @@ export const roadmap: TodoNode[] = [
 						children: [
 							{
 								title: "数量",
-								status: TodoStatus.Bug,
+								status: TodoStatus.Completed,
 							},
 							{
 								title: "二级列表",
-								status: TodoStatus.Planned,
+								status: TodoStatus.Completed,
 							}
 						]
 					},
@@ -135,7 +139,11 @@ export const roadmap: TodoNode[] = [
 							},
 							{
 								title: "播放",
-								status: TodoStatus.Bug,
+								status: TodoStatus.Completed,
+							},
+							{
+								title: "记录MiniBili观看视频",
+								status: TodoStatus.Planned,
 							}
 						]
 					},
@@ -191,7 +199,11 @@ export const roadmap: TodoNode[] = [
 						children: [
 							{
 								title: "清理缓存",
-								status: TodoStatus.Planned,
+								status: TodoStatus.Completed,
+							},
+							{
+								title: "视频缓存管理",
+								status: TodoStatus.Completed,
 							},
 						]
 					}
@@ -214,7 +226,7 @@ export const roadmap: TodoNode[] = [
 						status: TodoStatus.Completed,
 					},
 					{
-						title: "横向视频全屏自动横屏",
+						title: "横向视频点击全屏自动横屏",
 						status: TodoStatus.Completed,
 					},
 					{
@@ -224,6 +236,14 @@ export const roadmap: TodoNode[] = [
 					{
 						title: "画中画",
 						status: TodoStatus.Completed,
+					},
+					{
+						title: "手机横屏自动视频全屏",
+						status: TodoStatus.Planned,
+					},
+					{
+						title: "合集",
+						status: TodoStatus.Planned,
 					},
 				]
 			},
@@ -236,7 +256,7 @@ export const roadmap: TodoNode[] = [
 					},
 					{
 						title: "弹幕设置",
-						status: TodoStatus.InProgress,
+						status: TodoStatus.Bug,
 					},
 					{
 						title: "高级弹幕",
@@ -253,7 +273,7 @@ export const roadmap: TodoNode[] = [
 					},
 					{
 						title: "投币",
-						status: TodoStatus.Bug,
+						status: TodoStatus.Completed,
 					},
 					{
 						title: "收藏",
@@ -265,7 +285,7 @@ export const roadmap: TodoNode[] = [
 					},
 					{
 						title: "关注",
-						status: TodoStatus.Planned,
+						status: TodoStatus.Completed,
 					},
 				]
 			},
@@ -274,23 +294,23 @@ export const roadmap: TodoNode[] = [
 				children: [
 					{
 						title: "下载",
-						status: TodoStatus.Planned,
+						status: TodoStatus.Completed,
 					},
 					{
 						title: "任务队列",
-						status: TodoStatus.Planned,
+						status: TodoStatus.Completed,
 					},
 					{
 						title: "任务恢复",
-						status: TodoStatus.Planned,
+						status: TodoStatus.Completed,
 					},
 					{
 						title: "错误处理",
-						status: TodoStatus.Planned,
+						status: TodoStatus.InProgress,
 					},
 					{
 						title: "缓存资源删除",
-						status: TodoStatus.Planned,
+						status: TodoStatus.Completed,
 					},
 				]
 			}
@@ -301,11 +321,20 @@ export const roadmap: TodoNode[] = [
 		children: [
 			{
 				title: "个人信息",
-				status: TodoStatus.Planned,
+				status: TodoStatus.Completed,
 			},
 			{
-				title: "关注",
-				status: TodoStatus.Planned,
+				title: "个人空间",
+				children: [
+					{
+						title: "投稿列表",
+						status: TodoStatus.Completed,
+					},
+					{
+						title: "动态列表",
+						status: TodoStatus.Completed,
+					}
+				],
 			}
 		]
 	},
@@ -322,6 +351,19 @@ export const roadmap: TodoNode[] = [
 			},
 			{
 				title: "回复",
+				status: TodoStatus.Planned,
+			}
+		]
+	},
+	{
+		title: "推送通知",
+		children: [
+			{
+				title: "私信",
+				status: TodoStatus.Planned,
+			},
+			{
+				title: "UP主动态",
 				status: TodoStatus.Planned,
 			}
 		]
