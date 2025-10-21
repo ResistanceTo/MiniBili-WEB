@@ -1,11 +1,14 @@
 ---
 import AppHero from "@components/sections/AppHero";
 import Changelog from "@components/sections/Changelog";
+import Community from "@components/sections/Community";
 import FAQ from "@components/sections/FAQ";
 import Features from "@components/sections/Features";
 import Screenshots from "@components/sections/Screenshots";
 import AnnouncementBanner from "@components/ui/AnnouncementBanner";
 import Lightbox from "@components/ui/Lightbox";
+import FAQSchema from "@components/seo/FAQSchema.astro";
+import OrganizationSchema from "@components/seo/OrganizationSchema.astro";
 import Layout from "@layouts/Layout.astro";
 import { changelog } from "../config/changelog";
 import { siteConfig } from "../config";
@@ -13,7 +16,7 @@ import { siteConfig } from "../config";
 const { title, description, screenshots, features, faqs, storeLinks, logo, announcement } = siteConfig;
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} structuredDataType="mobileApplication">
   <main class="min-h-screen max-w-5xl mx-auto px-4 py-8">
     {announcement && announcement.show && (
       <AnnouncementBanner 
@@ -29,10 +32,13 @@ const { title, description, screenshots, features, faqs, storeLinks, logo, annou
     <Features items={features} />
     <Changelog items={changelog} client:visible />
     <FAQ items={faqs} client:visible />
+    <Community client:visible />
   </main>
 </Layout>
 
 <Lightbox images={screenshots} client:load />
+<FAQSchema items={faqs} />
+<OrganizationSchema />
 
 <style is:global>
   .screenshots-scroll {

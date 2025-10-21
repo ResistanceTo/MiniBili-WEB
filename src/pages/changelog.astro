@@ -2,9 +2,15 @@
 import BackToTop from "@components/ui/BackToTop";
 import Breadcrumbs from "@components/ui/Breadcrumbs";
 import ChangelogFull from "@components/sections/ChangelogFull";
+import BreadcrumbSchema from "@components/seo/BreadcrumbSchema.astro";
 import Layout from "@layouts/Layout.astro";
 import { changelog } from "../config/changelog";
 import { siteConfig } from "../config";
+
+const breadcrumbItems = [
+  { name: "首页", url: "https://minibili.zhaohe.org/" },
+  { name: "更新日志", url: "https://minibili.zhaohe.org/changelog/" }
+];
 ---
 
 <Layout
@@ -16,3 +22,5 @@ import { siteConfig } from "../config";
   </main>
   <BackToTop client:load />
 </Layout>
+
+<BreadcrumbSchema items={breadcrumbItems} />

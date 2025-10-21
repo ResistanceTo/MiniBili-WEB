@@ -1,0 +1,70 @@
+---
+interface Props {
+  type?: 'website' | 'mobileApplication';
+  title: string;
+  description?: string;
+  url: string;
+  image?: string;
+}
+
+const {
+  type = 'website',
+  title,
+  description,
+  url,
+  image = '/MiniBili.png'
+} = Astro.props;
+
+const baseStructuredData = {
+  "@context": "https://schema.org",
+  "@type": type === 'mobileApplication' ? "MobileApplication" : "WebSite",
+  "name": title,
+  "url": url,
+};
+
+// 网站结构化数据
+const websiteData = type === 'website' ? {
+  ...baseStructuredData,
+  "description": description,
+  "inLanguage": "zh-CN",
+  "author": {
+    "@type": "Person",
+    "name": "ResistanceTo",
+    "url": "https://zhaohe.org/zh-cn/"
+  }
+} : null;
+
+// 移动应用结构化数据
+const appData = type === 'mobileApplication' ? {
+  ...baseStructuredData,
+  "applicationCategory": "Entertainment",
+  "operatingSystem": "iOS",
+  "description": description,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "CNY"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "ratingCount": "1"
+  },
+  "screenshot": image,
+  "author": {
+    "@type": "Person",
+    "name": "ResistanceTo",
+    "url": "https://zhaohe.org/zh-cn/",
+    "sameAs": [
+      "https://github.com/ResistanceTo",
+      "https://t.me/MiniBiliGroup"
+    ]
+  },
+  "downloadUrl": "https://testflight.apple.com/join/TgcHSGwb",
+  "installUrl": "https://testflight.apple.com/join/TgcHSGwb"
+} : null;
+
+const structuredData = type === 'mobileApplication' ? appData : websiteData;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

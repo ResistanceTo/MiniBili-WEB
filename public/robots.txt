@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://minibili.zhaohe.org/sitemap-index.xml

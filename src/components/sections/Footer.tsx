@@ -12,7 +12,7 @@ const Footer = () => {
 						<div className="flex flex-col gap-3 max-w-lg">
 							<div className="flex items-center justify-between">
 								<div className="flex items-center gap-2">
-									<img src="/favicon-512.png" alt="Logo" className="w-6 h-6 rounded-md shadow-sm" />
+									<img src="/favicon-512.png" alt="MiniBili Logo" className="w-6 h-6 rounded-md shadow-sm" />
 									<span className="font-semibold text-neutral-800 dark:text-white">
 										{siteConfig.title}
 									</span>

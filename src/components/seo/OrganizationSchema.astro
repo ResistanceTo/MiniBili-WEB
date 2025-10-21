@@ -1,0 +1,36 @@
+---
+interface Props {
+  name?: string;
+  url?: string;
+  logo?: string;
+  contactEmail?: string;
+}
+
+const {
+  name = "MiniBili",
+  url = "https://minibili.zhaohe.org",
+  logo = "https://minibili.zhaohe.org/MiniBili.png",
+  contactEmail = "resistanceto@outlook.com"
+} = Astro.props;
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": name,
+  "url": url,
+  "logo": logo,
+  "sameAs": [
+    "https://github.com/ResistanceTo/MiniBili-WEB",
+    "https://t.me/MiniBiliGroup",
+    "https://github.com/ResistanceTo"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": contactEmail,
+    "contactType": "customer support"
+  },
+  "description": "免费、无广告、无跟踪器的iOS第三方哔哩哔哩客户端"
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />

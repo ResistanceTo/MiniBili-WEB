@@ -43,10 +43,11 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 									exit={{ opacity: 0, y: 20 }}
 									onClick={() => window.openLightbox?.(index, activeDevice)}
 									className="relative flex-shrink-0 overflow-hidden rounded-xl focus:outline-none"
+									aria-label={`查看 MiniBili ${activeDevice === "iphone" ? "iPhone" : "iPad"} 应用截图 ${index + 1}`}
 								>
 									<img
 										src={image}
-										alt={`Screenshot ${index + 1}`}
+										alt={`MiniBili ${activeDevice === "iphone" ? "iPhone" : "iPad"} 应用界面截图 ${index + 1} - 免费无广告的哔哩哔哩第三方客户端`}
 										className={`rounded-xl border border-gray-300 dark:border-white/10 object-cover shadow-lg ${isIphone ? "aspect-[9/16] w-[260px]" : "aspect-[4/3] w-[360px]"
 											}`}
 										loading="lazy"

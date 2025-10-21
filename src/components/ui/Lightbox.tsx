@@ -95,7 +95,7 @@ const Lightbox = ({ images }: LightboxProps) => {
 
 				<img
 					src={currentImages[currentIndex]}
-					alt={`Screenshot ${currentIndex + 1}`}
+					alt={`MiniBili ${activeDevice === "iphone" ? "iPhone" : "iPad"} 应用界面大图 ${currentIndex + 1} - 免费无广告的哔哩哔哩第三方客户端`}
 					className="max-h-[90vh] max-w-[90vw] object-contain rounded-xl shadow-2xl"
 					onClick={(e) => e.stopPropagation()}
 					onKeyDown={(e) => {

@@ -1,0 +1,54 @@
+# 默认响应头（针对宣传网站优化）
+/*
+  # 基础安全头（保留无害的）
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: no-referrer-when-downgrade
+
+  # 隐私保护：禁止 Google FLoC 跟踪
+  Permissions-Policy: interest-cohort=()
+
+# HTML 文件 - 不缓存
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# 静态资源 - 长期缓存
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# 图片资源 - 长期缓存
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+
+# 字体文件 - 长期缓存
+/*.woff
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+# JS/CSS 资源 - 长期缓存
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+# Sitemap 和 robots.txt - 短期缓存
+/sitemap*.xml
+  Cache-Control: public, max-age=3600
+
+/robots.txt
+  Cache-Control: public, max-age=3600
