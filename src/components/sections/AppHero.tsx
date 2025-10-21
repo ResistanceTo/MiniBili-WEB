@@ -6,7 +6,13 @@ const AppHero = ({ title, description, storeLinks, logo }: AppHeroProps) => (
 	<div className="mb-16 flex flex-col items-center md:items-start md:flex-row gap-8">
 		<div className="flex-shrink-0 md:self-center">
 			<div className="rounded-2xl border border-gray-200/50 dark:border-white/10 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-white/[0.02] dark:to-white/[0.05] p-4 w-[192px] h-[192px] flex items-center justify-center shadow-sm">
-				<img src={logo.src} alt="MiniBili 应用图标 - 免费无广告的 iOS 哔哩哔哩第三方客户端" className="w-full h-full rounded-2xl object-contain" />
+				<img
+					src={logo.src}
+					alt="MiniBili 应用图标 - 免费无广告的 iOS 哔哩哔哩第三方客户端"
+					className="w-full h-full rounded-2xl object-contain"
+					fetchPriority="high"
+					decoding="async"
+				/>
 			</div>
 		</div>
 

@@ -1,7 +1,7 @@
 import type { StoreLinks } from "./types";
 
 export const appInfo = {
-	title: "MiniBili",
+	title: "MiniBili - 免费无广的iOS哔哩哔哩第三方客户端",
 	description:
 		"免费、无广告、无跟踪器的iOS第三方哔哩哔哩客户端。",
 	logo: {

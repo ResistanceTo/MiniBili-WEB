@@ -17,6 +17,9 @@ const { title, description, screenshots, features, faqs, storeLinks, logo, annou
 ---
 
 <Layout title={title} description={description} structuredDataType="mobileApplication">
+  <!-- LCP -->
+  <link rel="preload" as="image" href="/MiniBili.png" fetchpriority="high" slot="head" />
+
   <main class="min-h-screen max-w-5xl mx-auto px-4 py-8">
     {announcement && announcement.show && (
       <AnnouncementBanner 

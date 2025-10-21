@@ -9,9 +9,9 @@ const termsContent = Object.values(import.meta.glob("./content/terms.md", { eage
 const htmlContent = marked(termsContent.rawContent());
 ---
 
-<Layout 
-  title={`${siteConfig.title} · Terms of Service`} 
-  description={`Terms of Service for ${siteConfig.title} application - Rules and guidelines for using our service`}
+<Layout
+  title="MiniBili 服务条款 - iOS哔哩哔哩第三方客户端使用协议"
+  description="MiniBili 服务条款 - 使用 MiniBili 应用的规则和指南"
 >
   <main class="min-h-screen max-w-3xl mx-auto px-4 py-8">
     <Breadcrumbs items={[{ label: "Terms of Service" }]} />

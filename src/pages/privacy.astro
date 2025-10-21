@@ -9,9 +9,9 @@ const privacyContent = Object.values(import.meta.glob("./content/privacy.md", { 
 const htmlContent = marked(privacyContent.rawContent());
 ---
 
-<Layout 
-  title={`${siteConfig.title} · Privacy Policy`} 
-  description={`Privacy Policy for ${siteConfig.title} application - How we handle and protect your data`}
+<Layout
+  title="MiniBili 隐私政策 - iOS哔哩哔哩第三方客户端"
+  description="MiniBili 隐私政策 - 了解我们如何保护你的隐私和数据安全"
 >
   <main class="min-h-screen max-w-3xl mx-auto px-4 py-8">
     <Breadcrumbs items={[{ label: "Privacy Policy" }]} />
