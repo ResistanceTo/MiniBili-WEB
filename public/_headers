@@ -16,21 +16,21 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-# 图片资源 - 长期缓存
+# 图片文件 - 中期缓存
 /*.png
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=604800, must-revalidate
 
 /*.jpg
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=604800, must-revalidate
 
 /*.jpeg
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=604800, must-revalidate
 
 /*.webp
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=604800, must-revalidate
 
 /*.svg
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=604800, must-revalidate
 
 # 字体文件 - 长期缓存
 /*.woff
@@ -46,9 +46,9 @@
 /*.css
   Cache-Control: public, max-age=31536000, immutable
 
-# Sitemap 和 robots.txt - 短期缓存
+# Sitemap 短期缓存
 /sitemap*.xml
   Cache-Control: public, max-age=3600
 
 /robots.txt
-  Cache-Control: public, max-age=3600
+  Cache-Control: public, max-age=604800
