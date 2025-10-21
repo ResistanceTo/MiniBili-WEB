@@ -3,6 +3,24 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 14,
+		date: "2025-10-20",
+		updates: {
+			improvement: [
+				"MiniBili的观看记录可以同步到官方",
+				"重新整理设置界面，去掉占位不能用的设置项",
+			],
+			feature: [
+				"支持设置为隐身模式（不同步观看记录）",
+				"支持获取视频合集",
+			],
+			bugfix: [
+				"修复夜间模式个人资料卡片背景色异常问题",
+			]
+		},
+	},
+	{
+		version: "1.0",
 		build: 13,
 		date: "2025-10-19",
 		updates: {
