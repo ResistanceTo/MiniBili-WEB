@@ -50,7 +50,7 @@ export const roadmap: TodoNode[] = [
 					},
 					{
 						title: "不看这个视频和不看这个UP主功能",
-						status: TodoStatus.Completed,
+						status: TodoStatus.Planned,
 					},
 				]
 			},
@@ -143,6 +143,14 @@ export const roadmap: TodoNode[] = [
 							},
 							{
 								title: "记录MiniBili观看视频",
+								status: TodoStatus.Completed,
+							},
+							{
+								title: "删除记录",
+								status: TodoStatus.Planned,
+							},
+							{
+								title: "搜索",
 								status: TodoStatus.Planned,
 							}
 						]
@@ -192,7 +200,12 @@ export const roadmap: TodoNode[] = [
 				children: [
 					{
 						title: "隐私",
-						status: TodoStatus.Planned,
+						children: [
+							{
+								title: "隐身模式（不同步观看记录）",
+								status: TodoStatus.Completed,
+							}
+						]
 					},
 					{
 						title: "缓存",
@@ -243,7 +256,7 @@ export const roadmap: TodoNode[] = [
 					},
 					{
 						title: "合集",
-						status: TodoStatus.Planned,
+						status: TodoStatus.Completed,
 					},
 				]
 			},
@@ -313,6 +326,19 @@ export const roadmap: TodoNode[] = [
 						status: TodoStatus.Completed,
 					},
 				]
+			},
+			{
+				title: "画质选择",
+				children: [
+					{
+						title: "直接拿最高画质",
+						status: TodoStatus.Planned,
+					},
+					{
+						title: "手动选择清晰度",
+						status: TodoStatus.Planned,
+					}
+				]
 			}
 		]
 	},
@@ -333,6 +359,10 @@ export const roadmap: TodoNode[] = [
 					{
 						title: "动态列表",
 						status: TodoStatus.Completed,
+					},
+					{
+						title: "关注、取关",
+						status: TodoStatus.Completed,
 					}
 				],
 			}
@@ -343,15 +373,15 @@ export const roadmap: TodoNode[] = [
 		children: [
 			{
 				title: "基本展示",
-				status: TodoStatus.Planned,
+				status: TodoStatus.InProgress,
 			},
 			{
 				title: "楼中楼展示",
-				status: TodoStatus.Planned,
+				status: TodoStatus.InProgress,
 			},
 			{
 				title: "回复",
-				status: TodoStatus.Planned,
+				status: TodoStatus.InProgress,
 			}
 		]
 	},
@@ -364,6 +394,27 @@ export const roadmap: TodoNode[] = [
 			},
 			{
 				title: "UP主动态",
+				status: TodoStatus.Planned,
+			}
+		]
+	},
+	{
+		title: "其他需要优化的部分",
+		children: [
+			{
+				title: "播放进度记录",
+				status: TodoStatus.Planned,
+			},
+			{
+				title: "点击全屏后，视频被暂停",
+				status: TodoStatus.Planned,
+			},
+			{
+				title: "简介部分做成可收起设计，同官B",
+				status: TodoStatus.Planned,
+			},
+			{
+				title: "底部菜单参考App Store设计，单独搜索按钮",
 				status: TodoStatus.Planned,
 			}
 		]
