@@ -4,6 +4,13 @@
   <p style="font-size: 18px; color: #666; margin-bottom: 24px;">
     <strong>免费、无广告、无跟踪器的 iOS 第三方哔哩哔哩客户端</strong>
   </p>
+
+  <p>
+    <img alt="GitHub stars" src="https://img.shields.io/github/stars/ResistanceTo/MiniBili-WEB?style=flat-square&logo=github">
+    <img alt="GitHub forks" src="https://img.shields.io/github/forks/ResistanceTo/MiniBili-WEB?style=flat-square&logo=github">
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues/ResistanceTo/MiniBili-WEB?style=flat-square&logo=github">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ResistanceTo/MiniBili-WEB?style=flat-square&logo=github">
+  </p>
 </div>
 
 ---
@@ -11,6 +18,10 @@
 ### 📱 关于 MiniBili
 
 MiniBili 是一个专为 iOS 平台设计的第三方哔哩哔哩客户端，由独立开发者精心打造。
+
+####  系统要求
+- iOS 17.0 或更高版本
+- iPhone、iPad 兼容
 
 ---
 
@@ -42,7 +53,10 @@ MiniBili 是一个专为 iOS 平台设计的第三方哔哩哔哩客户端，由
 
 ### 📮 联系方式
 
-- **反馈问题**: 通过 GitHub Issues 提交问题
+- 💬 **Telegram 群组**: [加入 MiniBili 用户群](https://t.me/MiniBiliGroup) - 与其他用户交流讨论
+- 🐛 **反馈问题**: [GitHub Issues](https://github.com/ResistanceTo/MiniBili-WEB/issues) - 提交 Bug 报告
+- 💡 **功能建议**: [GitHub Discussions](https://github.com/ResistanceTo/MiniBili-WEB/discussions) - 分享想法和建议
+- 📧 **邮件联系**: [resistanceto@outlook.com](resistanceto@outlook.com) - 带有个人信息的截图反馈
 
 ---
 
@@ -58,8 +72,12 @@ MiniBili 是非官方的第三方哔哩哔哩客户端，与哔哩哔哩（Bilib
   </p>
 
   <p>
-    <a href="https://github.com/ResistanceTo/MiniBili-WEB/issues">报告问题</a>
+    <a href="https://github.com/ResistanceTo/MiniBili-WEB/issues">🐛 报告问题</a>
     ·
-    <a href="https://github.com/ResistanceTo/MiniBili-WEB/issues">功能建议</a>
+    <a href="https://github.com/ResistanceTo/MiniBili-WEB/discussions">💡 功能建议</a>
+    ·
+    <a href="https://t.me/MiniBiliGroup">💬 Telegram 群组</a>
+    ·
+    <a href="https://github.com/ResistanceTo/MiniBili-WEB/blob/main/LICENSE">📄 许可证</a>
   </p>
 </div>
