@@ -365,23 +365,83 @@ export const roadmap: TodoNode[] = [
 						status: TodoStatus.Completed,
 					}
 				],
-			}
+			},
+			{
+				title: "操作",
+				children: [
+					{
+						title: "关注",
+						status: TodoStatus.Planned,
+					}
+				],
+			},
 		]
 	},
 	{
 		title: "评论",
 		children: [
 			{
-				title: "基本展示",
-				status: TodoStatus.InProgress,
+				title: "展示",
+				children: [
+					{
+						title: "置顶评论",
+						status: TodoStatus.Planned,
+					},
+					{
+						title: "一级评论",
+						status: TodoStatus.Planned,
+					},
+					{
+						title: "楼中楼",
+						status: TodoStatus.Planned,
+					},
+					{
+						title: "全部评论页",
+						status: TodoStatus.Planned,
+					},
+					{
+						title: "引用回复",
+						status: TodoStatus.Planned,
+					},
+					{
+						title: "@功能",
+						status: TodoStatus.Planned,
+					}
+				]
 			},
 			{
-				title: "楼中楼展示",
-				status: TodoStatus.InProgress,
+				title: "操作",
+				children: [
+					{
+						title: "点赞",
+						status: TodoStatus.Planned,
+					},
+					{
+						title: "点踩",
+						status: TodoStatus.Planned,
+					},
+					{
+						title: "评论",
+						status: TodoStatus.Planned,
+					},
+					{
+						title: "回复",
+						status: TodoStatus.Planned,
+					},
+				]
 			},
 			{
-				title: "回复",
-				status: TodoStatus.InProgress,
+				title: "排序",
+				children: [
+					{
+						title: "最热",
+						status: TodoStatus.Planned,
+					},
+					{
+						title: "最新",
+						status: TodoStatus.Planned,
+					}
+				]
 			}
 		]
 	},
