@@ -62,7 +62,6 @@ MiniBili 是一个专为 iOS 平台设计的第三方哔哩哔哩客户端，由
 - 💬 **Telegram 群组**: [加入 MiniBili 用户群](https://t.me/MiniBiliGroup) - 与其他用户交流讨论
 - 🐛 **反馈问题**: [GitHub Issues](https://github.com/ResistanceTo/MiniBili-WEB/issues) - 提交 Bug 报告
 - 💡 **功能建议**: [GitHub Discussions](https://github.com/ResistanceTo/MiniBili-WEB/discussions) - 分享想法和建议
-- 📧 **邮件联系**: [resistanceto@outlook.com](mailto:resistanceto@outlook.com) - 带有个人信息的截图反馈
 
 ---
 
