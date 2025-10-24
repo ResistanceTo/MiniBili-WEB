@@ -3,6 +3,27 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 15,
+		date: "2025-10-24",
+		updates: {
+			improvement: [
+				"iOS26适配，使用全新的底部菜单栏样式，参考App Store的设计",
+				"给部分操作添加了弹窗反馈，不会静默失败（未完待续）",
+				"用户空间界面可以直接关注，不用再点到视频页面",
+			],
+			feature: [
+				"评论区列表展示、楼中楼展示",
+				"评论回复、点赞功能",
+				"添加新手指引，防止类似于双列展示的功能被忽略",
+			],
+			bugfix: [
+				"修复了视频详情页无法收藏视频的问题",
+				"其他的一些小问题修复",
+			]
+		},
+	},
+	{
+		version: "1.0",
 		build: 14,
 		date: "2025-10-20",
 		updates: {

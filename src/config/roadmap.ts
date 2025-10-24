@@ -290,7 +290,7 @@ export const roadmap: TodoNode[] = [
 					},
 					{
 						title: "收藏",
-						status: TodoStatus.Bug,
+						status: TodoStatus.Completed,
 					},
 					{
 						title: "分享",
@@ -374,15 +374,6 @@ export const roadmap: TodoNode[] = [
 					}
 				],
 			},
-			{
-				title: "操作",
-				children: [
-					{
-						title: "关注",
-						status: TodoStatus.InProgress,
-					}
-				],
-			},
 		]
 	},
 	{
@@ -405,15 +396,15 @@ export const roadmap: TodoNode[] = [
 					},
 					{
 						title: "一级评论",
-						status: TodoStatus.InProgress,
+						status: TodoStatus.Completed,
 					},
 					{
 						title: "楼中楼",
-						status: TodoStatus.Planned,
+						status: TodoStatus.Completed,
 					},
 					{
 						title: "全部评论页",
-						status: TodoStatus.InProgress,
+						status: TodoStatus.Completed,
 					},
 					{
 						title: "引用回复",
@@ -430,7 +421,7 @@ export const roadmap: TodoNode[] = [
 				children: [
 					{
 						title: "点赞",
-						status: TodoStatus.InProgress,
+						status: TodoStatus.Completed,
 					},
 					{
 						title: "点踩",
@@ -438,11 +429,11 @@ export const roadmap: TodoNode[] = [
 					},
 					{
 						title: "评论",
-						status: TodoStatus.InProgress,
+						status: TodoStatus.Completed,
 					},
 					{
 						title: "回复",
-						status: TodoStatus.InProgress,
+						status: TodoStatus.Completed,
 					},
 					{
 						title: "删除",
@@ -455,7 +446,7 @@ export const roadmap: TodoNode[] = [
 				children: [
 					{
 						title: "最热",
-						status: TodoStatus.InProgress,
+						status: TodoStatus.Completed,
 					},
 					{
 						title: "最新",
@@ -495,7 +486,7 @@ export const roadmap: TodoNode[] = [
 			},
 			{
 				title: "「iOS26」底部菜单参考App Store设计，单独搜索按钮",
-				status: TodoStatus.InProgress,
+				status: TodoStatus.Completed,
 			},
 			{
 				title: "部分界面支持手势操作",
