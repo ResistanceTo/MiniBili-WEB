@@ -23,7 +23,7 @@
 
 ### 📱 关于 MiniBili
 
-MiniBili 是一个专为 iOS 平台设计的第三方哔哩哔哩客户端，由独立开发者精心打造。
+MiniBili 是一个专为 iOS 平台设计的第三方哔哩哔哩客户端，使用SwiftUI编写。
 
 ####  系统要求
 - iOS 17.0 或更高版本
@@ -50,7 +50,7 @@ MiniBili 是一个专为 iOS 平台设计的第三方哔哩哔哩客户端，由
 
 ---
 
-### 🌐 官网
+### 🙏 致谢
 
 基于此项目修改，非常感谢： https://github.com/bohd4nx/mobile-landing
 
