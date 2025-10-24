@@ -11,7 +11,7 @@ export const appInfo = {
 		apple: "https://testflight.apple.com/join/TgcHSGwb",
 	} as StoreLinks,
 	announcement: {
-		message: "最低支持iOS17.0，低于此版本将无法使用，没有兼容低版本的计划。",
+		message: "TF被下架了，正在联系解决，请耐心等待，恢复后第一时间在群里和官网更新信息。",
 		type: "warning" as const,
 		dismissible: true,
 		show: true,
