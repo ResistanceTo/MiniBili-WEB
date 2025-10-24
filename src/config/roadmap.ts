@@ -300,6 +300,10 @@ export const roadmap: TodoNode[] = [
 						title: "关注",
 						status: TodoStatus.Completed,
 					},
+					{
+						title: "稍后再看",
+						status: TodoStatus.Planned,
+					},
 				]
 			},
 			{
@@ -339,6 +343,10 @@ export const roadmap: TodoNode[] = [
 						status: TodoStatus.Planned,
 					}
 				]
+			},
+			{
+				title: "字幕选择",
+				status: TodoStatus.Planned,
 			}
 		]
 	},
@@ -371,11 +379,19 @@ export const roadmap: TodoNode[] = [
 				children: [
 					{
 						title: "关注",
-						status: TodoStatus.Planned,
+						status: TodoStatus.InProgress,
 					}
 				],
 			},
 		]
+	},
+	{
+		title: "番剧",
+		status: TodoStatus.Planned,
+	},
+	{
+		title: "电影",
+		status: TodoStatus.Planned,
 	},
 	{
 		title: "评论",
@@ -389,7 +405,7 @@ export const roadmap: TodoNode[] = [
 					},
 					{
 						title: "一级评论",
-						status: TodoStatus.Planned,
+						status: TodoStatus.InProgress,
 					},
 					{
 						title: "楼中楼",
@@ -397,7 +413,7 @@ export const roadmap: TodoNode[] = [
 					},
 					{
 						title: "全部评论页",
-						status: TodoStatus.Planned,
+						status: TodoStatus.InProgress,
 					},
 					{
 						title: "引用回复",
@@ -414,7 +430,7 @@ export const roadmap: TodoNode[] = [
 				children: [
 					{
 						title: "点赞",
-						status: TodoStatus.Planned,
+						status: TodoStatus.InProgress,
 					},
 					{
 						title: "点踩",
@@ -422,11 +438,15 @@ export const roadmap: TodoNode[] = [
 					},
 					{
 						title: "评论",
-						status: TodoStatus.Planned,
+						status: TodoStatus.InProgress,
 					},
 					{
 						title: "回复",
-						status: TodoStatus.Planned,
+						status: TodoStatus.InProgress,
+					},
+					{
+						title: "删除",
+						status: TodoStatus.InProgress,
 					},
 				]
 			},
@@ -435,7 +455,7 @@ export const roadmap: TodoNode[] = [
 				children: [
 					{
 						title: "最热",
-						status: TodoStatus.Planned,
+						status: TodoStatus.InProgress,
 					},
 					{
 						title: "最新",
@@ -474,7 +494,19 @@ export const roadmap: TodoNode[] = [
 				status: TodoStatus.Planned,
 			},
 			{
-				title: "底部菜单参考App Store设计，单独搜索按钮",
+				title: "「iOS26」底部菜单参考App Store设计，单独搜索按钮",
+				status: TodoStatus.InProgress,
+			},
+			{
+				title: "部分界面支持手势操作",
+				status: TodoStatus.Planned,
+			},
+			{
+				title: "播放进度记录同步",
+				status: TodoStatus.Planned,
+			},
+			{
+				title: "高刷屏帧率问题",
 				status: TodoStatus.Planned,
 			}
 		]
