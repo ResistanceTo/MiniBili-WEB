@@ -11,8 +11,8 @@ export const appInfo = {
 		apple: "https://testflight.apple.com/join/TgcHSGwb",
 	} as StoreLinks,
 	announcement: {
-		message: "已经恢复TF，点击下方链接可直接加入",
-		type: "success" as const,
+		message: "最低支持iOS17.0，低于此版本将无法使用，没有兼容低版本的计划。",
+		type: "warning" as const,
 		dismissible: true,
 		show: true,
 	},

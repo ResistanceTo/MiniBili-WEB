@@ -499,6 +499,22 @@ export const roadmap: TodoNode[] = [
 			{
 				title: "高刷屏帧率问题",
 				status: TodoStatus.Planned,
+			},
+			{
+				title: "动态的评论功能",
+				status: TodoStatus.Planned,
+			},
+			{
+				title: "连续播放",
+				status: TodoStatus.Planned,
+			},
+			{
+				title: "透明logo优化",
+				status: TodoStatus.Planned,
+			},
+			{
+				title: "顶部状态栏优化",
+				status: TodoStatus.Planned,
 			}
 		]
 	}
