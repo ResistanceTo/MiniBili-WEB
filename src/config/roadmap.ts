@@ -336,11 +336,11 @@ export const roadmap: TodoNode[] = [
 				children: [
 					{
 						title: "直接拿最高画质",
-						status: TodoStatus.Planned,
+						status: TodoStatus.InProgress,
 					},
 					{
 						title: "手动选择清晰度",
-						status: TodoStatus.Planned,
+						status: TodoStatus.InProgress,
 					}
 				]
 			},
@@ -473,16 +473,12 @@ export const roadmap: TodoNode[] = [
 		title: "其他需要优化的部分",
 		children: [
 			{
-				title: "播放进度记录",
-				status: TodoStatus.Planned,
-			},
-			{
 				title: "点击全屏后，视频被暂停",
 				status: TodoStatus.Planned,
 			},
 			{
 				title: "简介部分做成可收起设计，同官B",
-				status: TodoStatus.Planned,
+				status: TodoStatus.Completed,
 			},
 			{
 				title: "「iOS26」底部菜单参考App Store设计，单独搜索按钮",
@@ -494,7 +490,7 @@ export const roadmap: TodoNode[] = [
 			},
 			{
 				title: "播放进度记录同步",
-				status: TodoStatus.Planned,
+				status: TodoStatus.Completed,
 			},
 			{
 				title: "高刷屏帧率问题",
@@ -514,7 +510,7 @@ export const roadmap: TodoNode[] = [
 			},
 			{
 				title: "顶部状态栏优化",
-				status: TodoStatus.Planned,
+				status: TodoStatus.Completed,
 			}
 		]
 	}
