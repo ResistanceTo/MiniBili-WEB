@@ -11,8 +11,8 @@ export const appInfo = {
 		apple: "https://testflight.apple.com/join/TgcHSGwb",
 	} as StoreLinks,
 	announcement: {
-		message: "TF被下架了，正在联系解决，请耐心等待，恢复后第一时间在群里和官网更新信息。",
-		type: "warning" as const,
+		message: "TF已恢复，点击下方链接直接加入测试！不会支持iOS17.0以下系统，暂无iPad优化计划。",
+		type: "success" as const,
 		dismissible: true,
 		show: true,
 	},
