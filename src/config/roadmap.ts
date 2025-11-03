@@ -340,7 +340,7 @@ export const roadmap: TodoNode[] = [
 					},
 					{
 						title: "手动选择清晰度",
-						status: TodoStatus.InProgress,
+						status: TodoStatus.Completed,
 					}
 				]
 			},

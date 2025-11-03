@@ -3,6 +3,26 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 19,
+		date: "2025-11-03",
+		updates: {
+			improvement: [
+				"升级了之前的缓存系统",
+				"更新首页设置页样式",
+			],
+			feature: [
+				"支持大会员切换画质",
+				"添加Apple Music样式的底部菜单（iOS26）",
+				"“此版本最低支持iOS17.2，并且在未来会逐步提升支持的系统版本”",
+			],
+			bugfix: [
+				"修复顶部Tab菜单黑暗模式下看不清字的问题",
+				"修复了部分机型进入视频详情页会奔溃的问题",
+			]
+		},
+	},
+	{
+		version: "1.0",
 		build: 18,
 		date: "2025-10-28",
 		updates: {
