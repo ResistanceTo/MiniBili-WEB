@@ -515,6 +515,10 @@ export const roadmap: TodoNode[] = [
 			{
 				title: "黑暗主题下，优化部分字体和背景颜色对比度不足的问题",
 				status: TodoStatus.Planned,
+			},
+			{
+				title: "其他插件集成，如空降助手等",
+				status: TodoStatus.Planned,
 			}
 		]
 	}

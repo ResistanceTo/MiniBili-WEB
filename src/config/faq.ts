@@ -21,4 +21,8 @@ export const faq: FAQ[] = [
 		question: "TestFlight 失效或测试员名额已满？",
 		answer: "全部版本失效我会在官网和交流群里通知大家，等待修复即可，已经安装的用户不会受到影响。测试员名额满了会不定期清理不活跃测试员。",
 	},
+	{
+		question: "Apple TV等其他平台？",
+		answer: "未来有计划扩展到Apple TV、Apple Watch、Apple Vision Pro（不一定，开坑弃坑已经常态了），没提到的平台就一定不会。现在的主要精力会放在iPhone版本上。",
+	},
 ];
