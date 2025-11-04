@@ -1,7 +1,7 @@
-import type { LightboxProps } from "config";
+import type { LightboxProps, MediaItem } from "config";
 import { areImagesEqual } from "config";
 import { AnimatePresence, motion } from "framer-motion";
-import { memo, useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { FiChevronLeft, FiChevronRight, FiX } from "react-icons/fi";
 
 declare global {
@@ -15,6 +15,22 @@ const Lightbox = ({ images }: LightboxProps) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [activeDevice, setActiveDevice] = useState<"iphone" | "ipad">("iphone");
 	const currentImages = images[activeDevice];
+	const videoRef = useRef<HTMLVideoElement>(null);
+
+	const normalizeMedia = useCallback((item: string | MediaItem): MediaItem => {
+		if (typeof item === "string") {
+			return { src: item, type: "image" };
+		}
+		return item;
+	}, []);
+
+	// 切换图片/视频时，暂停之前的视频
+	useEffect(() => {
+		if (videoRef.current && !videoRef.current.paused) {
+			videoRef.current.pause();
+			videoRef.current.currentTime = 0;
+		}
+	}, [currentIndex]);
 
 	useEffect(() => {
 		window.openLightbox = (index: number, device: "iphone" | "ipad") => {
@@ -93,17 +109,43 @@ const Lightbox = ({ images }: LightboxProps) => {
 					<FiChevronLeft size={20} />
 				</button>
 
-				<img
-					src={currentImages[currentIndex]}
-					alt={`MiniBili ${activeDevice === "iphone" ? "iPhone" : "iPad"} 应用界面大图 ${currentIndex + 1} - 免费无广告的哔哩哔哩第三方客户端`}
-					className="max-h-[90vh] max-w-[90vw] object-contain rounded-xl shadow-2xl"
-					onClick={(e) => e.stopPropagation()}
-					onKeyDown={(e) => {
-						if (e.key === 'Enter' || e.key === ' ') {
-							e.stopPropagation();
-						}
-					}}
-				/>
+				{(() => {
+					const media = normalizeMedia(currentImages[currentIndex]);
+					return media.type === "video" ? (
+						<video
+							ref={videoRef}
+							key={media.src}
+							src={media.src}
+							poster={media.poster}
+							preload="metadata"
+							controls
+							playsInline
+							loop
+							autoPlay
+							muted
+							className="max-h-[90vh] max-w-[90vw] object-contain rounded-xl shadow-2xl"
+							onClick={(e) => e.stopPropagation()}
+							onKeyDown={(e) => {
+								if (e.key === 'Enter' || e.key === ' ') {
+									e.stopPropagation();
+								}
+							}}
+						/>
+					) : (
+						<img
+							key={media.src}
+							src={media.src}
+							alt={`MiniBili ${activeDevice === "iphone" ? "iPhone" : "iPad"} 应用界面大图 ${currentIndex + 1} - 免费无广告的哔哩哔哩第三方客户端`}
+							className="max-h-[90vh] max-w-[90vw] object-contain rounded-xl shadow-2xl"
+							onClick={(e) => e.stopPropagation()}
+							onKeyDown={(e) => {
+								if (e.key === 'Enter' || e.key === ' ') {
+									e.stopPropagation();
+								}
+							}}
+						/>
+					);
+				})()}
 
 				<button
 					type="button"
@@ -118,22 +160,25 @@ const Lightbox = ({ images }: LightboxProps) => {
 				</button>
 
 				<div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
-					{currentImages.map((image, index) => (
-						<button
-							type="button"
-							key={image}
-							onClick={(e) => {
-								e.stopPropagation();
-								setCurrentIndex(index);
-							}}
-							className={`h-2 w-2 rounded-full transition-colors ${
-								index === currentIndex
-									? "bg-gray-800 dark:bg-white"
-									: "bg-gray-500 dark:bg-white/60 hover:bg-gray-700 dark:hover:bg-white/80"
-							}`}
-							aria-label={`Go to image ${index + 1}`}
-						/>
-					))}
+					{currentImages.map((item, index) => {
+						const media = normalizeMedia(item);
+						return (
+							<button
+								type="button"
+								key={media.src}
+								onClick={(e) => {
+									e.stopPropagation();
+									setCurrentIndex(index);
+								}}
+								className={`h-2 w-2 rounded-full transition-colors ${
+									index === currentIndex
+										? "bg-gray-800 dark:bg-white"
+										: "bg-gray-500 dark:bg-white/60 hover:bg-gray-700 dark:hover:bg-white/80"
+								}`}
+								aria-label={`Go to ${media.type === "video" ? "video" : "image"} ${index + 1}`}
+							/>
+						);
+					})}
 				</div>
 			</motion.div>
 		</AnimatePresence>

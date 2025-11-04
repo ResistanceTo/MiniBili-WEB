@@ -1,8 +1,14 @@
 import type { IconType } from "react-icons";
 
+export interface MediaItem {
+	src: string;
+	type: "image" | "video";
+	poster?: string; 
+}
+
 export interface DeviceScreenshots {
-	iphone: string[];
-	ipad: string[];
+	iphone: (string | MediaItem)[];
+	ipad: (string | MediaItem)[];
 }
 
 export interface Feature {

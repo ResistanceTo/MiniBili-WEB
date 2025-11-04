@@ -32,6 +32,16 @@
 /*.svg
   Cache-Control: public, max-age=604800, must-revalidate
 
+# 视频文件 - 长期缓存
+/*.mp4
+  Cache-Control: public, max-age=2592000, must-revalidate
+
+/*.webm
+  Cache-Control: public, max-age=2592000, must-revalidate
+
+/*.mov
+  Cache-Control: public, max-age=2592000, must-revalidate
+
 # 字体文件 - 长期缓存
 /*.woff
   Cache-Control: public, max-age=31536000, immutable

@@ -2,10 +2,14 @@ import type { DeviceScreenshots } from "./types";
 
 export const screenshots: DeviceScreenshots = {
 	iphone: [
-		"screenshots/iphone/shouye.webp",
-		"screenshots/iphone/shipin.webp",
-		"screenshots/iphone/dongtai.webp",
-		"screenshots/iphone/guanyu.webp",
+		{  // 视频（对象）
+			src: "screenshots/iphone/minibili.mp4",
+			type: "video",
+		},
+		"screenshots/iphone/home.webp",
+		"screenshots/iphone/detail.webp",
+		"screenshots/iphone/search.webp",
+		"screenshots/iphone/about.webp",
 	],
 	ipad: [
 		"screenshots/ipad/shouye.webp",

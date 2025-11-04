@@ -20,6 +20,28 @@ const { title, description, screenshots, features, faqs, storeLinks, logo, annou
   <!-- LCP -->
   <link rel="preload" as="image" href="/MiniBili.png" fetchpriority="high" slot="head" />
 
+  <!-- 预加载视频以提升性能 -->
+  {screenshots.iphone.map((item: any) => {
+    if (typeof item === 'object' && item.type === 'video') {
+      return (
+        <>
+          <link rel="preload" as="video" href={item.src} slot="head" />
+          {item.poster && <link rel="preload" as="image" href={item.poster} slot="head" />}
+        </>
+      );
+    }
+  })}
+  {screenshots.ipad.map((item: any) => {
+    if (typeof item === 'object' && item.type === 'video') {
+      return (
+        <>
+          <link rel="preload" as="video" href={item.src} slot="head" />
+          {item.poster && <link rel="preload" as="image" href={item.poster} slot="head" />}
+        </>
+      );
+    }
+  })}
+
   <main class="min-h-screen max-w-5xl mx-auto px-4 py-8">
     {announcement && announcement.show && (
       <AnnouncementBanner 
