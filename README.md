@@ -1,29 +1,37 @@
 <div align="center">
-  <img src="public/MiniBili.png" alt="MiniBili Logo" width="120" height="120" style="border-radius: 24px;">
+  <img src="public/MiniBili.png" alt="MiniBili Logo" width="120" height="120">
 
-  <p style="font-size: 18px; color: #666; margin-bottom: 24px;">
+  <h1>MiniBili</h1>
+
+  <p>
     <strong>免费、无广告、无跟踪器的 iOS 第三方哔哩哔哩客户端</strong>
+  </p>
+
+  <p>
+    <a href="https://testflight.apple.com/join/TgcHSGwb">
+      <img alt="Download on TestFlight" src="https://img.shields.io/badge/TestFlight-Download-blue?style=for-the-badge&logo=app-store">
+    </a>
   </p>
 
   <p>
     <img alt="GitHub stars" src="https://img.shields.io/github/stars/ResistanceTo/MiniBili-WEB?style=flat-square&logo=github">
     <img alt="GitHub forks" src="https://img.shields.io/github/forks/ResistanceTo/MiniBili-WEB?style=flat-square&logo=github">
     <img alt="GitHub issues" src="https://img.shields.io/github/issues/ResistanceTo/MiniBili-WEB?style=flat-square&logo=github">
-    <img alt="GitHub license" src="https://img.shields.io/github/license/ResistanceTo/MiniBili-WEB?style=flat-square">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ResistanceTo/MiniBili-WEB?style=flat-square&logo=github">
   </p>
 
-  <p>
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ResistanceTo/MiniBili-WEB?style=flat-square&logo=github">
-    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/ResistanceTo/MiniBili-WEB?style=flat-square">
-    <img alt="Website status" src="https://img.shields.io/website?style=flat-square&url=https%3A%2F%2Fminibili.zhaohe.org">
-  </p>
 </div>
 
 ---
 
 ### 📱 关于 MiniBili
 
-MiniBili 是一个专为 iOS 平台设计的第三方哔哩哔哩客户端，使用SwiftUI编写。
+MiniBili 是一个专为 iOS 平台设计的第三方哔哩哔哩客户端，使用 SwiftUI 编写。
+
+#### 📥 下载安装
+
+- **TestFlight**: [立即下载](https://testflight.apple.com/join/TgcHSGwb)
+- **官网**: [minibili.zhaohe.org](https://minibili.zhaohe.org)
 
 ####  系统要求
 - iOS 17.0 或更高版本

@@ -3,6 +3,16 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 20,
+		date: "2025-11-04",
+		updates: {
+			bugfix: [
+				"修复了iOS26.1底部菜单异常显示问题",
+			]
+		},
+	},
+	{
+		version: "1.0",
 		build: 19,
 		date: "2025-11-03",
 		updates: {
