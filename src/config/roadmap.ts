@@ -474,7 +474,7 @@ export const roadmap: TodoNode[] = [
 		children: [
 			{
 				title: "点击全屏后，视频被暂停",
-				status: TodoStatus.Planned,
+				status: TodoStatus.Completed,
 			},
 			{
 				title: "简介部分做成可收起设计，同官B",

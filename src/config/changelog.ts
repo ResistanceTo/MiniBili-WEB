@@ -3,6 +3,16 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 22,
+		date: "2025-11-04",
+		updates: {
+			bugfix: [
+				"处理点哪儿哪儿就报错的问题",
+			]
+		},
+	},
+	{
+		version: "1.0",
 		build: 21,
 		date: "2025-11-04",
 		updates: {
