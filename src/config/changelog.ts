@@ -3,6 +3,20 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 21,
+		date: "2025-11-04",
+		updates: {
+			improvement: [
+				"视频进入全屏不会暂停播放",
+			],
+			bugfix: [
+				"优化了进入视频详情页的一些逻辑",
+				"优化了历史记录同步的一些问题",
+			]
+		},
+	},
+	{
+		version: "1.0",
 		build: 20,
 		date: "2025-11-04",
 		updates: {
