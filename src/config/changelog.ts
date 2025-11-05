@@ -3,6 +3,28 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 23,
+		date: "2025-11-05",
+		updates: {
+			improvement: [
+				"优化评论展示和交互",
+				"优化首页列表加载机制",
+				"现在查看评论不会暂停视频播放",
+			],
+			feature: [
+				"支持分享视频",
+				"添加新的紧凑型顶部菜单（iOS26）",
+			],
+			bugfix: [
+				"修复了视频页进入和退出一些资源未释放的问题",
+				"修复了视频播放页进入UP主空间视频会一直后台播放的问题",
+				"修复了点击全屏时，视频先翻转180度再横屏",
+				"修复了回复评论的弹窗偶尔白屏的问题",
+			]
+		},
+	},
+	{
+		version: "1.0",
 		build: 22,
 		date: "2025-11-04",
 		updates: {

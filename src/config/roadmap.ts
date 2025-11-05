@@ -294,7 +294,7 @@ export const roadmap: TodoNode[] = [
 					},
 					{
 						title: "分享",
-						status: TodoStatus.Planned,
+						status: TodoStatus.Completed,
 					},
 					{
 						title: "关注",
