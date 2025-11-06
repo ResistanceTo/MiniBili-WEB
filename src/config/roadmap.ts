@@ -190,6 +190,10 @@ export const roadmap: TodoNode[] = [
 							{
 								title: "播放",
 								status: TodoStatus.Completed,
+							},
+							{
+								title: "删除稍后再看",
+								status: TodoStatus.Completed,
 							}
 						]
 					}
@@ -329,6 +333,10 @@ export const roadmap: TodoNode[] = [
 						title: "缓存资源删除",
 						status: TodoStatus.Completed,
 					},
+					{
+						title: "下载到图库",
+						status: TodoStatus.InProgress,
+					},
 				]
 			},
 			{
@@ -336,7 +344,11 @@ export const roadmap: TodoNode[] = [
 				children: [
 					{
 						title: "直接拿最高画质",
-						status: TodoStatus.InProgress,
+						status: TodoStatus.Completed,
+					},
+					{
+						title: "设置默认清晰度",
+						status: TodoStatus.Completed,
 					},
 					{
 						title: "手动选择清晰度",

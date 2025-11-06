@@ -3,6 +3,27 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 24,
+		date: "2025-11-07",
+		updates: {
+			improvement: [
+				"可以设置长按“2X”标识是否显示",
+				"优化“2X”标识的位置",
+				"优化关注和粉丝页，不再用弹出窗口交互",
+			],
+			feature: [
+				"支持选择默认画质",
+				"支持自动选择最高画质",
+				"添加一个新的列表布局，参考官方的搜索页",
+				"支持删除稍后再看",
+			],
+			bugfix: [
+				"修复了进入视频页时顶部闪烁的问题"
+			]
+		},
+	},
+	{
+		version: "1.0",
 		build: 23,
 		date: "2025-11-05",
 		updates: {
