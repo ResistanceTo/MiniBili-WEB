@@ -27,7 +27,7 @@ const communityLinks: CommunityLink[] = [
 		icon: RiMailFill,
 		title: "电子邮件",
 		description: "发送邮件联系开发者",
-		url: "mailto:resistanceto@outlook.com",
+		url: "mailto:me@zhaohe.org",
 	},
 ];
 

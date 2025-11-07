@@ -1,7 +1,7 @@
 /* TEAM */
 
 Developer: ResistanceTo
-Contact: resistanceto@outlook.com
+Contact: me@zhaohe.org
 GitHub: github.com/ResistanceTo
 
 /* THANKS */
