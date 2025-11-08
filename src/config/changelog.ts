@@ -3,6 +3,24 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 25,
+		date: "2025-11-08",
+		updates: {
+			improvement: [
+				"优化视频详情页顶部菜单",
+				"可选不显示UP主头像，加快一点速度",
+				"可以自定义苹果音乐样式占位符",
+			],
+			feature: [
+				"添加稍后再看功能",
+			],
+			bugfix: [
+				"修复苹果音乐样式菜单栏点击奔溃的问题"
+			]
+		},
+	},
+	{
+		version: "1.0",
 		build: 24,
 		date: "2025-11-07",
 		updates: {

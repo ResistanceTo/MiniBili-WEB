@@ -306,7 +306,7 @@ export const roadmap: TodoNode[] = [
 					},
 					{
 						title: "稍后再看",
-						status: TodoStatus.Planned,
+						status: TodoStatus.Completed,
 					},
 				]
 			},
