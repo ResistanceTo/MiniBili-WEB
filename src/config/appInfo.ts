@@ -11,7 +11,7 @@ export const appInfo = {
 		apple: "https://testflight.apple.com/join/TgcHSGwb",
 	} as StoreLinks,
 	announcement: {
-		message: "build19之后只支持17.2及以上系统，iPad暂无优化计划。",
+		message: "build19之后只支持17.2及以上系统，tf人员已满，请关注群消息获取最新名额。",
 		type: "success" as const,
 		dismissible: true,
 		show: true,

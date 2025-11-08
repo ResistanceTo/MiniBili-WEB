@@ -11,14 +11,14 @@ export const faq: FAQ[] = [
 	},
 	{
 		question: "iPad版本优化问题？",
-		answer: "由于开发者没有iPad设备，所以会在iPhone版本几乎所有功能完成后，才会开始iPad版本的优化工作。",
+		answer: "由于开发者没有iPad设备，几乎不会花费精力去做大屏幕适配。",
 	},
 	{
 		question: "TestFlight 名额已满？",
-		answer: "我会不定期清理不活跃测试员，可以关注群消息。",
+		answer: "我会不定期清理不活跃测试员，关注群消息。",
 	},
 	{
 		question: "Apple TV等其他平台？",
-		answer: "未来有计划扩展到Apple TV、Apple Watch、Apple Vision Pro（不一定，开坑弃坑已经常态了），没提到的平台就一定不会。现在的主要精力会放在iPhone版本上。",
+		answer: "未来有计划扩展到Apple TV、Apple Watch、Apple Vision Pro（不一定，开坑弃坑已经常态了），没提到的平台就一定不会。现在的主要精力会放在iPhone版本上，等iPhone几乎所有功能完成后，会首先做Apple TV平台。",
 	},
 ];
