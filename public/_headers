@@ -1,20 +1,29 @@
 # 默认响应头（针对宣传网站优化）
 /*
-  # 基础安全头（保留无害的）
+  # 隐私保护：禁止 Google FLoC 跟踪
+  Permissions-Policy: interest-cohort=()
+
+# HTML 文件 - 不缓存 + 安全头
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
   X-Content-Type-Options: nosniff
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: no-referrer-when-downgrade
 
-  # 隐私保护：禁止 Google FLoC 跟踪
-  Permissions-Policy: interest-cohort=()
-
-# HTML 文件 - 不缓存
-/*.html
-  Cache-Control: public, max-age=0, must-revalidate
-
 # 静态资源 - 长期缓存
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
+
+# 截图资源（图片/视频）— 针对 /screenshots/* 的专属规则
+# 说明：移除 nosniff，避免浏览器在某些 CDN/MIME 场景误拦截二进制媒体。
+/screenshots/*
+  # 覆盖全局安全头中的 nosniff（如果有匹配到）
+  ! X-Content-Type-Options
+  # 可选：允许跨域静态获取（如 iframe/外链展示），同源访问不受影响
+  Access-Control-Allow-Origin: *
+
+  # 针对目录内所有静态文件的通用缓存（被下面按扩展名的更具体规则覆盖）
+  Cache-Control: public, max-age=604800
 
 # 图片文件 - 中期缓存
 /*.png
@@ -35,12 +44,16 @@
 # 视频文件 - 长期缓存
 /*.mp4
   Cache-Control: public, max-age=2592000, must-revalidate
+  # 提示浏览器支持按字节范围请求，改善拖动与预加载体验
+  Accept-Ranges: bytes
 
 /*.webm
   Cache-Control: public, max-age=2592000, must-revalidate
+  Accept-Ranges: bytes
 
 /*.mov
   Cache-Control: public, max-age=2592000, must-revalidate
+  Accept-Ranges: bytes
 
 # 字体文件 - 长期缓存
 /*.woff
