@@ -61,11 +61,29 @@ export const roadmap: TodoNode[] = [
 		children: [
 			{
 				title: "视频",
-				status: TodoStatus.Completed,
+				children: [
+					{
+						title: "观看",
+						status: TodoStatus.Completed,
+					}
+				]
 			},
 			{
 				title: "综合",
-				status: TodoStatus.Completed,
+				children: [
+					{
+						title: "文本动态",
+						status: TodoStatus.Completed,
+					},
+					{
+						title: "图片动态",
+						status: TodoStatus.Completed,
+					},
+					{
+						title: "评论信息",
+						status: TodoStatus.Completed,
+					},
+				]
 			}
 		],
 	},

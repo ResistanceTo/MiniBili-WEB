@@ -3,6 +3,29 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 26,
+		date: "2025-11-12",
+		updates: {
+			improvement: [
+				"视频详情页一些优化和改进",
+				"视频详情和评论双列显示，参考官B设计",
+				"现在许多界面都不会再显示底部的菜单栏",
+				"现在已经正确的解析分P和合集",
+			],
+			feature: [
+				"首页视频封面的小浮窗支持隐藏",
+				"可以设置是否自动画中画",
+				"评论区支持看图",
+				"文字动态和图片动态支持查看详情和评论",
+				"“个人精力有限，iOS17和iOS18这两个版本的UI将不会有升级也不考虑兼容性。另外，在此版本的开发过程中，发现了一些好用的API只有iOS18提供，所以在未来的某个版本将不支持iOS17全版本，iOS18也同理但是会支持更久。”",
+			],
+			bugfix: [
+				"一些小问题的修复和优化"
+			]
+		},
+	},
+	{
+		version: "1.0",
 		build: 25,
 		date: "2025-11-08",
 		updates: {
