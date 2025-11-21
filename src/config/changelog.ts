@@ -3,6 +3,18 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 27,
+		date: "2025-11-21",
+		updates: {
+			improvement: [
+				"支持设置首页和动态页的默认tab",
+				"视频详情页的清晰度现在会用图标表示而不是字符串",
+				"现在清晰度可以手动调节到比默认值更低的画质",
+			]
+		},
+	},
+	{
+		version: "1.0",
 		build: 26,
 		date: "2025-11-12",
 		updates: {
