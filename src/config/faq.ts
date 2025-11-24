@@ -2,8 +2,8 @@ import type { FAQ } from "./types";
 
 export const faq: FAQ[] = [
 	{
-		question: "是否考虑支持iOS17以下的系统？",
-		answer: "不会，许多新特性只有iOS17以上才提供。开发者本人已经iOS26了，原本准备只支持iOS26来着。",
+		question: "是否考虑支持低版本系统？",
+		answer: "不会考虑。",
 	},
 	{
 		question: "有ipa或者其他渠道分发吗？",

@@ -408,11 +408,15 @@ export const roadmap: TodoNode[] = [
 	},
 	{
 		title: "番剧",
-		status: TodoStatus.Planned,
+		status: TodoStatus.Completed,
+	},
+	{
+		title: "直播",
+		status: TodoStatus.Completed,
 	},
 	{
 		title: "电影",
-		status: TodoStatus.Planned,
+		status: TodoStatus.Completed,
 	},
 	{
 		title: "评论",

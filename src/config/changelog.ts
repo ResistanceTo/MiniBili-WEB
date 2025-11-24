@@ -3,6 +3,27 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 29,
+		date: "2025-11-24",
+		updates: {
+			improvement: [
+				"优化列表页UP主这一行的icon和文本",
+				"处理部分操作的风控问题（可能）",
+			],
+			feature: [
+				"支持直播",
+				"支持番剧",
+				"支持电影（关注哔哩哔哩电影）",
+				"支持分区",
+				"“此版本预计是最后一个支持iOS17及18的版本，之后的升级只考虑iOS26，不做代码层兼容”",
+			],
+			bugfix: [
+				"一些小问题的修复和优化"
+			]
+		},
+	},
+	{
+		version: "1.0",
 		build: 27,
 		date: "2025-11-21",
 		updates: {

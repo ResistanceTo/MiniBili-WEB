@@ -11,7 +11,7 @@ export const appInfo = {
 		apple: "https://testflight.apple.com/join/TgcHSGwb",
 	} as StoreLinks,
 	announcement: {
-		message: "build19之后只支持17.2及以上系统，已经清理了一次不活跃测试员，现在可以直接点击下方链接加入。",
+		message: "测试员已满，请关注群消息，后续会不定期清理不活跃测试员。",
 		type: "success" as const,
 		dismissible: true,
 		show: true,
