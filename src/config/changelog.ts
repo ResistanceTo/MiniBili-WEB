@@ -3,6 +3,28 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 30,
+		date: "2025-12-01",
+		updates: {
+			improvement: [
+				"又推进了一点弹幕的工作（能用但还不完善，不用提反馈）",
+				"视频详情页改了一点点液态玻璃的UI",
+			],
+			feature: [
+				"支持隐藏底部的首页、关注和分区菜单",
+				"支持清理整个App的缓存不仅是内存相关缓存",
+				"添加点赞投币等触觉反馈",
+				"“此版本仍然支持iOS18，但未做任何测试。之后版本的问题反馈只会处理iOS26+，低版本不考虑体验问题。”",
+			],
+			bugfix: [
+				"修复了首页紧凑型菜单没有直播项的问题",
+				"修复了无法投币的问题",
+				"修复了首页配置了默认Tab但是不生效的问题",
+			]
+		},
+	},
+	{
+		version: "1.0",
 		build: 29,
 		date: "2025-11-24",
 		updates: {
