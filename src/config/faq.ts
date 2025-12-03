@@ -2,23 +2,24 @@ import type { FAQ } from "./types";
 
 export const faq: FAQ[] = [
 	{
+		question: "为什么 TestFlight 邀请链接关闭了？",
+		answer: `TestFlight 有 10000 人的测试员上限。根据苹果官方说明：
+已删除的测试员仍会占用名额，直到他们安装的构建版本过期（最长 90 天）;
+即使手动将构建版本设为过期，这些测试员也仍计入人数上限;
+很多用户安装后只打开一次甚至不打开就删除，但名额无法立即释放。
+为了更合理地分配有限的测试员名额，我们暂时关闭了公开邀请链接，后续会采用更好的分配方式。
+关注群或公告获取最新信息。`,
+	},
+	{
 		question: "是否考虑支持低版本系统？",
 		answer: "不会考虑。",
 	},
 	{
 		question: "有ipa或者其他渠道分发吗？",
-		answer: "TestFlight 是目前唯一渠道，不会上架 App Store，也不会提供 ipa 下载。",
+		answer: "TestFlight 是目前唯一加入渠道，不会上架 App Store，也不会提供 ipa 下载。",
 	},
 	{
 		question: "iPad版本优化问题？",
-		answer: "由于开发者没有iPad设备，几乎不会花费精力去做大屏幕适配。",
-	},
-	{
-		question: "TestFlight 名额已满？",
-		answer: "我会不定期清理不活跃测试员，关注群消息。",
-	},
-	{
-		question: "Apple TV等其他平台？",
-		answer: "未来有计划扩展到Apple TV、Apple Watch、Apple Vision Pro（不一定，开坑弃坑已经常态了），没提到的平台就一定不会。现在的主要精力会放在iPhone版本上，等iPhone几乎所有功能完成后，会首先做Apple TV平台。",
+		answer: "由于开发者没有iPad设备，所以不会花费精力去做适配。",
 	},
 ];

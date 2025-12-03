@@ -11,8 +11,8 @@ export const appInfo = {
 		apple: "https://testflight.apple.com/join/TgcHSGwb",
 	} as StoreLinks,
 	announcement: {
-		message: "build30开始只支持iOS18及以上版本，只考虑iOS26的体验和交互。",
-		type: "success" as const,
+		message: "⚠️ TestFlight 公开邀请链接暂时关闭，详情请查看下方的FAQ部分。",
+		type: "warning" as const,
 		dismissible: true,
 		show: true,
 	},
