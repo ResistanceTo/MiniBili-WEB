@@ -5,6 +5,7 @@ export const changelog: ChangelogVersion[] = [
 		version: "1.0",
 		build: 30,
 		date: "2025-12-01",
+		title: "此版本仍然支持iOS18，但未做任何测试。之后版本的问题反馈只会处理iOS26+，低版本不考虑体验问题。",
 		updates: {
 			improvement: [
 				"又推进了一点弹幕的工作（能用但还不完善，不用提反馈）",
@@ -14,7 +15,6 @@ export const changelog: ChangelogVersion[] = [
 				"支持隐藏底部的首页、关注和分区菜单",
 				"支持清理整个App的缓存不仅是内存相关缓存",
 				"添加点赞投币等触觉反馈",
-				"“此版本仍然支持iOS18，但未做任何测试。之后版本的问题反馈只会处理iOS26+，低版本不考虑体验问题。”",
 			],
 			bugfix: [
 				"修复了首页紧凑型菜单没有直播项的问题",
@@ -37,7 +37,6 @@ export const changelog: ChangelogVersion[] = [
 				"支持番剧",
 				"支持电影（关注哔哩哔哩电影）",
 				"支持分区",
-				"“此版本预计是最后一个支持iOS17及18的版本，之后的升级只考虑iOS26，不做代码层兼容”",
 			],
 			bugfix: [
 				"一些小问题的修复和优化"
@@ -72,7 +71,6 @@ export const changelog: ChangelogVersion[] = [
 				"可以设置是否自动画中画",
 				"评论区支持看图",
 				"文字动态和图片动态支持查看详情和评论",
-				"“个人精力有限，iOS17和iOS18这两个版本的UI将不会有升级也不考虑兼容性。另外，在此版本的开发过程中，发现了一些好用的API只有iOS18提供，所以在未来的某个版本将不支持iOS17全版本，iOS18也同理但是会支持更久。”",
 			],
 			bugfix: [
 				"一些小问题的修复和优化"
@@ -178,6 +176,7 @@ export const changelog: ChangelogVersion[] = [
 		version: "1.0",
 		build: 19,
 		date: "2025-11-03",
+		title: "此版本最低支持iOS17.2，并且在未来会逐步提升支持的系统版本",
 		updates: {
 			improvement: [
 				"升级了之前的缓存系统",
@@ -186,7 +185,6 @@ export const changelog: ChangelogVersion[] = [
 			feature: [
 				"支持大会员切换画质",
 				"添加Apple Music样式的底部菜单（iOS26）",
-				"“此版本最低支持iOS17.2，并且在未来会逐步提升支持的系统版本”",
 			],
 			bugfix: [
 				"修复顶部Tab菜单黑暗模式下看不清字的问题",
