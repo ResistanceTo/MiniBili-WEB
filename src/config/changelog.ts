@@ -3,6 +3,16 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 32,
+		date: "2025-12-05",
+		updates: {
+			bugfix: [
+				"修复了build31默认字体大小下的UI错乱问题",
+			]
+		},
+	},
+	{
+		version: "1.0",
 		build: 31,
 		date: "2025-12-05",
 		updates: {
