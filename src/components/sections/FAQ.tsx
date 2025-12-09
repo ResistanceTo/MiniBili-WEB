@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { memo } from "react";
 
 const FAQ = ({ items }: FAQProps) => (
-	<div className="mb-16">
+	<div id="faq" className="mb-16 scroll-mt-20">
 		<motion.h2
 			initial={{ opacity: 0, y: 10 }}
 			whileInView={{ opacity: 1, y: 0 }}

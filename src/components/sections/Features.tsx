@@ -2,7 +2,7 @@ import type { FeaturesProps } from "config";
 import { memo } from "react";
 
 const Features = ({ items }: FeaturesProps) => (
-	<div className="mb-16">
+	<div id="features" className="mb-16 scroll-mt-20">
 		<h2 className="mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
 			特点
 		</h2>

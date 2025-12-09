@@ -7,6 +7,7 @@ import Features from "@components/sections/Features";
 import Screenshots from "@components/sections/Screenshots";
 import AnnouncementBanner from "@components/ui/AnnouncementBanner";
 import Lightbox from "@components/ui/Lightbox";
+import ScrollNav from "@components/ui/ScrollNav";
 import FAQSchema from "@components/seo/FAQSchema.astro";
 import OrganizationSchema from "@components/seo/OrganizationSchema.astro";
 import Layout from "@layouts/Layout.astro";
@@ -44,7 +45,7 @@ const { title, description, screenshots, features, faqs, storeLinks, logo, annou
 
   <main class="min-h-screen max-w-5xl mx-auto px-4 py-8">
     {announcement && announcement.show && (
-      <AnnouncementBanner 
+      <AnnouncementBanner
         message={announcement.message}
         type={announcement.type}
         dismissible={announcement.dismissible}
@@ -59,6 +60,7 @@ const { title, description, screenshots, features, faqs, storeLinks, logo, annou
     <FAQ items={faqs} client:visible />
     <Community client:visible />
   </main>
+  <ScrollNav client:load />
 </Layout>
 
 <Lightbox images={screenshots} client:load />

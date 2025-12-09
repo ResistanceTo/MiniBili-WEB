@@ -96,7 +96,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 	}, []);
 
 	return (
-		<div className="mb-16">
+		<div id="screenshots" className="mb-16 scroll-mt-20">
 			<div className="mb-6 flex items-center justify-between">
 				<h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
 					屏幕截图

@@ -7,7 +7,7 @@ const Changelog = ({ items }: ChangelogProps) => {
 	const recentVersions = items.slice(0, 3);
 
 	return (
-		<div className="mb-16">
+		<div id="changelog" className="mb-16 scroll-mt-20">
 			<div className="flex items-center justify-between mb-6">
 				<h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
 					最新更新
