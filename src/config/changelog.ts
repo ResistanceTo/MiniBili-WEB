@@ -3,6 +3,19 @@ import type { ChangelogVersion } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 33,
+		date: "2025-12-10",
+		updates: {
+			improvement: [
+				"大幅优化首页掉帧问题",
+			],
+			feature: [
+				"全屏幕播放时，点击屏幕，右上角显示时间和电量（5%的误差）",
+			],
+		},
+	},
+	{
+		version: "1.0",
 		build: 32,
 		date: "2025-12-05",
 		updates: {
