@@ -1,24 +1,37 @@
-import type { DeviceToggleProps } from "config";
+import { type DeviceToggleProps, DeviceType } from "config";
 import { motion } from "framer-motion";
 import { memo, useCallback } from "react";
 
 const DeviceToggle = ({ activeDevice, onToggle }: DeviceToggleProps) => {
-	const handleIphoneClick = useCallback(() => onToggle("iphone"), [onToggle]);
-	const handleIpadClick = useCallback(() => onToggle("ipad"), [onToggle]);
+	const handleIphoneClick = useCallback(() => onToggle(DeviceType.iPhone), [onToggle]);
+	const handleIpadClick = useCallback(() => onToggle(DeviceType.iPad), [onToggle]);
+	const handleMacosClick = useCallback(() => onToggle(DeviceType.macOS), [onToggle]);
 
 	return (
 		<div className="flex items-center justify-center gap-1.5 rounded-lg border border-gray-300 dark:border-white/10 bg-gray-200/80 dark:bg-white/[0.03] p-1 shadow-sm">
 			<DeviceButton
 				key="iphone"
-				isActive={activeDevice === "iphone"}
+				isActive={activeDevice === DeviceType.iPhone}
 				onClick={handleIphoneClick}
 				label="iPhone"
 			/>
 			<DeviceButton
 				key="ipad"
-				isActive={activeDevice === "ipad"}
+				isActive={activeDevice === DeviceType.iPad}
 				onClick={handleIpadClick}
 				label="iPad"
+			/>
+			<DeviceButton
+				key="macos"
+				isActive={activeDevice === DeviceType.macOS}
+				onClick={handleMacosClick}
+				label="macOS"
+			/>
+			<DeviceButton
+				key="tvos"
+				isActive={activeDevice === DeviceType.tvOS}
+				onClick={() => onToggle(DeviceType.tvOS)}
+				label="tvOS"
 			/>
 		</div>
 	);
@@ -33,8 +46,8 @@ const DeviceButton = memo(({ isActive, onClick, label }: {
 		type="button"
 		onClick={onClick}
 		className={`relative rounded-md px-3.5 py-1.5 text-sm font-medium transition-colors ${isActive
-				? "text-gray-900 dark:text-white"
-				: "text-gray-600 dark:text-white/60 hover:text-gray-800 dark:hover:text-white"
+			? "text-gray-900 dark:text-white"
+			: "text-gray-600 dark:text-white/60 hover:text-gray-800 dark:hover:text-white"
 			}`}
 		whileTap={{ scale: 0.95 }}
 	>
@@ -48,5 +61,7 @@ const DeviceButton = memo(({ isActive, onClick, label }: {
 		<span className="relative z-10">{label}</span>
 	</motion.button>
 ));
+
+DeviceButton.displayName = "DeviceButton";
 
 export default memo(DeviceToggle);

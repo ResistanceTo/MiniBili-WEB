@@ -1,4 +1,4 @@
-import type { ChangelogProps } from "config";
+import { type ChangelogProps, AppPlatform } from "config";
 import { memo } from "react";
 import { FiClock, FiPackage, FiStar, FiTrendingUp, FiTool } from "react-icons/fi";
 
@@ -20,7 +20,7 @@ const Changelog = ({ items }: ChangelogProps) => {
 				</a>
 			</div>
 			<div className="space-y-3">
-				{recentVersions.map(({ version, build, date, title, updates }) => (
+				{recentVersions.map(({ version, build, date, title, updates, platforms }) => (
 					<div
 						key={`${version}-${build}`}
 						className="rounded-xl border border-gray-300 dark:border-white/10 bg-white dark:bg-white/[0.03] p-4 shadow-sm hover:shadow-md transition-shadow"
@@ -30,9 +30,20 @@ const Changelog = ({ items }: ChangelogProps) => {
 								<div className="flex items-center justify-center w-9 h-9 rounded-lg bg-gray-100 dark:bg-white/[0.04]">
 									<FiPackage className="w-4.5 h-4.5 text-gray-700 dark:text-white opacity-90" />
 								</div>
-								<h3 className="text-base font-medium text-gray-900 dark:text-white">
-									版本 {version} (Build {build})
-								</h3>
+								<div className="flex flex-col">
+									<div className="flex items-center gap-2">
+										<h3 className="text-base font-medium text-gray-900 dark:text-white">
+											版本 {version} (Build {build})
+										</h3>
+										<div className="flex gap-1">
+											{(platforms || [AppPlatform.iOS]).map(p => (
+												<span key={p} className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-300">
+													{p}
+												</span>
+											))}
+										</div>
+									</div>
+								</div>
 							</div>
 							<div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
 								<FiClock className="w-3 h-3" />

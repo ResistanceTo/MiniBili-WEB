@@ -1,4 +1,4 @@
-import type { LightboxProps, MediaItem } from "config";
+import { type LightboxProps, type MediaItem, DeviceType } from "config";
 import { areImagesEqual } from "config";
 import { AnimatePresence, motion } from "framer-motion";
 import { memo, useCallback, useEffect, useRef, useState } from "react";
@@ -6,15 +6,15 @@ import { FiChevronLeft, FiChevronRight, FiX } from "react-icons/fi";
 
 declare global {
 	interface Window {
-		openLightbox: (index: number, device: "iphone" | "ipad") => void;
+		openLightbox: (index: number, device: DeviceType) => void;
 	}
 }
 
 const Lightbox = ({ images }: LightboxProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [currentIndex, setCurrentIndex] = useState(0);
-	const [activeDevice, setActiveDevice] = useState<"iphone" | "ipad">("iphone");
-	const currentImages = images[activeDevice];
+	const [activeDevice, setActiveDevice] = useState<DeviceType>(DeviceType.iPhone);
+	const currentImages = images[activeDevice] || [];
 	const videoRef = useRef<HTMLVideoElement>(null);
 
 	const normalizeMedia = useCallback((item: string | MediaItem): MediaItem => {
@@ -33,7 +33,7 @@ const Lightbox = ({ images }: LightboxProps) => {
 	}, [currentIndex]);
 
 	useEffect(() => {
-		window.openLightbox = (index: number, device: "iphone" | "ipad") => {
+		window.openLightbox = (index: number, device: DeviceType) => {
 			setCurrentIndex(index);
 			setActiveDevice(device);
 			setIsOpen(true);
@@ -135,7 +135,7 @@ const Lightbox = ({ images }: LightboxProps) => {
 						<img
 							key={media.src}
 							src={media.src}
-							alt={`MiniBili ${activeDevice === "iphone" ? "iPhone" : "iPad"} 应用界面大图 ${currentIndex + 1} - 免费无广告的哔哩哔哩第三方客户端`}
+							alt={`MiniBili ${activeDevice === DeviceType.iPhone ? "iPhone" : activeDevice === DeviceType.macOS ? "macOS" : activeDevice === DeviceType.tvOS ? "tvOS" : "iPad"} 应用界面大图 ${currentIndex + 1} - 免费无广告的哔哩哔哩第三方客户端`}
 							className="max-h-[90vh] max-w-[90vw] object-contain rounded-xl shadow-2xl"
 							onClick={(e) => e.stopPropagation()}
 							onKeyDown={(e) => {
@@ -170,11 +170,10 @@ const Lightbox = ({ images }: LightboxProps) => {
 									e.stopPropagation();
 									setCurrentIndex(index);
 								}}
-								className={`h-2 w-2 rounded-full transition-colors ${
-									index === currentIndex
-										? "bg-gray-800 dark:bg-white"
-										: "bg-gray-500 dark:bg-white/60 hover:bg-gray-700 dark:hover:bg-white/80"
-								}`}
+								className={`h-2 w-2 rounded-full transition-colors ${index === currentIndex
+									? "bg-gray-800 dark:bg-white"
+									: "bg-gray-500 dark:bg-white/60 hover:bg-gray-700 dark:hover:bg-white/80"
+									}`}
 								aria-label={`Go to ${media.type === "video" ? "video" : "image"} ${index + 1}`}
 							/>
 						);

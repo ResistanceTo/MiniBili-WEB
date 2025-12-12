@@ -1,6 +1,7 @@
-import type { ChangelogProps } from "config";
-import { memo } from "react";
-import { FiClock, FiPackage, FiStar, FiTrendingUp, FiTool } from "react-icons/fi";
+import { type ChangelogProps, AppPlatform } from "config";
+import { memo, useState, useMemo } from "react";
+import { FiClock, FiPackage, FiStar, FiTrendingUp, FiTool, FiMonitor, FiSmartphone, FiTablet, FiTv } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 const getUpdateIcon = (type: "feature" | "improvement" | "bugfix") => {
 	switch (type) {
@@ -10,17 +11,6 @@ const getUpdateIcon = (type: "feature" | "improvement" | "bugfix") => {
 			return FiTrendingUp;
 		case "bugfix":
 			return FiTool;
-	}
-};
-
-const getUpdateColor = (type: "feature" | "improvement" | "bugfix") => {
-	switch (type) {
-		case "feature":
-			return "text-green-600 dark:text-green-400";
-		case "improvement":
-			return "text-blue-600 dark:text-blue-400";
-		case "bugfix":
-			return "text-orange-600 dark:text-orange-400";
 	}
 };
 
@@ -36,17 +26,57 @@ const getUpdateLabel = (type: "feature" | "improvement" | "bugfix") => {
 };
 
 const ChangelogFull = ({ items }: ChangelogProps) => {
+	const [activePlatform, setActivePlatform] = useState<AppPlatform>(AppPlatform.iOS);
+
+	const filteredItems = useMemo(() => {
+		return items.filter(item => {
+			// If no platforms specified, assume it's for all (or at least iOS which is the base)
+			// But for this requirement, we want to filter.
+			// If item has no platforms field, we assume it is iOS (legacy items).
+			const itemPlatforms = item.platforms || [AppPlatform.iOS];
+			return itemPlatforms.includes(activePlatform);
+		});
+	}, [items, activePlatform]);
 
 	return (
 		<div className="space-y-8">
-			<div>
-				<h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+			<div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+				<h1 className="text-3xl font-bold text-gray-900 dark:text-white">
 					更新日志
 				</h1>
+
+				<div className="flex items-center p-1 rounded-xl bg-gray-100 dark:bg-white/[0.05] border border-gray-200 dark:border-white/10 self-start md:self-auto">
+					<PlatformTab
+						platform={AppPlatform.iOS}
+						label="iOS"
+						icon={FiSmartphone}
+						isActive={activePlatform === AppPlatform.iOS}
+						onClick={() => setActivePlatform(AppPlatform.iOS)}
+					/>
+					<PlatformTab
+						platform={AppPlatform.macOS}
+						label="macOS"
+						icon={FiMonitor}
+						isActive={activePlatform === AppPlatform.macOS}
+						onClick={() => setActivePlatform(AppPlatform.macOS)}
+					/>
+					<PlatformTab
+						platform={AppPlatform.tvOS}
+						label="tvOS"
+						icon={FiTv}
+						isActive={activePlatform === AppPlatform.tvOS}
+						onClick={() => setActivePlatform(AppPlatform.tvOS)}
+					/>
+				</div>
 			</div>
 
 			<div className="space-y-4">
-				{items.map(({ version, build, date, title, updates }) => (
+				{filteredItems.length === 0 ? (
+					<div className="text-center py-12 text-gray-500 dark:text-gray-400">
+						<p>该平台暂无更新日志</p>
+					</div>
+				) : (
+					filteredItems.map(({ version, build, date, title, updates }) => (
 						<div
 							key={`${version}-${build}`}
 							className="rounded-xl border border-gray-300 dark:border-white/10 bg-white dark:bg-white/[0.03] p-5 shadow-sm"
@@ -138,10 +168,39 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 								)}
 							</div>
 						</div>
-					))}
+					))
+				)}
 			</div>
 		</div>
 	);
 };
+
+const PlatformTab = ({ platform, label, icon: Icon, isActive, onClick }: {
+	platform: AppPlatform;
+	label: string;
+	icon: any;
+	isActive: boolean;
+	onClick: () => void;
+}) => (
+	<button
+		onClick={onClick}
+		className={`relative flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${isActive
+			? "text-gray-900 dark:text-white"
+			: "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+			}`}
+	>
+		{isActive && (
+			<motion.div
+				layoutId="activePlatform"
+				className="absolute inset-0 rounded-lg bg-white dark:bg-white/10 shadow-sm"
+				transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
+			/>
+		)}
+		<span className="relative z-10 flex items-center gap-2">
+			<Icon className="w-4 h-4" />
+			{label}
+		</span>
+	</button>
+);
 
 export default memo(ChangelogFull);

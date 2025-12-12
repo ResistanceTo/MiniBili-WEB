@@ -3,12 +3,21 @@ import type { IconType } from "react-icons";
 export interface MediaItem {
 	src: string;
 	type: "image" | "video";
-	poster?: string; 
+	poster?: string;
+}
+
+export enum DeviceType {
+	iPhone = "iphone",
+	iPad = "ipad",
+	macOS = "macos",
+	tvOS = "tvos",
 }
 
 export interface DeviceScreenshots {
-	iphone: (string | MediaItem)[];
-	ipad: (string | MediaItem)[];
+	[DeviceType.iPhone]: (string | MediaItem)[];
+	[DeviceType.iPad]: (string | MediaItem)[];
+	[DeviceType.macOS]?: (string | MediaItem)[];
+	[DeviceType.tvOS]?: (string | MediaItem)[];
 }
 
 export interface Feature {
@@ -23,7 +32,10 @@ export interface FAQ {
 }
 
 export interface StoreLinks {
-	apple: string;
+	ios: string;
+	macos?: string;
+	tvos?: string;
+	watchos?: string;
 }
 
 export interface SocialLink {
@@ -56,12 +68,20 @@ export interface ChangelogUpdates {
 	bugfix?: string[];
 }
 
+export enum AppPlatform {
+	iOS = "ios",
+	macOS = "macos",
+	tvOS = "tvos",
+	watchOS = "watchos",
+}
+
 export interface ChangelogVersion {
 	version: string;
 	build: number;
 	date: string;
 	title?: string;
 	updates: ChangelogUpdates;
+	platforms?: AppPlatform[];
 }
 
 // 状态枚举：0=已完成, 1=开发中, 2=计划中, 3=Bug修复
@@ -105,6 +125,9 @@ export interface StoreButtonProps {
 	href: string;
 	label: string;
 	storeName: string;
+	icon?: IconType;
+	className?: string;
+	onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 export interface AppHeroProps {
@@ -122,20 +145,20 @@ export interface BreadcrumbsProps {
 }
 
 export interface DeviceToggleProps {
-	activeDevice: "iphone" | "ipad";
-	onToggle: (device: "iphone" | "ipad") => void;
+	activeDevice: DeviceType;
+	onToggle: (device: DeviceType) => void;
 }
 
 export interface GithubCornerProps {
 	href: string;
 }
 
-export interface FeaturesProps extends WithItems<Feature> {}
-export interface FAQProps extends WithItems<FAQ> {}
-export interface ReviewsProps extends WithItems<Review> {}
-export interface SocialLinksProps extends WithItems<SocialLink> {}
-export interface ChangelogProps extends WithItems<ChangelogVersion> {}
-export interface RoadmapProps extends WithItems<TodoNode> {}
+export interface FeaturesProps extends WithItems<Feature> { }
+export interface FAQProps extends WithItems<FAQ> { }
+export interface ReviewsProps extends WithItems<Review> { }
+export interface SocialLinksProps extends WithItems<SocialLink> { }
+export interface ChangelogProps extends WithItems<ChangelogVersion> { }
+export interface RoadmapProps extends WithItems<TodoNode> { }
 
 export type ScreenshotsProps = WithImages;
 export type LightboxProps = WithImages;
@@ -145,7 +168,9 @@ export function areImagesEqual<T extends WithImages>(
 	nextProps: T,
 ): boolean {
 	return (
-		prevProps.images.iphone === nextProps.images.iphone &&
-		prevProps.images.ipad === nextProps.images.ipad
+		prevProps.images[DeviceType.iPhone] === nextProps.images[DeviceType.iPhone] &&
+		prevProps.images[DeviceType.iPad] === nextProps.images[DeviceType.iPad] &&
+		prevProps.images[DeviceType.macOS] === nextProps.images[DeviceType.macOS] &&
+		prevProps.images[DeviceType.tvOS] === nextProps.images[DeviceType.tvOS]
 	);
 }

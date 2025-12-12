@@ -8,7 +8,8 @@ export const appInfo = {
 		src: "MiniBili.png",
 	},
 	storeLinks: {
-		apple: "https://testflight.apple.com/join/TgcHSGwb",
+		ios: "https://testflight.apple.com/join/TgcHSGwb",
+		// macos: "",
 	} as StoreLinks,
 	announcement: {
 		message: "⚠️ TestFlight 公开邀请链接暂时关闭，详情请查看下方的FAQ部分。",

@@ -1,4 +1,4 @@
-import type { ChangelogVersion } from "./types";
+import { type ChangelogVersion, AppPlatform } from "./types";
 
 export const changelog: ChangelogVersion[] = [
 	{
@@ -23,6 +23,7 @@ export const changelog: ChangelogVersion[] = [
 				"修复了build31默认字体大小下的UI错乱问题",
 			]
 		},
+		platforms: [AppPlatform.iOS],
 	},
 	{
 		version: "1.0",
