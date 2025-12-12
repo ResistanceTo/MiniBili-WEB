@@ -99,7 +99,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 
 	return (
 		<div id="screenshots" className="mb-16 scroll-mt-20">
-			<div className="mb-6 flex items-center justify-between">
+			<div className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-0">
 				<h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
 					屏幕截图
 				</h2>

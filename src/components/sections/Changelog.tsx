@@ -33,7 +33,7 @@ const Changelog = ({ items }: ChangelogProps) => {
 								<div className="flex flex-col">
 									<div className="flex items-center gap-2">
 										<h3 className="text-base font-medium text-gray-900 dark:text-white">
-											版本 {version} (Build {build})
+											版本 {version}-{build}
 										</h3>
 										<div className="flex gap-1">
 											{(platforms || [AppPlatform.iOS]).map(p => (

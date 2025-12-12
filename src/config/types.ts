@@ -69,10 +69,11 @@ export interface ChangelogUpdates {
 }
 
 export enum AppPlatform {
-	iOS = "ios",
-	macOS = "macos",
-	tvOS = "tvos",
-	watchOS = "watchos",
+	iOS = "iOS",
+	macOS = "macOS",
+	tvOS = "tvOS",
+	watchOS = "watchOS",
+	visionOS = "visionOS",
 }
 
 export interface ChangelogVersion {
