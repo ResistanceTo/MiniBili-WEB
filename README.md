@@ -4,12 +4,12 @@
   <h1>MiniBili</h1>
 
   <p>
-    <strong>免费、无广告、无跟踪器的 iOS 第三方哔哩哔哩客户端</strong>
+    <strong>免费、无广告、无跟踪器的全苹果平台第三方哔哩哔哩客户端</strong>
   </p>
 
   <p>
-    <a href="https://testflight.apple.com/join/TgcHSGwb">
-      <img alt="Download on TestFlight" src="https://img.shields.io/badge/TestFlight-Download-blue?style=for-the-badge&logo=app-store">
+    <a href="https://minibili.zhaohe.org">
+       <img alt="Website" src="https://img.shields.io/badge/Website-minibili.zhaohe.org-blue?style=for-the-badge&logo=safari">
     </a>
   </p>
 
@@ -26,16 +26,19 @@
 
 ### 📱 关于 MiniBili
 
-MiniBili 是一个专为 iOS 平台设计的第三方哔哩哔哩客户端，使用 SwiftUI 编写。
+MiniBili 是一个专为苹果生态设计的第三方哔哩哔哩客户端，支持 iOS、iPadOS、macOS、tvOS、watchOS 和 visionOS，使用 SwiftUI 编写。
 
 #### 📥 下载安装
 
-- **TestFlight**: [立即下载](https://testflight.apple.com/join/TgcHSGwb)
-- **官网**: [minibili.zhaohe.org](https://minibili.zhaohe.org)
+- **官网**: [minibili.zhaohe.org](https://minibili.zhaohe.org) （请前往官网获取 TestFlight 链接）
 
-####  系统要求
-- iOS 17.0 或更高版本
-- iPhone、iPad 兼容
+| 平台 | 状态 | 系统要求 |
+| :--- | :--- | :--- |
+| **iOS / iPadOS** | ✅ **已发布** | 18.0+ |
+| **macOS** | 开发中 | 15.0+ |
+| **watchOS** |  开发中 | 11.0+ |
+| **tvOS** |  规划中 | 18.0+ |
+| **visionOS** |  规划中 | 1.0+
 
 ---
 
@@ -44,8 +47,8 @@ MiniBili 是一个专为 iOS 平台设计的第三方哔哩哔哩客户端，使
 - 🆓 **完全免费** - 无需付费，无内购项目
 - 🚫 **零广告干扰** - 纯粹的观看体验
 - 🔒 **隐私保护** - 不收集任何用户数据，不使用跟踪器
-- 📱 **原生体验** - 专为 iOS 优化，流畅自然
-- ⚡ **轻量高效** - 只有不到20MB，体积小运行快
+- 📱 **原生体验** - 专为苹果平台优化，符合人机交互指南
+- ⚡ **轻量高效** - 体积小运行快
 
 ---
 

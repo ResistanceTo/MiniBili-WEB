@@ -1,6 +1,6 @@
 import { type ChangelogProps, AppPlatform } from "config";
 import { memo, useState, useMemo } from "react";
-import { FiClock, FiPackage, FiStar, FiTrendingUp, FiTool, FiMonitor, FiSmartphone, FiTablet, FiTv } from "react-icons/fi";
+import { FiClock, FiPackage, FiStar, FiTrendingUp, FiTool, FiMonitor, FiSmartphone, FiTablet, FiTv, FiWatch, FiTarget } from "react-icons/fi";
 import { motion } from "framer-motion";
 
 const getUpdateIcon = (type: "feature" | "improvement" | "bugfix") => {
@@ -45,7 +45,7 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 					更新日志
 				</h1>
 
-				<div className="flex items-center p-1 rounded-xl bg-gray-100 dark:bg-white/[0.05] border border-gray-200 dark:border-white/10 self-start md:self-auto">
+				<div className="flex items-center p-1 rounded-xl bg-gray-100 dark:bg-white/[0.05] border border-gray-200 dark:border-white/10 self-start md:self-auto overflow-x-auto overflow-y-hidden max-w-full scrollbar-hide">
 					<PlatformTab
 						platform={AppPlatform.iOS}
 						label="iOS"
@@ -66,6 +66,20 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 						icon={FiTv}
 						isActive={activePlatform === AppPlatform.tvOS}
 						onClick={() => setActivePlatform(AppPlatform.tvOS)}
+					/>
+					<PlatformTab
+						platform={AppPlatform.watchOS}
+						label="watchOS"
+						icon={FiWatch}
+						isActive={activePlatform === AppPlatform.watchOS}
+						onClick={() => setActivePlatform(AppPlatform.watchOS)}
+					/>
+					<PlatformTab
+						platform={AppPlatform.visionOS}
+						label="visionOS"
+						icon={FiTarget}
+						isActive={activePlatform === AppPlatform.visionOS}
+						onClick={() => setActivePlatform(AppPlatform.visionOS)}
 					/>
 				</div>
 			</div>
@@ -184,7 +198,7 @@ const PlatformTab = ({ platform, label, icon: Icon, isActive, onClick }: {
 }) => (
 	<button
 		onClick={onClick}
-		className={`relative flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${isActive
+		className={`relative flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 whitespace-nowrap flex-shrink-0 ${isActive
 			? "text-gray-900 dark:text-white"
 			: "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
 			}`}

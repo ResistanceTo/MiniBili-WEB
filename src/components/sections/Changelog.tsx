@@ -38,7 +38,13 @@ const Changelog = ({ items }: ChangelogProps) => {
 										<div className="flex gap-1">
 											{(platforms || [AppPlatform.iOS]).map(p => (
 												<span key={p} className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-300">
-													{p}
+													{(() => {
+														const pLower = p.toLowerCase();
+														if (pLower === 'ios') return 'iOS';
+														if (pLower === 'watchos') return 'watchOS';
+														if (pLower === 'visionos') return 'visionOS';
+														return p;
+													})()}
 												</span>
 											))}
 										</div>

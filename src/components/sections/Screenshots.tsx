@@ -10,6 +10,8 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 	const isIphone = activeDevice === DeviceType.iPhone;
 	const isMac = activeDevice === DeviceType.macOS;
 	const isTv = activeDevice === DeviceType.tvOS;
+	const isWatch = activeDevice === DeviceType.watchOS;
+	const isVision = activeDevice === DeviceType.visionOS;
 	const [playingVideos, setPlayingVideos] = useState<Set<string>>(new Set());
 	const [loadingVideos, setLoadingVideos] = useState<Set<string>>(new Set());
 	const [errorVideos, setErrorVideos] = useState<Set<string>>(new Set());
@@ -105,7 +107,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 				</h2>
 				<DeviceToggle activeDevice={activeDevice} onToggle={setActiveDevice} />
 			</div>
-			<div className={`relative overflow-hidden min-h-[${isIphone ? "560px" : isMac ? "400px" : isTv ? "300px" : "300px"}]`}>
+			<div className={`relative overflow-hidden min-h-[${isIphone ? "560px" : isMac ? "400px" : isWatch ? "300px" : "300px"}]`}>
 				<AnimatePresence mode="wait">
 					<motion.div
 						key={activeDevice}
@@ -121,7 +123,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 							<div className="flex items-center justify-center h-[300px] w-full rounded-xl border-2 border-dashed border-gray-300 dark:border-white/10 bg-gray-50 dark:bg-white/[0.02]">
 								<div className="text-center">
 									<p className="text-lg font-medium text-gray-500 dark:text-gray-400">
-										{activeDevice === DeviceType.tvOS ? "tvOS" : activeDevice === DeviceType.macOS ? "macOS" : "iPad"} 版本敬请期待
+										{activeDevice === DeviceType.tvOS ? "Apple TV" : activeDevice === DeviceType.macOS ? "Mac" : activeDevice === DeviceType.watchOS ? "Apple Watch" : activeDevice === DeviceType.visionOS ? "Vision Pro" : "iPad"} 版本敬请期待
 									</p>
 								</div>
 							</div>
@@ -149,7 +151,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 													onKeyDown={(e) => handleKeyDown(e, media.src)}
 													tabIndex={0}
 													role="button"
-													aria-label={`${isPlaying ? '暂停' : '播放'} MiniBili ${activeDevice === DeviceType.iPhone ? "iPhone" : activeDevice === DeviceType.macOS ? "macOS" : activeDevice === DeviceType.tvOS ? "tvOS" : "iPad"} 应用视频预览`}
+													aria-label={`${isPlaying ? '暂停' : '播放'} MiniBili ${activeDevice === DeviceType.iPhone ? "iPhone" : activeDevice === DeviceType.macOS ? "Mac" : activeDevice === DeviceType.tvOS ? "Apple TV" : activeDevice === DeviceType.watchOS ? "Apple Watch" : activeDevice === DeviceType.visionOS ? "Vision Pro" : "iPad"} 应用视频预览`}
 												>
 													<video
 														ref={setVideoRef(media.src)}
@@ -162,7 +164,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 														onLoadStart={() => handleVideoLoadStart(media.src)}
 														onCanPlay={() => handleVideoCanPlay(media.src)}
 														onError={() => handleVideoError(media.src)}
-														className={`rounded-xl border border-gray-300 dark:border-white/10 object-cover shadow-lg ${isIphone ? "aspect-[1170/2532] w-[260px]" : isMac ? "aspect-[1488/2266] w-[340px]" : "aspect-[16/9] w-[400px]"
+														className={`rounded-xl border border-gray-300 dark:border-white/10 object-cover shadow-lg ${isIphone ? "aspect-[1170/2532] w-[260px]" : isMac ? "aspect-[1488/2266] w-[340px]" : isWatch ? "aspect-[396/484] w-[220px]" : "aspect-[16/9] w-[400px]"
 															}`}
 													/>
 													{/* 加载指示器 */}
@@ -197,12 +199,12 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 												<button
 													onClick={() => window.openLightbox?.(index, activeDevice)}
 													className="focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-xl"
-													aria-label={`查看 MiniBili ${activeDevice === DeviceType.iPhone ? "iPhone" : activeDevice === DeviceType.macOS ? "macOS" : activeDevice === DeviceType.tvOS ? "tvOS" : "iPad"} 应用截图 ${index + 1}`}
+													aria-label={`查看 MiniBili ${activeDevice === DeviceType.iPhone ? "iPhone" : activeDevice === DeviceType.macOS ? "Mac" : activeDevice === DeviceType.tvOS ? "Apple TV" : activeDevice === DeviceType.watchOS ? "Apple Watch" : activeDevice === DeviceType.visionOS ? "Vision Pro" : "iPad"} 应用截图 ${index + 1}`}
 												>
 													<img
 														src={media.src}
-														alt={`MiniBili ${activeDevice === DeviceType.iPhone ? "iPhone" : activeDevice === DeviceType.macOS ? "macOS" : activeDevice === DeviceType.tvOS ? "tvOS" : "iPad"} 应用界面截图 ${index + 1} - 免费无广告的哔哩哔哩第三方客户端`}
-														className={`rounded-xl border border-gray-300 dark:border-white/10 object-cover shadow-lg ${isIphone ? "aspect-[1170/2532] w-[260px]" : isMac ? "aspect-[1488/2266] w-[340px]" : "aspect-[16/9] w-[400px]"
+														alt={`MiniBili ${activeDevice === DeviceType.iPhone ? "iPhone" : activeDevice === DeviceType.macOS ? "Mac" : activeDevice === DeviceType.tvOS ? "Apple TV" : activeDevice === DeviceType.watchOS ? "Apple Watch" : activeDevice === DeviceType.visionOS ? "Vision Pro" : "iPad"} 应用界面截图 ${index + 1} - 免费无广告的哔哩哔哩第三方客户端`}
+														className={`rounded-xl border border-gray-300 dark:border-white/10 object-cover shadow-lg ${isIphone ? "aspect-[1170/2532] w-[260px]" : isMac ? "aspect-[1488/2266] w-[340px]" : isWatch ? "aspect-[396/484] w-[220px]" : "aspect-[16/9] w-[400px]"
 															}`}
 														loading="lazy"
 													/>

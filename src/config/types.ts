@@ -11,6 +11,8 @@ export enum DeviceType {
 	iPad = "ipad",
 	macOS = "macos",
 	tvOS = "tvos",
+	watchOS = "watchOS",
+	visionOS = "visionOS",
 }
 
 export interface DeviceScreenshots {
@@ -18,6 +20,8 @@ export interface DeviceScreenshots {
 	[DeviceType.iPad]: (string | MediaItem)[];
 	[DeviceType.macOS]?: (string | MediaItem)[];
 	[DeviceType.tvOS]?: (string | MediaItem)[];
+	[DeviceType.watchOS]?: (string | MediaItem)[];
+	[DeviceType.visionOS]?: (string | MediaItem)[];
 }
 
 export interface Feature {
@@ -36,6 +40,7 @@ export interface StoreLinks {
 	macos?: string;
 	tvos?: string;
 	watchos?: string;
+	visionOS?: string;
 }
 
 export interface SocialLink {
@@ -172,6 +177,8 @@ export function areImagesEqual<T extends WithImages>(
 		prevProps.images[DeviceType.iPhone] === nextProps.images[DeviceType.iPhone] &&
 		prevProps.images[DeviceType.iPad] === nextProps.images[DeviceType.iPad] &&
 		prevProps.images[DeviceType.macOS] === nextProps.images[DeviceType.macOS] &&
-		prevProps.images[DeviceType.tvOS] === nextProps.images[DeviceType.tvOS]
+		prevProps.images[DeviceType.tvOS] === nextProps.images[DeviceType.tvOS] &&
+		prevProps.images[DeviceType.watchOS] === nextProps.images[DeviceType.watchOS] &&
+		prevProps.images[DeviceType.visionOS] === nextProps.images[DeviceType.visionOS]
 	);
 }
