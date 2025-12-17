@@ -3,6 +3,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 3,
+		date: "2025-12-17",
+		title: "Apple Watch第一个版本发布啦！",
+		updates: {
+			feature: [
+				"支持搜索视频",
+				"支持查看推荐列表、视频播放",
+				"支持查看我的收藏、历史记录、稍后再看",
+				"此版本支持将登陆状态同步到其他端，例如Apple Watch登陆了，iPhone（Mac）也会自动同步登陆状态。",
+			],
+		},
+		platforms: [AppPlatform.watchOS],
+	},
+	{
+		version: "1.0",
 		build: 33,
 		date: "2025-12-10",
 		updates: {

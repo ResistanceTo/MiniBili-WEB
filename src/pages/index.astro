@@ -22,7 +22,7 @@ const { title, description, screenshots, features, faqs, storeLinks, logo, annou
   <link rel="preload" as="image" href="/MiniBili.png" fetchpriority="high" slot="head" />
 
   <!-- 预加载视频以提升性能 -->
-  {screenshots.iphone.map((item: any) => {
+  {screenshots.iOS.map((item: any) => {
     if (typeof item === 'object' && item.type === 'video') {
       return (
         <>
@@ -32,7 +32,7 @@ const { title, description, screenshots, features, faqs, storeLinks, logo, annou
       );
     }
   })}
-  {screenshots.ipad.map((item: any) => {
+  {screenshots.iPadOS.map((item: any) => {
     if (typeof item === 'object' && item.type === 'video') {
       return (
         <>
@@ -53,7 +53,7 @@ const { title, description, screenshots, features, faqs, storeLinks, logo, annou
         client:load
       />
     )}
-    <AppHero {title} {description} {storeLinks} {logo} />
+    <AppHero {title} {description} {storeLinks} {logo} client:load />
     <div class="mb-16"><Screenshots images={screenshots} client:load /></div>
     <Features items={features} />
     <Changelog items={changelog} client:visible />

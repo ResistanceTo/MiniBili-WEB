@@ -1,6 +1,6 @@
-import type { AppHeroProps, StoreButtonProps } from "config";
-import { memo } from "react";
-import { FaApple } from "react-icons/fa";
+import type { AppHeroProps, StoreLinks } from "config";
+import { memo, useState, useRef, useEffect } from "react";
+import { FiChevronDown } from "react-icons/fi";
 
 const AppHero = ({ title, description, storeLinks, logo }: AppHeroProps) => (
 	<div className="mb-16 flex flex-col items-center md:items-start md:flex-row gap-8">
@@ -23,40 +23,78 @@ const AppHero = ({ title, description, storeLinks, logo }: AppHeroProps) => (
 			</div>
 
 			<div className="flex flex-wrap gap-3 justify-center md:justify-start">
-				<StoreButton href={storeLinks.ios} label="Download" storeName="iOS" />
-				{storeLinks.macos && (
-					<StoreButton href={storeLinks.macos} label="Download" storeName="macOS" />
-				)}
-				{storeLinks.tvos && (
-					<StoreButton href={storeLinks.tvos} label="Download" storeName="tvOS" />
-				)}
+				<TestFlightButton storeLinks={storeLinks} />
 			</div>
 		</div>
 	</div>
 );
 
-const StoreButton = memo(({ href, label, storeName, onClick }: StoreButtonProps) => {
-	const Icon = FaApple;
+interface TestFlightButtonProps {
+	storeLinks: StoreLinks;
+}
+
+const TestFlightButton = memo(({ storeLinks }: TestFlightButtonProps) => {
+	const [isOpen, setIsOpen] = useState(false);
+	const dropdownRef = useRef<HTMLDivElement>(null);
+
+	// 获取可用的平台列表
+	const platforms = [
+		{ key: 'ios', name: 'iOS', version: '26.0+', url: storeLinks.ios },
+		{ key: 'macos', name: 'macOS', version: '15.0+', url: storeLinks.macos },
+		{ key: 'watchos', name: 'watchOS', version: '11.0+', url: storeLinks.watchos },
+		{ key: 'tvos', name: 'tvOS', version: '18.0+', url: storeLinks.tvos },
+		{ key: 'visionOS', name: 'visionOS', version: '2.0+', url: storeLinks.visionOS },
+	].filter(p => p.url);
+
+	// 点击外部关闭下拉菜单
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+				setIsOpen(false);
+			}
+		};
+
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => document.removeEventListener('mousedown', handleClickOutside);
+	}, []);
 
 	return (
-		<a
-			href={href}
-			target="_blank"
-			rel="noopener noreferrer"
-			onClick={onClick}
-			className="group flex items-center gap-2.5 rounded-xl border border-gray-300 dark:border-white/10 bg-white dark:bg-white/[0.04] px-4 py-2.5 transition-all duration-300 hover:bg-gray-50 dark:hover:bg-white/[0.08] hover:border-gray-400 dark:hover:border-white/20 shadow-sm"
-		>
-			<div className="flex items-center justify-center w-6 h-6">
-				<Icon className={`text-gray-600 dark:text-gray-300 transition-transform duration-300 group-hover:scale-110 group-hover:text-gray-800 dark:group-hover:text-white w-5 h-5`} />
-			</div>
-			<span className="text-left">
-				<div className="text-[10px] font-medium text-gray-500 dark:text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors leading-tight">{label}</div>
-				<div className="text-xs font-bold tracking-wide text-gray-900 dark:text-white/90 group-hover:text-gray-900 dark:group-hover:text-white transition-colors leading-tight">{storeName}</div>
-			</span>
-		</a>
+		<div className="relative" ref={dropdownRef}>
+			<button
+				onClick={() => setIsOpen(!isOpen)}
+				className="group flex items-center gap-3 rounded-xl border border-gray-300 dark:border-white/10 bg-white dark:bg-white/[0.04] pl-3 pr-3 py-3 transition-all duration-300 hover:bg-gray-50 dark:hover:bg-white/[0.08] hover:border-gray-400 dark:hover:border-white/20 shadow-md hover:shadow-lg"
+			>
+				<img src="/TestFlight.png" alt="MiniBili TestFlight" className="w-10 h-10 rounded-lg" />
+				<div className="flex flex-col items-start">
+					<div className="text-xs text-gray-500 dark:text-gray-400">Download from</div>
+					<div className="text-base font-bold text-gray-900 dark:text-white flex items-center gap-1">
+						TestFlight
+						<FiChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+					</div>
+				</div>
+			</button>
+
+			{isOpen && (
+				<div className="absolute top-full left-0 mt-2 w-52 rounded-xl border border-gray-300 dark:border-white/10 bg-white dark:bg-neutral-900 shadow-xl overflow-hidden z-50">
+					{platforms.map((platform) => (
+						<a
+							key={platform.key}
+							href={platform.url}
+							target="_blank"
+							rel="noopener noreferrer"
+							onClick={() => setIsOpen(false)}
+							className="flex items-center justify-between px-4 py-3 hover:bg-gray-50 dark:hover:bg-white/[0.08] transition-colors border-b border-gray-200 dark:border-white/5 last:border-b-0"
+						>
+							<span className="text-sm font-medium text-gray-900 dark:text-white">{platform.name}</span>
+							<span className="text-xs text-gray-500 dark:text-gray-400">({platform.version})</span>
+						</a>
+					))}
+				</div>
+			)}
+		</div>
 	);
 });
 
-StoreButton.displayName = "StoreButton";
+TestFlightButton.displayName = "TestFlightButton";
 
 export default memo(AppHero);

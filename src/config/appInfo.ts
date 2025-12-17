@@ -1,15 +1,15 @@
 import type { StoreLinks } from "./types";
 
 export const appInfo = {
-	title: "MiniBili - 免费无广的iOS哔哩哔哩第三方客户端",
+	title: "MiniBili - 免费无广的哔哩哔哩第三方客户端",
 	description:
-		"免费、无广告、无跟踪器的iOS第三方哔哩哔哩客户端。",
+		"支持iOS、iPadOS、watchOS（macOS、tvOS、visionOS）",
 	logo: {
 		src: "MiniBili.png",
 	},
 	storeLinks: {
 		ios: "https://testflight.apple.com/join/TgcHSGwb",
-		// macos: "",
+		watchos: "https://testflight.apple.com/join/mxsM6Jwm",
 	} as StoreLinks,
 	announcement: {
 		message: "⚠️ TestFlight 公开邀请链接暂时关闭，详情请查看下方的FAQ部分。",

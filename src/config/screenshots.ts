@@ -1,7 +1,7 @@
 import type { DeviceScreenshots } from "./types";
 
 export const screenshots: DeviceScreenshots = {
-	iphone: [
+	iOS: [
 		{
 			src: "/screenshots/iphone/HomeList.mp4",
 			type: "video",
@@ -23,12 +23,18 @@ export const screenshots: DeviceScreenshots = {
 		"/screenshots/iphone/settings.webp",
 		"/screenshots/iphone/about.webp",
 	],
-	ipad: [
+	iPadOS: [
 		"/screenshots/ipad/home.webp",
 		"/screenshots/ipad/homeSettings.webp",
 		"/screenshots/ipad/detail.webp",
 		"/screenshots/ipad/video.webp",
 		"/screenshots/ipad/settings.webp",
 		"/screenshots/ipad/about.webp",
+	],
+	watchOS: [
+		"/screenshots/watch/list.webp",
+		"/screenshots/watch/player.webp",
+		"/screenshots/watch/search.webp",
+		"/screenshots/watch/mine.webp",
 	],
 };

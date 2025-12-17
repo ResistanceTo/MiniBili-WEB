@@ -13,7 +13,7 @@ declare global {
 const Lightbox = ({ images }: LightboxProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [currentIndex, setCurrentIndex] = useState(0);
-	const [activeDevice, setActiveDevice] = useState<DeviceType>(DeviceType.iPhone);
+	const [activeDevice, setActiveDevice] = useState<DeviceType>(DeviceType.iOS);
 	const currentImages = images[activeDevice] || [];
 	const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -135,7 +135,7 @@ const Lightbox = ({ images }: LightboxProps) => {
 						<img
 							key={media.src}
 							src={media.src}
-							alt={`MiniBili ${activeDevice === DeviceType.iPhone ? "iPhone" : activeDevice === DeviceType.macOS ? "macOS" : activeDevice === DeviceType.tvOS ? "tvOS" : "iPad"} 应用界面大图 ${currentIndex + 1} - 免费无广告的哔哩哔哩第三方客户端`}
+							alt={`MiniBili ${activeDevice === DeviceType.iOS ? "iPhone" : activeDevice === DeviceType.macOS ? "macOS" : activeDevice === DeviceType.tvOS ? "tvOS" : "iPad"} 应用界面大图 ${currentIndex + 1} - 免费无广告的哔哩哔哩第三方客户端`}
 							className="max-h-[90vh] max-w-[90vw] object-contain rounded-xl shadow-2xl"
 							onClick={(e) => e.stopPropagation()}
 							onKeyDown={(e) => {

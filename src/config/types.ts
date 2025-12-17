@@ -7,8 +7,8 @@ export interface MediaItem {
 }
 
 export enum DeviceType {
-	iPhone = "iphone",
-	iPad = "ipad",
+	iOS = "iOS",
+	iPadOS = "iPadOS",
 	macOS = "macos",
 	tvOS = "tvos",
 	watchOS = "watchOS",
@@ -16,8 +16,8 @@ export enum DeviceType {
 }
 
 export interface DeviceScreenshots {
-	[DeviceType.iPhone]: (string | MediaItem)[];
-	[DeviceType.iPad]: (string | MediaItem)[];
+	[DeviceType.iOS]: (string | MediaItem)[];
+	[DeviceType.iPadOS]: (string | MediaItem)[];
 	[DeviceType.macOS]?: (string | MediaItem)[];
 	[DeviceType.tvOS]?: (string | MediaItem)[];
 	[DeviceType.watchOS]?: (string | MediaItem)[];
@@ -174,8 +174,8 @@ export function areImagesEqual<T extends WithImages>(
 	nextProps: T,
 ): boolean {
 	return (
-		prevProps.images[DeviceType.iPhone] === nextProps.images[DeviceType.iPhone] &&
-		prevProps.images[DeviceType.iPad] === nextProps.images[DeviceType.iPad] &&
+		prevProps.images[DeviceType.iOS] === nextProps.images[DeviceType.iOS] &&
+		prevProps.images[DeviceType.iPadOS] === nextProps.images[DeviceType.iPadOS] &&
 		prevProps.images[DeviceType.macOS] === nextProps.images[DeviceType.macOS] &&
 		prevProps.images[DeviceType.tvOS] === nextProps.images[DeviceType.tvOS] &&
 		prevProps.images[DeviceType.watchOS] === nextProps.images[DeviceType.watchOS] &&

@@ -3,21 +3,21 @@ import { motion } from "framer-motion";
 import { memo, useCallback } from "react";
 
 const DeviceToggle = ({ activeDevice, onToggle }: DeviceToggleProps) => {
-	const handleIphoneClick = useCallback(() => onToggle(DeviceType.iPhone), [onToggle]);
-	const handleIpadClick = useCallback(() => onToggle(DeviceType.iPad), [onToggle]);
+	const handleIphoneClick = useCallback(() => onToggle(DeviceType.iOS), [onToggle]);
+	const handleIpadClick = useCallback(() => onToggle(DeviceType.iPadOS), [onToggle]);
 	const handleMacosClick = useCallback(() => onToggle(DeviceType.macOS), [onToggle]);
 
 	return (
 		<div className="flex items-center justify-start md:justify-center gap-1.5 rounded-lg border border-gray-300 dark:border-white/10 bg-gray-200/80 dark:bg-white/[0.03] p-1 shadow-sm overflow-x-auto overflow-y-hidden max-w-full scrollbar-hide">
 			<DeviceButton
 				key="iphone"
-				isActive={activeDevice === DeviceType.iPhone}
+				isActive={activeDevice === DeviceType.iOS}
 				onClick={handleIphoneClick}
 				label="iPhone"
 			/>
 			<DeviceButton
 				key="ipad"
-				isActive={activeDevice === DeviceType.iPad}
+				isActive={activeDevice === DeviceType.iPadOS}
 				onClick={handleIpadClick}
 				label="iPad"
 			/>
