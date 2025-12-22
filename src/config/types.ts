@@ -9,8 +9,8 @@ export interface MediaItem {
 export enum DeviceType {
 	iOS = "iOS",
 	iPadOS = "iPadOS",
-	macOS = "macos",
-	tvOS = "tvos",
+	macOS = "macOS",
+	tvOS = "tvOS",
 	watchOS = "watchOS",
 	visionOS = "visionOS",
 }
