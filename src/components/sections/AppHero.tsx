@@ -24,6 +24,7 @@ const AppHero = ({ title, description, storeLinks, logo }: AppHeroProps) => (
 
 			<div className="flex flex-wrap gap-3 justify-center md:justify-start">
 				<TestFlightButton storeLinks={storeLinks} />
+				<SponsorButton />
 			</div>
 		</div>
 	</div>
@@ -96,5 +97,24 @@ const TestFlightButton = memo(({ storeLinks }: TestFlightButtonProps) => {
 });
 
 TestFlightButton.displayName = "TestFlightButton";
+
+const SponsorButton = memo(() => (
+	<a
+		href="https://afdian.com/a/ResistanceTo"
+		target="_blank"
+		rel="noopener noreferrer"
+		className="group flex items-center gap-3 rounded-xl border border-gray-300 dark:border-white/10 bg-white dark:bg-white/[0.04] pl-3 pr-5 py-3 transition-all duration-300 hover:bg-gray-50 dark:hover:bg-white/[0.08] hover:border-gray-400 dark:hover:border-white/20 shadow-md hover:shadow-lg"
+	>
+		<img src="/toubi.svg" alt="Sponsor" className="w-10 h-10" />
+		<div className="flex flex-col items-start">
+			<div className="text-xs text-gray-500 dark:text-gray-400">Support on</div>
+			<div className="text-base font-bold text-gray-900 dark:text-white">
+				爱发电
+			</div>
+		</div>
+	</a>
+));
+
+SponsorButton.displayName = "SponsorButton";
 
 export default memo(AppHero);
