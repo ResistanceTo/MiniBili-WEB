@@ -12,8 +12,8 @@ export const appInfo = {
 		watchos: "https://testflight.apple.com/join/mxsM6Jwm",
 	} as StoreLinks,
 	announcement: {
-		message: "⚠️ TestFlight 公开邀请链接暂时关闭，详情请查看下方的FAQ部分。",
-		type: "warning" as const,
+		message: "build34 开始仅支持iOS26.0及以上版本，此版本大幅重写，强烈推荐所有用户更新！",
+		type: "success" as const,
 		dismissible: true,
 		show: true,
 	},

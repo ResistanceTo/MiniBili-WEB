@@ -3,6 +3,34 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 34,
+		date: "2025-12-28",
+		title: "此版本最低支持iOS26.0，整体项目大幅重写，为其他端的兼容开发做准备。",
+		updates: {
+			improvement: [
+				"优化带图评论的布局",
+				"优化评论回复的查看交互",
+				"优化投币、收藏、切换清晰度等交互窗口",
+				"优化直播，添加自动切换线路和重试",
+				"优化播放器切换和重试的状态提醒",
+				"优化合集和分P的定位及播放",
+				"优化整体App内存占用",
+			],
+			feature: [
+				"历史记录、我的收藏、稍后再看支持高级筛选和查询",
+				"搜索页面的UI和查询能力大幅升级",
+				"动态适配最常访问UP区域",
+				"弹幕增加描边，白色背景也能看清",
+				"如果你有多设备，此版本登陆后，各个端将共享此登陆状态，退出同理",
+			],
+			bugfix: [
+				"修复了一些视频在某些清晰度无法播放的问题",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "1.0",
 		build: 4,
 		date: "2025-12-17",
 		updates: {
