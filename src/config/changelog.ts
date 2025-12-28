@@ -3,6 +3,19 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 36,
+		date: "2025-12-28",
+		updates: {
+			bugfix: [
+				"修复了部分账号无法登陆的问题",
+				"修复首页设置面板自动关闭的问题",
+				"修复夜间模式下，个人卡片UI问题",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "1.0",
 		build: 34,
 		date: "2025-12-28",
 		title: "此版本最低支持iOS26.0，整体项目大幅重写，为其他端的兼容开发做准备。",
