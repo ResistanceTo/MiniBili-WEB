@@ -3,6 +3,30 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 37,
+		date: "2025-12-29",
+		title: "首页苹果音乐样式此版本不要再使用了，等之后的版本优化",
+		updates: {
+			improvement: [
+				"恢复发送弹幕功能",
+				"恢复视频页添加到稍后再看功能",
+				"恢复自动选择最高清晰度",
+			],
+			feature: [
+				"支持记忆播放",
+				"添加首页长按视频卡片加入稍后再看功能",
+			],
+			bugfix: [
+				"修复合集、分P、视频卡片显示的时长错误问题",
+				"修复长按视频2倍速弹幕会消失的问题",
+				"修复视频页进入UP主个人空间，手势返回直接回到列表页问题",
+				"修复搜索界面点击某个视频再返回整体UI错误问题",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "1.0",
 		build: 36,
 		date: "2025-12-28",
 		updates: {
