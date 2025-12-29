@@ -3,6 +3,20 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 39,
+		date: "2025-12-30",
+		updates: {
+			feature: [
+				"支持纯透明图标",
+			],
+			bugfix: [
+				"处理稍后再看可能无法解析的问题",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "1.0",
 		build: 38,
 		date: "2025-12-29",
 		updates: {
