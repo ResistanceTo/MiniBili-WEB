@@ -3,6 +3,23 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 38,
+		date: "2025-12-29",
+		updates: {
+			improvement: [
+				"优化弹幕弹窗",
+			],
+			feature: [
+				"支持在“我的”-“动态”直接点进自己的空间",
+			],
+			bugfix: [
+				"处理播放器被空白区域挤掉的问题",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "1.0",
 		build: 37,
 		date: "2025-12-29",
 		title: "首页苹果音乐样式此版本不要再使用了，等之后的版本优化",
