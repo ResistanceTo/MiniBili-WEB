@@ -41,4 +41,7 @@ export const screenshots: DeviceScreenshots = {
 		"/screenshots/tv/list.webp",
 		"/screenshots/tv/video.webp",
 	],
+	macOS: [
+		"/screenshots/mac/mac.webp",
+	]
 };

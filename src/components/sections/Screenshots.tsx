@@ -107,7 +107,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 				</h2>
 				<DeviceToggle activeDevice={activeDevice} onToggle={setActiveDevice} />
 			</div>
-			<div className={`relative overflow-hidden min-h-[${isIphone ? "560px" : isMac ? "400px" : isWatch ? "300px" : "300px"}]`}>
+			<div className={`relative overflow-hidden min-h-[${isIphone ? "560px" : isMac ? "260px" : isWatch ? "300px" : "300px"}]`}>
 				<AnimatePresence mode="wait">
 					<motion.div
 						key={activeDevice}
@@ -164,7 +164,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 														onLoadStart={() => handleVideoLoadStart(media.src)}
 														onCanPlay={() => handleVideoCanPlay(media.src)}
 														onError={() => handleVideoError(media.src)}
-														className={`rounded-xl border border-gray-300 dark:border-white/10 object-cover shadow-lg ${isIphone ? "aspect-[1170/2532] w-[260px]" : isMac ? "aspect-[1488/2266] w-[340px]" : isWatch ? "aspect-[396/484] w-[220px]" : "aspect-[16/9] w-[400px]"
+														className={`rounded-xl border border-gray-300 dark:border-white/10 object-cover shadow-lg ${isIphone ? "aspect-[1170/2532] w-[260px]" : isMac ? "aspect-[2580/1676] w-[460px]" : isWatch ? "aspect-[396/484] w-[220px]" : isTv ? "aspect-[16/9] w-[400px]" : "aspect-[1640/2360] w-[260px]"
 															}`}
 													/>
 													{/* 加载指示器 */}
@@ -204,7 +204,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 													<img
 														src={media.src}
 														alt={`MiniBili ${activeDevice === DeviceType.iOS ? "iPhone" : activeDevice === DeviceType.macOS ? "Mac" : activeDevice === DeviceType.tvOS ? "Apple TV" : activeDevice === DeviceType.watchOS ? "Apple Watch" : activeDevice === DeviceType.visionOS ? "Vision Pro" : "iPad"} 应用界面截图 ${index + 1} - 免费无广告的哔哩哔哩第三方客户端`}
-														className={`rounded-xl border border-gray-300 dark:border-white/10 object-cover shadow-lg ${isIphone ? "aspect-[1170/2532] w-[260px]" : isMac ? "aspect-[1488/2266] w-[340px]" : isWatch ? "aspect-[396/484] w-[220px]" : "aspect-[16/9] w-[400px]"
+														className={`rounded-xl border border-gray-300 dark:border-white/10 object-cover shadow-lg ${isIphone ? "aspect-[1170/2532] w-[260px]" : isMac ? "aspect-[2580/1676] w-[460px]" : isWatch ? "aspect-[396/484] w-[220px]" : isTv ? "aspect-[16/9] w-[400px]" : "aspect-[1640/2360] w-[260px]"
 															}`}
 														loading="lazy"
 													/>
