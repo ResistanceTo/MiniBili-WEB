@@ -169,7 +169,7 @@ export const roadmap: TodoNode[] = [
 							},
 							{
 								title: "搜索",
-								status: TodoStatus.Planned,
+								status: TodoStatus.Completed,
 							}
 						]
 					},
@@ -287,11 +287,11 @@ export const roadmap: TodoNode[] = [
 				children: [
 					{
 						title: "弹幕播放",
-						status: TodoStatus.InProgress,
+						status: TodoStatus.Completed,
 					},
 					{
 						title: "弹幕设置",
-						status: TodoStatus.Bug,
+						status: TodoStatus.Planned,
 					},
 					{
 						title: "高级弹幕",
@@ -484,7 +484,7 @@ export const roadmap: TodoNode[] = [
 					},
 					{
 						title: "最新",
-						status: TodoStatus.Planned,
+						status: TodoStatus.Completed,
 					}
 				]
 			}
@@ -540,7 +540,7 @@ export const roadmap: TodoNode[] = [
 			},
 			{
 				title: "透明logo优化",
-				status: TodoStatus.Planned,
+				status: TodoStatus.Completed,
 			},
 			{
 				title: "顶部状态栏优化",
@@ -552,7 +552,7 @@ export const roadmap: TodoNode[] = [
 			},
 			{
 				title: "其他插件集成，如空降助手等",
-				status: TodoStatus.Planned,
+				status: TodoStatus.Completed,
 			}
 		]
 	}

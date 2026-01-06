@@ -3,6 +3,22 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 40,
+		date: "2026-01-06",
+		updates: {
+			feature: [
+				"支持空降助手",
+				"适配系统锁屏与控制中心，支持显示视频标题及封面",
+				"UP主空间的视频卡片增加观看进度显示",
+			],
+			bugfix: [
+				"解决部分场景下的闪退问题",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "1.0",
 		build: 39,
 		date: "2025-12-30",
 		updates: {
