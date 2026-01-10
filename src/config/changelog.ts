@@ -14,6 +14,7 @@ export const changelog: ChangelogVersion[] = [
 				"添加黑名单管理",
 				"首页视频卡片长按支持拉黑UP",
 				"可以设置下滑时最小化底部菜单",
+				"可以设置视频播放结束后自动重播",
 			],
 			bugfix: [
 				"播放器优化许多底层逻辑",
