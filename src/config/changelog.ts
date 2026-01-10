@@ -3,6 +3,26 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 41,
+		date: "2026-01-10",
+		updates: {
+			improvement: [
+				"视频全屏显示更多元信息",
+				"全屏幕状态下，时间和电量（5%误差）的显示放在作者这一行",
+			],
+			feature: [
+				"添加黑名单管理",
+				"首页视频卡片长按支持拉黑UP",
+				"可以设置下滑时最小化底部菜单",
+			],
+			bugfix: [
+				"播放器优化许多底层逻辑",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "1.0",
 		build: 40,
 		date: "2026-01-06",
 		updates: {
@@ -16,6 +36,17 @@ export const changelog: ChangelogVersion[] = [
 			]
 		},
 		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "1.0",
+		build: 5,
+		date: "2026-01-02",
+		updates: {
+			bugfix: [
+				"修复多个界面数据解析失败的问题",
+			]
+		},
+		platforms: [AppPlatform.watchOS],
 	},
 	{
 		version: "1.0",
