@@ -3,6 +3,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 42,
+		date: "2026-01-11",
+		updates: {
+			improvement: [
+				"优化Logo边缘锯齿和夜间模式下的显示效果",
+			],
+			bugfix: [
+				"修复视频详情页底部菜单有意外背景色的问题",
+				"修复视频进入全屏幕时动画翻转的问题",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "1.0",
 		build: 41,
 		date: "2026-01-10",
 		updates: {
