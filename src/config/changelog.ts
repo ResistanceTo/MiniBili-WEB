@@ -3,6 +3,22 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 43,
+		date: "2026-01-14",
+		updates: {
+			improvement: [
+				"Logo恢复",
+			],
+			bugfix: [
+				"修复合集和分P切换时间可能错误的问题",
+				"修复切换子分P，拖动进度卡死的问题",
+				"修复切换子分P，播放内容错误问题",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "1.0",
 		build: 42,
 		date: "2026-01-11",
 		updates: {

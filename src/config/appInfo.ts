@@ -12,7 +12,7 @@ export const appInfo = {
 		watchos: "https://testflight.apple.com/join/mxsM6Jwm",
 	} as StoreLinks,
 	announcement: {
-		message: "build34 开始仅支持iOS26.0及以上版本，此版本大幅重写，强烈推荐所有用户更新！",
+		message: "2026.1.18开始释放新名额。build34 开始仅支持iOS26.0及以上版本",
 		type: "success" as const,
 		dismissible: true,
 		show: true,
