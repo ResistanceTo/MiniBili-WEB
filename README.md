@@ -26,7 +26,7 @@
 
 ### 📱 关于 MiniBili
 
-MiniBili 是一个专为苹果生态设计的第三方哔哩哔哩客户端，支持 iOS、iPadOS、watchOS (macOS、tvOS、visionOS) ，使用 SwiftUI 编写。
+MiniBili 是一个专为苹果生态设计的第三方哔哩哔哩客户端，支持 iOS、iPadOS、watchOS、macOS (tvOS、visionOS) ，使用 SwiftUI 编写。
 
 **官网**: [minibili.zhaohe.org](https://minibili.zhaohe.org) （请前往官网获取 TestFlight 链接）
 
@@ -34,7 +34,7 @@ MiniBili 是一个专为苹果生态设计的第三方哔哩哔哩客户端，�
 | :--------------- | :------------ | :------- |
 | **iOS / iPadOS** | ✅ **已发布** | 26.0+    |
 | **watchOS**      | ✅ **已发布** | 11.0+    |
-| **macOS**        | 开发中        | 15.0+    |
+| **macOS**        | ✅ **已发布** | 15.0+    |
 | **tvOS**         | 开发中        | 18.0+    |
 | **visionOS**     | 规划中        | 1.0+     |
 

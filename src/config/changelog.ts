@@ -3,6 +3,19 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "1.0",
+		build: 3,
+		date: "2026-01-16",
+		updates: {
+			feature: [
+				"多平台登录信息同步",
+				"历史、收藏、稍后再看管理",
+				"播放视频",
+			]
+		},
+		platforms: [AppPlatform.macOS],
+	},
+	{
+		version: "1.0",
 		build: 43,
 		date: "2026-01-14",
 		updates: {
