@@ -11,7 +11,7 @@ export const faq: FAQ[] = [
     },
 	{
 		question: "一些视频无法播放？",
-		answer: "可能原因如下： 1.充电专属或者会员专属等视频； 2.如果你安装了adg这种广告拦截程序，可能把播放链接当成广告拦截了； 3. 不登陆能看，登陆后看不了 https://github.com/xiaye13579/BBLL/issues/1566； 4.某个清晰度无法播放，可以尝试切换清晰度。",
+		answer: "可能原因如下： 1.充电专属或者会员专属等视频； 2.如果你安装了adg这种广告拦截程序，可能把播放链接当成广告拦截了；（mcdn.bilivideo.cn 放行） 3. 不登陆能看，登陆后看不了 https://github.com/xiaye13579/BBLL/issues/1566； 4.某个清晰度无法播放，可以尝试切换清晰度。",
 	},
 	{
 		question: "是否考虑支持低版本系统？",
