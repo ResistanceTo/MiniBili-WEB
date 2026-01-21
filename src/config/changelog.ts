@@ -2,7 +2,22 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 
 export const changelog: ChangelogVersion[] = [
 	{
-		version: "1.0",
+		version: "先行版",
+		build: 44,
+		date: "2026-01-20",
+		updates: {
+			feature: [
+				"支持App推荐流（beta）",
+				"支持评论区表情显示",
+				"新增双击底部 TabBar 图标刷新当前页面的功能",
+				"「稍后再看」与「我的收藏」添加额外的长按交互菜单",
+				"更新图片加载框架为 Nuke，极大提升了列表滑动流畅度与图片加载速度",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "公测版",
 		build: 3,
 		date: "2026-01-16",
 		updates: {
@@ -15,7 +30,7 @@ export const changelog: ChangelogVersion[] = [
 		platforms: [AppPlatform.macOS],
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 43,
 		date: "2026-01-14",
 		updates: {
@@ -31,7 +46,7 @@ export const changelog: ChangelogVersion[] = [
 		platforms: [AppPlatform.iOS],
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 42,
 		date: "2026-01-11",
 		updates: {
@@ -46,7 +61,7 @@ export const changelog: ChangelogVersion[] = [
 		platforms: [AppPlatform.iOS],
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 41,
 		date: "2026-01-10",
 		updates: {
@@ -67,7 +82,7 @@ export const changelog: ChangelogVersion[] = [
 		platforms: [AppPlatform.iOS],
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 40,
 		date: "2026-01-06",
 		updates: {
@@ -83,7 +98,7 @@ export const changelog: ChangelogVersion[] = [
 		platforms: [AppPlatform.iOS],
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 5,
 		date: "2026-01-02",
 		updates: {
@@ -94,7 +109,7 @@ export const changelog: ChangelogVersion[] = [
 		platforms: [AppPlatform.watchOS],
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 39,
 		date: "2025-12-30",
 		updates: {
@@ -108,7 +123,7 @@ export const changelog: ChangelogVersion[] = [
 		platforms: [AppPlatform.iOS],
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 38,
 		date: "2025-12-29",
 		updates: {
@@ -125,7 +140,7 @@ export const changelog: ChangelogVersion[] = [
 		platforms: [AppPlatform.iOS],
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 37,
 		date: "2025-12-29",
 		title: "首页苹果音乐样式此版本不要再使用了，等之后的版本优化",
@@ -149,7 +164,7 @@ export const changelog: ChangelogVersion[] = [
 		platforms: [AppPlatform.iOS],
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 36,
 		date: "2025-12-28",
 		updates: {
@@ -162,7 +177,7 @@ export const changelog: ChangelogVersion[] = [
 		platforms: [AppPlatform.iOS],
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 34,
 		date: "2025-12-28",
 		title: "此版本最低支持iOS26.0，整体项目大幅重写，为其他端的兼容开发做准备。",
@@ -190,7 +205,7 @@ export const changelog: ChangelogVersion[] = [
 		platforms: [AppPlatform.iOS],
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 4,
 		date: "2025-12-17",
 		updates: {
@@ -201,7 +216,7 @@ export const changelog: ChangelogVersion[] = [
 		platforms: [AppPlatform.watchOS],
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 3,
 		date: "2025-12-17",
 		title: "Apple Watch第一个版本发布啦！",
@@ -216,7 +231,7 @@ export const changelog: ChangelogVersion[] = [
 		platforms: [AppPlatform.watchOS],
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 33,
 		date: "2025-12-10",
 		updates: {
@@ -229,7 +244,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 32,
 		date: "2025-12-05",
 		updates: {
@@ -240,7 +255,7 @@ export const changelog: ChangelogVersion[] = [
 		platforms: [AppPlatform.iOS],
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 31,
 		date: "2025-12-05",
 		updates: {
@@ -271,7 +286,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 30,
 		date: "2025-12-01",
 		title: "此版本仍然支持iOS18，但未做任何测试。之后版本的问题反馈只会处理iOS26+，低版本不考虑体验问题。",
@@ -293,7 +308,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 29,
 		date: "2025-11-24",
 		updates: {
@@ -313,7 +328,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 27,
 		date: "2025-11-21",
 		updates: {
@@ -325,7 +340,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 26,
 		date: "2025-11-12",
 		updates: {
@@ -347,7 +362,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 25,
 		date: "2025-11-08",
 		updates: {
@@ -365,7 +380,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 24,
 		date: "2025-11-07",
 		updates: {
@@ -386,7 +401,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 23,
 		date: "2025-11-05",
 		updates: {
@@ -408,7 +423,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 22,
 		date: "2025-11-04",
 		updates: {
@@ -418,7 +433,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 21,
 		date: "2025-11-04",
 		updates: {
@@ -432,7 +447,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 20,
 		date: "2025-11-04",
 		updates: {
@@ -442,7 +457,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 19,
 		date: "2025-11-03",
 		title: "此版本最低支持iOS17.2，并且在未来会逐步提升支持的系统版本",
@@ -462,7 +477,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 18,
 		date: "2025-10-28",
 		updates: {
@@ -472,7 +487,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 17,
 		date: "2025-10-28",
 		updates: {
@@ -497,7 +512,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 15,
 		date: "2025-10-24",
 		updates: {
@@ -518,7 +533,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 14,
 		date: "2025-10-20",
 		updates: {
@@ -536,7 +551,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 13,
 		date: "2025-10-19",
 		updates: {
@@ -549,7 +564,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 12,
 		date: "2025-10-18",
 		updates: {
@@ -559,7 +574,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 11,
 		date: "2025-10-17",
 		updates: {
@@ -575,7 +590,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 10,
 		date: "2025-10-16",
 		updates: {
@@ -591,7 +606,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 7,
 		date: "2025-10-15",
 		updates: {
@@ -612,7 +627,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 5,
 		date: "2025-10-14",
 		updates: {
@@ -629,7 +644,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 4,
 		date: "2025-10-13",
 		updates: {
@@ -642,7 +657,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 3,
 		date: "2025-10-12",
 		updates: {
@@ -656,7 +671,7 @@ export const changelog: ChangelogVersion[] = [
 		},
 	},
 	{
-		version: "1.0",
+		version: "公测版",
 		build: 2,
 		date: "2025-10-12",
 		title: "🎉 MiniBili 正式发布！感谢大家的支持与期待！",

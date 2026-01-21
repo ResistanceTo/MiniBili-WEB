@@ -101,7 +101,7 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 										<FiPackage className="w-5 h-5 text-gray-700 dark:text-white opacity-90" />
 									</div>
 									<h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-										版本 {version}-{build}
+										{version}-{build}
 									</h2>
 								</div>
 								<div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
