@@ -3,6 +3,19 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 45,
+		date: "2026-01-23",
+		updates: {
+			bugfix: [
+				"撤回评论区表情（有无法显示全部评论的问题）",
+				"修复我的收藏、稍后再看等页面背景色问题",
+				"修复切换到App推流，UP主头像设置没有联动修改的问题",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 44,
 		date: "2026-01-20",
 		updates: {
