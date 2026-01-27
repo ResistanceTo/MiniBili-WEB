@@ -3,8 +3,25 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 47,
+		date: "2026-01-27",
+		updates: {
+			improvement: [
+				"视频卡片和直播卡片改版，增加液态玻璃效果",
+			],
+			feature: [
+				"支持删除历史记录",
+			],
+			bugfix: [
+				"修复多个弹出窗口按钮样式不一样的问题",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 46,
-		date: "2026-01-23",
+		date: "2026-01-24",
 		updates: {
 			improvement: [
 				"添加爱发电赞助墙～感谢所有赞助我的小伙伴！",
