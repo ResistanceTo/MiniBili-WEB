@@ -2,6 +2,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 
 export const changelog: ChangelogVersion[] = [
 	{
+		version: "先行版",
+		build: 49,
+		date: "2026-02-02",
+		updates: {
+			improvement: [
+				"画中画的小窗口，从桌面（其他软件）返回到 MiniBili 恢复播放器 UI",
+			],
+			feature: [
+				"视频播放器，左边区域上下滑动调节亮度，右边区域调节音量，中间区域下滑退出全屏",
+				"发弹幕和发评论的交互窗口更新",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
 		version: "公测版",
 		build: 48,
 		date: "2026-02-01",
