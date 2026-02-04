@@ -78,7 +78,7 @@ export const changelog: ChangelogVersion[] = [
 		date: "2026-01-20",
 		updates: {
 			feature: [
-				"支持App推荐流（beta）",
+				"支持App推荐流（不显示头像和发布时间）",
 				"支持评论区表情显示",
 				"新增双击底部 TabBar 图标刷新当前页面的功能",
 				"「稍后再看」与「我的收藏」添加额外的长按交互菜单",
