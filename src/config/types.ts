@@ -67,10 +67,15 @@ export interface Review {
 	avatar?: string;
 }
 
+export interface ChangelogEntry {
+	text: string;
+	images?: string[];
+}
+
 export interface ChangelogUpdates {
-	feature?: string[];
-	improvement?: string[];
-	bugfix?: string[];
+	feature?: (string | ChangelogEntry)[];
+	improvement?: (string | ChangelogEntry)[];
+	bugfix?: (string | ChangelogEntry)[];
 }
 
 export enum AppPlatform {

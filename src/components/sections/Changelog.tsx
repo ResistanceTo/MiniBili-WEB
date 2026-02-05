@@ -1,6 +1,30 @@
-import { type ChangelogProps, AppPlatform } from "config";
+import { type ChangelogProps, type ChangelogEntry, AppPlatform } from "config";
 import { memo } from "react";
 import { FiClock, FiPackage, FiStar, FiTrendingUp, FiTool } from "react-icons/fi";
+
+const renderChangelogItem = (item: string | ChangelogEntry, idx: number) => {
+	const text = typeof item === "string" ? item : item.text;
+	const images = typeof item === "string" ? undefined : item.images;
+
+	return (
+		<div key={idx} className="space-y-2">
+			<span>{text}</span>
+			{images && images.length > 0 && (
+				<div className="grid grid-cols-2 gap-2 mt-2">
+					{images.map((imgPath, imgIdx) => (
+						<img
+							key={imgIdx}
+							src={imgPath}
+							alt={`${text} - ${imgIdx + 1}`}
+							className="rounded-lg border border-gray-200 dark:border-white/10 cursor-pointer hover:opacity-90 transition-opacity max-w-full"
+							onClick={() => window.open(imgPath, "_blank")}
+						/>
+					))}
+				</div>
+			)}
+		</div>
+	);
+};
 
 const Changelog = ({ items }: ChangelogProps) => {
 	// 只显示最新的 3 个版本
@@ -67,25 +91,25 @@ const Changelog = ({ items }: ChangelogProps) => {
 							{updates.feature?.map((content, idx) => (
 								<li key={`feature-${idx}`} className="flex items-start gap-2 text-sm">
 									<FiStar className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-green-600 dark:text-green-400" />
-									<span className="text-gray-600 dark:text-gray-400 leading-relaxed">
-										{content}
-									</span>
+									<div className="text-gray-600 dark:text-gray-400 leading-relaxed flex-1">
+										{renderChangelogItem(content, idx)}
+									</div>
 								</li>
 							))}
 							{updates.improvement?.map((content, idx) => (
 								<li key={`improvement-${idx}`} className="flex items-start gap-2 text-sm">
 									<FiTrendingUp className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-blue-600 dark:text-blue-400" />
-									<span className="text-gray-600 dark:text-gray-400 leading-relaxed">
-										{content}
-									</span>
+									<div className="text-gray-600 dark:text-gray-400 leading-relaxed flex-1">
+										{renderChangelogItem(content, idx)}
+									</div>
 								</li>
 							))}
 							{updates.bugfix?.map((content, idx) => (
 								<li key={`bugfix-${idx}`} className="flex items-start gap-2 text-sm">
 									<FiTool className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-orange-600 dark:text-orange-400" />
-									<span className="text-gray-600 dark:text-gray-400 leading-relaxed">
-										{content}
-									</span>
+									<div className="text-gray-600 dark:text-gray-400 leading-relaxed flex-1">
+										{renderChangelogItem(content, idx)}
+									</div>
 								</li>
 							))}
 						</ul>

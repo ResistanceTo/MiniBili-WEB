@@ -1,4 +1,4 @@
-import { type ChangelogProps, AppPlatform } from "config";
+import { type ChangelogProps, type ChangelogEntry, AppPlatform } from "config";
 import { memo, useState, useMemo } from "react";
 import { FiClock, FiPackage, FiStar, FiTrendingUp, FiTool, FiMonitor, FiSmartphone, FiTablet, FiTv, FiWatch, FiTarget } from "react-icons/fi";
 import { motion } from "framer-motion";
@@ -23,6 +23,30 @@ const getUpdateLabel = (type: "feature" | "improvement" | "bugfix") => {
 		case "bugfix":
 			return "问题修复";
 	}
+};
+
+const renderChangelogItem = (item: string | ChangelogEntry, idx: number) => {
+	const text = typeof item === "string" ? item : item.text;
+	const images = typeof item === "string" ? undefined : item.images;
+
+	return (
+		<div key={idx} className="space-y-2">
+			<span>{text}</span>
+			{images && images.length > 0 && (
+				<div className="grid grid-cols-2 gap-2 mt-2">
+					{images.map((imgPath, imgIdx) => (
+						<img
+							key={imgIdx}
+							src={imgPath}
+							alt={`${text} - ${imgIdx + 1}`}
+							className="rounded-lg border border-gray-200 dark:border-white/10 cursor-pointer hover:opacity-90 transition-opacity"
+							onClick={() => window.open(imgPath, "_blank")}
+						/>
+					))}
+				</div>
+			)}
+		</div>
+	);
 };
 
 const ChangelogFull = ({ items }: ChangelogProps) => {
@@ -127,14 +151,14 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 											<FiStar className="w-4 h-4 text-green-600 dark:text-green-400" />
 											{getUpdateLabel("feature")}
 										</h3>
-										<ul className="space-y-1 ml-6">
+										<ul className="space-y-3 ml-6">
 											{updates.feature.map((content, idx) => (
 												<li
 													key={idx}
 													className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed flex items-start gap-2"
 												>
-													<span className="text-green-600 dark:text-green-400 mt-0.5">•</span>
-													<span>{content}</span>
+													<span className="text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0">•</span>
+													<div className="flex-1">{renderChangelogItem(content, idx)}</div>
 												</li>
 											))}
 										</ul>
@@ -147,14 +171,14 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 											<FiTrendingUp className="w-4 h-4 text-blue-600 dark:text-blue-400" />
 											{getUpdateLabel("improvement")}
 										</h3>
-										<ul className="space-y-1 ml-6">
+										<ul className="space-y-3 ml-6">
 											{updates.improvement.map((content, idx) => (
 												<li
 													key={idx}
 													className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed flex items-start gap-2"
 												>
-													<span className="text-blue-600 dark:text-blue-400 mt-0.5">•</span>
-													<span>{content}</span>
+													<span className="text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0">•</span>
+													<div className="flex-1">{renderChangelogItem(content, idx)}</div>
 												</li>
 											))}
 										</ul>
@@ -167,14 +191,14 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 											<FiTool className="w-4 h-4 text-orange-600 dark:text-orange-400" />
 											{getUpdateLabel("bugfix")}
 										</h3>
-										<ul className="space-y-1 ml-6">
+										<ul className="space-y-3 ml-6">
 											{updates.bugfix.map((content, idx) => (
 												<li
 													key={idx}
 													className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed flex items-start gap-2"
 												>
-													<span className="text-orange-600 dark:text-orange-400 mt-0.5">•</span>
-													<span>{content}</span>
+													<span className="text-orange-600 dark:text-orange-400 mt-0.5 flex-shrink-0">•</span>
+													<div className="flex-1">{renderChangelogItem(content, idx)}</div>
 												</li>
 											))}
 										</ul>

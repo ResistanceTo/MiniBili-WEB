@@ -11,7 +11,10 @@ export const changelog: ChangelogVersion[] = [
 			],
 			feature: [
 				"视频播放器，左边区域上下滑动调节亮度，右边区域调节音量，中间区域下滑退出全屏",
-				"发弹幕和发评论的交互窗口更新",
+				{
+					text: "发弹幕和发评论的交互窗口更新",
+					images: ["/log/49-弹幕.webp", "/log/49-评论.webp"]
+				}
 			],
 		},
 		platforms: [AppPlatform.iOS],
