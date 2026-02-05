@@ -3,6 +3,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 50,
+		date: "2026-02-05",
+		updates: {
+			improvement: [
+				"收藏夹弹窗支持拉高显示更多内容",
+				{
+					text: "评论回复的界面改版",
+					images: ["/log/50-回复.gif"]
+				}
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 49,
 		date: "2026-02-02",
 		updates: {
