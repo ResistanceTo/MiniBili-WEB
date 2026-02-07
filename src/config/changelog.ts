@@ -3,13 +3,34 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 51,
+		date: "2026-02-07",
+		title: "所有参考项目和直接引用的代码库，都在：【我的-关于-致谢】中列出了。",
+		updates: {
+			improvement: [
+				"加快一点视频解析速度",
+				"动态页视频可以直接添加到稍后再看",
+				"搜索页如果没有关键词则恢复到最初界面",
+				{
+					text: "添加一个颜色选择器，可以自定义多处颜色（例如首页的推荐、热门等等）",
+					images: ["/log/51-颜色选择.gif"]
+				}
+			],
+			bugfix: [
+				"一些其他优化",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 50,
 		date: "2026-02-05",
 		updates: {
 			improvement: [
 				"收藏夹弹窗支持拉高显示更多内容",
 				{
-					text: "评论回复的界面改版",
+					text: "评论回复的交互界面改版",
 					images: ["/log/50-回复.gif"]
 				}
 			],
