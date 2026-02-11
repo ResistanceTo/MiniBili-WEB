@@ -3,6 +3,18 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 53,
+		date: "2026-02-11",
+		updates: {
+			improvement: [
+				"动态页面优化交互和卡片",
+				"添加 MiniBili 的 URL scheme"
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 51,
 		date: "2026-02-07",
 		title: "所有参考项目和直接引用的代码库，都在：【我的-关于-致谢】中列出了。",
