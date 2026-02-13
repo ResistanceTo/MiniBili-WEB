@@ -3,6 +3,22 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 54,
+		date: "2026-02-13",
+		updates: {
+			feature: [
+				"视频详情页菜单添加一些快捷功能",
+				"动态页的文本详情如果有链接支持点击跳转",
+			],
+			bugfix: [
+				"修复动态页面的图片形状、边距、高度问题",
+				"修复动态页查看文本详情被折行的问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 53,
 		date: "2026-02-11",
 		updates: {
