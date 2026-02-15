@@ -9,6 +9,7 @@ export const changelog: ChangelogVersion[] = [
 			improvement: [
 				"添加标题屏蔽词",
 				"查询界面UI优化",
+				"动态界面UI优化",
 			],
 		},
 		platforms: [AppPlatform.iOS],
