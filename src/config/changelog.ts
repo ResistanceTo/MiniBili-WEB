@@ -3,6 +3,18 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 56,
+		date: "2026-02-23",
+		updates: {
+			feature: [
+				"支持番剧和电影的播放",
+				"支持用户空间搜索视频、视频排序",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 55,
 		date: "2026-02-15",
 		updates: {
