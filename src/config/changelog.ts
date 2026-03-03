@@ -3,8 +3,25 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 57,
+		date: "2026-03-03",
+		updates: {
+			feature: [
+				"添加【我的订阅】",
+			],
+			improvement: [
+				"优化底部菜单单击和双击互动",
+				"番剧页面布局优化",
+				"优化绝大部分页面字体样式",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 56,
 		date: "2026-02-23",
+		title: "2026-03-01 同步为测试版",
 		updates: {
 			feature: [
 				"支持番剧和电影的播放",
