@@ -8,7 +8,10 @@ export const changelog: ChangelogVersion[] = [
 		updates: {
 			improvement: [
 				"搜索界面UI和交互优化",
-				"首页的单列展示模式UI优化",
+				{
+					text: "首页的单列展示模式UI优化",
+					images: ["/log/58-搜索.webp"]
+				}
 			],
 		},
 		platforms: [AppPlatform.iOS],
