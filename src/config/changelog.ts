@@ -3,6 +3,22 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 59,
+		date: "2026-03-07",
+		updates: {
+			feature: [
+				"添加弹幕设置（字号、透明度）",
+				"UP的评论会标明UP主",
+				"App内显示专栏内容",
+			],
+			improvement: [
+				"评论区UI优化",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 58,
 		date: "2026-03-05",
 		updates: {
