@@ -4,7 +4,7 @@
 
 ## 接受条款 / Acceptance of Terms
 
-使用 MiniBili 应用即表示您同意本服务条款。如果您不同意这些条款,请不要使用本应用。
+使用 MiniBili 应用即表示您同意本服务条款。如果您不同意这些条款，请不要使用本应用。
 
 By using the MiniBili app, you agree to these Terms of Service. If you do not agree to these terms, please do not use this app.
 
@@ -121,10 +121,4 @@ If any provision of these terms is found to be invalid or unenforceable, the rem
 If you have any questions or concerns, please contact the developer:
 
 - GitHub: https://github.com/ResistanceTo/MiniBili-WEB
-
----
-
-**再次声明**：MiniBili 是免费的第三方应用，与哔哩哔哩官方无关。使用本应用即表示您理解并接受这一点。
-
-**Disclaimer**: MiniBili is a free third-party app and is not affiliated with Bilibili. By using this app, you understand and accept this.
-
+- 邮箱 / Email: me@zhaohe.org

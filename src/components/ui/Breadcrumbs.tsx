@@ -3,8 +3,8 @@ import { memo } from "react";
 import { FiChevronRight, FiHome } from "react-icons/fi";
 
 const Breadcrumbs = ({ items }: BreadcrumbsProps) => (
-	<nav className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400 mb-8">
-		<a href="/" className="hover:text-gray-800 dark:hover:text-white transition-colors p-2 -ml-2">
+	<nav aria-label="面包屑导航" className="mb-8 flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+		<a href="/" className="p-2 -ml-2 transition-colors hover:text-gray-800 dark:hover:text-white" aria-label="返回首页">
 			<FiHome className="w-4 h-4" />
 		</a>
 		{items.map(({ label, href }) => (
@@ -15,7 +15,7 @@ const Breadcrumbs = ({ items }: BreadcrumbsProps) => (
 						{label}
 					</a>
 				) : (
-					<span className="text-gray-900 dark:text-white">{label}</span>
+					<span aria-current="page" className="text-gray-900 dark:text-white">{label}</span>
 				)}
 			</div>
 		))}

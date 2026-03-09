@@ -1,6 +1,6 @@
 import { type ChangelogProps, type ChangelogEntry, AppPlatform } from "config";
 import { memo, useState, useMemo } from "react";
-import { FiClock, FiPackage, FiStar, FiTrendingUp, FiTool, FiMonitor, FiSmartphone, FiTablet, FiTv, FiWatch, FiTarget } from "react-icons/fi";
+import { FiClock, FiPackage, FiStar, FiTrendingUp, FiTool, FiMonitor, FiSmartphone, FiTv, FiWatch, FiTarget } from "react-icons/fi";
 import { motion } from "framer-motion";
 
 const getUpdateIcon = (type: "feature" | "improvement" | "bugfix") => {

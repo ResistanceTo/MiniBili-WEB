@@ -14,6 +14,7 @@ const {
   url,
   image = '/MiniBili.png'
 } = Astro.props;
+const imageUrl = image.startsWith("http") ? image : new URL(image, url).href;
 
 const baseStructuredData = {
   "@context": "https://schema.org",
@@ -38,19 +39,22 @@ const websiteData = type === 'website' ? {
 const appData = type === 'mobileApplication' ? {
   ...baseStructuredData,
   "applicationCategory": "Entertainment",
-  "operatingSystem": "iOS",
+  "operatingSystem": "iOS 26.0+, iPadOS 26.0+, watchOS 11.0+, macOS 15.0+, tvOS 18.0+, visionOS 2.0+",
   "description": description,
+  "isAccessibleForFree": true,
   "offers": {
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "CNY"
   },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "5.0",
-    "ratingCount": "1"
-  },
-  "screenshot": image,
+  "featureList": [
+    "免费使用",
+    "无广告",
+    "无跟踪器",
+    "本地缓存",
+    "支持多 Apple 平台"
+  ],
+  "screenshot": imageUrl,
   "author": {
     "@type": "Person",
     "name": "ResistanceTo",

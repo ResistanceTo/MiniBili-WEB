@@ -1,8 +1,8 @@
 ---
-import AppHero from "@components/sections/AppHero";
-import Changelog from "@components/sections/Changelog";
-import Community from "@components/sections/Community";
-import FAQ from "@components/sections/FAQ";
+import AppHero from "@components/sections/AppHero.astro";
+import Changelog from "@components/sections/Changelog.astro";
+import Community from "@components/sections/Community.astro";
+import FAQ from "@components/sections/FAQ.astro";
 import Features from "@components/sections/Features";
 import Screenshots from "@components/sections/Screenshots";
 import AnnouncementBanner from "@components/ui/AnnouncementBanner";
@@ -53,17 +53,17 @@ const { title, description, screenshots, features, faqs, storeLinks, logo, annou
         client:load
       />
     )}
-    <AppHero {title} {description} {storeLinks} {logo} client:load />
-    <div class="mb-16"><Screenshots images={screenshots} client:load /></div>
+    <AppHero {title} {description} {storeLinks} {logo} />
+    <div class="mb-16"><Screenshots images={screenshots} client:visible /></div>
     <Features items={features} />
-    <Changelog items={changelog} client:visible />
-    <FAQ items={faqs} client:visible />
-    <Community client:visible />
+    <Changelog items={changelog} />
+    <FAQ items={faqs} />
+    <Community />
   </main>
-  <ScrollNav client:load />
+  <ScrollNav client:media="(min-width: 1024px)" />
 </Layout>
 
-<Lightbox images={screenshots} client:load />
+<Lightbox images={screenshots} client:visible />
 <FAQSchema items={faqs} />
 <OrganizationSchema />
 

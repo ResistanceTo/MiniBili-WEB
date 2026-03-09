@@ -15,7 +15,7 @@ export const faq: FAQ[] = [
 	},
 	{
 		question: "是否考虑支持低版本系统？",
-		answer: "不会考虑。",
+		answer: "目前没有支持更低系统版本的计划。",
 	},
 	{
 		question: "有ipa或者其他渠道分发吗？",
@@ -23,6 +23,6 @@ export const faq: FAQ[] = [
 	},
 	{
 		question: "iPad版本优化问题？",
-		answer: "由于开发者没有iPad设备，所以不会花费精力去做适配。",
+		answer: "由于目前缺少 iPad 真机设备，暂时不会投入专门的 iPad 适配资源。",
 	},
 ];

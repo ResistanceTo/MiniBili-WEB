@@ -5,9 +5,9 @@ import { FiMonitor, FiMoon, FiSun } from "react-icons/fi";
 type Theme = "light" | "dark" | "system";
 
 const themes: { key: Theme; icon: typeof FiSun; label: string }[] = [
-    { key: "light", icon: FiSun, label: "Light" },
-    { key: "dark", icon: FiMoon, label: "Dark" },
-    { key: "system", icon: FiMonitor, label: "System" },
+    { key: "light", icon: FiSun, label: "浅色" },
+    { key: "dark", icon: FiMoon, label: "深色" },
+    { key: "system", icon: FiMonitor, label: "跟随系统" },
 ];
 
 const ThemeToggle = () => {
@@ -67,7 +67,7 @@ const ThemeToggle = () => {
                     }`}
                     whileTap={{ scale: 0.95 }}
                     title={label}
-                    aria-label={`Switch to ${label.toLowerCase()} theme`}
+                    aria-label={`切换到${label}主题`}
                 >
                     {theme === key && (
                         <motion.div

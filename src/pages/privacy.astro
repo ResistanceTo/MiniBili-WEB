@@ -2,11 +2,11 @@
 import BackToTop from "@components/ui/BackToTop";
 import Breadcrumbs from "@components/ui/Breadcrumbs";
 import Layout from "@layouts/Layout.astro";
-import { siteConfig } from "../config";
 import { marked } from "marked";
 
-const privacyContent = Object.values(import.meta.glob("./content/privacy.md", { eager: true }))[0] as { rawContent: () => string };
-const htmlContent = marked(privacyContent.rawContent());
+import privacyContent from "../data/legal/privacy.md?raw";
+
+const htmlContent = marked(privacyContent);
 ---
 
 <Layout
@@ -14,7 +14,7 @@ const htmlContent = marked(privacyContent.rawContent());
   description="MiniBili 隐私政策 - 了解我们如何保护你的隐私和数据安全"
 >
   <main class="min-h-screen max-w-3xl mx-auto px-4 py-8">
-    <Breadcrumbs items={[{ label: "Privacy Policy" }]} />
+    <Breadcrumbs items={[{ label: "隐私政策" }]} />
     <div class="prose prose-gray dark:prose-invert prose-sm sm:prose-base max-w-none">
       <div set:html={htmlContent} />
     </div>

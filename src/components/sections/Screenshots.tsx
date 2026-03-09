@@ -11,11 +11,11 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 	const isMac = activeDevice === DeviceType.macOS;
 	const isTv = activeDevice === DeviceType.tvOS;
 	const isWatch = activeDevice === DeviceType.watchOS;
-	const isVision = activeDevice === DeviceType.visionOS;
 	const [playingVideos, setPlayingVideos] = useState<Set<string>>(new Set());
 	const [loadingVideos, setLoadingVideos] = useState<Set<string>>(new Set());
 	const [errorVideos, setErrorVideos] = useState<Set<string>>(new Set());
 	const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
+	const containerMinHeightClass = isIphone ? "min-h-[560px]" : isMac ? "min-h-[260px]" : "min-h-[300px]";
 
 	// 切换设备时暂停所有视频
 	useEffect(() => {
@@ -107,7 +107,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 				</h2>
 				<DeviceToggle activeDevice={activeDevice} onToggle={setActiveDevice} />
 			</div>
-			<div className={`relative overflow-hidden min-h-[${isIphone ? "560px" : isMac ? "260px" : isWatch ? "300px" : "300px"}]`}>
+			<div className={`relative overflow-hidden ${containerMinHeightClass}`}>
 				<AnimatePresence mode="wait">
 					<motion.div
 						key={activeDevice}

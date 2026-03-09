@@ -52,7 +52,7 @@ export const changelog: ChangelogVersion[] = [
 		version: "先行版",
 		build: 56,
 		date: "2026-02-23",
-		title: "2026-03-01 同步为测试版",
+		title: "2026-03-01同步为公测版",
 		updates: {
 			feature: [
 				"支持番剧和电影的播放",

@@ -1,6 +1,5 @@
 ---
-import Footer from "@components/sections/Footer";
-import PageAnimation from "@components/ui/PageAnimation";
+import Footer from "@components/sections/Footer.astro";
 import StructuredData from "@components/seo/StructuredData.astro";
 
 interface Props {
@@ -11,6 +10,9 @@ interface Props {
 }
 
 const { title, description, showFooter = true, structuredDataType = 'website' } = Astro.props;
+const siteUrl = Astro.site ?? Astro.url;
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = new URL("/og_image.png", siteUrl).href;
 ---
 
 <!DOCTYPE html>
@@ -21,33 +23,37 @@ const { title, description, showFooter = true, structuredDataType = 'website' } 
     <meta name="generator" content={Astro.generator}>
 
     <!-- Canonical URL -->
-    <link rel="canonical" href={Astro.url.href}>
+    <link rel="canonical" href={canonicalUrl}>
 
     <!-- Favicons -->
-    <link rel="icon" type="image/webp" href="/favicon-512.png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="/favicon-512.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
 
     <title>{title}</title>
     {description && <meta name="description" content={description}>}
     <meta name="keywords" content="MiniBili,哔哩哔哩,bilibili,B站,B站客户端,第三方客户端,iOS,iPhone,iPad,免费,无广告,隐私保护,TestFlight,哔哩哔哩第三方,哔哩哔哩无广告,Bilibili alternative">
     <meta name="author" content="ResistanceTo">
+    <meta name="theme-color" content="#111827">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content={Astro.url.href}>
+    <meta property="og:url" content={canonicalUrl}>
     <meta property="og:title" content={title}>
     {description && <meta property="og:description" content={description}>}
-    <meta property="og:image" content={new URL('/og_image.png', Astro.url).href}>
+    <meta property="og:image" content={ogImageUrl}>
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="MiniBili 应用落地页预览图">
     <meta property="og:site_name" content="MiniBili">
     <meta property="og:locale" content="zh_CN">
 
-    {/* <!-- Twitter Card -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content={title}>
     {description && <meta name="twitter:description" content={description}>}
-    <meta name="twitter:image" content={new URL('/MiniBili.png', Astro.url).href}> */}
+    <meta name="twitter:image" content={ogImageUrl}>
 
     <!-- Apple Mobile Web App -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -59,8 +65,9 @@ const { title, description, showFooter = true, structuredDataType = 'website' } 
       type={structuredDataType}
       title={title}
       description={description}
-      url={Astro.url.href}
+      url={canonicalUrl}
     />
+    <slot name="head" />
 
     <script is:inline>
       const theme = localStorage.getItem('theme') || 'system';
@@ -79,17 +86,15 @@ const { title, description, showFooter = true, structuredDataType = 'website' } 
   </head>
   <body class="transition-colors duration-300 bg-gray-50 text-gray-900 dark:bg-black dark:text-white">
     <div class="mx-auto min-h-screen max-w-[800px]">
-      <PageAnimation client:load>
-        <main><slot /></main>
-        {showFooter && <Footer client:load />}
-      </PageAnimation>
+      <slot />
+      {showFooter && <Footer />}
     </div>
   </body>
 </html>
 
 
 <style is:global>
-  * { transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
+  body { transition: background-color 0.3s ease, color 0.3s ease; }
   html.light { color-scheme: light; }
   html.dark { color-scheme: dark; }
 

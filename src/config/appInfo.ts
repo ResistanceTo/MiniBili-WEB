@@ -13,7 +13,7 @@ export const appInfo = {
 		macos: "https://testflight.apple.com/join/k9xD3Vqh",
 	} as StoreLinks,
 	announcement: {
-		message: "2026.1.18开始释放新名额。macOS刚上线还存在很多问题，除了崩溃日志，其他的无需反馈。",
+		message: "每月初发布公测版本，月中或月初清理不活跃测试员。",
 		type: "success" as const,
 		dismissible: true,
 		show: true,

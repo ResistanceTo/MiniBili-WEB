@@ -1,0 +1,71 @@
+---
+import { siteConfig } from "config";
+import { FiClock, FiFileText, FiMap, FiShield } from "react-icons/fi";
+import ThemeToggle from "../ui/ThemeToggle";
+
+const legalLinks = [
+  { href: "/privacy", icon: FiShield, text: "隐私" },
+  { href: "/terms", icon: FiFileText, text: "条款" },
+  { href: "/changelog", icon: FiClock, text: "日志" },
+  { href: "/roadmap", icon: FiMap, text: "路线" },
+];
+---
+
+<footer class="border-t border-neutral-200/30 bg-neutral-50/50 py-8 backdrop-blur-sm dark:border-neutral-800/30 dark:bg-black/50">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col gap-8">
+      <div class="flex flex-col items-start justify-between gap-6 md:flex-row">
+        <div class="flex max-w-lg flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <img src="/favicon-512.png" alt="MiniBili Logo" class="h-6 w-6 rounded-md shadow-sm" />
+              <span class="font-semibold text-neutral-800 dark:text-white">MiniBili</span>
+            </div>
+            <div class="block md:hidden">
+              <ThemeToggle client:load />
+            </div>
+          </div>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400">{siteConfig.description}</p>
+        </div>
+        <div class="hidden md:block">
+          <div class="mb-3 text-xs font-semibold uppercase tracking-wide text-neutral-500">主题</div>
+          <ThemeToggle client:load />
+        </div>
+      </div>
+
+      <div class="flex flex-col-reverse items-center justify-between gap-6 md:flex-row">
+        <div class="flex flex-col items-center gap-6 md:flex-row">
+          <div class="flex items-center gap-3">
+            {siteConfig.socialLinks.map((link) => (
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex h-9 w-9 items-center justify-center rounded-lg border border-neutral-200/50 bg-neutral-100 transition-colors hover:bg-neutral-200 dark:border-white/5 dark:bg-white/5 dark:hover:bg-white/10"
+                aria-label={link.label}
+                title={link.label}
+              >
+                <link.icon className="h-4 w-4 text-neutral-600 dark:text-neutral-300" />
+              </a>
+            ))}
+          </div>
+          <div class="text-sm text-neutral-500 dark:text-neutral-400">
+            &copy; {new Date().getFullYear()} MiniBili. All rights reserved.
+          </div>
+        </div>
+
+        <div class="flex items-center gap-6">
+          {legalLinks.map(({ href, icon: Icon, text }) => (
+            <a
+              href={href}
+              class="flex items-center gap-2 text-sm text-neutral-500 transition-colors hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-white"
+            >
+              <Icon className="h-4 w-4" />
+              <span>{text}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

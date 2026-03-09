@@ -1,0 +1,88 @@
+---
+import type { AppHeroProps } from "config";
+import { FiChevronDown } from "react-icons/fi";
+
+const { title, description, storeLinks, logo } = Astro.props as AppHeroProps;
+
+const platforms = [
+  { key: "ios", name: "iOS", version: "26.0+", url: storeLinks.ios },
+  { key: "macos", name: "macOS", version: "15.0+", url: storeLinks.macos },
+  { key: "watchos", name: "watchOS", version: "11.0+", url: storeLinks.watchos },
+  { key: "tvos", name: "tvOS", version: "18.0+", url: storeLinks.tvos },
+  { key: "visionos", name: "visionOS", version: "2.0+", url: storeLinks.visionOS },
+].filter((platform) => platform.url);
+---
+
+<section class="mb-16 flex flex-col items-center gap-8 md:flex-row md:items-start">
+  <div class="flex-shrink-0 md:self-center">
+    <div class="flex h-[192px] w-[192px] items-center justify-center rounded-2xl border border-gray-200/50 bg-gradient-to-br from-gray-50 to-gray-100 p-4 shadow-sm dark:border-white/10 dark:from-white/[0.02] dark:to-white/[0.05]">
+      <img
+        src={logo.src}
+        alt="MiniBili 应用图标"
+        class="h-full w-full rounded-2xl object-contain"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </div>
+  </div>
+
+  <div class="flex flex-1 flex-col justify-between text-center md:text-left">
+    <div>
+      <h1 class="mb-3 text-4xl font-bold text-gray-900 dark:text-white">{title}</h1>
+      <p class="mx-auto mb-4 max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-400 md:mx-0">
+        {description}
+      </p>
+      <p class="mx-auto mb-6 max-w-2xl text-sm text-gray-500 dark:text-gray-400 md:mx-0">
+        支持 iPhone、iPad、Apple Watch 和 Mac，提供轻量、无广告、无跟踪器的哔哩哔哩浏览体验。
+      </p>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-center gap-3 md:justify-start">
+      <details class="group relative">
+        <summary class="flex cursor-pointer list-none items-center gap-3 rounded-xl border border-gray-300 bg-white pl-3 pr-4 py-3 text-gray-900 shadow-md transition-all duration-300 hover:bg-gray-50 hover:border-gray-400 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:hover:bg-white/[0.08] dark:hover:border-white/20">
+          <img src="/TestFlight.png" alt="" class="h-10 w-10 rounded-lg" />
+          <div class="flex flex-col items-start">
+            <span class="text-xs text-gray-500 dark:text-gray-400">立即加入测试</span>
+            <span class="flex items-center gap-1 text-base font-bold">
+              TestFlight
+              <FiChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
+            </span>
+          </div>
+        </summary>
+
+        <div class="absolute left-0 top-full z-50 mt-2 w-56 overflow-hidden rounded-xl border border-gray-300 bg-white shadow-xl dark:border-white/10 dark:bg-neutral-900">
+          {platforms.map((platform) => (
+            <a
+              href={platform.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-between border-b border-gray-200 px-4 py-3 transition-colors hover:bg-gray-50 last:border-b-0 dark:border-white/5 dark:hover:bg-white/[0.08]"
+            >
+              <span class="text-sm font-medium text-gray-900 dark:text-white">{platform.name}</span>
+              <span class="text-xs text-gray-500 dark:text-gray-400">{platform.version}</span>
+            </a>
+          ))}
+        </div>
+      </details>
+
+      <a
+        href="https://afdian.com/a/ResistanceTo"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group flex items-center gap-3 rounded-xl border border-gray-300 bg-white pl-3 pr-5 py-3 shadow-md transition-all duration-300 hover:bg-gray-50 hover:border-gray-400 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04] dark:hover:bg-white/[0.08] dark:hover:border-white/20"
+      >
+        <img src="/toubi.svg" alt="" class="h-10 w-10" />
+        <div class="flex flex-col items-start">
+          <span class="text-xs text-gray-500 dark:text-gray-400">可选支持</span>
+          <span class="text-base font-bold text-gray-900 dark:text-white">爱发电赞助</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

@@ -1,5 +1,5 @@
 import { memo, useState } from "react";
-import { FiAlertTriangle, FiInfo, FiCheckCircle, FiX } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 
 export interface AnnouncementBannerProps {
 	message: string;
