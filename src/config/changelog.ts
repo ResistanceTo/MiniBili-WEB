@@ -3,6 +3,22 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 60,
+		date: "2026-03-09",
+		updates: {
+			improvement: [
+				"动态页面UI大幅优化",
+				"动态页面添加追番菜单",
+				{
+					text: "视频列表卡片UI优化",
+					images: ["/log/60-首页.webp"]
+				}
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 59,
 		date: "2026-03-07",
 		updates: {
