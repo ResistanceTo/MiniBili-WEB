@@ -3,6 +3,25 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 61,
+		date: "2026-03-10",
+		updates: {
+			feature: [
+				"评论区支持显示表情",
+				"评论区支持显示是否是VIP、置顶、UP主点赞等信息",
+				"评论区支持5:20这种时间格式的跳转",
+				"可以保存视频封面到相册",
+			],
+			improvement: [
+				"评论区整体UI和组件重构",
+				"评论区评论优化了弹出层的回复和交互布局",
+				"设置页做了统一的分类优化",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 60,
 		date: "2026-03-09",
 		updates: {
