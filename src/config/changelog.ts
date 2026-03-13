@@ -3,6 +3,22 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 63,
+		date: "2026-03-13",
+		updates: {
+			feature: [
+				"分P视频自动播放下一P",
+			],
+			improvement: [
+				"修复评论区加载多页后的掉帧问题",
+				"修复动态页面嵌套的评论区加载更多产生的掉帧问题",
+				"优化稍后再看、我的收藏页面的性能问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 62,
 		date: "2026-03-12",
 		updates: {
