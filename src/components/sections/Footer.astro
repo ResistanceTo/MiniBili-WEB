@@ -1,7 +1,7 @@
 ---
 import { siteConfig } from "config";
 import { FiClock, FiFileText, FiMap, FiShield } from "react-icons/fi";
-import ThemeToggle from "../ui/ThemeToggle";
+import ThemeToggle from "../ui/ThemeToggle.astro";
 
 const legalLinks = [
   { href: "/privacy", icon: FiShield, text: "隐私" },
@@ -22,14 +22,14 @@ const legalLinks = [
               <span class="font-semibold text-neutral-800 dark:text-white">MiniBili</span>
             </div>
             <div class="block md:hidden">
-              <ThemeToggle client:load />
+              <ThemeToggle />
             </div>
           </div>
           <p class="text-sm text-neutral-600 dark:text-neutral-400">{siteConfig.description}</p>
         </div>
         <div class="hidden md:block">
           <div class="mb-3 text-xs font-semibold uppercase tracking-wide text-neutral-500">主题</div>
-          <ThemeToggle client:load />
+          <ThemeToggle />
         </div>
       </div>
 

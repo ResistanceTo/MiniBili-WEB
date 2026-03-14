@@ -1,11 +1,10 @@
 ---
-import BackToTop from "@components/ui/BackToTop";
-import Breadcrumbs from "@components/ui/Breadcrumbs";
+import BackToTop from "@components/ui/BackToTop.astro";
+import Breadcrumbs from "@components/ui/Breadcrumbs.astro";
 import RoadmapFull from "@components/sections/RoadmapFull";
 import BreadcrumbSchema from "@components/seo/BreadcrumbSchema.astro";
 import Layout from "@layouts/Layout.astro";
 import { roadmap } from "../config/roadmap";
-import { siteConfig } from "../config";
 
 const breadcrumbItems = [
   { name: "首页", url: "https://minibili.zhaohe.org/" },
@@ -21,7 +20,7 @@ const breadcrumbItems = [
     <Breadcrumbs items={[{ label: "开发路线图" }]} />
     <RoadmapFull items={roadmap} client:load />
   </main>
-  <BackToTop client:load />
+  <BackToTop />
 </Layout>
 
 <BreadcrumbSchema items={breadcrumbItems} />

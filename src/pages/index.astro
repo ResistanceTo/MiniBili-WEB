@@ -3,11 +3,10 @@ import AppHero from "@components/sections/AppHero.astro";
 import Changelog from "@components/sections/Changelog.astro";
 import Community from "@components/sections/Community.astro";
 import FAQ from "@components/sections/FAQ.astro";
-import Features from "@components/sections/Features";
+import Features from "@components/sections/Features.astro";
 import Screenshots from "@components/sections/Screenshots";
-import AnnouncementBanner from "@components/ui/AnnouncementBanner";
-import Lightbox from "@components/ui/Lightbox";
-import ScrollNav from "@components/ui/ScrollNav";
+import AnnouncementBanner from "@components/ui/AnnouncementBanner.astro";
+import ScrollNav from "@components/ui/ScrollNav.astro";
 import FAQSchema from "@components/seo/FAQSchema.astro";
 import OrganizationSchema from "@components/seo/OrganizationSchema.astro";
 import Layout from "@layouts/Layout.astro";
@@ -21,28 +20,6 @@ const { title, description, screenshots, features, faqs, storeLinks, logo, annou
   <!-- LCP -->
   <link rel="preload" as="image" href="/MiniBili.png" fetchpriority="high" slot="head" />
 
-  <!-- 预加载视频以提升性能 -->
-  {screenshots.iOS.map((item: any) => {
-    if (typeof item === 'object' && item.type === 'video') {
-      return (
-        <>
-          <link rel="preload" as="video" href={item.src} slot="head" />
-          {item.poster && <link rel="preload" as="image" href={item.poster} slot="head" />}
-        </>
-      );
-    }
-  })}
-  {screenshots.iPadOS.map((item: any) => {
-    if (typeof item === 'object' && item.type === 'video') {
-      return (
-        <>
-          <link rel="preload" as="video" href={item.src} slot="head" />
-          {item.poster && <link rel="preload" as="image" href={item.poster} slot="head" />}
-        </>
-      );
-    }
-  })}
-
   <main class="min-h-screen max-w-5xl mx-auto px-4 py-8">
     {announcement && announcement.show && (
       <AnnouncementBanner
@@ -50,7 +27,6 @@ const { title, description, screenshots, features, faqs, storeLinks, logo, annou
         type={announcement.type}
         dismissible={announcement.dismissible}
         show={announcement.show}
-        client:load
       />
     )}
     <AppHero {title} {description} {storeLinks} {logo} />
@@ -60,18 +36,8 @@ const { title, description, screenshots, features, faqs, storeLinks, logo, annou
     <FAQ items={faqs} />
     <Community />
   </main>
-  <ScrollNav client:media="(min-width: 1024px)" />
+  <ScrollNav />
 </Layout>
 
-<Lightbox images={screenshots} client:visible />
 <FAQSchema items={faqs} />
 <OrganizationSchema />
-
-<style is:global>
-  .screenshots-scroll {
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    &::-webkit-scrollbar { display: none; }
-  }
-</style>

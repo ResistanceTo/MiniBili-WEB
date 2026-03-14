@@ -1,0 +1,43 @@
+<button
+  type="button"
+  class="pointer-events-none fixed bottom-8 right-8 z-50 flex h-12 w-12 translate-y-2 items-center justify-center rounded-full border border-gray-300 bg-white/90 text-gray-800 opacity-0 shadow-lg backdrop-blur-sm transition-all hover:bg-white dark:border-white/10 dark:bg-black/80 dark:text-white dark:hover:bg-white/10"
+  aria-label="Back to top"
+  data-back-to-top
+>
+  <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
+</button>
+
+<script is:inline>
+  document
+    .querySelectorAll("[data-back-to-top]:not([data-back-to-top-bound])")
+    .forEach((button) => {
+      button.setAttribute("data-back-to-top-bound", "true");
+
+      let ticking = false;
+
+      const updateVisibility = () => {
+        const isVisible = window.scrollY > 300;
+        button.classList.toggle("pointer-events-none", !isVisible);
+        button.classList.toggle("opacity-0", !isVisible);
+        button.classList.toggle("translate-y-2", !isVisible);
+        button.classList.toggle("opacity-100", isVisible);
+        button.classList.toggle("translate-y-0", isVisible);
+        ticking = false;
+      };
+
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(updateVisibility);
+      };
+
+      button.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      updateVisibility();
+    });
+</script>

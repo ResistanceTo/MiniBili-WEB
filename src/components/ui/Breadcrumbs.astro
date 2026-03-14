@@ -1,0 +1,24 @@
+---
+import type { BreadcrumbsProps } from "config";
+import { FiChevronRight, FiHome } from "react-icons/fi";
+
+const { items } = Astro.props as BreadcrumbsProps;
+---
+
+<nav aria-label="面包屑导航" class="mb-8 flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+  <a href="/" class="p-2 -ml-2 transition-colors hover:text-gray-800 dark:hover:text-white" aria-label="返回首页">
+    <FiHome className="h-4 w-4" />
+  </a>
+  {items.map(({ label, href }) => (
+    <div class="flex items-center space-x-2">
+      <FiChevronRight className="h-4 w-4 text-gray-400 dark:text-gray-600" />
+      {href ? (
+        <a href={href} class="transition-colors hover:text-gray-800 dark:hover:text-white">
+          {label}
+        </a>
+      ) : (
+        <span aria-current="page" class="text-gray-900 dark:text-white">{label}</span>
+      )}
+    </div>
+  ))}
+</nav>

@@ -1,6 +1,6 @@
 ---
-import BackToTop from "@components/ui/BackToTop";
-import Breadcrumbs from "@components/ui/Breadcrumbs";
+import BackToTop from "@components/ui/BackToTop.astro";
+import Breadcrumbs from "@components/ui/Breadcrumbs.astro";
 import Layout from "@layouts/Layout.astro";
 import { marked } from "marked";
 
@@ -19,7 +19,7 @@ const htmlContent = marked(termsContent);
       <div set:html={htmlContent} />
     </div>
   </main>
-  <BackToTop client:load />
+  <BackToTop />
 </Layout>
 
 <style is:global>

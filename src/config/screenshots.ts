@@ -2,10 +2,10 @@ import type { DeviceScreenshots } from "./types";
 
 export const screenshots: DeviceScreenshots = {
 	iOS: [
-		{
-			src: "/screenshots/iphone/HomeList.mp4",
-			type: "video",
-		},
+		// {
+		// 	src: "/screenshots/iphone/HomeList.mp4",
+		// 	type: "video",
+		// },
 		// {
 		// 	src: "/screenshots/iphone/VideoDetail.mp4",
 		// 	type: "video",

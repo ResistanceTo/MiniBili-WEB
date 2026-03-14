@@ -1,0 +1,28 @@
+---
+import type { FeaturesProps } from "config";
+
+const { items } = Astro.props as FeaturesProps;
+---
+
+<section id="features" class="mb-16 scroll-mt-20">
+  <h2 class="mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+    特点
+  </h2>
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+    {items.map(({ icon: Icon, title, description }) => (
+      <div
+        class="rounded-2xl border border-gray-300 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/[0.03]"
+      >
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 dark:bg-white/[0.04]">
+          <Icon className="h-6 w-6 text-gray-700 opacity-90 dark:text-white" />
+        </div>
+        <h3 class="mb-2 text-lg font-medium text-gray-900 dark:text-white">
+          {title}
+        </h3>
+        <p class="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+          {description}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,125 @@
+---
+import { FiClock, FiHelpCircle, FiImage, FiMessageCircle, FiStar } from "react-icons/fi";
+
+const sections = [
+  { id: "screenshots", label: "截图", icon: FiImage },
+  { id: "features", label: "特点", icon: FiStar },
+  { id: "changelog", label: "更新", icon: FiClock },
+  { id: "faq", label: "FAQ", icon: FiHelpCircle },
+  { id: "community", label: "社区", icon: FiMessageCircle },
+];
+---
+
+<nav class="fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 lg:block" data-scroll-nav>
+  <div class="flex flex-col gap-2 rounded-2xl border border-neutral-200/50 bg-white/80 p-2 shadow-lg backdrop-blur-md dark:border-white/10 dark:bg-black/50">
+    {sections.map(({ id, label, icon: Icon }) => (
+      <button
+        type="button"
+        class="scroll-nav-button group relative flex items-center gap-2 rounded-xl px-3 py-2 transition-all duration-200 hover:bg-neutral-100 dark:hover:bg-white/10"
+        data-scroll-nav-link
+        data-target={id}
+        aria-label={`跳转到${label}`}
+        title={label}
+      >
+        <span class="scroll-nav-indicator pointer-events-none absolute inset-0 -z-10 rounded-xl opacity-0 transition-opacity duration-200"></span>
+        <Icon className="h-4 w-4 text-neutral-600 transition-colors dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white" />
+        <span class="text-xs font-medium whitespace-nowrap text-neutral-600 transition-colors dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white">
+          {label}
+        </span>
+      </button>
+    ))}
+  </div>
+</nav>
+
+<script is:inline>
+  document
+    .querySelectorAll("[data-scroll-nav]:not([data-scroll-nav-bound])")
+    .forEach((nav) => {
+      nav.setAttribute("data-scroll-nav-bound", "true");
+
+      const links = Array.from(nav.querySelectorAll("[data-scroll-nav-link]"));
+      const sectionIds = links.map((link) => link.getAttribute("data-target")).filter(Boolean);
+      let ticking = false;
+
+      const setActiveSection = (activeId) => {
+        links.forEach((link) => {
+          const isActive = link.getAttribute("data-target") === activeId;
+          const indicator = link.querySelector(".scroll-nav-indicator");
+          const icon = link.querySelector("svg");
+          const label = link.querySelector("span:last-child");
+
+          link.classList.toggle("bg-neutral-900", isActive);
+          link.classList.toggle("dark:bg-white", isActive);
+          link.classList.toggle("text-white", isActive);
+          link.classList.toggle("dark:text-black", isActive);
+          indicator?.classList.toggle("opacity-100", isActive);
+          indicator?.classList.toggle("bg-neutral-900", isActive);
+          indicator?.classList.toggle("dark:bg-white", isActive);
+          icon?.classList.toggle("text-white", isActive);
+          icon?.classList.toggle("dark:text-black", isActive);
+          label?.classList.toggle("text-white", isActive);
+          label?.classList.toggle("dark:text-black", isActive);
+
+          if (!isActive) {
+            icon?.classList.add("text-neutral-600", "dark:text-neutral-400");
+            label?.classList.add("text-neutral-600", "dark:text-neutral-400");
+          } else {
+            icon?.classList.remove("text-neutral-600", "dark:text-neutral-400");
+            label?.classList.remove("text-neutral-600", "dark:text-neutral-400");
+          }
+        });
+      };
+
+      const updateActiveSection = () => {
+        const offset = 150;
+        const scrollPosition = window.scrollY + offset;
+        let activeId = "";
+
+        for (let index = sectionIds.length - 1; index >= 0; index -= 1) {
+          const id = sectionIds[index];
+          const section = id ? document.getElementById(id) : null;
+          if (section && scrollPosition >= section.offsetTop) {
+            activeId = id;
+            break;
+          }
+        }
+
+        if (window.scrollY < 100) {
+          activeId = "";
+        }
+
+        setActiveSection(activeId);
+
+        const currentHash = window.location.hash.replace("#", "");
+        if (activeId && currentHash !== activeId) {
+          window.history.replaceState(null, "", `${window.location.pathname}#${activeId}`);
+        }
+        if (!activeId && window.location.hash) {
+          window.history.replaceState(null, "", window.location.pathname);
+        }
+
+        ticking = false;
+      };
+
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(updateActiveSection);
+      };
+
+      links.forEach((link) => {
+        link.addEventListener("click", () => {
+          const targetId = link.getAttribute("data-target");
+          const section = targetId ? document.getElementById(targetId) : null;
+          if (!section) return;
+
+          const offset = 80;
+          const top = section.offsetTop - offset;
+          window.scrollTo({ top, behavior: "smooth" });
+        });
+      });
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      updateActiveSection();
+    });
+</script>

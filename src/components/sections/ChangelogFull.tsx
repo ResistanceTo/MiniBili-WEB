@@ -1,18 +1,7 @@
 import { type ChangelogProps, type ChangelogEntry, AppPlatform } from "config";
-import { memo, useState, useMemo } from "react";
+import { memo, useMemo, useState } from "react";
 import { FiClock, FiPackage, FiStar, FiTrendingUp, FiTool, FiMonitor, FiSmartphone, FiTv, FiWatch, FiTarget } from "react-icons/fi";
 import { motion } from "framer-motion";
-
-const getUpdateIcon = (type: "feature" | "improvement" | "bugfix") => {
-	switch (type) {
-		case "feature":
-			return FiStar;
-		case "improvement":
-			return FiTrendingUp;
-		case "bugfix":
-			return FiTool;
-	}
-};
 
 const getUpdateLabel = (type: "feature" | "improvement" | "bugfix") => {
 	switch (type) {
@@ -71,35 +60,30 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 
 				<div className="flex items-center p-1 rounded-xl bg-gray-100 dark:bg-white/[0.05] border border-gray-200 dark:border-white/10 self-start md:self-auto overflow-x-auto overflow-y-hidden max-w-full scrollbar-hide">
 					<PlatformTab
-						platform={AppPlatform.iOS}
 						label="iOS"
 						icon={FiSmartphone}
 						isActive={activePlatform === AppPlatform.iOS}
 						onClick={() => setActivePlatform(AppPlatform.iOS)}
 					/>
 					<PlatformTab
-						platform={AppPlatform.macOS}
 						label="macOS"
 						icon={FiMonitor}
 						isActive={activePlatform === AppPlatform.macOS}
 						onClick={() => setActivePlatform(AppPlatform.macOS)}
 					/>
 					<PlatformTab
-						platform={AppPlatform.tvOS}
 						label="tvOS"
 						icon={FiTv}
 						isActive={activePlatform === AppPlatform.tvOS}
 						onClick={() => setActivePlatform(AppPlatform.tvOS)}
 					/>
 					<PlatformTab
-						platform={AppPlatform.watchOS}
 						label="watchOS"
 						icon={FiWatch}
 						isActive={activePlatform === AppPlatform.watchOS}
 						onClick={() => setActivePlatform(AppPlatform.watchOS)}
 					/>
 					<PlatformTab
-						platform={AppPlatform.visionOS}
 						label="visionOS"
 						icon={FiTarget}
 						isActive={activePlatform === AppPlatform.visionOS}
@@ -213,8 +197,7 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 	);
 };
 
-const PlatformTab = ({ platform, label, icon: Icon, isActive, onClick }: {
-	platform: AppPlatform;
+const PlatformTab = ({ label, icon: Icon, isActive, onClick }: {
 	label: string;
 	icon: any;
 	isActive: boolean;
