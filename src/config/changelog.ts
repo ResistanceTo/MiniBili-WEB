@@ -3,6 +3,27 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 64,
+		date: "2026-03-16",
+		updates: {
+			feature: [
+				"支持音质切换",
+				"支持稍后再看自动连播（只支持普通视频，暂时不包含番剧）",
+			],
+			improvement: [
+				"优化设置页的UI和交互",
+				"优化直播列表的卡片样式",
+				"音量和视频手势调节指示器使用液态玻璃样式",
+				"加快视频的格式转换",
+			],
+			bugfix: [
+				"修复了部分视频无法加载的问题",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 63,
 		date: "2026-03-13",
 		updates: {
