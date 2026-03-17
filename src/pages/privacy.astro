@@ -6,7 +6,7 @@ import { marked } from "marked";
 
 import privacyContent from "../data/legal/privacy.md?raw";
 
-const htmlContent = marked(privacyContent);
+const htmlContent = marked.parse(privacyContent) as string;
 ---
 
 <Layout

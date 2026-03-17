@@ -154,6 +154,7 @@ const TreeNode = ({ node, isLast, prefix, collapsedNodes, onToggleCollapse, node
 						onClick={() => onToggleCollapse(nodePath)}
 						className="flex-shrink-0 mt-0.5 hover:bg-gray-100 dark:hover:bg-white/5 rounded p-0.5 transition-colors"
 						aria-label={isCollapsed ? "展开" : "折叠"}
+						aria-expanded={!isCollapsed}
 					>
 						{isCollapsed ? (
 							<FiChevronRight className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
@@ -301,7 +302,7 @@ const RoadmapFull = ({ items }: RoadmapProps) => {
 			{/* 树形待办清单 */}
 			<div className="rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.02] p-5">
 				{filteredItems.length > 0 ? (
-					<div className="font-mono text-sm">
+						<div className="font-mono text-sm [font-family:ui-monospace,SFMono-Regular,Menlo,monospace,system-ui] [unicode-range:U+0000-00FF] leading-relaxed">
 						{filteredItems.map((node, idx) => (
 							<TreeNode
 								key={idx}

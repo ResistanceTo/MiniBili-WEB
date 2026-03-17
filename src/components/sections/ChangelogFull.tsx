@@ -1,4 +1,5 @@
 import { type ChangelogProps, type ChangelogEntry, AppPlatform } from "config";
+import type { IconType } from "react-icons";
 import { memo, useMemo, useState } from "react";
 import { FiClock, FiPackage, FiStar, FiTrendingUp, FiTool, FiMonitor, FiSmartphone, FiTv, FiWatch, FiTarget } from "react-icons/fi";
 import { motion } from "framer-motion";
@@ -29,7 +30,7 @@ const renderChangelogItem = (item: string | ChangelogEntry, idx: number) => {
 							src={imgPath}
 							alt={`${text} - ${imgIdx + 1}`}
 							className="rounded-lg border border-gray-200 dark:border-white/10 cursor-pointer hover:opacity-90 transition-opacity"
-							onClick={() => window.open(imgPath, "_blank")}
+							onClick={() => window.open(imgPath, "_blank", "noopener,noreferrer")}
 						/>
 					))}
 				</div>
@@ -199,12 +200,14 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 
 const PlatformTab = ({ label, icon: Icon, isActive, onClick }: {
 	label: string;
-	icon: any;
+	icon: IconType;
 	isActive: boolean;
 	onClick: () => void;
 }) => (
 	<button
+		type="button"
 		onClick={onClick}
+		aria-pressed={isActive}
 		className={`relative flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 whitespace-nowrap flex-shrink-0 ${isActive
 			? "text-gray-900 dark:text-white"
 			: "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"

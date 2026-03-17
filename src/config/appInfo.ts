@@ -5,7 +5,7 @@ export const appInfo = {
 	description:
 		"支持iOS、iPadOS、watchOS、macOS（tvOS、visionOS）",
 	logo: {
-		src: "MiniBili.png",
+		src: "/MiniBili.png",
 	},
 	storeLinks: {
 		ios: "https://testflight.apple.com/join/TgcHSGwb",

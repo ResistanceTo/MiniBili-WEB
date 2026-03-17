@@ -6,7 +6,7 @@ import { marked } from "marked";
 
 import termsContent from "../data/legal/terms.md?raw";
 
-const htmlContent = marked(termsContent);
+const htmlContent = marked.parse(termsContent) as string;
 ---
 
 <Layout

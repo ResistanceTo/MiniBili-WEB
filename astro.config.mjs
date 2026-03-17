@@ -11,6 +11,18 @@ export default defineConfig({
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,
+      serialize(item) {
+        if (item.url === 'https://minibili.zhaohe.org/') {
+          return { ...item, priority: 1.0, changefreq: 'daily' };
+        }
+        if (item.url.includes('/changelog')) {
+          return { ...item, priority: 0.8 };
+        }
+        if (item.url.includes('/roadmap')) {
+          return { ...item, priority: 0.6 };
+        }
+        return { ...item, priority: 0.5 };
+      },
     }),
   ],
   vite: {
@@ -18,8 +30,7 @@ export default defineConfig({
       rollupOptions: {
         output: {
           manualChunks: {
-            // 将 React Icons 单独打包，便于缓存
-            'react-icons': ['react-icons/ri', 'react-icons/fa'],
+            'react-icons': ['react-icons/ri', 'react-icons/fa', 'react-icons/tb', 'react-icons/fi'],
           }
         }
       }

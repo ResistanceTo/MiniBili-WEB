@@ -6,10 +6,12 @@ interface Props {
   contactEmail?: string;
 }
 
+const siteBase = Astro.site?.href.replace(/\/$/, '') ?? 'https://minibili.zhaohe.org';
+
 const {
   name = "MiniBili",
-  url = "https://minibili.zhaohe.org",
-  logo = "https://minibili.zhaohe.org/MiniBili.png",
+  url = siteBase,
+  logo = `${siteBase}/MiniBili.png`,
   contactEmail = "me@zhaohe.org"
 } = Astro.props;
 

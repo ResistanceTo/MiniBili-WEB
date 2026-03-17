@@ -35,4 +35,13 @@ const { items } = Astro.props as FAQProps;
   summary::-webkit-details-marker {
     display: none;
   }
+
+  @keyframes faq-reveal {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  details[open] > div {
+    animation: faq-reveal 0.2s ease forwards;
+  }
 </style>

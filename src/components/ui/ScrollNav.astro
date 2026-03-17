@@ -40,6 +40,7 @@ const sections = [
       const links = Array.from(nav.querySelectorAll("[data-scroll-nav-link]"));
       const sectionIds = links.map((link) => link.getAttribute("data-target")).filter(Boolean);
       let ticking = false;
+      let hashUpdateTimer = null;
 
       const setActiveSection = (activeId) => {
         links.forEach((link) => {
@@ -90,13 +91,16 @@ const sections = [
 
         setActiveSection(activeId);
 
-        const currentHash = window.location.hash.replace("#", "");
-        if (activeId && currentHash !== activeId) {
-          window.history.replaceState(null, "", `${window.location.pathname}#${activeId}`);
-        }
-        if (!activeId && window.location.hash) {
-          window.history.replaceState(null, "", window.location.pathname);
-        }
+        clearTimeout(hashUpdateTimer);
+        hashUpdateTimer = setTimeout(() => {
+          const currentHash = window.location.hash.replace("#", "");
+          if (activeId && currentHash !== activeId) {
+            window.history.replaceState(null, "", `${window.location.pathname}#${activeId}`);
+          }
+          if (!activeId && window.location.hash) {
+            window.history.replaceState(null, "", window.location.pathname);
+          }
+        }, 200);
 
         ticking = false;
       };

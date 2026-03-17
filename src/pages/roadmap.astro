@@ -6,9 +6,10 @@ import BreadcrumbSchema from "@components/seo/BreadcrumbSchema.astro";
 import Layout from "@layouts/Layout.astro";
 import { roadmap } from "../config/roadmap";
 
+const siteBase = Astro.site?.href ?? 'https://minibili.zhaohe.org/';
 const breadcrumbItems = [
-  { name: "首页", url: "https://minibili.zhaohe.org/" },
-  { name: "开发路线图", url: "https://minibili.zhaohe.org/roadmap/" }
+  { name: "首页", url: siteBase },
+  { name: "开发路线图", url: `${siteBase}roadmap/` }
 ];
 ---
 
@@ -18,7 +19,7 @@ const breadcrumbItems = [
 >
   <main class="min-h-screen max-w-3xl mx-auto px-4 py-8">
     <Breadcrumbs items={[{ label: "开发路线图" }]} />
-    <RoadmapFull items={roadmap} client:load />
+    <RoadmapFull items={roadmap} client:idle />
   </main>
   <BackToTop />
 </Layout>

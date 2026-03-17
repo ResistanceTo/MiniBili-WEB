@@ -32,13 +32,10 @@ const platforms = [
       <p class="mx-auto mb-4 max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-400 md:mx-0">
         {description}
       </p>
-      <p class="mx-auto mb-6 max-w-2xl text-sm text-gray-500 dark:text-gray-400 md:mx-0">
-        支持 iPhone、iPad、Apple Watch 和 Mac，提供轻量、无广告、无跟踪器的哔哩哔哩浏览体验。
-      </p>
     </div>
 
     <div class="flex flex-wrap items-center justify-center gap-3 md:justify-start">
-      <details class="group relative">
+      <details class="group relative" data-auto-close>
         <summary class="flex cursor-pointer list-none items-center gap-3 rounded-xl border border-gray-300 bg-white pl-3 pr-4 py-3 text-gray-900 shadow-md transition-all duration-300 hover:bg-gray-50 hover:border-gray-400 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:hover:bg-white/[0.08] dark:hover:border-white/20">
           <img src="/TestFlight.png" alt="" class="h-10 w-10 rounded-lg" />
           <div class="flex flex-col items-start">
@@ -86,3 +83,11 @@ const platforms = [
     display: none;
   }
 </style>
+
+<script is:inline>
+  document.addEventListener('click', (e) => {
+    document.querySelectorAll('details[data-auto-close]').forEach((d) => {
+      if (!d.contains(e.target)) d.removeAttribute('open');
+    });
+  });
+</script>

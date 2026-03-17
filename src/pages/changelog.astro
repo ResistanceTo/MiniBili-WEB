@@ -6,9 +6,10 @@ import BreadcrumbSchema from "@components/seo/BreadcrumbSchema.astro";
 import Layout from "@layouts/Layout.astro";
 import { changelog } from "../config/changelog";
 
+const siteBase = Astro.site?.href ?? 'https://minibili.zhaohe.org/';
 const breadcrumbItems = [
-  { name: "首页", url: "https://minibili.zhaohe.org/" },
-  { name: "更新日志", url: "https://minibili.zhaohe.org/changelog/" }
+  { name: "首页", url: siteBase },
+  { name: "更新日志", url: `${siteBase}changelog/` }
 ];
 ---
 
@@ -18,7 +19,7 @@ const breadcrumbItems = [
 >
   <main class="min-h-screen max-w-3xl mx-auto px-4 py-8">
     <Breadcrumbs items={[{ label: "更新日志" }]} />
-    <ChangelogFull items={changelog} client:load />
+    <ChangelogFull items={changelog} client:idle />
   </main>
   <BackToTop />
 </Layout>

@@ -1,6 +1,6 @@
 {
-	"name": "landing.bohd4n.dev",
-	"version": "2025.2.3",
+	"name": "minibili-web",
+	"version": "2026.3.17",
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",

@@ -92,13 +92,16 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 	useEffect(() => {
 		if (lightboxIndex === null) {
 			document.documentElement.style.overflow = "";
+			document.body.style.overflow = "";
 			return;
 		}
 
 		document.documentElement.style.overflow = "hidden";
+		document.body.style.overflow = "hidden";
 
 		return () => {
 			document.documentElement.style.overflow = "";
+			document.body.style.overflow = "";
 		};
 	}, [lightboxIndex]);
 
@@ -243,7 +246,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 										<motion.div
 											key={media.src}
 											initial={{ opacity: 0, y: 20 }}
-											animate={{ opacity: 1, y: 0, transition: { delay: index * 0.1 } }}
+											animate={{ opacity: 1, y: 0, transition: { delay: Math.min(index * 0.05, 0.3) } }}
 											exit={{ opacity: 0, y: 20 }}
 											className="group relative flex-shrink-0 overflow-hidden rounded-xl"
 										>
@@ -324,6 +327,9 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
+						role="dialog"
+						aria-modal="true"
+						aria-label={`MiniBili ${deviceLabel} 截图预览，第 ${(lightboxIndex ?? 0) + 1} 张，共 ${currentImages.length} 张`}
 						className="fixed inset-0 z-50 flex items-center justify-center bg-white/70 backdrop-blur-md dark:bg-black/70"
 						onClick={closeLightbox}
 					>
