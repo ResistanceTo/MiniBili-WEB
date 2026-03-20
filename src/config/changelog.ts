@@ -3,6 +3,23 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 65,
+		date: "2026-03-20",
+		updates: {
+			feature: [
+				"番剧添加弹幕",
+			],
+			improvement: [
+				"优化普通视频和番剧的播放器",
+				"修复全屏幕状态下手势失效的问题",
+				"发评论和弹幕的窗口使用液态玻璃",
+				"处理了评论区中的图片排列异常问题",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 64,
 		date: "2026-03-16",
 		updates: {
