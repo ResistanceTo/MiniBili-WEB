@@ -1,14 +1,11 @@
-# 默认响应头（针对宣传网站优化）
+# 默认响应头
 /*
-  # 隐私保护：禁止 Google FLoC 跟踪
   Permissions-Policy: interest-cohort=()
-
-# HTML 文件 - 不缓存 + 安全头
-/*.html
-  Cache-Control: public, max-age=0, must-revalidate
   X-Content-Type-Options: nosniff
-  X-XSS-Protection: 1; mode=block
-  Referrer-Policy: no-referrer-when-downgrade
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; media-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'
+  Cache-Control: public, max-age=0, must-revalidate
 
 # 静态资源 - 长期缓存
 /assets/*
@@ -16,11 +13,8 @@
 
 # 截图资源（图片/视频）— 针对 /screenshots/* 的专属规则
 /screenshots/*
-  # 允许跨域静态获取（如 iframe/外链展示），同源访问不受影响
   Access-Control-Allow-Origin: *
   X-Content-Type-Options: nosniff
-
-  # 针对目录内所有静态文件的通用缓存（被下面按扩展名的更具体规则覆盖）
   Cache-Control: public, max-age=604800
 
 # 图片文件 - 中期缓存
@@ -42,7 +36,6 @@
 # 视频文件 - 长期缓存
 /*.mp4
   Cache-Control: public, max-age=2592000, must-revalidate
-  # 提示浏览器支持按字节范围请求，改善拖动与预加载体验
   Accept-Ranges: bytes
 
 /*.webm

@@ -17,11 +17,10 @@ const breadcrumbItems = [
   title="MiniBili 开发路线图 - iOS哔哩哔哩第三方客户端功能规划"
   description="MiniBili 开发路线图 - 查看已完成、开发中和计划中的功能"
 >
+  <BreadcrumbSchema items={breadcrumbItems} slot="head" />
   <main class="min-h-screen max-w-3xl mx-auto px-4 py-8">
     <Breadcrumbs items={[{ label: "开发路线图" }]} />
     <RoadmapFull items={roadmap} client:idle />
   </main>
   <BackToTop />
 </Layout>
-
-<BreadcrumbSchema items={breadcrumbItems} />

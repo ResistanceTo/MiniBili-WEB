@@ -12,7 +12,7 @@ const {
   title,
   description,
   url,
-  image = '/MiniBili.png'
+  image = type === 'mobileApplication' ? '/screenshots/iphone/home.webp' : '/og_image.png'
 } = Astro.props;
 const imageUrl = image.startsWith("http") ? image : new URL(image, url).href;
 

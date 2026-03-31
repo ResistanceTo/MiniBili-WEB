@@ -17,11 +17,10 @@ const breadcrumbItems = [
   title="MiniBili 更新日志"
   description="查看 MiniBili 的所有版本更新记录，包括新功能、改进和问题修复"
 >
+  <BreadcrumbSchema items={breadcrumbItems} slot="head" />
   <main class="min-h-screen max-w-3xl mx-auto px-4 py-8">
     <Breadcrumbs items={[{ label: "更新日志" }]} />
     <ChangelogFull items={changelog} client:idle />
   </main>
   <BackToTop />
 </Layout>
-
-<BreadcrumbSchema items={breadcrumbItems} />

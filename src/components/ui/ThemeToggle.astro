@@ -9,6 +9,8 @@ const themes = [
 <div
   class="flex items-center rounded-lg border border-gray-300 bg-gray-200/80 p-1 shadow-sm dark:border-white/10 dark:bg-white/[0.03]"
   data-theme-toggle
+  role="group"
+  aria-label="主题切换"
 >
   {themes.map(({ key, label, icon }) => (
     <button
@@ -18,6 +20,7 @@ const themes = [
       data-theme={key}
       title={label}
       aria-label={`切换到${label}主题`}
+      aria-pressed="false"
     >
       <span class="pointer-events-none absolute inset-0 rounded-md border border-transparent"></span>
       {icon === "sun" && (
@@ -48,78 +51,6 @@ const themes = [
     </button>
   ))}
 </div>
-
-<script is:inline>
-  const themeStorageKey = "theme";
-
-  const applyTheme = (theme) => {
-    const root = document.documentElement;
-    root.classList.remove("light", "dark");
-
-    if (theme === "system") {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      root.classList.add(prefersDark ? "dark" : "light");
-      return;
-    }
-
-    root.classList.add(theme);
-  };
-
-  const syncThemeButtons = (theme) => {
-    document.querySelectorAll("[data-theme-toggle]").forEach((toggle) => {
-      toggle.querySelectorAll("[data-theme-option]").forEach((button) => {
-        const isActive = button.getAttribute("data-theme") === theme;
-        button.classList.toggle("text-gray-900", isActive);
-        button.classList.toggle("dark:text-white", isActive);
-        button.classList.toggle("text-gray-600", !isActive);
-        button.classList.toggle("dark:text-white/60", !isActive);
-
-        const indicator = button.firstElementChild;
-        indicator?.classList.toggle("bg-white", isActive);
-        indicator?.classList.toggle("dark:bg-white/10", isActive);
-        indicator?.classList.toggle("shadow-sm", isActive);
-        indicator?.classList.toggle("border-gray-300/60", isActive);
-        indicator?.classList.toggle("dark:border-white/5", isActive);
-      });
-    });
-  };
-
-  const getSavedTheme = () => localStorage.getItem(themeStorageKey) || "system";
-
-  const initThemeToggles = () => {
-    const savedTheme = getSavedTheme();
-    applyTheme(savedTheme);
-    syncThemeButtons(savedTheme);
-
-    document
-      .querySelectorAll("[data-theme-toggle]:not([data-theme-toggle-bound])")
-      .forEach((toggle) => {
-        toggle.setAttribute("data-theme-toggle-bound", "true");
-        toggle.querySelectorAll("[data-theme-option]").forEach((button) => {
-          button.addEventListener("click", () => {
-            const nextTheme = button.getAttribute("data-theme") || "system";
-            localStorage.setItem(themeStorageKey, nextTheme);
-            applyTheme(nextTheme);
-            syncThemeButtons(nextTheme);
-          });
-        });
-      });
-  };
-
-  if (!window.__minibiliThemeListenerBound) {
-    window.__minibiliThemeListenerBound = true;
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", () => {
-        if (getSavedTheme() === "system") {
-          applyTheme("system");
-          syncThemeButtons("system");
-        }
-      });
-  }
-
-  initThemeToggles();
-</script>
 
 <style>
   .theme-toggle-button:active {
