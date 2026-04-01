@@ -2,6 +2,17 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 
 export const changelog: ChangelogVersion[] = [
 	{
+		version: "公测版",
+		build: 6,
+		date: "2026-04-01",
+		updates: {
+			improvement: [
+				"使用iOS版的内核",
+			],
+		},
+		platforms: [AppPlatform.watchOS],
+	},
+	{
 		version: "先行版",
 		build: 66,
 		date: "2026-04-01",
