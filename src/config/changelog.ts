@@ -2,6 +2,20 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 
 export const changelog: ChangelogVersion[] = [
 	{
+		version: "先行版",
+		build: 66,
+		date: "2026-04-01",
+		updates: {
+			improvement: [
+				"视频页的操作菜单，将复制相关的能力收拢为二级菜单",
+			],
+			bugfix: [
+				"修复了部分国创的动漫不能播放的问题"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
 		version: "公测版",
 		build: 65,
 		date: "2026-04-01",
