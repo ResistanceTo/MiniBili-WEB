@@ -2,6 +2,18 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 
 export const changelog: ChangelogVersion[] = [
 	{
+		version: "先行版",
+		build: 67,
+		date: "2026-04-02",
+		updates: {
+			improvement: [
+				"支持视频缓存",
+				"支持将缓存的视频导出到图库",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
 		version: "公测版",
 		build: 6,
 		date: "2026-04-01",
