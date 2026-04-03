@@ -3,6 +3,22 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 70,
+		date: "2026-04-04",
+		updates: {
+			feature: [
+				"直播页接入评论",
+				"首页和动态页支持左右滑动切换（容易误触）",
+			],
+			improvement: [
+				"动态页的交互改版",
+				"去掉动态页中的推广卡片",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 69,
 		date: "2026-04-03",
 		updates: {
