@@ -3,6 +3,26 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 71,
+		date: "2026-04-06",
+		title: "这将是真正的、全面的液态玻璃版本了！",
+		updates: {
+			feature: [
+				{
+					text: "全面升级的液态玻璃！",
+					images: ["/log/71-热门.webp", "/log/71-动态.webp"]
+				},
+				"评论区整体结构优化，使用卡片模式",
+				"“我的”菜单添加头像（参考GitHub）",
+			],
+			improvement: [
+				"动态页去掉预览区的评论",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 70,
 		date: "2026-04-04",
 		updates: {
