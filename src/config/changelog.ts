@@ -3,6 +3,20 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 72,
+		date: "2026-04-07",
+		updates: {
+			improvement: [
+				"添加无玻璃样式",
+			],
+			bugfix: [
+				"修复动态顶部的UP主区域会意外响应手势的问题",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 71,
 		date: "2026-04-06",
 		title: "这将是真正的、全面的液态玻璃版本了！",
