@@ -3,6 +3,19 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 73,
+		date: "2026-04-08",
+		updates: {
+			improvement: [
+				"支持明亮模式和黑暗模式设置各自的壁纸",
+				"评论区支持下拉刷新",
+				"优化弹幕播放的性能",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 72,
 		date: "2026-04-07",
 		updates: {
