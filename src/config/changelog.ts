@@ -3,6 +3,17 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 74,
+		date: "2026-04-09",
+		updates: {
+			improvement: [
+				"固化评论区表情，防止界面切换时闪烁",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 73,
 		date: "2026-04-08",
 		updates: {
