@@ -3,6 +3,17 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 76,
+		date: "2026-04-10",
+		updates: {
+			improvement: [
+				"首页、搜索、历史记录等页面，添加视频页返回列表页时的动画",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 75,
 		date: "2026-04-10",
 		updates: {
