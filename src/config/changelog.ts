@@ -3,6 +3,17 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 75,
+		date: "2026-04-10",
+		updates: {
+			bugfix: [
+				"修复视频退出全屏后，顶部工具栏位移的问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 74,
 		date: "2026-04-09",
 		updates: {
