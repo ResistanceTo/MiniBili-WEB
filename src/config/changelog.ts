@@ -3,6 +3,26 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 78,
+		date: "2026-04-13",
+		updates: {
+			feature: [
+				{
+					text: "【双列模式下】iPhone和iPad横屏时，视频列表自适应列表布局。",
+					images: ["/log/78-首页.webp"]
+				}
+			],
+			improvement: [
+				"弹幕播放优化性能",
+			],
+			bugfix: [
+				"修复视频页操作过快可能导致的播放器状态异常问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 77,
 		date: "2026-04-12",
 		updates: {
