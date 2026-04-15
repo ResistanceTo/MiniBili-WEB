@@ -3,6 +3,19 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 79,
+		date: "2026-04-15",
+		updates: {
+			improvement: [
+				"动态详情始终加载评论区",
+				"首页、分区、收藏列表补充滑动动画",
+				"番剧、直播兼容多列模式",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 78,
 		date: "2026-04-13",
 		updates: {
