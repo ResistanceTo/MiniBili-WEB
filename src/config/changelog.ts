@@ -2,6 +2,19 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 
 export const changelog: ChangelogVersion[] = [
 	{
+		version: "公测版",
+		build: 4,
+		date: "2026-04-15",
+		updates: {
+			improvement: [
+				"对接新版 MiniBili 内核",
+				"视频详情页使用更合理的布局，展示更多信息",
+				"首页、关注页布局优化",
+			],
+		},
+		platforms: [AppPlatform.macOS],
+	},
+	{
 		version: "先行版",
 		build: 79,
 		date: "2026-04-15",
