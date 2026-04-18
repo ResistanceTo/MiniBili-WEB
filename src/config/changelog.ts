@@ -2,6 +2,18 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 
 export const changelog: ChangelogVersion[] = [
 	{
+		version: "先行版",
+		build: 80,
+		date: "2026-04-18",
+		updates: {
+			improvement: [
+				"设置页优化布局和交互",
+				"固定评论区行高，防止图片和文字混合显示时的行高异常问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
 		version: "公测版",
 		build: 4,
 		date: "2026-04-15",
