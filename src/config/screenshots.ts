@@ -20,7 +20,7 @@ export const screenshots: DeviceScreenshots = {
 		"/screenshots/iphone/DynamicList_new.webp",
 		"/screenshots/iphone/Category_new.webp",
 		"/screenshots/iphone/search_new.webp",
-		"/screenshots/iphone/up.webp",
+		"/screenshots/iphone/up_new.webp",
 		"/screenshots/iphone/settings.webp",
 		"/screenshots/iphone/about.webp",
 	],

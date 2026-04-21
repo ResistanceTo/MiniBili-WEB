@@ -3,6 +3,20 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 81,
+		date: "2026-04-21",
+		updates: {
+			feature: [
+				{
+					text: "UP主个人空间更新",
+					images: ["/log/81-UP.webp"]
+				}
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 80,
 		date: "2026-04-18",
 		updates: {
