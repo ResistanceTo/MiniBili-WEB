@@ -2,6 +2,20 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 
 export const changelog: ChangelogVersion[] = [
 	{
+		version: "先行版",
+		build: 85,
+		date: "2026-05-03",
+		updates: {
+			feature: [
+				"添加观影模式，使用全新的播放器实现（现阶段仅番剧使用）"
+			],
+			improvement: [
+				"UP主个人空间UI优化",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
 		version: "公测版",
 		build: 84,
 		date: "2026-05-03",
