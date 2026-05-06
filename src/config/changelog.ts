@@ -3,6 +3,19 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 86,
+		date: "2026-05-06",
+		updates: {
+			bugfix: [
+				"修复部分UP主动态的图片不显示问题",
+				"修复点击首页或我的菜单时可能崩溃的问题",
+				"修复部分资源占用过高问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 85,
 		date: "2026-05-03",
 		updates: {
