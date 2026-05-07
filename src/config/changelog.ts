@@ -3,6 +3,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 87,
+		date: "2026-05-07",
+		updates: {
+			improvement: [
+				"UP主个人空间的动态添加发布时间显示",
+				"全局背景图片支持单独设置显示或隐藏",
+			],
+			bugfix: [
+				"修复评论区无法点击链接跳转的问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 86,
 		date: "2026-05-06",
 		updates: {
