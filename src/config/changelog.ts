@@ -3,6 +3,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 88,
+		date: "2026-05-08",
+		updates: {
+			improvement: [
+				"支持灵动岛显示视频信息和控制播放",
+				"添加默认夜间模式壁纸",
+			],
+			bugfix: [
+				"修复媒体播放器不显示标题和作者信息的问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 87,
 		date: "2026-05-07",
 		updates: {
