@@ -3,6 +3,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 90,
+		date: "2026-05-10",
+		updates: {
+			improvement: [
+				"普通视频兼容观影模式",
+				"充电视频做正确提示",
+			],
+			bugfix: [
+				"修复竖屏视频点击全屏变成横屏的问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 89,
 		date: "2026-05-08",
 		updates: {
