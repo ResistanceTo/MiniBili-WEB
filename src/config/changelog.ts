@@ -3,6 +3,22 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 93,
+		date: "2026-05-14",
+		updates: {
+			feature: [
+				"支持短信登录",
+			],
+			improvement: [
+				"可以在设置中关闭私信红点",
+				"添加一件清理未读消息功能",
+				"真正的App推荐流（需要退出并用短信重新登录）",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 92,
 		date: "2026-05-13",
 		updates: {
