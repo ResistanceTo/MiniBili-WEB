@@ -3,6 +3,20 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 92,
+		date: "2026-05-13",
+		updates: {
+			improvement: [
+				"优化私信相关交互和页面",
+			],
+			bugfix: [
+				"修复空降助手不生效的问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 91,
 		date: "2026-05-12",
 		updates: {
