@@ -3,6 +3,20 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 96,
+		date: "2026-05-18",
+		updates: {
+			improvement: [
+				"视频页按照屏幕大小兼容显示（iPad也有）",
+				"视频页支持收起视频区域，专注查看评论",
+				"视频页背景图优化",
+				"持续优化App端推荐",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 95,
 		date: "2026-05-16",
 		updates: {
@@ -11,6 +25,7 @@ export const changelog: ChangelogVersion[] = [
 				"支持单击图片退出预览",
 				"添加崩溃日志收集",
 				"音量调节使用系统的UI",
+				"视频播放完毕更新历史记录",
 			],
 		},
 		platforms: [AppPlatform.iOS],
