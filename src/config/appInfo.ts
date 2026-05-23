@@ -13,7 +13,7 @@ export const appInfo = {
 		macos: "https://testflight.apple.com/join/k9xD3Vqh",
 	} as StoreLinks,
 	announcement: {
-		message: "每月初发布公测版本，月中或月初清理不活跃测试员。",
+		message: "每月初发布公测版本，月中或月初清理不活跃测试员。独立的watchOS应用将不再更新，合并到iOS版本中。",
 		type: "success" as const,
 		dismissible: true,
 		show: true,
