@@ -3,6 +3,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 107,
+		date: "2026-05-26",
+		updates: {
+			improvement: [
+				"支持自定义底栏菜单",
+				"直播根据视频源规格判断放大后的横屏或竖屏显示",
+				"弹幕快进快退优化",
+				"竖屏视频弹幕不会再突破灵动岛区域",
+				"升级图片加载库到最新版本，优化性能和修复一些问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 97,
 		date: "2026-05-21",
 		updates: {
