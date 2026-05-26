@@ -1,6 +1,6 @@
 ---
 interface Props {
-  message: string;
+  message: string | string[];
   type?: "warning" | "info" | "success";
   dismissible?: boolean;
   show?: boolean;
@@ -14,6 +14,14 @@ const {
 } = Astro.props as Props;
 
 if (!show || !message) {
+  return;
+}
+
+const messageLines = (Array.isArray(message) ? message : message.split(/\r?\n/))
+  .map((line) => line.trim())
+  .filter(Boolean);
+
+if (messageLines.length === 0) {
   return;
 }
 
@@ -38,7 +46,7 @@ const typeStyles = {
   },
 }[type];
 
-const dismissKey = `announcement:${message}`;
+const dismissKey = `announcement:${messageLines.join("\n")}`;
 ---
 
 <div
@@ -52,9 +60,11 @@ const dismissKey = `announcement:${message}`;
 >
   <div class="flex items-start gap-3">
     <div class="flex-1">
-      <p class:list={["text-sm font-medium leading-relaxed", typeStyles.text]}>
-        {message}
-      </p>
+      <div class:list={["space-y-1 text-sm font-medium leading-relaxed", typeStyles.text]}>
+        {messageLines.map((line) => (
+          <p>{line}</p>
+        ))}
+      </div>
     </div>
     {dismissible && (
       <button

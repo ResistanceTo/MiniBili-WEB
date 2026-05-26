@@ -54,7 +54,7 @@ export interface AppLogo {
 }
 
 export interface Announcement {
-	message: string;
+	message: string | string[];
 	type?: "warning" | "info" | "success";
 	dismissible?: boolean;
 	show?: boolean;
