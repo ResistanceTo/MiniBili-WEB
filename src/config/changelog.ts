@@ -3,6 +3,18 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 108,
+		date: "2026-05-27",
+		updates: {
+			improvement: [
+				"支持关闭底部Tab菜单",
+				"优化多个页面视频卡片样式，优化多个页面的性能",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 107,
 		date: "2026-05-26",
 		updates: {
