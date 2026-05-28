@@ -3,6 +3,17 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 109,
+		date: "2026-05-28",
+		updates: {
+			bugfix: [
+				"修复了设定关闭底部菜单，重启后会有页面占位的问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 108,
 		date: "2026-05-27",
 		updates: {
