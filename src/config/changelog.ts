@@ -3,6 +3,18 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 111,
+		date: "2026-06-02",
+		updates: {
+			improvement: [
+				"动态菜单顶部UP区域交互修改",
+				"UP个人空间添加合集",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 110,
 		date: "2026-05-31",
 		title: "由于某些原因，此版本之后不会再支持缓存视频导出到图库",
