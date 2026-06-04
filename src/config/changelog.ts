@@ -3,7 +3,7 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
-		build: 114,
+		build: 115,
 		date: "2026-06-04",
 		updates: {
 			improvement: [
