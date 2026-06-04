@@ -3,6 +3,46 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 114,
+		date: "2026-06-04",
+		updates: {
+			improvement: [
+				"'最常访问'区域支持顶部或左侧显示",
+				"优化评论区多页性能"
+			],
+			bugfix: [
+				"修复'最常访问'区域消失的问题"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
+		build: 113,
+		date: "2026-06-03",
+		updates: {
+			improvement: [
+				"修复部分视频显示证书异常无法播放的问题"
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
+		build: 112,
+		date: "2026-06-03",
+		updates: {
+			improvement: [
+				"可以设置固定动态页的顶部UP栏"
+			],
+			bugfix: [
+				"修复手势调节音量会从0开始的问题"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 111,
 		date: "2026-06-02",
 		updates: {
