@@ -3,6 +3,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 117,
+		date: "2026-06-06",
+		updates: {
+			improvement: [
+				"加速格式转换，首帧播放更快"
+			],
+			bugfix: [
+				"修复空降助手生效后自动暂停的问题",
+				"修复视频拖动进度条偶发状态不同步的问题"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 116,
 		date: "2026-06-05",
 		updates: {
