@@ -3,6 +3,24 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 118,
+		date: "2026-06-07",
+		updates: {
+			improvement: [
+				"动态页的最常访问区域纵向时使用圆角矩形",
+				"动态页中的直播卡片跳转到MiniBili直播间",
+				"动态页卡片字体自适应大小",
+				"直播间取流算法优化",
+				"添加搜索联想词和热搜",
+			],
+			bugfix: [
+				"修复最常访问，如果一个UP同时有直播和有动态异常显示的问题"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 117,
 		date: "2026-06-06",
 		updates: {
