@@ -7,6 +7,23 @@ export const changelog: ChangelogVersion[] = [
 		date: "2026-06-07",
 		updates: {
 			improvement: [
+				"直播间清晰度取流优化",
+				"直播间添加更新元信息显示",
+				"直播间优先HEVC编码视频源",
+				"直播间优化iPad下的样式"
+			],
+			bugfix: [
+				"修复无玻璃样式下，动态页的最常访问区域异常UI的问题"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
+		build: 118,
+		date: "2026-06-07",
+		updates: {
+			improvement: [
 				"动态页的最常访问区域纵向时使用圆角矩形",
 				"动态页中的直播卡片跳转到MiniBili直播间",
 				"动态页卡片字体自适应大小",
