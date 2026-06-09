@@ -3,8 +3,40 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
-		build: 118,
-		date: "2026-06-07",
+		build: 122,
+		date: "2026-06-09",
+		updates: {
+			improvement: [
+				"iOS27去掉底部搜索栏，改用顶部搜索",
+				"iOS27修复兼容分割搜索按钮",
+				"在搜索界面再次点击底部搜索按钮唤醒键盘",
+				"可以在隐私中关闭搜索记录"
+			],
+			bugfix: [
+				"修复搜索界面无内容时UI错误问题",
+				"修复搜索时搜索词和状态异常问题"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
+		build: 121,
+		date: "2026-06-09",
+		updates: {
+			improvement: [
+				"修复视频会自动被停止的问题(beta)",
+				"可以在设置中关闭热搜",
+				"支持设置单击或双击刷新首页和动态",
+				"使用iOS27的NowPlaying框架做媒体管理"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
+		build: 119,
+		date: "2026-06-08",
 		updates: {
 			improvement: [
 				"直播间清晰度取流优化",
