@@ -3,6 +3,38 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 124,
+		date: "2026-06-11",
+		updates: {
+			improvement: [
+				"跟随重力切换全屏(beta)",
+				"搜索记录不能超出屏幕"
+			],
+			bugfix: [
+				"修复搜索联想词点击事件和搜索事件冲突问题"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
+		build: 123,
+		date: "2026-06-10",
+		updates: {
+			improvement: [
+				"双列紧凑卡片可以设置所有额外信息都隐藏",
+				"记录搜索历史，修正文案和逻辑",
+				"初始化App固定加载顺序",
+				"双击搜索按钮动作优化"
+			],
+			bugfix: [
+				"修复视频会自动被暂停的问题(beta)"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 122,
 		date: "2026-06-09",
 		updates: {
