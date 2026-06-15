@@ -3,6 +3,36 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 126,
+		date: "2026-06-15",
+		updates: {
+			improvement: [
+				"自动切换下一P时，自动播放",
+				"可以在设置中关闭自适应全屏，这样手动点击全屏后会根据重力调整方向",
+				"优化设置页布局"
+			],
+			bugfix: [
+				"修复自动切换下一P弹幕没更新的问题",
+				"修复某些视频是竖屏点击全屏变横屏的问题"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
+		build: 125,
+		date: "2026-06-13",
+		updates: {
+			improvement: [
+				"充电视频做正确提示",
+				"设置页添加手势相关的使用手册",
+				"视频详情页支持三指上下滑收起和展开视频区域"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 124,
 		date: "2026-06-11",
 		updates: {
