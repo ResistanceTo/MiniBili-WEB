@@ -3,6 +3,29 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 128,
+		date: "2026-06-22",
+		updates: {
+			improvement: [
+				"识别视频BGM信息",
+				"添加BGM详情和关联视频"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
+		build: 127,
+		date: "2026-06-17",
+		updates: {
+			improvement: [
+				"全屏状态下中间下滑退出全屏"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 126,
 		date: "2026-06-15",
 		updates: {
