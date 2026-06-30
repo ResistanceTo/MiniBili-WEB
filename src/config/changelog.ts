@@ -3,6 +3,28 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 130,
+		date: "2026-06-30",
+		updates: {
+			improvement: [
+				"观影模式UI和交互全面升级"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
+		build: 129,
+		date: "2026-06-25",
+		updates: {
+			improvement: [
+				"可以在设置中关闭自动播放下一P"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 128,
 		date: "2026-06-22",
 		updates: {
