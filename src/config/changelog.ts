@@ -3,6 +3,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 131,
+		date: "2026-07-01",
+		updates: {
+			improvement: [
+				"观影模式控件布局更新",
+				"播放界面显示时间、电量、网速",
+				"支持设定屏幕双击暂停或快进快退",
+				"支持设定播放器控件的液态玻璃样式",
+				"正确显示2X指示器的位置",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 130,
 		date: "2026-06-30",
 		updates: {
