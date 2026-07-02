@@ -3,6 +3,22 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 132,
+		date: "2026-07-02",
+		updates: {
+			improvement: [
+				"支持自定义底部控件按钮",
+				"横屏模式下电量、时间显示优化",
+				"手势操作只会同时响应一种",
+				"音量调节指示器现在只会显示一种",
+				"支持拉伸视频播放",
+				"发送弹幕窗口可以直接按下键盘回车键发送，优化样式",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 131,
 		date: "2026-07-01",
 		updates: {
