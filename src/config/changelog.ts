@@ -3,6 +3,29 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 134,
+		date: "2026-07-08",
+		updates: {
+			improvement: [
+				"添加推荐视频（网页版）",
+				"支持iOS多级导航返回",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
+		build: 133,
+		date: "2026-07-07",
+		updates: {
+			improvement: [
+				"经典模式视频区域现在使用自适应模式",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 132,
 		date: "2026-07-02",
 		updates: {
