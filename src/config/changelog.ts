@@ -3,6 +3,23 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 136,
+		date: "2026-07-09",
+		updates: {
+			improvement: [
+				"花瓣选择器使用合适的大小",
+				"可以关闭动态页顶部的关注列表按钮",
+				"可以设定等级、大会员是官方模式或经典样式",
+			],
+			bugfix: [
+				"修复视频没评论的时候不能发评论的问题",
+				"修复主题色选择器的交互错误"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 134,
 		date: "2026-07-08",
 		updates: {
