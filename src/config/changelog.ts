@@ -3,6 +3,24 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 137,
+		date: "2026-07-11",
+		updates: {
+			improvement: [
+				"首页、动态页添加左右滑动切换手势",
+				"视频解码优先AV1",
+				"杜比视界视频解码重写",
+				"可以隐藏底部菜单标题",
+				"App内绝大部分UI和文本完成自定义主题色适配",
+			],
+			bugfix: [
+				"修复短信登录后无法投币的问题"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 136,
 		date: "2026-07-09",
 		updates: {
