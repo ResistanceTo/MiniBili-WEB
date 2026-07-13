@@ -3,6 +3,24 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 139,
+		date: "2026-07-13",
+		updates: {
+			improvement: [
+				"经典模式支持切换Mini播放器或原版播放器",
+				"Mini播放器使用原生音量调节指示器",
+				"视频解码优先AV1",
+				"添加繁体中文",
+			],
+			bugfix: [
+				"修复分区出现错误的问题",
+				"修复多个页面按钮液态玻璃重叠问题",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 137,
 		date: "2026-07-11",
 		updates: {
