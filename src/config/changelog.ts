@@ -3,6 +3,24 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 140,
+		date: "2026-07-15",
+		updates: {
+			improvement: [
+				"更新搜索页交互及UI",
+				"长按倍速增加触觉反馈（震动）",
+				"倍速指示器开关接入Mini播放器",
+				"增加手动画中画",
+				"新增配置【进度条置底】",
+			],
+			bugfix: [
+				"修复长按倍速时，弹幕跳动的问题",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 139,
 		date: "2026-07-13",
 		updates: {
