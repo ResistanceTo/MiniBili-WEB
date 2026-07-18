@@ -3,8 +3,33 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
-		build: 140,
-		date: "2026-07-15",
+		build: 152,
+		date: "2026-07-18",
+		updates: {
+			improvement: [
+				"首次点击选P弹窗，自动定位播放P",
+				"添加自定义弹幕描边",
+				"添加自定义弹幕显示区域",
+				"优化弹幕显示",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
+		build: 151,
+		date: "2026-07-17",
+		updates: {
+			improvement: [
+				"画中画响应设置开关",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
+		build: 150,
+		date: "2026-07-16",
 		updates: {
 			improvement: [
 				"更新搜索页交互及UI",
