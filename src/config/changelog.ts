@@ -3,6 +3,23 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 153,
+		date: "2026-07-20",
+		updates: {
+			improvement: [
+				"优化点开分P选择器时的交互",
+				"优化Mini播放器暂停按钮样式",
+				"优化Mini播放器左右滑动快进快退时的样式",
+				"优化搜索页的交互操作和状态",
+			],
+			bugfix: [
+				"修复在收藏夹中点开视频，每次返回强制跳转到默认收藏夹的问题"
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 152,
 		date: "2026-07-18",
 		updates: {
