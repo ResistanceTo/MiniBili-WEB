@@ -3,6 +3,19 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 154,
+		date: "2026-07-21",
+		updates: {
+			improvement: [
+				"评论区使用UIKit重写，大幅提升性能",
+				"Mini播放器左右滑动时，进度条等控件不再显示",
+				"Mini播放器左右滑动时的指示器样式优化",
+			]
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 153,
 		date: "2026-07-20",
 		updates: {
