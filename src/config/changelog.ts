@@ -3,6 +3,18 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 155,
+		date: "2026-07-21",
+		updates: {
+			bugfix: [
+				"修复评论区在无玻璃样式下的分割线UI问题",
+				"修复评论区点赞按钮可能会出现UI错误的问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 154,
 		date: "2026-07-21",
 		updates: {
