@@ -1,0 +1,132 @@
+---
+import ThemeToggle from "@components/ui/ThemeToggle.astro";
+
+// 首页锚点导航；非首页时锚点指向首页对应片段
+const navLinks = [
+  { href: "/#screenshots", label: "截图" },
+  { href: "/#features", label: "特点" },
+  { href: "/#changelog", label: "更新" },
+  { href: "/#faq", label: "FAQ" },
+  { href: "/roadmap/", label: "路线图" },
+];
+---
+
+<header class="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-4 sm:pt-4">
+  <nav
+    class="glass mx-auto flex max-w-[1120px] items-center justify-between gap-3 rounded-2xl px-3 py-2.5 sm:px-4"
+    aria-label="主导航"
+  >
+    <a href="/" class="flex flex-shrink-0 items-center gap-2.5" aria-label="MiniBili 首页">
+      <img src="/MiniBili.png" alt="MiniBili" class="h-8 w-8 rounded-[10px] shadow-sm" width="32" height="32" />
+      <span class="text-base font-semibold tracking-tight text-ink">MiniBili</span>
+    </a>
+
+    <div class="hidden items-center gap-1 md:flex">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="rounded-lg px-3 py-1.5 text-sm font-medium text-ink-muted transition-colors hover:bg-hairline/5 hover:text-ink"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="flex items-center gap-2">
+      <div class="hidden sm:block">
+        <ThemeToggle />
+      </div>
+
+      <button
+        type="button"
+        class="flex h-9 w-9 items-center justify-center rounded-lg text-ink transition-colors hover:bg-hairline/5 md:hidden"
+        aria-label="打开菜单"
+        aria-expanded="false"
+        data-nav-toggle
+      >
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line class="nav-icon-line-1" x1="3" y1="6" x2="21" y2="6"></line>
+          <line class="nav-icon-line-2" x1="3" y1="12" x2="21" y2="12"></line>
+          <line class="nav-icon-line-3" x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 移动端展开菜单 -->
+  <div
+    class="glass-strong mx-auto mt-2 max-w-[1120px] origin-top overflow-hidden rounded-2xl px-2 py-2 opacity-0 transition-all duration-200 md:hidden"
+    data-nav-menu
+    hidden
+  >
+    <div class="flex flex-col">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="rounded-xl px-4 py-3 text-sm font-medium text-ink-muted transition-colors hover:bg-hairline/5 hover:text-ink"
+            data-nav-menu-link
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <div class="mt-1 flex items-center border-t border-hairline/10 px-4 pt-3">
+        <ThemeToggle />
+      </div>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    const bind = () => {
+      const toggle = document.querySelector("[data-nav-toggle]");
+      const menu = document.querySelector("[data-nav-menu]");
+      if (!toggle || !menu || toggle.dataset.bound) return;
+      toggle.dataset.bound = "true";
+
+      let open = false;
+      const setOpen = (next) => {
+        open = next;
+        toggle.setAttribute("aria-expanded", next ? "true" : "false");
+        toggle.setAttribute("aria-label", next ? "关闭菜单" : "打开菜单");
+        toggle.classList.toggle("nav-open", next);
+        if (next) {
+          menu.hidden = false;
+          requestAnimationFrame(() => {
+            menu.style.opacity = "1";
+            menu.style.transform = "translateY(0)";
+          });
+        } else {
+          menu.style.opacity = "0";
+          menu.style.transform = "translateY(-6px)";
+          setTimeout(() => { if (!open) menu.hidden = true; }, 200);
+        }
+      };
+
+      toggle.addEventListener("click", () => setOpen(!open));
+      menu.querySelectorAll("[data-nav-menu-link]").forEach((link) => {
+        link.addEventListener("click", () => setOpen(false));
+      });
+      document.addEventListener("click", (e) => {
+        if (open && !menu.contains(e.target) && !toggle.contains(e.target)) setOpen(false);
+      });
+    };
+    bind();
+    document.addEventListener("astro:after-swap", bind);
+  })();
+</script>
+
+<style>
+  [data-nav-menu] { transform: translateY(-6px); }
+  .nav-open .nav-icon-line-1 { transform: translateY(6px) rotate(45deg); }
+  .nav-open .nav-icon-line-2 { opacity: 0; }
+  .nav-open .nav-icon-line-3 { transform: translateY(-6px) rotate(-45deg); }
+  .nav-icon-line-1, .nav-icon-line-2, .nav-icon-line-3 {
+    transform-origin: center;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+</style>

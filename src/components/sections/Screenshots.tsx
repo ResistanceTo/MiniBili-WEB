@@ -206,11 +206,14 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 	}, [closeLightbox, lightboxIndex, showNext, showPrevious]);
 
 	return (
-		<div id="screenshots" className="mb-16 scroll-mt-20">
-			<div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center md:gap-0">
-				<h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-					屏幕截图
-				</h2>
+		<div id="screenshots" className="scroll-mt-28 py-12 sm:py-20">
+			<div className="mb-8 flex flex-col items-center gap-5 text-center">
+				<div>
+					<p className="mb-2 text-sm font-semibold tracking-[0.15em] text-brand">界面一览</p>
+					<h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+						每一屏都精心打磨
+					</h2>
+				</div>
 				<DeviceToggle activeDevice={activeDevice} onToggle={setActiveDevice} />
 			</div>
 			<div className={`relative overflow-hidden ${containerMinHeightClass}`}>
@@ -222,14 +225,14 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 						animate={{ opacity: 1, x: 0 }}
 						exit={{ opacity: 0, x: -20 }}
 						transition={{ duration: 0.3 }}
-						className="screenshots-container scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-400 hover:scrollbar-thumb-gray-500 dark:scrollbar-track-white/5 dark:scrollbar-thumb-white/10 dark:hover:scrollbar-thumb-white/20"
+						className="screenshots-container screenshots-scroll"
 						onAnimationComplete={() => handleAnimationEvent("add")}
 						onAnimationStart={() => handleAnimationEvent("remove")}
 					>
 						{currentImages.length === 0 ? (
-							<div className="flex h-[300px] w-full items-center justify-center rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 dark:border-white/10 dark:bg-white/[0.02]">
+							<div className="flex h-[300px] w-full items-center justify-center rounded-3xl border-2 border-dashed border-hairline/15">
 								<div className="text-center">
-									<p className="text-lg font-medium text-gray-500 dark:text-gray-400">
+									<p className="text-lg font-medium text-ink-subtle">
 										{deviceLabel} 版本敬请期待
 									</p>
 								</div>
@@ -270,7 +273,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 														onLoadStart={() => handleVideoLoadStart(media.src)}
 														onCanPlay={() => handleVideoCanPlay(media.src)}
 														onError={() => handleVideoError(media.src)}
-														className={`rounded-xl border border-gray-300 object-cover shadow-lg dark:border-white/10 ${mediaClassNames}`}
+														className={`rounded-[1.75rem] object-cover shadow-glass ring-1 ring-hairline/10 ${mediaClassNames}`}
 													/>
 													{isLoading && (
 														<div className="absolute inset-0 flex items-center justify-center bg-black/20">
@@ -307,7 +310,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 													<img
 														src={media.src}
 														alt={`MiniBili ${deviceLabel} 应用界面截图 ${index + 1} - 免费无广告的哔哩哔哩第三方客户端`}
-														className={`rounded-xl border border-gray-300 object-cover shadow-lg dark:border-white/10 ${mediaClassNames}`}
+														className={`rounded-[1.75rem] object-cover shadow-glass ring-1 ring-hairline/10 transition-transform duration-300 group-hover:scale-[1.02] ${mediaClassNames}`}
 														loading="lazy"
 													/>
 												</button>
@@ -330,13 +333,13 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 						role="dialog"
 						aria-modal="true"
 						aria-label={`MiniBili ${deviceLabel} 截图预览，第 ${(lightboxIndex ?? 0) + 1} 张，共 ${currentImages.length} 张`}
-						className="fixed inset-0 z-50 flex items-center justify-center bg-white/70 backdrop-blur-md dark:bg-black/70"
+						className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-xl"
 						onClick={closeLightbox}
 					>
 						<button
 							type="button"
 							onClick={closeLightbox}
-							className="absolute right-4 top-4 rounded-full border border-gray-200/50 bg-white/80 p-3 text-gray-800 shadow-lg backdrop-blur-sm transition-colors hover:bg-white/90 hover:text-gray-900 dark:border-white/10 dark:bg-black/60 dark:text-white/90 dark:hover:bg-black/80 dark:hover:text-white"
+							className="absolute right-4 top-4 rounded-full glass p-3 text-ink transition-colors hover:text-brand"
 							aria-label="关闭预览"
 						>
 							<svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -351,7 +354,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 								event.stopPropagation();
 								showPrevious();
 							}}
-							className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-gray-200/50 bg-white/80 p-3 text-gray-800 shadow-lg backdrop-blur-sm transition-colors hover:bg-white/90 hover:text-gray-900 dark:border-white/10 dark:bg-black/60 dark:text-white/90 dark:hover:bg-black/80 dark:hover:text-white"
+							className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full glass p-3 text-ink transition-colors hover:text-brand"
 							aria-label="上一张"
 						>
 							<svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -390,7 +393,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 								event.stopPropagation();
 								showNext();
 							}}
-							className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-gray-200/50 bg-white/80 p-3 text-gray-800 shadow-lg backdrop-blur-sm transition-colors hover:bg-white/90 hover:text-gray-900 dark:border-white/10 dark:bg-black/60 dark:text-white/90 dark:hover:bg-black/80 dark:hover:text-white"
+							className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full glass p-3 text-ink transition-colors hover:text-brand"
 							aria-label="下一张"
 						>
 							<svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -411,8 +414,8 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 										}}
 										className={`h-2 w-2 rounded-full transition-colors ${
 											index === lightboxIndex
-												? "bg-gray-800 dark:bg-white"
-												: "bg-gray-500 hover:bg-gray-700 dark:bg-white/60 dark:hover:bg-white/80"
+												? "w-6 bg-brand"
+												: "bg-white/50 hover:bg-white/80"
 										}`}
 										aria-label={`跳转到${media.type === "video" ? "视频" : "图片"} ${index + 1}`}
 									/>

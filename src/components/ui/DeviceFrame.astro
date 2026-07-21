@@ -1,0 +1,129 @@
+---
+// 可复用设备样机：把截图裱进真实机身（圆角、灵动岛、玻璃反光）
+interface Props {
+  device?: "iphone" | "ipad";
+  src?: string;
+  alt?: string;
+  class?: string;
+  loading?: "eager" | "lazy";
+  fetchpriority?: "high" | "low" | "auto";
+}
+
+const {
+  device = "iphone",
+  src,
+  alt = "",
+  class: className = "",
+  loading = "lazy",
+  fetchpriority = "auto",
+} = Astro.props;
+
+const isPad = device === "ipad";
+---
+
+<div class:list={["device-frame", isPad ? "device-ipad" : "device-iphone", className]}>
+  <div class="device-body">
+    <div class="device-screen">
+      {!isPad && <span class="device-island" aria-hidden="true"></span>}
+      {
+        src ? (
+          <img
+            src={src}
+            alt={alt}
+            class="device-media"
+            loading={loading}
+            fetchpriority={fetchpriority}
+            decoding="async"
+          />
+        ) : (
+          <slot />
+        )
+      }
+      <span class="device-glare" aria-hidden="true"></span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .device-frame {
+    position: relative;
+    width: 100%;
+  }
+
+  .device-body {
+    position: relative;
+    border-radius: var(--frame-radius);
+    padding: var(--frame-pad);
+    background: linear-gradient(155deg, #3a3d46 0%, #17181d 45%, #26282f 100%);
+    box-shadow:
+      0 2px 2px rgb(255 255 255 / 0.15) inset,
+      0 -2px 3px rgb(0 0 0 / 0.5) inset,
+      0 40px 80px -24px rgb(var(--glass-shadow) / 0.45);
+  }
+
+  html.dark .device-body {
+    box-shadow:
+      0 2px 2px rgb(255 255 255 / 0.1) inset,
+      0 -2px 3px rgb(0 0 0 / 0.6) inset,
+      0 40px 90px -24px rgb(0 0 0 / 0.7);
+  }
+
+  .device-screen {
+    position: relative;
+    overflow: hidden;
+    border-radius: calc(var(--frame-radius) - var(--frame-pad));
+    background: #000;
+    aspect-ratio: var(--screen-ratio);
+  }
+
+  .device-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .device-island {
+    position: absolute;
+    top: 2.4%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32%;
+    height: 3.4%;
+    min-height: 22px;
+    background: #000;
+    border-radius: 9999px;
+    z-index: 3;
+  }
+
+  .device-glare {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.16) 0%,
+      rgb(255 255 255 / 0.04) 18%,
+      transparent 42%
+    );
+  }
+
+  /* iPhone 比例 1260x2736 */
+  .device-iphone {
+    --frame-radius: 3rem;
+    --frame-pad: 0.6rem;
+    --screen-ratio: 1260 / 2736;
+  }
+
+  /* iPad 比例 1640x2360 */
+  .device-ipad {
+    --frame-radius: 1.75rem;
+    --frame-pad: 0.75rem;
+    --screen-ratio: 1640 / 2360;
+  }
+
+  .device-ipad .device-island {
+    display: none;
+  }
+</style>

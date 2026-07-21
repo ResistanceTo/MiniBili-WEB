@@ -7,7 +7,7 @@ const themes = [
 ---
 
 <div
-  class="flex items-center rounded-lg border border-gray-300 bg-gray-200/80 p-1 shadow-sm dark:border-white/10 dark:bg-white/[0.03]"
+  class="flex items-center gap-0.5 rounded-xl border border-hairline/10 bg-hairline/[0.04] p-1"
   data-theme-toggle
   role="group"
   aria-label="主题切换"
@@ -15,16 +15,15 @@ const themes = [
   {themes.map(({ key, label, icon }) => (
     <button
       type="button"
-      class="theme-toggle-button relative rounded-md p-2 text-sm font-medium text-gray-600 transition-colors hover:text-gray-800 dark:text-white/60 dark:hover:text-white"
+      class="theme-toggle-button relative flex h-8 w-8 items-center justify-center rounded-lg text-ink-subtle transition-colors"
       data-theme-option
       data-theme={key}
       title={label}
       aria-label={`切换到${label}主题`}
       aria-pressed="false"
     >
-      <span class="pointer-events-none absolute inset-0 rounded-md border border-transparent"></span>
       {icon === "sun" && (
-        <svg class="relative z-10 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="5"></circle>
           <line x1="12" y1="1" x2="12" y2="3"></line>
           <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -37,12 +36,12 @@ const themes = [
         </svg>
       )}
       {icon === "moon" && (
-        <svg class="relative z-10 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 12.79A9 9 0 1 1 11.21 3c0 4.97 4.03 9 9 9 .27 0 .53-.01.79-.03"></path>
         </svg>
       )}
       {icon === "monitor" && (
-        <svg class="relative z-10 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <rect x="2" y="3" width="20" height="14" rx="2"></rect>
           <line x1="8" y1="21" x2="16" y2="21"></line>
           <line x1="12" y1="17" x2="12" y2="21"></line>
@@ -53,7 +52,14 @@ const themes = [
 </div>
 
 <style>
-  .theme-toggle-button:active {
-    transform: scale(0.95);
+  .theme-toggle-button:hover { color: rgb(var(--ink-muted)); }
+  .theme-toggle-button:active { transform: scale(0.92); }
+  .theme-toggle-button.is-active {
+    color: rgb(var(--ink));
+    background-color: rgb(var(--surface));
+    box-shadow: 0 1px 3px rgb(var(--glass-shadow) / 0.18);
+  }
+  html.dark .theme-toggle-button.is-active {
+    background-color: rgb(255 255 255 / 0.12);
   }
 </style>

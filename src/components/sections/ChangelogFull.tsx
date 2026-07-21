@@ -4,7 +4,9 @@ import { memo, useMemo, useState } from "react";
 import { FiClock, FiPackage, FiStar, FiTrendingUp, FiTool, FiMonitor, FiSmartphone, FiTv, FiWatch, FiTarget } from "react-icons/fi";
 import { motion } from "framer-motion";
 
-const getUpdateLabel = (type: "feature" | "improvement" | "bugfix") => {
+type UpdateType = "feature" | "improvement" | "bugfix";
+
+const getUpdateLabel = (type: UpdateType) => {
 	switch (type) {
 		case "feature":
 			return "新功能";
@@ -15,6 +17,20 @@ const getUpdateLabel = (type: "feature" | "improvement" | "bugfix") => {
 	}
 };
 
+const UPDATE_GROUPS: { key: UpdateType; icon: IconType; color: string; dot: string }[] = [
+	{ key: "feature", icon: FiStar, color: "text-emerald-500", dot: "bg-emerald-500" },
+	{ key: "improvement", icon: FiTrendingUp, color: "text-sky-500", dot: "bg-sky-500" },
+	{ key: "bugfix", icon: FiTool, color: "text-amber-500", dot: "bg-amber-500" },
+];
+
+const PLATFORM_TABS: { platform: AppPlatform; label: string; icon: IconType }[] = [
+	{ platform: AppPlatform.iOS, label: "iOS", icon: FiSmartphone },
+	{ platform: AppPlatform.macOS, label: "macOS", icon: FiMonitor },
+	{ platform: AppPlatform.tvOS, label: "tvOS", icon: FiTv },
+	{ platform: AppPlatform.watchOS, label: "watchOS", icon: FiWatch },
+	{ platform: AppPlatform.visionOS, label: "visionOS", icon: FiTarget },
+];
+
 const renderChangelogItem = (item: string | ChangelogEntry, idx: number) => {
 	const text = typeof item === "string" ? item : item.text;
 	const images = typeof item === "string" ? undefined : item.images;
@@ -23,13 +39,14 @@ const renderChangelogItem = (item: string | ChangelogEntry, idx: number) => {
 		<div key={idx} className="space-y-2">
 			<span>{text}</span>
 			{images && images.length > 0 && (
-				<div className="grid grid-cols-2 gap-2 mt-2">
+				<div className="mt-2 grid grid-cols-2 gap-2">
 					{images.map((imgPath, imgIdx) => (
 						<img
 							key={imgIdx}
 							src={imgPath}
 							alt={`${text} - ${imgIdx + 1}`}
-							className="rounded-lg border border-gray-200 dark:border-white/10 cursor-pointer hover:opacity-90 transition-opacity"
+							loading="lazy"
+							className="cursor-pointer rounded-xl ring-1 ring-hairline/10 transition-opacity hover:opacity-90"
 							onClick={() => window.open(imgPath, "_blank", "noopener,noreferrer")}
 						/>
 					))}
@@ -43,157 +60,112 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 	const [activePlatform, setActivePlatform] = useState<AppPlatform>(AppPlatform.iOS);
 
 	const filteredItems = useMemo(() => {
-		return items.filter(item => {
-			// If no platforms specified, assume it's for all (or at least iOS which is the base)
-			// But for this requirement, we want to filter.
-			// If item has no platforms field, we assume it is iOS (legacy items).
+		return items.filter((item) => {
 			const itemPlatforms = item.platforms || [AppPlatform.iOS];
 			return itemPlatforms.includes(activePlatform);
 		});
 	}, [items, activePlatform]);
 
+	const stats = useMemo(() => {
+		let feature = 0, improvement = 0, bugfix = 0;
+		filteredItems.forEach(({ updates }) => {
+			feature += updates.feature?.length ?? 0;
+			improvement += updates.improvement?.length ?? 0;
+			bugfix += updates.bugfix?.length ?? 0;
+		});
+		return { versions: filteredItems.length, feature, improvement, bugfix };
+	}, [filteredItems]);
+
 	return (
 		<div className="space-y-8">
-			<div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-				<h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-					更新日志
-				</h1>
+			<div className="text-center">
+				<p className="mb-2 text-sm font-semibold tracking-[0.15em] text-brand">持续进化</p>
+				<h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">更新日志</h1>
+			</div>
 
-				<div className="flex items-center p-1 rounded-xl bg-gray-100 dark:bg-white/[0.05] border border-gray-200 dark:border-white/10 self-start md:self-auto overflow-x-auto overflow-y-hidden max-w-full scrollbar-hide">
-					<PlatformTab
-						label="iOS"
-						icon={FiSmartphone}
-						isActive={activePlatform === AppPlatform.iOS}
-						onClick={() => setActivePlatform(AppPlatform.iOS)}
-					/>
-					<PlatformTab
-						label="macOS"
-						icon={FiMonitor}
-						isActive={activePlatform === AppPlatform.macOS}
-						onClick={() => setActivePlatform(AppPlatform.macOS)}
-					/>
-					<PlatformTab
-						label="tvOS"
-						icon={FiTv}
-						isActive={activePlatform === AppPlatform.tvOS}
-						onClick={() => setActivePlatform(AppPlatform.tvOS)}
-					/>
-					<PlatformTab
-						label="watchOS"
-						icon={FiWatch}
-						isActive={activePlatform === AppPlatform.watchOS}
-						onClick={() => setActivePlatform(AppPlatform.watchOS)}
-					/>
-					<PlatformTab
-						label="visionOS"
-						icon={FiTarget}
-						isActive={activePlatform === AppPlatform.visionOS}
-						onClick={() => setActivePlatform(AppPlatform.visionOS)}
-					/>
+			<div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+				{[
+					{ label: "个版本", value: stats.versions, color: "text-ink" },
+					{ label: "项新功能", value: stats.feature, color: "text-emerald-500" },
+					{ label: "项优化", value: stats.improvement, color: "text-sky-500" },
+					{ label: "项修复", value: stats.bugfix, color: "text-amber-500" },
+				].map(({ label, value, color }) => (
+					<div key={label} className="glass rounded-2xl px-4 py-3 text-center">
+						<div className={`text-2xl font-bold ${color}`}>{value}</div>
+						<div className="text-xs text-ink-subtle">{label}</div>
+					</div>
+				))}
+			</div>
+
+			<div className="flex justify-center">
+				<div className="glass flex max-w-full items-center gap-1 overflow-x-auto overflow-y-hidden rounded-2xl p-1 scrollbar-hide">
+					{PLATFORM_TABS.map(({ platform, label, icon }) => (
+						<PlatformTab
+							key={platform}
+							label={label}
+							icon={icon}
+							isActive={activePlatform === platform}
+							onClick={() => setActivePlatform(platform)}
+						/>
+					))}
 				</div>
 			</div>
 
-			<div className="space-y-4">
-				{filteredItems.length === 0 ? (
-					<div className="text-center py-12 text-gray-500 dark:text-gray-400">
-						<p>该平台暂无更新日志</p>
-					</div>
-				) : (
-					filteredItems.map(({ version, build, date, title, updates }) => (
-						<div
-							key={`${version}-${build}`}
-							className="rounded-xl border border-gray-300 dark:border-white/10 bg-white dark:bg-white/[0.03] p-5 shadow-sm"
-						>
-							<div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-200 dark:border-white/10">
-								<div className="flex items-center gap-3">
-									<div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 dark:bg-white/[0.04]">
-										<FiPackage className="w-5 h-5 text-gray-700 dark:text-white opacity-90" />
+			{filteredItems.length === 0 ? (
+				<div className="glass rounded-3xl py-16 text-center text-ink-muted">
+					<p>该平台暂无更新日志</p>
+				</div>
+			) : (
+				<div className="relative space-y-5 before:absolute before:left-[14px] before:top-3 before:h-[calc(100%-2rem)] before:w-px before:bg-hairline/15 sm:before:left-[15px]">
+					{filteredItems.map(({ version, build, date, title, updates }) => (
+						<div key={`${version}-${build}`} className="relative pl-10 sm:pl-12">
+							<span className="absolute left-0 top-2 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-brand/15 ring-4 ring-[rgb(var(--page-bg))] sm:h-8 sm:w-8">
+								<FiPackage className="h-3.5 w-3.5 text-brand" />
+							</span>
+
+							<article className="glass rounded-3xl p-5 transition-transform duration-300 hover:-translate-y-0.5 sm:p-6">
+								<div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+									<div className="flex items-baseline gap-2">
+										<span className="text-xl font-bold text-ink">{build}</span>
+										<span className="rounded-full bg-hairline/[0.06] px-2.5 py-0.5 text-xs font-medium text-ink-muted">{version}</span>
 									</div>
-									<h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-										{version}-{build}
-									</h2>
+									<div className="flex items-center gap-1.5 text-xs text-ink-subtle">
+										<FiClock className="h-3.5 w-3.5" />
+										<span>{date}</span>
+									</div>
 								</div>
-								<div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
-									<FiClock className="w-3.5 h-3.5" />
-									<span>{date}</span>
-								</div>
-							</div>
 
-							{/* 版本标题/亮点 */}
-							{title && (
-								<div className="mb-4 p-3 rounded-lg bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800/30">
-									<p className="text-sm font-medium text-gray-900 dark:text-white">
-										{title}
-									</p>
-								</div>
-							)}
-
-							{/* 更新内容分组 */}
-							<div className="space-y-3">
-								{updates.feature && updates.feature.length > 0 && (
-									<div>
-										<h3 className="flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-white mb-2">
-											<FiStar className="w-4 h-4 text-green-600 dark:text-green-400" />
-											{getUpdateLabel("feature")}
-										</h3>
-										<ul className="space-y-3 ml-6">
-											{updates.feature.map((content, idx) => (
-												<li
-													key={idx}
-													className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed flex items-start gap-2"
-												>
-													<span className="text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0">•</span>
-													<div className="flex-1">{renderChangelogItem(content, idx)}</div>
-												</li>
-											))}
-										</ul>
+								{title && (
+									<div className="mb-4 rounded-2xl border border-brand/20 bg-brand/[0.06] px-3.5 py-2.5">
+										<p className="text-sm font-medium leading-relaxed text-ink">{title}</p>
 									</div>
 								)}
 
-								{updates.improvement && updates.improvement.length > 0 && (
-									<div>
-										<h3 className="flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-white mb-2">
-											<FiTrendingUp className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-											{getUpdateLabel("improvement")}
-										</h3>
-										<ul className="space-y-3 ml-6">
-											{updates.improvement.map((content, idx) => (
-												<li
-													key={idx}
-													className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed flex items-start gap-2"
-												>
-													<span className="text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0">•</span>
-													<div className="flex-1">{renderChangelogItem(content, idx)}</div>
-												</li>
-											))}
-										</ul>
-									</div>
-								)}
-
-								{updates.bugfix && updates.bugfix.length > 0 && (
-									<div>
-										<h3 className="flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-white mb-2">
-											<FiTool className="w-4 h-4 text-orange-600 dark:text-orange-400" />
-											{getUpdateLabel("bugfix")}
-										</h3>
-										<ul className="space-y-3 ml-6">
-											{updates.bugfix.map((content, idx) => (
-												<li
-													key={idx}
-													className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed flex items-start gap-2"
-												>
-													<span className="text-orange-600 dark:text-orange-400 mt-0.5 flex-shrink-0">•</span>
-													<div className="flex-1">{renderChangelogItem(content, idx)}</div>
-												</li>
-											))}
-										</ul>
-									</div>
-								)}
-							</div>
+								<div className="space-y-4">
+									{UPDATE_GROUPS.map(({ key, icon: Icon, color, dot }) =>
+										updates[key] && updates[key]!.length > 0 ? (
+											<div key={key}>
+												<h3 className={`mb-2 flex items-center gap-2 text-sm font-semibold ${color}`}>
+													<Icon className="h-4 w-4" />
+													{getUpdateLabel(key)}
+												</h3>
+												<ul className="ml-1 space-y-2.5">
+													{updates[key]!.map((content, idx) => (
+														<li key={idx} className="flex items-start gap-2.5 text-sm leading-relaxed text-ink-muted">
+															<span className={`mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full ${dot}`} />
+															<div className="flex-1">{renderChangelogItem(content, idx)}</div>
+														</li>
+													))}
+												</ul>
+											</div>
+										) : null
+									)}
+								</div>
+							</article>
 						</div>
-					))
-				)}
-			</div>
+					))}
+				</div>
+			)}
 		</div>
 	);
 };
@@ -208,20 +180,17 @@ const PlatformTab = ({ label, icon: Icon, isActive, onClick }: {
 		type="button"
 		onClick={onClick}
 		aria-pressed={isActive}
-		className={`relative flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 whitespace-nowrap flex-shrink-0 ${isActive
-			? "text-gray-900 dark:text-white"
-			: "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
-			}`}
+		className={`relative flex flex-shrink-0 items-center gap-2 whitespace-nowrap rounded-xl px-4 py-2 text-sm font-medium transition-colors ${isActive ? "text-white" : "text-ink-muted hover:text-ink"}`}
 	>
 		{isActive && (
 			<motion.div
 				layoutId="activePlatform"
-				className="absolute inset-0 rounded-lg bg-white dark:bg-white/10 shadow-sm"
+				className="absolute inset-0 rounded-xl bg-brand shadow-[0_4px_14px_-4px_rgba(251,114,153,0.6)]"
 				transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
 			/>
 		)}
 		<span className="relative z-10 flex items-center gap-2">
-			<Icon className="w-4 h-4" />
+			<Icon className="h-4 w-4" />
 			{label}
 		</span>
 	</button>

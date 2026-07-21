@@ -1,15 +1,23 @@
 ---
 import Footer from "@components/sections/Footer.astro";
+import Navbar from "@components/sections/Navbar.astro";
 import StructuredData from "@components/seo/StructuredData.astro";
 
 interface Props {
   title: string;
   description?: string;
   showFooter?: boolean;
+  showNavbar?: boolean;
   structuredDataType?: 'website' | 'mobileApplication';
 }
 
-const { title, description, showFooter = true, structuredDataType = 'website' } = Astro.props;
+const {
+  title,
+  description,
+  showFooter = true,
+  showNavbar = true,
+  structuredDataType = 'website',
+} = Astro.props;
 const siteUrl = Astro.site ?? Astro.url;
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = new URL("/og_image.png", siteUrl).href;
@@ -35,7 +43,8 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
     {description && <meta name="description" content={description}>}
     <meta name="keywords" content="MiniBili,哔哩哔哩,bilibili,B站,B站客户端,第三方客户端,iOS,iPhone,iPad,免费,无广告,隐私保护,TestFlight,哔哩哔哩第三方,哔哩哔哩无广告,Bilibili alternative">
     <meta name="author" content="ResistanceTo">
-    <meta name="theme-color" content="#111827">
+    <meta name="theme-color" content="#0a0a0b" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f7f7fb" media="(prefers-color-scheme: light)">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -73,22 +82,34 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
       const theme = localStorage.getItem('theme') || 'system';
       const root = document.documentElement;
       root.classList.remove('light', 'dark');
-      
+
       if (theme === 'system') {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         root.classList.add(prefersDark ? 'dark' : 'light');
       } else {
         root.classList.add(theme);
       }
-      
+
       !localStorage.getItem('theme') && localStorage.setItem('theme', 'system');
     </script>
   </head>
-  <body class="transition-colors duration-300 bg-gray-50 text-gray-900 dark:bg-black dark:text-white">
-    <div class="mx-auto min-h-screen max-w-[800px]">
-      <slot />
+  <body class="min-h-screen bg-transparent text-ink antialiased">
+    <!-- 环境光背景层（玻璃的"透光"底） -->
+    <div class="aurora-backdrop" aria-hidden="true">
+      <span class="aurora-blob aurora-blob-1"></span>
+      <span class="aurora-blob aurora-blob-2"></span>
+      <span class="aurora-blob aurora-blob-3"></span>
+      <span class="aurora-grain"></span>
+    </div>
+
+    {showNavbar && <Navbar />}
+    <div class="relative z-10 flex min-h-screen flex-col">
+      <div class="flex-1">
+        <slot />
+      </div>
       {showFooter && <Footer />}
     </div>
+
     <script is:inline>
       const themeStorageKey = "theme";
 
@@ -109,18 +130,8 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
         document.querySelectorAll("[data-theme-toggle]").forEach((toggle) => {
           toggle.querySelectorAll("[data-theme-option]").forEach((button) => {
             const isActive = button.getAttribute("data-theme") === theme;
-            button.classList.toggle("text-gray-900", isActive);
-            button.classList.toggle("dark:text-white", isActive);
-            button.classList.toggle("text-gray-600", !isActive);
-            button.classList.toggle("dark:text-white/60", !isActive);
+            button.classList.toggle("is-active", isActive);
             button.setAttribute("aria-pressed", isActive ? "true" : "false");
-
-            const indicator = button.firstElementChild;
-            indicator?.classList.toggle("bg-white", isActive);
-            indicator?.classList.toggle("dark:bg-white/10", isActive);
-            indicator?.classList.toggle("shadow-sm", isActive);
-            indicator?.classList.toggle("border-gray-300/60", isActive);
-            indicator?.classList.toggle("dark:border-white/5", isActive);
           });
         });
       };
@@ -160,36 +171,179 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
       }
 
       initThemeToggles();
+      document.addEventListener("astro:after-swap", initThemeToggles);
     </script>
   </body>
 </html>
 
-
 <style is:global>
-  body { transition: background-color 0.3s ease, color 0.3s ease; }
-  html.light { color-scheme: light; }
-  html.dark { color-scheme: dark; }
+  :root {
+    color-scheme: light dark;
+    scroll-behavior: smooth;
+  }
 
+  /* 亮色令牌（默认 / .light） */
+  html,
+  html.light {
+    --surface: 255 255 255;
+    --surface-muted: 247 247 251;
+    --ink: 17 20 27;
+    --ink-muted: 82 88 102;
+    --ink-subtle: 130 136 150;
+    --hairline: 17 20 27;
+    --glass-shadow: 30 35 60;
+    --page-bg: 246 247 251;
+    --glass-bg: 255 255 255;
+    --glass-bg-alpha: 0.68;
+    --glass-border: 255 255 255;
+    --glass-border-alpha: 0.7;
+    color-scheme: light;
+  }
+
+  /* 暗色令牌 */
+  html.dark {
+    --surface: 22 24 30;
+    --surface-muted: 16 17 22;
+    --ink: 244 245 248;
+    --ink-muted: 168 173 186;
+    --ink-subtle: 122 127 140;
+    --hairline: 255 255 255;
+    --glass-shadow: 0 0 0;
+    --page-bg: 9 10 13;
+    --glass-bg: 30 33 42;
+    --glass-bg-alpha: 0.5;
+    --glass-border: 255 255 255;
+    --glass-border-alpha: 0.1;
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: rgb(var(--page-bg));
+    transition: background-color 0.4s ease, color 0.4s ease;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- 环境光背景 ---------- */
+  .aurora-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .aurora-blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    opacity: 0.55;
+    will-change: transform;
+  }
+
+  html.dark .aurora-blob {
+    opacity: 0.4;
+    filter: blur(90px);
+  }
+
+  .aurora-blob-1 {
+    top: -12%;
+    left: -8%;
+    width: 42vw;
+    height: 42vw;
+    max-width: 620px;
+    max-height: 620px;
+    background: radial-gradient(circle at 30% 30%, #fb7299, transparent 70%);
+    animation: aurora-drift 20s ease-in-out infinite;
+  }
+
+  .aurora-blob-2 {
+    top: 6%;
+    right: -10%;
+    width: 40vw;
+    height: 40vw;
+    max-width: 580px;
+    max-height: 580px;
+    background: radial-gradient(circle at 60% 40%, #7aa2ff, transparent 70%);
+    animation: aurora-drift 26s ease-in-out infinite reverse;
+  }
+
+  .aurora-blob-3 {
+    bottom: -16%;
+    left: 30%;
+    width: 46vw;
+    height: 46vw;
+    max-width: 640px;
+    max-height: 640px;
+    background: radial-gradient(circle at 50% 50%, #b58bff, transparent 70%);
+    animation: aurora-drift 30s ease-in-out infinite;
+  }
+
+  .aurora-grain {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    mix-blend-mode: overlay;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root { scroll-behavior: auto; }
+    .aurora-blob,
+    .animate-float,
+    .animate-ping { animation: none !important; }
+  }
+
+  /* 键盘可访问：统一 focus-visible 焦点环 */
+  :where(a, button, summary, input, [tabindex]):focus-visible {
+    outline: 2px solid #fb7299;
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+  }
+
+  /* ---------- 液态玻璃工具类 ---------- */
+  .glass {
+    background-color: rgb(var(--glass-bg) / var(--glass-bg-alpha));
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgb(var(--glass-border) / var(--glass-border-alpha));
+    box-shadow: 0 8px 32px -8px rgb(var(--glass-shadow) / 0.24),
+      inset 0 1px 0 0 rgb(255 255 255 / 0.14);
+  }
+
+  .glass-strong {
+    background-color: rgb(var(--glass-bg) / calc(var(--glass-bg-alpha) + 0.18));
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    border: 1px solid rgb(var(--glass-border) / var(--glass-border-alpha));
+    box-shadow: 0 16px 48px -12px rgb(var(--glass-shadow) / 0.3),
+      inset 0 1px 0 0 rgb(255 255 255 / 0.18);
+  }
+
+  /* 移动端降级模糊半径，防止大面积 backdrop-blur 掉帧 */
+  @media (max-width: 640px) {
+    .glass { backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%); }
+    .glass-strong { backdrop-filter: blur(18px) saturate(170%); -webkit-backdrop-filter: blur(18px) saturate(170%); }
+    .aurora-blob { filter: blur(60px); }
+  }
+
+  /* 不支持 backdrop-filter 时的兜底：加大不透明度保证可读性 */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass { background-color: rgb(var(--glass-bg) / 0.92); }
+    .glass-strong { background-color: rgb(var(--glass-bg) / 0.96); }
+  }
+
+  /* ---------- 自定义滚动条 ---------- */
   .screenshots-scroll {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
-    scrollbar-color: rgb(255 255 255 / 0.1) transparent;
+    scrollbar-color: rgb(var(--hairline) / 0.2) transparent;
   }
-  
-  .light .screenshots-scroll { scrollbar-color: rgb(0 0 0 / 0.2) transparent; }
-  
-  .screenshots-scroll::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-  
+
+  .screenshots-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
   .screenshots-scroll::-webkit-scrollbar-track { background: transparent; }
-  
   .screenshots-scroll::-webkit-scrollbar-thumb {
-    background-color: rgb(255 255 255 / 0.1);
+    background-color: rgb(var(--hairline) / 0.2);
     border-radius: 3px;
   }
-  
-  .light .screenshots-scroll::-webkit-scrollbar-thumb { background-color: rgb(0 0 0 / 0.2); }
 </style>

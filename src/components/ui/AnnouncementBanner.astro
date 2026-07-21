@@ -27,22 +27,19 @@ if (messageLines.length === 0) {
 
 const typeStyles = {
   warning: {
-    bg: "bg-yellow-50 dark:bg-yellow-900/20",
-    border: "border-yellow-200 dark:border-yellow-800/50",
-    text: "text-yellow-800 dark:text-yellow-200",
-    iconColor: "text-yellow-600 dark:text-yellow-400",
+    accent: "bg-amber-400",
+    text: "text-ink",
+    iconColor: "text-ink-subtle hover:text-ink",
   },
   info: {
-    bg: "bg-blue-50 dark:bg-blue-900/20",
-    border: "border-blue-200 dark:border-blue-800/50",
-    text: "text-blue-800 dark:text-blue-200",
-    iconColor: "text-blue-600 dark:text-blue-400",
+    accent: "bg-sky-400",
+    text: "text-ink",
+    iconColor: "text-ink-subtle hover:text-ink",
   },
   success: {
-    bg: "bg-green-50 dark:bg-green-900/20",
-    border: "border-green-200 dark:border-green-800/50",
-    text: "text-green-800 dark:text-green-200",
-    iconColor: "text-green-600 dark:text-green-400",
+    accent: "bg-brand",
+    text: "text-ink",
+    iconColor: "text-ink-subtle hover:text-ink",
   },
 }[type];
 
@@ -50,15 +47,12 @@ const dismissKey = `announcement:${messageLines.join("\n")}`;
 ---
 
 <div
-  class:list={[
-    "mb-6 rounded-lg border p-4 shadow-sm",
-    typeStyles.bg,
-    typeStyles.border,
-  ]}
+  class="glass mb-8 overflow-hidden rounded-3xl p-4 sm:p-5"
   data-announcement
   data-dismiss-key={dismissKey}
 >
-  <div class="flex items-start gap-3">
+  <div class="flex items-start gap-3.5">
+    <span class:list={["w-1 flex-shrink-0 self-stretch rounded-full", typeStyles.accent]}></span>
     <div class="flex-1">
       <div class:list={["space-y-1 text-sm font-medium leading-relaxed", typeStyles.text]}>
         {messageLines.map((line) => (

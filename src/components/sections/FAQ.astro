@@ -4,26 +4,26 @@ import type { FAQProps } from "config";
 const { items } = Astro.props as FAQProps;
 ---
 
-<section id="faq" class="mb-16 scroll-mt-20">
-  <h2 class="mb-6 text-2xl font-semibold text-gray-900 dark:text-white">常见问题</h2>
-  <div class="space-y-4">
+<section id="faq" class="scroll-mt-28 py-12 sm:py-20">
+  <div class="mb-10 text-center">
+    <p class="mb-2 text-sm font-semibold tracking-[0.15em] text-brand">还有疑问</p>
+    <h2 class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">常见问题</h2>
+  </div>
+
+  <div class="mx-auto max-w-3xl space-y-3">
     {items.map((item) => (
-      <div class="overflow-hidden rounded-xl border border-gray-300 bg-white shadow-sm dark:border-white/10 dark:bg-white/[0.03]">
+      <div class="glass overflow-hidden rounded-3xl">
         <details class="group">
-          <summary class="flex cursor-pointer list-none items-center justify-between p-6">
-            <h3 class="pr-6 font-medium text-gray-900 dark:text-white">{item.question}</h3>
-            <svg
-              class="h-5 w-5 flex-shrink-0 text-gray-600 transition-transform group-open:rotate-180 dark:text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 p-5 sm:p-6">
+            <h3 class="font-semibold text-ink">{item.question}</h3>
+            <span class="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-hairline/[0.06] text-ink-muted transition-transform group-open:rotate-180">
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
           </summary>
-          <div class="border-t border-gray-200 px-6 pb-6 pt-6 dark:border-white/5">
-            <p class="text-gray-600 dark:text-gray-400">{item.answer}</p>
+          <div class="border-t border-hairline/10 px-5 pb-5 pt-4 sm:px-6 sm:pb-6">
+            <p class="leading-relaxed text-ink-muted">{item.answer}</p>
           </div>
         </details>
       </div>
@@ -32,16 +32,12 @@ const { items } = Astro.props as FAQProps;
 </section>
 
 <style>
-  summary::-webkit-details-marker {
-    display: none;
-  }
+  summary::-webkit-details-marker { display: none; }
 
   @keyframes faq-reveal {
     from { opacity: 0; transform: translateY(-6px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  details[open] > div {
-    animation: faq-reveal 0.2s ease forwards;
-  }
+  details[open] > div { animation: faq-reveal 0.2s ease forwards; }
 </style>

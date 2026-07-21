@@ -6,7 +6,6 @@ import FAQ from "@components/sections/FAQ.astro";
 import Features from "@components/sections/Features.astro";
 import Screenshots from "@components/sections/Screenshots";
 import AnnouncementBanner from "@components/ui/AnnouncementBanner.astro";
-import ScrollNav from "@components/ui/ScrollNav.astro";
 import FAQSchema from "@components/seo/FAQSchema.astro";
 import OrganizationSchema from "@components/seo/OrganizationSchema.astro";
 import Layout from "@layouts/Layout.astro";
@@ -18,11 +17,11 @@ const { title, description, screenshots, features, faqs, storeLinks, logo, annou
 
 <Layout title={title} description={description} structuredDataType="mobileApplication">
   <!-- LCP -->
-  <link rel="preload" as="image" href="/MiniBili.png" fetchpriority="high" slot="head" />
+  <link rel="preload" as="image" href="/screenshots/iphone/home_new.webp" fetchpriority="high" slot="head" />
   <FAQSchema items={faqs} slot="head" />
   <OrganizationSchema slot="head" />
 
-  <main class="min-h-screen max-w-5xl mx-auto px-4 py-8">
+  <main class="mx-auto max-w-[1120px] px-4 pb-8 pt-24 sm:px-6 sm:pt-28">
     {announcement && announcement.show && (
       <AnnouncementBanner
         message={announcement.message}
@@ -32,11 +31,10 @@ const { title, description, screenshots, features, faqs, storeLinks, logo, annou
       />
     )}
     <AppHero {title} {description} {storeLinks} {logo} />
-    <div class="mb-16"><Screenshots images={screenshots} client:visible /></div>
+    <div class="mt-10 sm:mt-24"><Screenshots images={screenshots} client:visible /></div>
     <Features items={features} />
     <Changelog items={changelog} />
     <FAQ items={faqs} />
     <Community />
   </main>
-  <ScrollNav />
 </Layout>
