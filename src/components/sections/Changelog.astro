@@ -37,12 +37,12 @@ const groups = [
 
   <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
     {recentVersions.map(({ version, build, date, title, updates, platforms }) => (
-      <article class="glass flex flex-col rounded-4xl p-6 transition-all duration-300 hover:-translate-y-1">
+      <article class="glass flex flex-col rounded-4xl p-6 transition-all duration-300 hover:-translate-y-1" id={String(build)}>
         <div class="mb-4 flex items-center justify-between">
-          <div class="flex items-baseline gap-1.5">
-            <span class="text-xl font-bold text-ink">{build}</span>
+          <a href={`/changelog/#${build}`} class="group/anchor flex items-baseline gap-1.5 hover:text-brand transition-colors" title={`查看 Build ${build} 详细日志`}>
+            <span class="text-xl font-bold text-ink group-hover/anchor:text-brand">{build}</span>
             <span class="text-sm text-ink-subtle">{version}</span>
-          </div>
+          </a>
           <div class="flex gap-1">
             {(platforms ?? [AppPlatform.iOS]).map((platform) => (
               <span class="rounded-full bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand">

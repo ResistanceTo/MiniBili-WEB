@@ -1,8 +1,8 @@
 import { type ChangelogProps, type ChangelogEntry, AppPlatform } from "config";
 import type { IconType } from "react-icons";
-import { memo, useMemo, useState } from "react";
-import { FiClock, FiPackage, FiStar, FiTrendingUp, FiTool, FiMonitor, FiSmartphone, FiTv, FiWatch, FiTarget } from "react-icons/fi";
-import { motion } from "framer-motion";
+import { memo, useMemo, useState, useEffect, useCallback, useRef } from "react";
+import { FiClock, FiPackage, FiStar, FiTrendingUp, FiTool, FiMonitor, FiSmartphone, FiTv, FiWatch, FiTarget, FiHash, FiCheck } from "react-icons/fi";
+import { motion, AnimatePresence } from "framer-motion";
 
 type UpdateType = "feature" | "improvement" | "bugfix";
 
@@ -58,6 +58,9 @@ const renderChangelogItem = (item: string | ChangelogEntry, idx: number) => {
 
 const ChangelogFull = ({ items }: ChangelogProps) => {
 	const [activePlatform, setActivePlatform] = useState<AppPlatform>(AppPlatform.iOS);
+	const [toastMessage, setToastMessage] = useState<string | null>(null);
+	const [activeHash, setActiveHash] = useState<string>("");
+	const isProgrammaticScroll = useRef<boolean>(false);
 
 	const filteredItems = useMemo(() => {
 		return items.filter((item) => {
@@ -75,6 +78,113 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 		});
 		return { versions: filteredItems.length, feature, improvement, bugfix };
 	}, [filteredItems]);
+
+	// Initial hash sync and hashchange listener
+	useEffect(() => {
+		const syncHash = () => {
+			const rawHash = window.location.hash.replace("#", "");
+			setActiveHash(rawHash);
+			if (!rawHash) return;
+
+			const targetBuild = parseInt(rawHash, 10);
+			if (isNaN(targetBuild)) return;
+
+			const targetItem = items.find((item) => item.build === targetBuild);
+			if (targetItem) {
+				const itemPlatforms = targetItem.platforms || [AppPlatform.iOS];
+				setActivePlatform((current) => {
+					if (!itemPlatforms.includes(current)) {
+						return itemPlatforms[0];
+					}
+					return current;
+				});
+
+				isProgrammaticScroll.current = true;
+				setTimeout(() => {
+					const el = document.getElementById(String(targetBuild));
+					if (el) {
+						el.scrollIntoView({ behavior: "smooth" });
+					}
+					setTimeout(() => {
+						isProgrammaticScroll.current = false;
+					}, 800);
+				}, 150);
+			}
+		};
+
+		syncHash();
+		window.addEventListener("hashchange", syncHash);
+		return () => window.removeEventListener("hashchange", syncHash);
+	}, [items]);
+
+	// Scroll spy to update hash automatically as user scrolls down/up
+	useEffect(() => {
+		if (typeof window === "undefined") return;
+
+		const elements = filteredItems
+			.map(({ build }) => document.getElementById(String(build)))
+			.filter((el): el is HTMLElement => el !== null);
+
+		if (elements.length === 0) return;
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				if (isProgrammaticScroll.current) return;
+
+				const visibleEntries = entries.filter((e) => e.isIntersecting);
+				if (visibleEntries.length === 0) return;
+
+				const topMost = visibleEntries.reduce((prev, curr) => {
+					const prevDist = Math.abs(prev.boundingClientRect.top - 120);
+					const currDist = Math.abs(curr.boundingClientRect.top - 120);
+					return currDist < prevDist ? curr : prev;
+				});
+
+				const buildId = topMost.target.id;
+				if (buildId && window.location.hash !== `#${buildId}`) {
+					setActiveHash(buildId);
+					window.history.replaceState(null, "", `#${buildId}`);
+				}
+			},
+			{
+				rootMargin: "-100px 0px -50% 0px",
+				threshold: [0, 0.2, 0.5, 0.8, 1],
+			}
+		);
+
+		elements.forEach((el) => observer.observe(el));
+
+		return () => observer.disconnect();
+	}, [filteredItems]);
+
+	const handleCopyAnchor = useCallback((e: React.MouseEvent<HTMLAnchorElement>, build: number) => {
+		e.preventDefault();
+		const buildStr = String(build);
+		const url = `${window.location.origin}${window.location.pathname}#${buildStr}`;
+		window.history.pushState(null, "", `#${buildStr}`);
+		setActiveHash(buildStr);
+
+		isProgrammaticScroll.current = true;
+		const el = document.getElementById(buildStr);
+		if (el) {
+			el.scrollIntoView({ behavior: "smooth" });
+		}
+		setTimeout(() => {
+			isProgrammaticScroll.current = false;
+		}, 800);
+
+		if (navigator.clipboard) {
+			navigator.clipboard.writeText(url).then(() => {
+				setToastMessage(`已复制 Build ${build} 锚点链接`);
+				setTimeout(() => {
+					setToastMessage((prev) => (prev === `已复制 Build ${build} 锚点链接` ? null : prev));
+				}, 2000);
+			}).catch(() => {
+				setToastMessage(`Build ${build}`);
+				setTimeout(() => setToastMessage(null), 2000);
+			});
+		}
+	}, []);
 
 	return (
 		<div className="space-y-8">
@@ -117,55 +227,82 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 				</div>
 			) : (
 				<div className="relative space-y-5 before:absolute before:left-[14px] before:top-3 before:h-[calc(100%-2rem)] before:w-px before:bg-hairline/15 sm:before:left-[15px]">
-					{filteredItems.map(({ version, build, date, title, updates }) => (
-						<div key={`${version}-${build}`} className="relative pl-10 sm:pl-12">
-							<span className="absolute left-0 top-2 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-brand/15 ring-4 ring-[rgb(var(--page-bg))] sm:h-8 sm:w-8">
-								<FiPackage className="h-3.5 w-3.5 text-brand" />
-							</span>
+					{filteredItems.map(({ version, build, date, title, updates }) => {
+						const buildStr = String(build);
+						const isTargeted = activeHash === buildStr;
 
-							<article className="glass rounded-3xl p-5 transition-transform duration-300 hover:-translate-y-0.5 sm:p-6">
-								<div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-									<div className="flex items-baseline gap-2">
-										<span className="text-xl font-bold text-ink">{build}</span>
-										<span className="rounded-full bg-hairline/[0.06] px-2.5 py-0.5 text-xs font-medium text-ink-muted">{version}</span>
-									</div>
-									<div className="flex items-center gap-1.5 text-xs text-ink-subtle">
-										<FiClock className="h-3.5 w-3.5" />
-										<span>{date}</span>
-									</div>
-								</div>
+						return (
+							<div key={`${version}-${build}`} id={buildStr} className="relative pl-10 sm:pl-12 scroll-mt-24 sm:scroll-mt-28">
+								<span className="absolute left-0 top-2 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-brand/15 ring-4 ring-[rgb(var(--page-bg))] sm:h-8 sm:w-8">
+									<FiPackage className="h-3.5 w-3.5 text-brand" />
+								</span>
 
-								{title && (
-									<div className="mb-4 rounded-2xl border border-brand/20 bg-brand/[0.06] px-3.5 py-2.5">
-										<p className="text-sm font-medium leading-relaxed text-ink">{title}</p>
+								<article className={`glass rounded-3xl p-5 transition-all duration-300 hover:-translate-y-0.5 sm:p-6 target:ring-2 target:ring-brand target:ring-offset-2 target:ring-offset-[rgb(var(--page-bg))] ${isTargeted ? "ring-2 ring-brand ring-offset-2 ring-offset-[rgb(var(--page-bg))]" : ""}`}>
+									<div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+										<div className="flex items-center gap-2">
+											<a
+												href={`#${buildStr}`}
+												onClick={(e) => handleCopyAnchor(e, build)}
+												className="group/anchor inline-flex items-center gap-1.5 text-xl font-bold text-ink transition-colors hover:text-brand"
+												title={`复制 Build ${build} 锚点链接`}
+											>
+												<span>{build}</span>
+												<FiHash className="h-4 w-4 text-brand/60 opacity-0 transition-all duration-200 group-hover/anchor:opacity-100 group-focus-within/anchor:opacity-100 group-hover/anchor:scale-110" />
+											</a>
+											<span className="rounded-full bg-hairline/[0.06] px-2.5 py-0.5 text-xs font-medium text-ink-muted">{version}</span>
+										</div>
+										<div className="flex items-center gap-1.5 text-xs text-ink-subtle">
+											<FiClock className="h-3.5 w-3.5" />
+											<span>{date}</span>
+										</div>
 									</div>
-								)}
 
-								<div className="space-y-4">
-									{UPDATE_GROUPS.map(({ key, icon: Icon, color, dot }) =>
-										updates[key] && updates[key]!.length > 0 ? (
-											<div key={key}>
-												<h3 className={`mb-2 flex items-center gap-2 text-sm font-semibold ${color}`}>
-													<Icon className="h-4 w-4" />
-													{getUpdateLabel(key)}
-												</h3>
-												<ul className="ml-1 space-y-2.5">
-													{updates[key]!.map((content, idx) => (
-														<li key={idx} className="flex items-start gap-2.5 text-sm leading-relaxed text-ink-muted">
-															<span className={`mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full ${dot}`} />
-															<div className="flex-1">{renderChangelogItem(content, idx)}</div>
-														</li>
-													))}
-												</ul>
-											</div>
-										) : null
+									{title && (
+										<div className="mb-4 rounded-2xl border border-brand/20 bg-brand/[0.06] px-3.5 py-2.5">
+											<p className="text-sm font-medium leading-relaxed text-ink">{title}</p>
+										</div>
 									)}
-								</div>
-							</article>
-						</div>
-					))}
+
+									<div className="space-y-4">
+										{UPDATE_GROUPS.map(({ key, icon: Icon, color, dot }) =>
+											updates[key] && updates[key]!.length > 0 ? (
+												<div key={key}>
+													<h3 className={`mb-2 flex items-center gap-2 text-sm font-semibold ${color}`}>
+														<Icon className="h-4 w-4" />
+														{getUpdateLabel(key)}
+													</h3>
+													<ul className="ml-1 space-y-2.5">
+														{updates[key]!.map((content, idx) => (
+															<li key={idx} className="flex items-start gap-2.5 text-sm leading-relaxed text-ink-muted">
+																<span className={`mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full ${dot}`} />
+																<div className="flex-1">{renderChangelogItem(content, idx)}</div>
+															</li>
+														))}
+													</ul>
+												</div>
+											) : null
+										)}
+									</div>
+								</article>
+							</div>
+						);
+					})}
 				</div>
 			)}
+
+			<AnimatePresence>
+				{toastMessage && (
+					<motion.div
+						initial={{ opacity: 0, y: 20, scale: 0.95 }}
+						animate={{ opacity: 1, y: 0, scale: 1 }}
+						exit={{ opacity: 0, y: 10, scale: 0.95 }}
+						className="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-full bg-slate-900/90 px-4 py-2 text-sm text-white shadow-xl backdrop-blur-md dark:bg-slate-100/90 dark:text-slate-900"
+					>
+						<FiCheck className="h-4 w-4 text-emerald-400 dark:text-emerald-600" />
+						<span>{toastMessage}</span>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</div>
 	);
 };
