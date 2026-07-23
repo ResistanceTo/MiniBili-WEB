@@ -3,6 +3,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 156,
+		date: "2026-07-23",
+		updates: {
+			bugfix: [
+				"修复了评论区点赞动画异常问题",
+				"修复了评论区回复弹窗交互问题",
+				"修复了长按复制评论区内容交互异常问题",
+				"修复了动态页交换横屏竖屏时图片会错乱问题",
+				"修复了图片本身规格太高会影响周围点击事件异常问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 155,
 		date: "2026-07-21",
 		updates: {
