@@ -4,43 +4,164 @@ import Breadcrumbs from "@components/ui/Breadcrumbs.astro";
 import Layout from "@layouts/Layout.astro";
 import { marked } from "marked";
 
-import termsContent from "../data/legal/terms.md?raw";
+import termsZh from "../data/legal/terms_zh.md?raw";
+import termsEn from "../data/legal/terms_en.md?raw";
 
-const htmlContent = marked.parse(termsContent) as string;
+const htmlZh = marked.parse(termsZh) as string;
+const htmlEn = marked.parse(termsEn) as string;
 ---
 
 <Layout
-  title="MiniBili 服务条款 - iOS哔哩哔哩第三方客户端使用协议"
+  title="MiniBili 服务条款 / Terms of Service"
   description="MiniBili 服务条款 - 使用 MiniBili 应用的规则和指南"
 >
-  <main class="min-h-screen max-w-3xl mx-auto px-4 py-8">
-    <Breadcrumbs items={[{ label: "服务条款" }]} />
-    <div class="prose prose-gray dark:prose-invert prose-sm sm:prose-base max-w-none">
-      <div set:html={htmlContent} />
+  <main class="min-h-screen max-w-4xl mx-auto px-4 pb-12 pt-24 sm:px-6 sm:pt-28">
+    <div class="mb-6 flex items-center justify-between gap-3">
+      <Breadcrumbs items={[{ label: "服务条款" }]} />
+      
+      <!-- 语言切换开关 / Language Toggle (位于右上角) -->
+      <div 
+        class="inline-flex items-center rounded-2xl border border-hairline/15 bg-hairline/[0.06] p-1 shadow-sm backdrop-blur-md"
+        data-lang-switcher
+        role="tablist"
+        aria-label="语言切换"
+      >
+        <button
+          type="button"
+          class="lang-btn active flex items-center gap-1 rounded-xl px-3 py-1.5 text-xs font-semibold transition-all duration-200"
+          data-lang-target="zh"
+          role="tab"
+          aria-selected="true"
+        >
+          <span class="text-sm">🇨🇳</span>
+          <span class="hidden sm:inline">中文</span>
+        </button>
+        <button
+          type="button"
+          class="lang-btn flex items-center gap-1 rounded-xl px-3 py-1.5 text-xs font-semibold transition-all duration-200"
+          data-lang-target="en"
+          role="tab"
+          aria-selected="false"
+        >
+          <span class="text-sm">🇺🇸</span>
+          <span class="hidden sm:inline">English</span>
+        </button>
+      </div>
     </div>
+
+    <!-- 文档主体卡片 / Legal Document Card -->
+    <article class="glass rounded-3xl p-6 sm:p-10 shadow-glass border border-hairline/10 transition-all">
+      <!-- 中文版本内容 -->
+      <div data-lang-content="zh" class="prose prose-gray dark:prose-invert prose-sm sm:prose-base max-w-none">
+        <div set:html={htmlZh} />
+      </div>
+
+      <!-- 英文版本内容 -->
+      <div data-lang-content="en" class="prose prose-gray dark:prose-invert prose-sm sm:prose-base max-w-none hidden">
+        <div set:html={htmlEn} />
+      </div>
+    </article>
   </main>
   <BackToTop />
 </Layout>
 
+<script is:inline>
+  (function () {
+    const initLangSwitch = () => {
+      const storageKey = 'minibili-legal-lang';
+      const switcher = document.querySelector('[data-lang-switcher]');
+      if (!switcher) return;
+
+      const buttons = switcher.querySelectorAll('[data-lang-target]');
+      const contents = document.querySelectorAll('[data-lang-content]');
+
+      const setLanguage = (lang) => {
+        buttons.forEach((btn) => {
+          const isActive = btn.getAttribute('data-lang-target') === lang;
+          btn.classList.toggle('active', isActive);
+          btn.classList.toggle('bg-brand', isActive);
+          btn.classList.toggle('text-white', isActive);
+          btn.classList.toggle('shadow-sm', isActive);
+          btn.classList.toggle('text-ink-muted', !isActive);
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        contents.forEach((content) => {
+          const isTarget = content.getAttribute('data-lang-content') === lang;
+          if (isTarget) {
+            content.classList.remove('hidden');
+          } else {
+            content.classList.add('hidden');
+          }
+        });
+
+        try {
+          localStorage.setItem(storageKey, lang);
+        } catch (e) {
+          // Fallback if localStorage disabled
+        }
+      };
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const lang = btn.getAttribute('data-lang-target') || 'zh';
+          setLanguage(lang);
+        });
+      });
+
+      // 读取用户存储偏好或默认中文
+      let initialLang = 'zh';
+      try {
+        const saved = localStorage.getItem(storageKey);
+        if (saved === 'en' || saved === 'zh') {
+          initialLang = saved;
+        }
+      } catch (e) {}
+
+      setLanguage(initialLang);
+    };
+
+    initLangSwitch();
+    document.addEventListener('astro:after-swap', initLangSwitch);
+  })();
+</script>
+
 <style is:global>
   .prose {
     --tw-prose-headings: theme(colors.gray.900);
-    --tw-prose-links: theme(colors.blue.600);
+    --tw-prose-links: theme(colors.pink.500);
     --tw-prose-bold: theme(colors.gray.900);
     --tw-prose-invert-headings: theme(colors.white);
-    --tw-prose-invert-links: theme(colors.blue.400);
+    --tw-prose-invert-links: theme(colors.pink.400);
     --tw-prose-invert-bold: theme(colors.white);
   }
   
-  .prose {
-    a {
-      text-decoration: none;
-      &:hover { text-decoration: underline; }
-    }
+  .prose a {
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .prose a:hover {
+    text-decoration: underline;
+  }
 
-    h1, h2, h3, h4, h5, h6 { color: theme(colors.gray.900); }
-    p, li { color: theme(colors.gray.700); }
-    strong { color: theme(colors.gray.800); }
+  .prose h1 {
+    font-size: 1.875rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.5rem;
+  }
+
+  .prose h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+    padding-bottom: 0.4rem;
+  }
+
+  .prose p, .prose li {
+    line-height: 1.75;
   }
 
   .dark .prose {
