@@ -3,6 +3,17 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 157,
+		date: "2026-07-26",
+		updates: {
+			improvement: [
+				"mini播放器添加控件高光和阴影，确保白色背景视频能看清控件内容",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 156,
 		date: "2026-07-23",
 		updates: {
