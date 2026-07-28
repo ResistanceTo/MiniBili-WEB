@@ -3,6 +3,22 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 158,
+		date: "2026-07-28",
+		updates: {
+			improvement: [
+				"合集切换弹窗添加播放量和发布时间",
+				"合集选择任意P播放时，受视频自动播放开关设置控制",
+				"添加转后台时继续播放设置",
+			],
+			bugfix: [
+				"修复设置自定义底栏菜单后，底栏不会自动隐藏的问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 157,
 		date: "2026-07-26",
 		updates: {
