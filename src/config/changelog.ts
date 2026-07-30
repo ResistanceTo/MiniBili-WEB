@@ -3,6 +3,18 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 162,
+		date: "2026-07-30",
+		updates: {
+			improvement: [
+				"经典播放器支持左右滑动快进快退",
+				"优化图片浏览交互和体验",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 158,
 		date: "2026-07-28",
 		updates: {
