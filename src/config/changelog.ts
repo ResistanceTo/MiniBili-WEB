@@ -3,6 +3,18 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 164,
+		date: "2026-07-31",
+		updates: {
+			bugfix: [
+				"修复有多个图片时，点开后面的图片下滑手势失效的问题",
+				"修复放大图片后，单击关闭手势失效的问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 162,
 		date: "2026-07-30",
 		updates: {
