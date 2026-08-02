@@ -3,6 +3,17 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 166,
+		date: "2026-08-02",
+		updates: {
+			bugfix: [
+				"修复Mini播放器自动切换分P后，丢失倍速设置的问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 165,
 		date: "2026-08-01",
 		updates: {
