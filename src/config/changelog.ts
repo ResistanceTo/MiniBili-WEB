@@ -3,6 +3,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 167,
+		date: "2026-08-03",
+		updates: {
+			improvement: [
+				"支持更改App Logo，已预设塔菲、初音未来、阿尼亚和李天希",
+				"移除双击暂停时，视频中间显示的播放状态",
+			],
+			bugfix: [
+				"修复动态卡片中的稍后再看按钮太大挤占其他按钮位置的问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 166,
 		date: "2026-08-02",
 		updates: {
