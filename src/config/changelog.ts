@@ -3,6 +3,19 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 169,
+		date: "2026-08-04",
+		updates: {
+			improvement: [
+				"添加图标预览图",
+				"添加白、粉两种MiniBili图标",
+				"默认蓝色图标修改黑色图标下的着色",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 167,
 		date: "2026-08-03",
 		updates: {
