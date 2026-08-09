@@ -3,6 +3,23 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 173,
+		date: "2026-08-09",
+		updates: {
+			improvement: [
+				"支持直播间发送弹幕",
+				"优化直播间界面",
+				"直播间支持点击头像跳转主播空间",
+				"默认画质设置，区分Wi-Fi和流量",
+			],
+			bugfix: [
+				"修复搜索结果标题存在异常文本的问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 172,
 		date: "2026-08-08",
 		updates: {
