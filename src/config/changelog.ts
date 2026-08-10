@@ -3,6 +3,20 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 175,
+		date: "2026-08-10",
+		updates: {
+			improvement: [
+				"添加自动显示字幕开关",
+			],
+			bugfix: [
+				"修复字幕错误显示问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 174,
 		date: "2026-08-10",
 		updates: {
