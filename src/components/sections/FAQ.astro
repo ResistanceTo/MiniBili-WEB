@@ -23,7 +23,11 @@ const { items } = Astro.props as FAQProps;
             </span>
           </summary>
           <div class="border-t border-hairline/10 px-5 pb-5 pt-4 sm:px-6 sm:pb-6">
-            <p class="leading-relaxed text-ink-muted">{item.answer}</p>
+            <div class="space-y-2 leading-relaxed text-ink-muted">
+              {item.answer.split("\n").map((line) => (
+                <p>{line}</p>
+              ))}
+            </div>
           </div>
         </details>
       </div>

@@ -8,7 +8,8 @@ interface Props {
   description?: string;
   showFooter?: boolean;
   showNavbar?: boolean;
-  structuredDataType?: 'website' | 'mobileApplication';
+  includeApplication?: boolean;
+  noindex?: boolean;
 }
 
 const {
@@ -16,7 +17,8 @@ const {
   description,
   showFooter = true,
   showNavbar = true,
-  structuredDataType = 'website',
+  includeApplication = false,
+  noindex = false,
 } = Astro.props;
 const siteUrl = Astro.site ?? Astro.url;
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
@@ -32,6 +34,7 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
 
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalUrl}>
+    {noindex && <meta name="robots" content="noindex, follow">}
 
     <!-- Favicons -->
     <link rel="icon" href="/favicon.ico" sizes="any">
@@ -41,7 +44,6 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
 
     <title>{title}</title>
     {description && <meta name="description" content={description}>}
-    <meta name="keywords" content="MiniBili,哔哩哔哩,bilibili,B站,B站客户端,第三方客户端,iOS,iPhone,iPad,免费,无广告,隐私保护,TestFlight,哔哩哔哩第三方,哔哩哔哩无广告,Bilibili alternative">
     <meta name="author" content="ResistanceTo">
     <meta name="theme-color" content="#0a0a0b" media="(prefers-color-scheme: dark)">
     <meta name="theme-color" content="#f7f7fb" media="(prefers-color-scheme: light)">
@@ -70,12 +72,13 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
     <meta name="apple-mobile-web-app-title" content="MiniBili">
 
     <!-- Structured Data -->
-    <StructuredData
-      type={structuredDataType}
-      title={title}
-      description={description}
-      url={canonicalUrl}
-    />
+    {!noindex && (
+      <StructuredData
+        {includeApplication}
+        title={title}
+        description={description}
+      />
+    )}
     <slot name="head" />
 
     <script is:inline>

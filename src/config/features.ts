@@ -16,7 +16,7 @@ export const features: Feature[] = [
 	},
 	{
 		title: "完全免费",
-		description: "iPhone和iPad版本，现在和将来都不会向用户收取任何费用。",
+		description: "MiniBili 的所有 App 功能完全免费，赞助不会解锁额外功能。",
 		icon: TbFreeRights,
 	},
 ];

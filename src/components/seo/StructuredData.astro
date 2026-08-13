@@ -1,74 +1,105 @@
 ---
+import { productFacts } from "config/productFacts";
+
 interface Props {
-  type?: 'website' | 'mobileApplication';
+  includeApplication?: boolean;
   title: string;
   description?: string;
-  url: string;
-  image?: string;
 }
 
 const {
-  type = 'website',
+  includeApplication = false,
   title,
   description,
-  url,
-  image = type === 'mobileApplication' ? '/screenshots/iphone/home.webp' : '/og_image.png'
 } = Astro.props;
-const imageUrl = image.startsWith("http") ? image : new URL(image, url).href;
 
-const baseStructuredData = {
-  "@context": "https://schema.org",
-  "@type": type === 'mobileApplication' ? "MobileApplication" : "WebSite",
-  "name": title,
-  "url": url,
+const siteBase = Astro.site?.href.replace(/\/$/, "") ?? "https://minibili.zhaohe.org";
+const siteUrl = `${siteBase}/`;
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const imageUrl = new URL(
+  includeApplication ? "/screenshots/iphone/home_new.webp" : "/og_image.png",
+  siteUrl,
+).href;
+
+const ids = {
+  website: `${siteUrl}#website`,
+  developer: `${siteUrl}#developer`,
+  app: `${siteUrl}#app`,
+  webpage: `${canonicalUrl}#webpage`,
 };
 
-// 网站结构化数据
-const websiteData = type === 'website' ? {
-  ...baseStructuredData,
+const developer = {
+  "@type": "Person",
+  "@id": ids.developer,
+  "name": "ResistanceTo",
+  "url": "https://zhaohe.org/zh-cn/",
+  "sameAs": ["https://github.com/ResistanceTo"],
+};
+
+const website = {
+  "@type": "WebSite",
+  "@id": ids.website,
+  "url": siteUrl,
+  "name": "MiniBili",
+  "description": productFacts.description,
+  "inLanguage": "zh-CN",
+  "publisher": { "@id": ids.developer },
+};
+
+const webpage = {
+  "@type": "WebPage",
+  "@id": ids.webpage,
+  "url": canonicalUrl,
+  "name": title,
   "description": description,
   "inLanguage": "zh-CN",
-  "author": {
-    "@type": "Person",
-    "name": "ResistanceTo",
-    "url": "https://zhaohe.org/zh-cn/"
-  }
-} : null;
+  "isPartOf": { "@id": ids.website },
+  "about": includeApplication ? { "@id": ids.app } : undefined,
+  "primaryImageOfPage": {
+    "@type": "ImageObject",
+    "url": imageUrl,
+  },
+};
 
-// 移动应用结构化数据
-const appData = type === 'mobileApplication' ? {
-  ...baseStructuredData,
-  "applicationCategory": "Entertainment",
-  "operatingSystem": "iOS 26.0+, iPadOS 26.0+, watchOS 11.0+, macOS 26.0+, tvOS 18.0+, visionOS 2.0+",
-  "description": description,
+const releasedPlatforms = Object.values(productFacts.platforms);
+const application = {
+  "@type": "SoftwareApplication",
+  "@id": ids.app,
+  "name": "MiniBili",
+  "url": siteUrl,
+  "description": productFacts.description,
+  "inLanguage": "zh-CN",
+  "applicationCategory": "EntertainmentApplication",
+  "operatingSystem": releasedPlatforms.map(
+    (platform) => `${platform.name} ${platform.minimumVersion}`,
+  ),
   "isAccessibleForFree": true,
   "offers": {
     "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "CNY"
+    "price": 0,
+    "priceCurrency": "CNY",
   },
   "featureList": [
-    "免费使用",
+    "完全免费",
     "无广告",
     "无跟踪器",
-    "本地缓存",
-    "支持多 Apple 平台"
+    "无服务器上传，App 数据仅保存在本地设备",
+    "SwiftUI 原生打造",
   ],
   "screenshot": imageUrl,
-  "author": {
-    "@type": "Person",
-    "name": "ResistanceTo",
-    "url": "https://zhaohe.org/zh-cn/",
-    "sameAs": [
-      "https://github.com/ResistanceTo",
-      "https://t.me/MiniBiliGroup"
-    ]
-  },
-  "downloadUrl": "https://testflight.apple.com/join/TgcHSGwb",
-  "installUrl": "https://testflight.apple.com/join/TgcHSGwb"
-} : null;
+  "author": { "@id": ids.developer },
+  "publisher": { "@id": ids.developer },
+  "downloadUrl": [...new Set(releasedPlatforms.map((platform) => platform.downloadUrl))],
+};
 
-const structuredData = type === 'mobileApplication' ? appData : websiteData;
+const graph = includeApplication
+  ? [website, webpage, application, developer]
+  : [website, webpage, developer];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": graph,
+};
 ---
 
 <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />

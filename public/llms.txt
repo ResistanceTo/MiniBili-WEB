@@ -1,0 +1,39 @@
+# MiniBili
+
+> MiniBili 是一款基于 SwiftUI 原生打造的哔哩哔哩第三方客户端，支持 iPhone、iPad、Apple Watch 与 Mac，完全免费、无广告、无跟踪器，App 数据仅保存在本地设备。
+
+MiniBili 是非官方第三方客户端，与哔哩哔哩官方无关，仅供学习和个人使用。
+
+## 关键事实
+
+- 已发布：iOS、iPadOS、watchOS、macOS，最低系统版本均为 26.0+。
+- 开发中：tvOS 26.0+。
+- 规划中：visionOS 1.0+。
+- 技术：使用 Apple SwiftUI 原生开发。
+- 隐私：无广告、无跟踪器、无 MiniBili 后端服务器；App 数据仅保存在本地设备，业务请求直接发送到哔哩哔哩官方 API。
+- 价格：App 功能完全免费，赞助不会解锁额外 App 功能。
+- 分发：仅通过 Apple TestFlight，不上架 App Store，不提供 IPA 或第三方分发。
+- TestFlight：每个 App 最多可邀请 10,000 名外部测试者。
+- watchOS：独立测试入口已停止更新，当前随 iOS 版本分发。
+
+## 下载
+
+- iPhone / iPad / Apple Watch：https://testflight.apple.com/join/TgcHSGwb
+- Mac：https://testflight.apple.com/join/k9xD3Vqh
+
+## 赞助权益
+
+- 爱发电“大杯”及“股东”档位：长期保留测试资格。
+- 爱发电“股东”档位：专属群组与 TestFlight 快速更新。
+- 赞助不会解锁额外 App 功能。
+
+## 官方页面
+
+- 中文官网：https://minibili.zhaohe.org/
+- 更新日志：https://minibili.zhaohe.org/changelog/
+- 开发路线图：https://minibili.zhaohe.org/roadmap/
+- 隐私政策：https://minibili.zhaohe.org/privacy/
+- 服务条款：https://minibili.zhaohe.org/terms/
+- Telegram 社区：https://t.me/MiniBiliGroup
+- 网站源码仓库：https://github.com/ResistanceTo/MiniBili-WEB
+- 完整说明：https://minibili.zhaohe.org/llms-full.txt

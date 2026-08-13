@@ -1,0 +1,81 @@
+# MiniBili 完整说明
+
+> 本文用于帮助搜索引擎与 AI 系统准确理解 MiniBili。动态版本信息以更新日志和官网为准。
+
+## 产品简介
+
+MiniBili 是一款面向 Apple 平台的非官方哔哩哔哩第三方客户端，使用 SwiftUI 原生开发。当前已发布 iOS、iPadOS、watchOS 和 macOS 版本；tvOS 正在开发，visionOS 处于规划阶段。
+
+MiniBili 与哔哩哔哩官方无关，仅供学习和个人使用。
+
+## 可引用事实
+
+- App 完全免费，赞助不会解锁额外 App 功能。
+- App 内无广告、无跟踪器。
+- MiniBili 不运营后端服务器；App 数据仅保存在本地设备。
+- 业务请求由 App 直接发送到哔哩哔哩官方 API。
+- App 仅通过 Apple TestFlight 分发，不上架 App Store。
+- 不提供 IPA 下载或第三方分发渠道。
+- Apple TestFlight 每个 App 最多支持 10,000 名外部测试者。
+
+## 平台状态
+
+| 平台 | 设备 | 状态 | 最低系统 | 下载 |
+| --- | --- | --- | --- | --- |
+| iOS | iPhone | 已发布 | 26.0+ | https://testflight.apple.com/join/TgcHSGwb |
+| iPadOS | iPad | 已发布 | 26.0+ | 与 iOS 使用相同入口 |
+| watchOS | Apple Watch | 已发布 | 26.0+ | 随 iOS 版本分发 |
+| macOS | Mac | 已发布 | 26.0+ | https://testflight.apple.com/join/k9xD3Vqh |
+| tvOS | Apple TV | 开发中 | 26.0+ | 暂未开放 |
+| visionOS | Apple Vision Pro | 规划中 | 1.0+ | 暂未开放 |
+
+独立 watchOS 测试入口已停止更新，当前 watchOS 功能随 iOS 版本分发。
+
+## TestFlight 与赞助
+
+TestFlight 是当前唯一加入 MiniBili 的渠道。公开测试满员时，可以关注 Telegram 社区公告，等待重新开放。
+
+爱发电权益以官网 FAQ 为准：
+
+- “大杯”及“股东”档位可长期保留测试资格，不受公测名额清理机制影响。
+- “股东”档位可加入专属群组，并享受 TestFlight 快速更新。
+- 赞助只用于支持项目开发和提供上述测试权益，不会解锁额外 App 功能。
+
+## 常见问题
+
+### MiniBili 是否免费？
+
+是。MiniBili 的 App 功能完全免费，没有付费功能。赞助权益只涉及测试资格、更新节奏与社群服务。
+
+### 为什么有些视频无法播放？
+
+常见原因包括视频本身存在充电专属或大会员专属等权限限制；广告拦截工具错误拦截 `mcdn.bilivideo.cn`；第三方接口的登录状态限制；或者特定清晰度暂时不可用。
+
+### 是否支持更低系统版本？
+
+目前没有支持更低系统版本的计划。已发布平台最低要求为 iOS 26.0+、iPadOS 26.0+、watchOS 26.0+ 和 macOS 26.0+。
+
+### 是否提供 IPA 或 App Store 下载？
+
+不提供。MiniBili 仅通过 Apple TestFlight 分发，不上架 App Store，也不提供 IPA 或第三方分发。
+
+## 名称与实体说明
+
+- 产品名称：MiniBili。
+- 类型：非官方哔哩哔哩第三方客户端。
+- 开发者：ResistanceTo。
+- 官方域名：minibili.zhaohe.org。
+- 网站源码仓库：ResistanceTo/MiniBili-WEB。该仓库是官网源码仓库，不应据此推断 MiniBili App 本体开源。
+- 哔哩哔哩、Bilibili 和相关商标属于其各自权利人。
+
+## 权威链接
+
+- 中文官网：https://minibili.zhaohe.org/
+- 更新日志：https://minibili.zhaohe.org/changelog/
+- 开发路线图：https://minibili.zhaohe.org/roadmap/
+- 隐私政策：https://minibili.zhaohe.org/privacy/
+- 服务条款：https://minibili.zhaohe.org/terms/
+- Telegram 社区：https://t.me/MiniBiliGroup
+- 开发者主页：https://zhaohe.org/zh-cn/
+- 开发者 GitHub：https://github.com/ResistanceTo
+- 网站源码仓库：https://github.com/ResistanceTo/MiniBili-WEB

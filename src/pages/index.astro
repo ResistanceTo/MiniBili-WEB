@@ -7,7 +7,6 @@ import Features from "@components/sections/Features.astro";
 import Screenshots from "@components/sections/Screenshots";
 import AnnouncementBanner from "@components/ui/AnnouncementBanner.astro";
 import FAQSchema from "@components/seo/FAQSchema.astro";
-import OrganizationSchema from "@components/seo/OrganizationSchema.astro";
 import Layout from "@layouts/Layout.astro";
 import { changelog } from "../config/changelog";
 import { siteConfig } from "../config";
@@ -15,11 +14,10 @@ import { siteConfig } from "../config";
 const { title, description, screenshots, features, faqs, storeLinks, logo, announcement } = siteConfig;
 ---
 
-<Layout title={title} description={description} structuredDataType="mobileApplication">
+<Layout title={title} description={description} includeApplication>
   <!-- LCP -->
   <link rel="preload" as="image" href="/screenshots/iphone/home_new.webp" fetchpriority="high" slot="head" />
   <FAQSchema items={faqs} slot="head" />
-  <OrganizationSchema slot="head" />
 
   <main class="mx-auto max-w-[1120px] px-4 pb-8 pt-24 sm:px-6 sm:pt-28">
     {announcement && announcement.show && (

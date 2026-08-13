@@ -6,7 +6,8 @@
 		"start": "astro dev",
 		"build": "astro build",
 		"preview": "astro preview",
-		"check": "astro check"
+		"check": "astro check",
+		"check:geo": "npm run build && node scripts/check-geo.mjs"
 	},
 	"dependencies": {
 		"@astrojs/react": "^4.4.0",

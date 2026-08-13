@@ -1,15 +1,26 @@
 ---
 import type { AppHeroProps } from "config";
+import { productFacts } from "config/productFacts";
 import { FiChevronDown } from "react-icons/fi";
 
 const { storeLinks, logo } = Astro.props as AppHeroProps;
 
 const platforms = [
-  { key: "ios", name: "iOS", version: "26.0+", url: storeLinks.ios },
-  { key: "macos", name: "macOS", version: "26.0+", url: storeLinks.macos },
-  { key: "watchos", name: "watchOS", version: "11.0+", url: storeLinks.watchos },
-  { key: "tvos", name: "tvOS", version: "18.0+", url: storeLinks.tvos },
-  { key: "visionos", name: "visionOS", version: "2.0+", url: storeLinks.visionOS },
+  {
+    name: productFacts.platforms.ios.name,
+    minimumVersion: productFacts.platforms.ios.minimumVersion,
+    url: storeLinks.ios,
+  },
+  {
+    name: productFacts.platforms.macos.name,
+    minimumVersion: productFacts.platforms.macos.minimumVersion,
+    url: storeLinks.macos,
+  },
+  {
+    name: productFacts.platforms.watchos.name,
+    minimumVersion: productFacts.platforms.watchos.minimumVersion,
+    url: storeLinks.ios,
+  },
 ].filter((platform) => platform.url);
 
 const badges = ["完全免费", "无广告", "无跟踪器"];
@@ -43,7 +54,7 @@ const badges = ["完全免费", "无广告", "无跟踪器"];
   </h1>
 
   <p class="mt-5 max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg">
-    免费、无广告、无跟踪器的第三方客户端。支持 iPhone、iPad、Apple Watch 与 Mac，所有数据只留在你的设备上。
+    免费、无广告、无跟踪器的第三方客户端。支持 iPhone、iPad、Apple Watch 与 Mac，App 数据只保存在你的设备上。
   </p>
 
   <div class="mt-6 flex flex-wrap items-center justify-center gap-2">
@@ -71,7 +82,7 @@ const badges = ["完全免费", "无广告", "无跟踪器"];
             class="flex items-center justify-between rounded-xl px-4 py-2.5 transition-colors hover:bg-hairline/[0.06]"
           >
             <span class="text-sm font-medium text-ink">{platform.name}</span>
-            <span class="text-xs text-ink-subtle">{platform.version}</span>
+            <span class="text-xs text-ink-subtle">{platform.minimumVersion}</span>
           </a>
         ))}
       </div>
@@ -100,4 +111,3 @@ const badges = ["完全免费", "无广告", "无跟踪器"];
     });
   });
 </script>
-</section>
