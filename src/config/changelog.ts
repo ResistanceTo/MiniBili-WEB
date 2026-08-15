@@ -3,6 +3,32 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 176,
+		date: "2026-08-15",
+		updates: {
+			improvement: [
+				"支持新建、编辑、删除收藏夹",
+				"支持收藏夹、收藏夹内容排序",
+				"支持收藏夹内容批量迁移、删除、播放",
+				"订阅合集批量播放",
+				"历史记录批量播放",
+				"统一播放通道，支持切换上/下一个视频以及正/倒序",
+				"正确记录已看完/重播的视频状态",
+				"支持点踩、举报评论",
+				"支持删除自己的评论",
+				"UP主可以在自己的作品下设置评论置顶和删除评论",
+				"优化点赞、取消点赞、点踩、取消点赞的状态机制",
+				"图片浏览顶部区域使用完全透明的策略",
+				"支持设定全局的顶部、底部模糊状态（主要针对iOS27）",
+			],
+			bugfix: [
+				"修复重复/多次刷新评论和回复时的错误",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 175,
 		date: "2026-08-10",
 		updates: {
