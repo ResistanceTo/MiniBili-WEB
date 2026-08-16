@@ -3,6 +3,22 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 177,
+		date: "2026-08-16",
+		updates: {
+			improvement: [
+				"添加转场动画",
+				"优化弹幕引擎的发射和销毁逻辑",
+				"多处文本使用系统预设字体而非固定写死",
+			],
+			bugfix: [
+				"修复多刷新评论会导致app崩溃的问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 176,
 		date: "2026-08-15",
 		updates: {
