@@ -3,6 +3,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 178,
+		date: "2026-08-17",
+		updates: {
+			improvement: [
+				"优化背景采样逻辑",
+				"优化性能，首页及其他页面提升滑动帧率",
+			],
+			bugfix: [
+				"修复底部tabview消失的问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 177,
 		date: "2026-08-16",
 		updates: {
