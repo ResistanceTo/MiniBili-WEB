@@ -3,6 +3,24 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1000,
+		date: "2026-08-20",
+		updates: {
+			improvement: [
+				"全屏模式下呼出评论区，按钮使用仅图标模式，防止文本太长UI错乱",
+				"多分p视频做正确上报，番剧记录上次播放剧集",
+			],
+			bugfix: [
+				"修复经典播放器下，某些视频无法显示左上角全屏按钮的问题",
+				"修复了滑动位置意外变化的问题",
+				"修复多图浏览，顶部有遮罩问题",
+				"修复回复评论弹窗中，有一个异常小白条的问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 180,
 		date: "2026-08-18",
 		updates: {
