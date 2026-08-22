@@ -3,6 +3,22 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1001,
+		date: "2026-08-22",
+		updates: {
+			improvement: [
+				"分区Tab支持双击回到顶部刷新",
+				"繁体中文由【是但求其】帮助修正",
+			],
+			bugfix: [
+				"修复搜索页搜索框交互不一致问题",
+				"修复直播中媒体控制器的状态",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1000,
 		date: "2026-08-20",
 		updates: {
