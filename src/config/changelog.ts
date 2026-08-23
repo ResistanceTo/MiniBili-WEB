@@ -3,6 +3,24 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1002,
+		date: "2026-08-23",
+		updates: {
+			improvement: [
+				"支持记录分P选择器位置，优化番剧选集选择器交互",
+			],
+			bugfix: [
+				"修复首页滑动时滚动条异常的问题",
+				"修复Mini播放器，隐藏控件时控件会跳动问题",
+				"修复从UP投稿中查看视频后，返回丢失滑动位置的问题",
+				"修复视频详情页，切换详情和评论tab，评论会重载问题",
+				"修复BGM请求会影响详情页面高度问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1001,
 		date: "2026-08-22",
 		updates: {
