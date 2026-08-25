@@ -3,6 +3,27 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1003,
+		date: "2026-08-25",
+		updates: {
+			improvement: [
+				"支持直播全屏弹幕",
+				"支持播放器中间上滑全屏",
+				"公告通知优化",
+				"优化弹幕性能",
+				"优化图片加载",
+			],
+			bugfix: [
+				"修复内嵌模式上下滑会导致控件变化的问题",
+				"修复分P选择器滑动交互问题",
+				"修复番剧视频内存占用较多的问题",
+				"修复视频全屏后评论区重载问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1002,
 		date: "2026-08-23",
 		updates: {
