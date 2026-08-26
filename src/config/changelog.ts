@@ -3,6 +3,25 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1004,
+		date: "2026-08-26",
+		updates: {
+			improvement: [
+				"首页和动态页顶部切换菜单使用原生样式",
+				"去掉苹果音乐菜单样式",
+				"mini播放器优化液态玻璃交互",
+				"支持动图播放",
+				"优化图片打开的动画",
+				"优化评论区内容",
+			],
+			bugfix: [
+				"修复媒体控制器偶尔不生效的问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1003,
 		date: "2026-08-25",
 		updates: {
