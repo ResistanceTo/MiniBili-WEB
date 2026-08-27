@@ -1,0 +1,15 @@
+{
+  "name": "猫猫狗狗",
+  "version": 1,
+  "icons": {
+    "home": "https://minibili.zhaohe.org/themes/pets/chaiquan.png",
+    "dynamic": "https://minibili.zhaohe.org/themes/pets/jumao.png",
+    "category": "https://minibili.zhaohe.org/themes/pets/sanhuamao.png",
+    "history": "https://minibili.zhaohe.org/themes/pets/nainiumao.png",
+    "favorite": "https://minibili.zhaohe.org/themes/pets/baimao.png",
+    "watchLater": "https://minibili.zhaohe.org/themes/pets/keji.png",
+    "subscription": "https://minibili.zhaohe.org/themes/pets/jinmao.png",
+    "message": "https://minibili.zhaohe.org/themes/pets/hashiqi.png",
+    "downloads": "https://minibili.zhaohe.org/themes/pets/bianmu.png"
+  }
+}
