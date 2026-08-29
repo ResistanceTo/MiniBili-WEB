@@ -3,6 +3,19 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1008,
+		date: "2026-08-29",
+		updates: {
+			improvement: [
+				"长按进度条滑动显示预览图",
+				"mini播放器优化缓冲动画",
+				"mini播放器优化控件响应",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1007,
 		date: "2026-08-28",
 		updates: {
