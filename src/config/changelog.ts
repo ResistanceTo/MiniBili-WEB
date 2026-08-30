@@ -37,7 +37,7 @@ export const changelog: ChangelogVersion[] = [
 				"最常访问区域直播默认隐藏",
 				"优化图标着色",
 				"支持自定义底栏图标",
-				"支持订阅主题包",
+				"支持订阅主题包（https://minibili.zhaohe.org/themes/pets/pack.json）",
 			],
 		},
 		platforms: [AppPlatform.iOS],
