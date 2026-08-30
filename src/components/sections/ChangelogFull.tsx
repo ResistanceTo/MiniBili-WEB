@@ -1,7 +1,7 @@
 import { type ChangelogProps, type ChangelogEntry, AppPlatform } from "config";
 import type { IconType } from "react-icons";
 import { memo, useMemo, useState, useEffect, useCallback, useRef } from "react";
-import { FiClock, FiPackage, FiStar, FiTrendingUp, FiTool, FiMonitor, FiSmartphone, FiTv, FiWatch, FiTarget, FiHash, FiCheck } from "react-icons/fi";
+import { FiCheck, FiClock, FiHash, FiMonitor, FiPackage, FiRss, FiSmartphone, FiStar, FiTarget, FiTool, FiTrendingUp, FiTv, FiWatch } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 
 type UpdateType = "feature" | "improvement" | "bugfix";
@@ -190,7 +190,20 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 		<div className="space-y-8">
 			<div className="text-center">
 				<p className="mb-2 text-sm font-semibold tracking-[0.15em] text-brand">持续进化</p>
-				<h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">更新日志</h1>
+				<div className="flex items-center justify-center gap-3">
+					<h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">更新日志</h1>
+					<a
+						href="/rss.xml"
+						target="_blank"
+						rel="alternate"
+						type="application/rss+xml"
+						className="inline-flex h-8 items-center gap-1.5 rounded-full border border-orange-500/20 bg-orange-500/10 px-3 text-xs font-semibold text-orange-600 transition-colors hover:border-orange-500/30 hover:bg-orange-500/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--page-bg))] dark:text-orange-400"
+						title="订阅 MiniBili 更新"
+					>
+						<FiRss className="h-3.5 w-3.5" />
+						订阅
+					</a>
+				</div>
 			</div>
 
 			<div className="grid grid-cols-2 gap-3 sm:grid-cols-4">

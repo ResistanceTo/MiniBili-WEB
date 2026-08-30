@@ -1,11 +1,10 @@
 ---
 import { siteConfig } from "config";
-import { FiClock, FiFileText, FiMap, FiShield } from "react-icons/fi";
+import { FiClock, FiMap, FiRss } from "react-icons/fi";
 
-const legalLinks = [
-  { href: "/privacy/", icon: FiShield, text: "隐私" },
-  { href: "/terms/", icon: FiFileText, text: "条款" },
+const footerLinks = [
   { href: "/changelog/", icon: FiClock, text: "日志" },
+  { href: "/rss.xml", icon: FiRss, text: "订阅" },
   { href: "/roadmap/", icon: FiMap, text: "路线" },
 ];
 ---
@@ -40,8 +39,8 @@ const legalLinks = [
               </a>
             ))}
           </div>
-          <nav class="flex flex-wrap items-center gap-x-5 gap-y-2" aria-label="页脚导航">
-            {legalLinks.map(({ href, icon: Icon, text }) => (
+          <nav class="flex flex-nowrap items-center gap-4 sm:gap-5" aria-label="页脚导航">
+            {footerLinks.map(({ href, icon: Icon, text }) => (
               <a href={href} class="flex items-center gap-1.5 text-sm text-ink-muted transition-colors hover:text-ink">
                 <Icon className="h-3.5 w-3.5" />
                 <span>{text}</span>
