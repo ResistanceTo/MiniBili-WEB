@@ -3,6 +3,20 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1009,
+		date: "2026-08-30",
+		updates: {
+			improvement: [
+				"弹幕支持更大字号",
+			],
+			bugfix: [
+				"修复弹幕默认关闭时，开启弹幕后卡顿问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1008,
 		date: "2026-08-29",
 		updates: {
