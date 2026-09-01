@@ -3,6 +3,17 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1010,
+		date: "2026-09-01",
+		updates: {
+			bugfix: [
+				"修复首页卡片长按交互UI错误问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1009,
 		date: "2026-08-30",
 		updates: {
