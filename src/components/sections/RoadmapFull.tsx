@@ -18,13 +18,13 @@ const getStatusIcon = (status: TodoStatus) => {
 const getStatusColor = (status: TodoStatus) => {
 	switch (status) {
 		case TodoStatus.Completed:
-			return "text-green-600 dark:text-green-400";
+			return "text-emerald-500";
 		case TodoStatus.InProgress:
-			return "text-blue-600 dark:text-blue-400";
+			return "text-sky-500";
 		case TodoStatus.Planned:
-			return "text-gray-400 dark:text-gray-500";
+			return "text-ink-subtle";
 		case TodoStatus.Bug:
-			return "text-red-600 dark:text-red-400";
+			return "text-rose-500";
 	}
 };
 
@@ -144,22 +144,22 @@ const TreeNode = ({ node, isLast, prefix, collapsedNodes, onToggleCollapse, node
 	return (
 		<div className="leading-relaxed">
 			{/* 当前节点 */}
-			<div className="flex items-start gap-2 py-0.5">
-				<span className="text-gray-400 dark:text-gray-600 whitespace-pre">
+			<div className="flex items-start gap-2 py-1">
+				<span className="text-ink-subtle/40 whitespace-pre select-none">
 					{prefix}
 					{isLast ? "└─ " : "├─ "}
 				</span>
 				{hasChildren && (
 					<button
 						onClick={() => onToggleCollapse(nodePath)}
-						className="flex-shrink-0 mt-0.5 hover:bg-gray-100 dark:hover:bg-white/5 rounded p-0.5 transition-colors"
+						className="flex-shrink-0 mt-0.5 hover:bg-hairline/10 rounded p-0.5 transition-colors text-ink-subtle hover:text-ink"
 						aria-label={isCollapsed ? "展开" : "折叠"}
 						aria-expanded={!isCollapsed}
 					>
 						{isCollapsed ? (
-							<FiChevronRight className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
+							<FiChevronRight className="w-3.5 h-3.5" />
 						) : (
-							<FiChevronDown className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
+							<FiChevronDown className="w-3.5 h-3.5" />
 						)}
 					</button>
 				)}
@@ -170,10 +170,10 @@ const TreeNode = ({ node, isLast, prefix, collapsedNodes, onToggleCollapse, node
 				)}
 				<span className={`flex-1 font-sans ${
 					hasStatus && node.status === TodoStatus.Completed
-						? "text-gray-500 dark:text-gray-500 line-through"
+						? "text-ink-subtle/70 line-through"
 						: hasChildren
-						? "font-semibold text-gray-900 dark:text-white"
-						: "text-gray-700 dark:text-gray-300"
+						? "font-semibold text-ink"
+						: "text-ink-muted"
 				}`}>
 					{node.title}
 				</span>
@@ -236,32 +236,33 @@ const RoadmapFull = ({ items }: RoadmapProps) => {
 	};
 
 	return (
-		<div className="space-y-5">
-			<div>
-				<h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+		<div className="space-y-6">
+			<div className="text-center sm:text-left">
+				<p className="mb-2 text-sm font-semibold tracking-[0.15em] text-brand">功能演进</p>
+				<h1 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl mb-2">
 					开发路线图
 				</h1>
-				<p className="text-gray-600 dark:text-gray-400 text-sm">
-					查看 MiniBili 的开发进度和计划
+				<p className="text-sm text-ink-muted">
+					查看 MiniBili 的开发进度、规划特性与问题修复状态
 				</p>
 			</div>
 
 			{/* 搜索框 */}
 			<div className="relative">
-				<FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+				<FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-subtle" />
 				<input
 					type="text"
-					placeholder="搜索功能..."
+					placeholder="搜索功能或模块..."
 					value={searchTerm}
 					onChange={(e) => setSearchTerm(e.target.value)}
-					className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.02] text-gray-900 dark:text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all"
+					className="glass w-full pl-10 pr-4 py-2.5 rounded-2xl text-ink placeholder-ink-subtle text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand/30 transition-all"
 				/>
 			</div>
 
 			{/* 状态筛选与统计 */}
-			<div className="rounded-lg border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.02] p-4">
-				<h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">状态筛选</h3>
-				<div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+			<div className="glass rounded-3xl p-5">
+				<h3 className="text-xs font-semibold uppercase tracking-wider text-ink-subtle mb-3">状态筛选</h3>
+				<div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
 					{[
 						{ status: TodoStatus.Completed, count: stats.completed },
 						{ status: TodoStatus.InProgress, count: stats.inProgress },
@@ -275,16 +276,17 @@ const RoadmapFull = ({ items }: RoadmapProps) => {
 							<button
 								key={status}
 								onClick={() => toggleStatusFilter(status)}
-								className={`flex items-center gap-2 p-2 rounded-lg transition-all ${
+								className={`flex items-center justify-between rounded-xl px-3 py-2 text-xs font-medium transition-all ${
 									isActive
-										? "bg-gray-100 dark:bg-white/5"
-										: "opacity-40 hover:opacity-60"
+										? "bg-hairline/[0.08] text-ink ring-1 ring-hairline/15 shadow-sm"
+										: "opacity-40 hover:opacity-75 text-ink-muted"
 								}`}
 							>
-								<Icon className={`w-4 h-4 ${color}`} />
-								<span className="text-sm text-gray-600 dark:text-gray-400">
-									{getStatusLabel(status)} <span className="font-semibold text-gray-800 dark:text-gray-200">{count}</span>
-								</span>
+								<div className="flex items-center gap-2">
+									<Icon className={`w-3.5 h-3.5 ${color}`} />
+									<span>{getStatusLabel(status)}</span>
+								</div>
+								<span className="font-bold text-ink">{count}</span>
 							</button>
 						);
 					})}
@@ -292,17 +294,17 @@ const RoadmapFull = ({ items }: RoadmapProps) => {
 				{statusFilter.size > 0 && (
 					<button
 						onClick={() => setStatusFilter(new Set())}
-						className="mt-3 text-xs text-blue-600 dark:text-blue-400 hover:underline"
+						className="mt-3 text-xs text-brand hover:underline font-medium"
 					>
-						清除筛选
+						清除状态筛选
 					</button>
 				)}
 			</div>
 
 			{/* 树形待办清单 */}
-			<div className="rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.02] p-5">
+			<div className="glass rounded-3xl p-5 sm:p-6">
 				{filteredItems.length > 0 ? (
-						<div className="font-mono text-sm [font-family:ui-monospace,SFMono-Regular,Menlo,monospace,system-ui] [unicode-range:U+0000-00FF] leading-relaxed">
+					<div className="font-mono text-sm [font-family:ui-monospace,SFMono-Regular,Menlo,monospace,system-ui] leading-relaxed">
 						{filteredItems.map((node, idx) => (
 							<TreeNode
 								key={idx}
@@ -316,8 +318,8 @@ const RoadmapFull = ({ items }: RoadmapProps) => {
 						))}
 					</div>
 				) : (
-					<div className="text-center py-8 text-gray-500 dark:text-gray-400 text-sm">
-						没有找到匹配的结果
+					<div className="text-center py-12 text-ink-subtle text-sm">
+						没有找到匹配的功能或模块
 					</div>
 				)}
 			</div>

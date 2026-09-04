@@ -39,7 +39,7 @@ const footerLinks = [
               </a>
             ))}
           </div>
-          <nav class="flex flex-nowrap items-center gap-4 sm:gap-5" aria-label="页脚导航">
+          <nav class="flex flex-wrap items-center gap-3 sm:gap-5" aria-label="页脚导航">
             {footerLinks.map(({ href, icon: Icon, text }) => (
               <a href={href} class="flex items-center gap-1.5 text-sm text-ink-muted transition-colors hover:text-ink">
                 <Icon className="h-3.5 w-3.5" />

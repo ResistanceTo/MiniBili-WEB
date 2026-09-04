@@ -51,6 +51,15 @@ const dismissKey = `announcement:${messageLines.join("\n")}`;
   data-announcement
   data-dismiss-key={dismissKey}
 >
+  {dismissible && (
+    <script is:inline define:vars={{ dismissKey }}>
+      try {
+        if (localStorage.getItem(dismissKey) === "hidden") {
+          document.currentScript.parentElement.style.display = "none";
+        }
+      } catch (e) {}
+    </script>
+  )}
   <div class="flex items-start gap-3.5">
     <span class:list={["w-1 flex-shrink-0 self-stretch rounded-full", typeStyles.accent]}></span>
     <div class="flex-1">

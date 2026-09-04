@@ -1,8 +1,11 @@
 import { type ChangelogProps, type ChangelogEntry, AppPlatform } from "config";
 import type { IconType } from "react-icons";
 import { memo, useMemo, useState, useEffect, useCallback, useRef } from "react";
-import { FiCheck, FiClock, FiHash, FiMonitor, FiPackage, FiRss, FiSmartphone, FiStar, FiTarget, FiTool, FiTrendingUp, FiTv, FiWatch } from "react-icons/fi";
+import { FiCheck, FiChevronDown, FiClock, FiHash, FiMonitor, FiPackage, FiRss, FiSmartphone, FiStar, FiTarget, FiTool, FiTrendingUp, FiTv, FiWatch } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
+
+const INITIAL_PAGE_SIZE = 25;
+const PAGE_SIZE_STEP = 25;
 
 type UpdateType = "feature" | "improvement" | "bugfix";
 
@@ -58,6 +61,7 @@ const renderChangelogItem = (item: string | ChangelogEntry, idx: number) => {
 
 const ChangelogFull = ({ items }: ChangelogProps) => {
 	const [activePlatform, setActivePlatform] = useState<AppPlatform>(AppPlatform.iOS);
+	const [displayCount, setDisplayCount] = useState<number>(INITIAL_PAGE_SIZE);
 	const [toastMessage, setToastMessage] = useState<string | null>(null);
 	const [activeHash, setActiveHash] = useState<string>("");
 	const isProgrammaticScroll = useRef<boolean>(false);
@@ -68,6 +72,10 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 			return itemPlatforms.includes(activePlatform);
 		});
 	}, [items, activePlatform]);
+
+	const visibleItems = useMemo(() => {
+		return filteredItems.slice(0, displayCount);
+	}, [filteredItems, displayCount]);
 
 	const stats = useMemo(() => {
 		let feature = 0, improvement = 0, bugfix = 0;
@@ -92,12 +100,16 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 			const targetItem = items.find((item) => item.build === targetBuild);
 			if (targetItem) {
 				const itemPlatforms = targetItem.platforms || [AppPlatform.iOS];
-				setActivePlatform((current) => {
-					if (!itemPlatforms.includes(current)) {
-						return itemPlatforms[0];
-					}
-					return current;
-				});
+				const targetPlatform = itemPlatforms.includes(activePlatform) ? activePlatform : itemPlatforms[0];
+				if (targetPlatform !== activePlatform) {
+					setActivePlatform(targetPlatform);
+				}
+
+				const targetPlatformItems = items.filter((item) => (item.platforms || [AppPlatform.iOS]).includes(targetPlatform));
+				const targetIdx = targetPlatformItems.findIndex((item) => item.build === targetBuild);
+				if (targetIdx !== -1) {
+					setDisplayCount((current) => Math.max(current, targetIdx + 5));
+				}
 
 				isProgrammaticScroll.current = true;
 				setTimeout(() => {
@@ -115,13 +127,13 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 		syncHash();
 		window.addEventListener("hashchange", syncHash);
 		return () => window.removeEventListener("hashchange", syncHash);
-	}, [items]);
+	}, [items, activePlatform]);
 
 	// Scroll spy to update hash automatically as user scrolls down/up
 	useEffect(() => {
 		if (typeof window === "undefined") return;
 
-		const elements = filteredItems
+		const elements = visibleItems
 			.map(({ build }) => document.getElementById(String(build)))
 			.filter((el): el is HTMLElement => el !== null);
 
@@ -155,7 +167,7 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 		elements.forEach((el) => observer.observe(el));
 
 		return () => observer.disconnect();
-	}, [filteredItems]);
+	}, [visibleItems]);
 
 	const handleCopyAnchor = useCallback((e: React.MouseEvent<HTMLAnchorElement>, build: number) => {
 		e.preventDefault();
@@ -228,7 +240,10 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 							label={label}
 							icon={icon}
 							isActive={activePlatform === platform}
-							onClick={() => setActivePlatform(platform)}
+							onClick={() => {
+								setActivePlatform(platform);
+								setDisplayCount(INITIAL_PAGE_SIZE);
+							}}
 						/>
 					))}
 				</div>
@@ -239,68 +254,92 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 					<p>该平台暂无更新日志</p>
 				</div>
 			) : (
-				<div className="relative space-y-5 before:absolute before:left-[14px] before:top-3 before:h-[calc(100%-2rem)] before:w-px before:bg-hairline/15 sm:before:left-[15px]">
-					{filteredItems.map(({ version, build, date, title, updates }) => {
-						const buildStr = String(build);
-						const isTargeted = activeHash === buildStr;
+				<>
+					<div className="relative space-y-5 before:absolute before:left-[14px] before:top-3 before:h-[calc(100%-2rem)] before:w-px before:bg-hairline/15 sm:before:left-[15px]">
+						{visibleItems.map(({ version, build, date, title, updates }) => {
+							const buildStr = String(build);
+							const isTargeted = activeHash === buildStr;
 
-						return (
-							<div key={`${version}-${build}`} id={buildStr} className="relative pl-10 sm:pl-12 scroll-mt-24 sm:scroll-mt-28">
-								<span className="absolute left-0 top-2 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-brand/15 ring-4 ring-[rgb(var(--page-bg))] sm:h-8 sm:w-8">
-									<FiPackage className="h-3.5 w-3.5 text-brand" />
-								</span>
+							return (
+								<div key={`${version}-${build}`} id={buildStr} className="relative pl-10 sm:pl-12 scroll-mt-24 sm:scroll-mt-28">
+									<span className="absolute left-0 top-2 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-brand/15 ring-4 ring-[rgb(var(--page-bg))] sm:h-8 sm:w-8">
+										<FiPackage className="h-3.5 w-3.5 text-brand" />
+									</span>
 
-								<article className={`glass rounded-3xl p-5 transition-all duration-300 hover:-translate-y-0.5 sm:p-6 target:ring-2 target:ring-brand target:ring-offset-2 target:ring-offset-[rgb(var(--page-bg))] ${isTargeted ? "ring-2 ring-brand ring-offset-2 ring-offset-[rgb(var(--page-bg))]" : ""}`}>
-									<div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-										<div className="flex items-center gap-2">
-											<a
-												href={`#${buildStr}`}
-												onClick={(e) => handleCopyAnchor(e, build)}
-												className="group/anchor inline-flex items-center gap-1.5 text-xl font-bold text-ink transition-colors hover:text-brand"
-												title={`复制 Build ${build} 锚点链接`}
-											>
-												<span>{build}</span>
-												<FiHash className="h-4 w-4 text-brand/60 opacity-0 transition-all duration-200 group-hover/anchor:opacity-100 group-focus-within/anchor:opacity-100 group-hover/anchor:scale-110" />
-											</a>
-											<span className="rounded-full bg-hairline/[0.06] px-2.5 py-0.5 text-xs font-medium text-ink-muted">{version}</span>
+									<article className={`glass rounded-3xl p-5 transition-all duration-300 hover:-translate-y-0.5 sm:p-6 target:ring-2 target:ring-brand target:ring-offset-2 target:ring-offset-[rgb(var(--page-bg))] ${isTargeted ? "ring-2 ring-brand ring-offset-2 ring-offset-[rgb(var(--page-bg))]" : ""}`}>
+										<div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+											<div className="flex items-center gap-2">
+												<a
+													href={`#${buildStr}`}
+													onClick={(e) => handleCopyAnchor(e, build)}
+													className="group/anchor inline-flex items-center gap-1.5 text-xl font-bold text-ink transition-colors hover:text-brand"
+													title={`复制 Build ${build} 锚点链接`}
+												>
+													<span>{build}</span>
+													<FiHash className="h-4 w-4 text-brand/60 opacity-0 transition-all duration-200 group-hover/anchor:opacity-100 group-focus-within/anchor:opacity-100 group-hover/anchor:scale-110" />
+												</a>
+												<span className="rounded-full bg-hairline/[0.06] px-2.5 py-0.5 text-xs font-medium text-ink-muted">{version}</span>
+											</div>
+											<div className="flex items-center gap-1.5 text-xs text-ink-subtle">
+												<FiClock className="h-3.5 w-3.5" />
+												<span>{date}</span>
+											</div>
 										</div>
-										<div className="flex items-center gap-1.5 text-xs text-ink-subtle">
-											<FiClock className="h-3.5 w-3.5" />
-											<span>{date}</span>
-										</div>
-									</div>
 
-									{title && (
-										<div className="mb-4 rounded-2xl border border-brand/20 bg-brand/[0.06] px-3.5 py-2.5">
-											<p className="text-sm font-medium leading-relaxed text-ink">{title}</p>
-										</div>
-									)}
-
-									<div className="space-y-4">
-										{UPDATE_GROUPS.map(({ key, icon: Icon, color, dot }) =>
-											updates[key] && updates[key]!.length > 0 ? (
-												<div key={key}>
-													<h3 className={`mb-2 flex items-center gap-2 text-sm font-semibold ${color}`}>
-														<Icon className="h-4 w-4" />
-														{getUpdateLabel(key)}
-													</h3>
-													<ul className="ml-1 space-y-2.5">
-														{updates[key]!.map((content, idx) => (
-															<li key={idx} className="flex items-start gap-2.5 text-sm leading-relaxed text-ink-muted">
-																<span className={`mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full ${dot}`} />
-																<div className="flex-1">{renderChangelogItem(content, idx)}</div>
-															</li>
-														))}
-													</ul>
-												</div>
-											) : null
+										{title && (
+											<div className="mb-4 rounded-2xl border border-brand/20 bg-brand/[0.06] px-3.5 py-2.5">
+												<p className="text-sm font-medium leading-relaxed text-ink">{title}</p>
+											</div>
 										)}
-									</div>
-								</article>
-							</div>
-						);
-					})}
-				</div>
+
+										<div className="space-y-4">
+											{UPDATE_GROUPS.map(({ key, icon: Icon, color, dot }) =>
+												updates[key] && updates[key]!.length > 0 ? (
+													<div key={key}>
+														<h3 className={`mb-2 flex items-center gap-2 text-sm font-semibold ${color}`}>
+															<Icon className="h-4 w-4" />
+															{getUpdateLabel(key)}
+														</h3>
+														<ul className="ml-1 space-y-2.5">
+															{updates[key]!.map((content, idx) => (
+																<li key={idx} className="flex items-start gap-2.5 text-sm leading-relaxed text-ink-muted">
+																	<span className={`mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full ${dot}`} />
+																	<div className="flex-1">{renderChangelogItem(content, idx)}</div>
+																</li>
+															))}
+														</ul>
+													</div>
+												) : null
+											)}
+										</div>
+									</article>
+								</div>
+							);
+						})}
+					</div>
+
+					{displayCount < filteredItems.length && (
+						<div className="flex flex-col items-center gap-3 pt-6">
+							<button
+								type="button"
+								onClick={() => setDisplayCount((prev) => Math.min(prev + PAGE_SIZE_STEP, filteredItems.length))}
+								className="glass inline-flex items-center gap-2 rounded-2xl px-6 py-3 text-sm font-semibold text-ink transition-all hover:bg-hairline/[0.08] hover:-translate-y-0.5 active:scale-[0.98]"
+							>
+								<span>加载更早版本（剩余 {filteredItems.length - displayCount} 个）</span>
+								<FiChevronDown className="h-4 w-4 text-ink-subtle" />
+							</button>
+							{filteredItems.length - displayCount > PAGE_SIZE_STEP && (
+								<button
+									type="button"
+									onClick={() => setDisplayCount(filteredItems.length)}
+									className="text-xs text-ink-subtle transition-colors hover:text-ink hover:underline"
+								>
+									展开全部历史版本
+								</button>
+							)}
+						</div>
+					)}
+				</>
 			)}
 
 			<AnimatePresence>

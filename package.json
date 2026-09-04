@@ -4,9 +4,9 @@
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
-		"build": "astro build",
+		"build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
 		"preview": "astro preview",
-		"check": "astro check",
+		"check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
 		"check:geo": "npm run build && node scripts/check-geo.mjs"
 	},
 	"dependencies": {

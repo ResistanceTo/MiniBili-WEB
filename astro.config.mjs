@@ -5,6 +5,7 @@ import { defineConfig } from "astro/config";
 
 export default defineConfig({
   site: 'https://minibili.zhaohe.org',
+  prefetch: true,
   integrations: [
     tailwind(),
     react(),

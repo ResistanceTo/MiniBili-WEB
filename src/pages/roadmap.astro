@@ -18,7 +18,7 @@ const breadcrumbItems = [
   description="MiniBili 开发路线图 - 查看已完成、开发中和计划中的功能"
 >
   <BreadcrumbSchema items={breadcrumbItems} slot="head" />
-  <main class="min-h-screen max-w-3xl mx-auto px-4 py-8">
+  <main class="mx-auto max-w-3xl px-4 pb-16 pt-24 sm:px-6 sm:pt-28">
     <Breadcrumbs items={[{ label: "开发路线图" }]} />
     <RoadmapFull items={roadmap} client:idle />
   </main>

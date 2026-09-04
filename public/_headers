@@ -11,6 +11,10 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Astro 打包产物（自带内容 hash）- 长期不可变缓存
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
 # 截图资源（图片/视频）— 针对 /screenshots/* 的专属规则
 /screenshots/*
   Access-Control-Allow-Origin: *

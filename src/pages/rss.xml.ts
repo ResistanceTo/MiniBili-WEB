@@ -128,7 +128,10 @@ export function GET(context: APIContext) {
 	const lastBuildDate = latestDate
 		? new Date(`${latestDate}T00:00:00+08:00`).toUTCString()
 		: new Date().toUTCString();
-	const items = changelog.map((item) => renderItem(item, site)).join("");
+	const items = changelog
+		.slice(0, 30)
+		.map((item) => renderItem(item, site))
+		.join("");
 	const xml = [
 		'<?xml version="1.0" encoding="UTF-8"?>',
 		'<?xml-stylesheet type="text/xsl" href="/rss/styles.xsl"?>',
