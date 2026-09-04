@@ -3,6 +3,22 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1012,
+		date: "2026-09-04",
+		updates: {
+			improvement: [
+				"番剧接入iPhone媒体控制器",
+				"添加定时关闭能力",
+				"优化首页卡片UI",
+			],
+			bugfix: [
+				"修复mini播放器崩溃问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1011,
 		date: "2026-09-02",
 		updates: {
