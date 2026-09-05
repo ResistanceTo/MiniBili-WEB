@@ -3,6 +3,18 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1013,
+		date: "2026-09-05",
+		updates: {
+			improvement: [
+				"支持分享到微信显示为卡片样式",
+				"首页可以选择不感兴趣某视频",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1012,
 		date: "2026-09-04",
 		updates: {
