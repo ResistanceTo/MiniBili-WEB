@@ -3,6 +3,19 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1015,
+		date: "2026-09-07",
+		updates: {
+			improvement: [
+				"支持清空失效的收藏视频",
+				"支持清空已看完的、失效的稍后再看的视频",
+				"支持查看和下载原图",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1014,
 		date: "2026-09-06",
 		updates: {
