@@ -3,6 +3,20 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1016,
+		date: "2026-09-08",
+		updates: {
+			improvement: [
+				"支持图片放大宽度与手机屏幕宽度一致",
+			],
+			bugfix: [
+				"修复稍后再看等页面下拉刷新报错问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1015,
 		date: "2026-09-07",
 		updates: {
