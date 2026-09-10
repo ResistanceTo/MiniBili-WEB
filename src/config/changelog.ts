@@ -3,6 +3,17 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1017,
+		date: "2026-09-10",
+		updates: {
+			improvement: [
+				"支持在首页长按卡片直接进入UP空间",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1016,
 		date: "2026-09-08",
 		updates: {
