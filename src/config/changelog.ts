@@ -3,6 +3,22 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1018,
+		date: "2026-09-12",
+		updates: {
+			improvement: [
+				"播放队列支持按需分页加载",
+				"听视频记录到历史",
+				"听视频支持连播预取、锁屏切歌、打断续播和倍速保持",
+				"没有外部播放队列时，播放队列入口改为显示选集",
+				"新增播放模式：顺序 / 列表循环 / 单曲循环 / 随机 / 播完停止",
+				"去掉部分页的倒序播放",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1017,
 		date: "2026-09-10",
 		updates: {
