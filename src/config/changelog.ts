@@ -3,6 +3,19 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1019,
+		date: "2026-09-14",
+		updates: {
+			improvement: [
+				"听视频页去掉进度条圆点，并修掉菜单闪烁",
+				"优化画质和音质的图标",
+				"弹幕和评论保存草稿",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1018,
 		date: "2026-09-12",
 		updates: {
