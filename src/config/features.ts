@@ -11,7 +11,7 @@ export const features: Feature[] = [
 	},
 	{
 		title: "无广告",
-		description: "整个app没有任何广告干扰你的体验。",
+		description: "整个 App 没有任何广告干扰你的体验。",
 		icon: TbAdCircleOff,
 	},
 	{
