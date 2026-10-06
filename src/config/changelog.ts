@@ -3,6 +3,20 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1031,
+		date: "2026-10-06",
+		updates: {
+			improvement: [
+				"Mac 上把窗口隐藏或最小化一会儿后，App 被系统关掉、再点开要重新启动的问题。",
+			],
+			bugfix: [
+				"【修复】",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1030,
 		date: "2026-10-05",
 		updates: {
