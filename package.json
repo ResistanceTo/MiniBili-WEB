@@ -15,7 +15,6 @@
 		"@astrojs/tailwind": "^6.0.2",
 		"@tailwindcss/typography": "^0.5.19",
 		"astro": "^5.14.1",
-		"framer-motion": "^12.23.22",
 		"marked": "^16.3.0",
 		"react": "^19.1.1",
 		"react-dom": "^19.1.1",
@@ -27,6 +26,7 @@
 		"@astrojs/check": "^0.9.7",
 		"@types/react": "^19.1.16",
 		"@types/react-dom": "^19.1.9",
+		"sharp": "^0.34.5",
 		"typescript": "^5.9.3"
 	},
 	"overrides": {

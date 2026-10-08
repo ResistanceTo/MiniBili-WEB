@@ -1,0 +1,298 @@
+---
+import { DeviceType } from "config";
+import { screenshots } from "config/screenshots";
+import { type Lang, ui } from "../../i18n/ui";
+import { getResponsiveImage } from "../../lib/images";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "zh" } = Astro.props;
+const t = ui[lang].gallery;
+
+// 卡片显示宽度（CSS 像素），同时用于 sizes；visionOS 暂无截图，不显示标签
+const devices = [
+  { type: DeviceType.iOS, label: "iPhone", width: 260 },
+  { type: DeviceType.iPadOS, label: "iPad", width: 300 },
+  { type: DeviceType.macOS, label: "Mac", width: 520 },
+  { type: DeviceType.watchOS, label: "Apple Watch", width: 200 },
+  { type: DeviceType.tvOS, label: "Apple TV", width: 440, upcoming: true },
+];
+
+const panels = await Promise.all(
+  devices
+    .filter((device) => (screenshots[device.type] ?? []).length > 0)
+    .map(async (device) => ({
+      ...device,
+      images: await Promise.all(
+        screenshots[device.type]!.map(async (shot) => ({
+          ...(await getResponsiveImage(shot.src)),
+          label: shot[lang],
+        })),
+      ),
+    })),
+);
+---
+
+<section id="screenshots" class="scroll-mt-28 py-12 sm:py-20" data-gallery>
+  <div class="mb-8 flex flex-col items-center gap-5 text-center">
+    <div>
+      <p class="mb-2 text-sm font-semibold tracking-[0.15em] text-brand-ink">{t.eyebrow}</p>
+      <h2 class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">{t.title}</h2>
+    </div>
+    <div class="glass flex max-w-full items-center gap-1 overflow-x-auto rounded-2xl p-1 scrollbar-hide" role="tablist" aria-label={t.tablist}>
+      {panels.map((panel, index) => (
+        <button
+          type="button"
+          role="tab"
+          id={`gallery-tab-${panel.type}`}
+          aria-controls={`gallery-panel-${panel.type}`}
+          aria-selected={index === 0 ? "true" : "false"}
+          tabindex={index === 0 ? 0 : -1}
+          class="gl-tab"
+          data-tab={panel.type}
+        >
+          {panel.label}
+          {panel.upcoming && <span class="gl-badge">{t.upcoming}</span>}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  {panels.map((panel, panelIndex) => (
+    <div
+      role="tabpanel"
+      id={`gallery-panel-${panel.type}`}
+      aria-labelledby={`gallery-tab-${panel.type}`}
+      class="gl-panel"
+      data-panel={panel.type}
+      hidden={panelIndex !== 0}
+    >
+      <div class="gl-track" data-track tabindex="0" aria-label={t.scrollHint(panel.label)}>
+        {panel.images.map((image, index) => (
+          <button
+            type="button"
+            class="gl-item"
+            data-index={index}
+            data-full={image.original}
+            data-label={t.alt(panel.label, image.label)}
+            aria-label={t.open(panel.label, image.label)}
+          >
+            <img
+              src={image.src}
+              srcset={image.srcset}
+              sizes={`${panel.width}px`}
+              width={image.width}
+              height={image.height}
+              alt={t.alt(panel.label, image.label)}
+              loading="lazy"
+              decoding="async"
+              style={`width:${panel.width}px`}
+            />
+          </button>
+        ))}
+      </div>
+      <div data-track-controls hidden>
+        <div class="mt-4 flex justify-center gap-2">
+          <button type="button" class="gl-arrow glass" data-scroll="-1" aria-label={t.prev}>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button type="button" class="gl-arrow glass" data-scroll="1" aria-label={t.next}>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  ))}
+
+  <dialog class="gl-dialog" aria-label={t.dialog} data-lightbox>
+    <div class="gl-stage" data-stage>
+      <img class="gl-full" alt="" data-full-image />
+    </div>
+    <button type="button" class="gl-arrow glass gl-close" data-close aria-label={t.close}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <button type="button" class="gl-arrow glass gl-prev" data-step="-1" aria-label={t.prev}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button type="button" class="gl-arrow glass gl-next" data-step="1" aria-label={t.next}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+    <p class="gl-counter" aria-live="polite" data-counter></p>
+  </dialog>
+</section>
+
+<style is:global>
+  .gl-tab {
+    @apply relative flex flex-shrink-0 items-center gap-1.5 whitespace-nowrap rounded-xl px-4 py-1.5 text-sm font-medium text-ink-muted transition-colors hover:text-ink;
+  }
+  .gl-tab[aria-selected="true"] {
+    @apply bg-brand-600 text-white shadow-[0_4px_14px_-4px_rgba(251,114,153,0.6)];
+  }
+  .gl-badge {
+    @apply rounded-full bg-hairline/10 px-1.5 py-px text-[10px] font-semibold text-ink-muted;
+  }
+  .gl-tab[aria-selected="true"] .gl-badge { @apply bg-white/25 text-white; }
+
+  .gl-track {
+    @apply flex gap-6 overflow-x-auto pb-4;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--hairline) / 0.2) transparent;
+  }
+  /* 可以继续滚动的一侧渐隐，提示还有内容 */
+  .gl-track[data-fade~="start"] { mask-image: linear-gradient(to right, transparent, #000 48px); }
+  .gl-track[data-fade~="end"] { mask-image: linear-gradient(to left, transparent, #000 48px); }
+  .gl-track[data-fade~="start"][data-fade~="end"] {
+    mask-image: linear-gradient(to right, transparent, #000 48px, #000 calc(100% - 48px), transparent);
+  }
+  .gl-track::-webkit-scrollbar { height: 6px; }
+  .gl-track::-webkit-scrollbar-thumb { background-color: rgb(var(--hairline) / 0.2); border-radius: 3px; }
+
+  .gl-item {
+    @apply flex-shrink-0 overflow-hidden rounded-[1.75rem] shadow-glass ring-1 ring-hairline/10 transition-transform duration-300 hover:scale-[1.02];
+    scroll-snap-align: start;
+  }
+  .gl-item img { @apply block h-auto max-w-none; }
+
+  .gl-arrow {
+    @apply flex h-10 w-10 items-center justify-center rounded-full text-ink transition-colors hover:text-brand-ink disabled:opacity-40 disabled:hover:text-ink;
+  }
+  .gl-arrow svg { @apply h-5 w-5 fill-none stroke-current; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  .gl-dialog {
+    @apply m-0 h-full max-h-none w-full max-w-none border-0 bg-transparent p-0;
+  }
+  .gl-dialog::backdrop { background: rgb(0 0 0 / 0.65); backdrop-filter: blur(16px); }
+  .gl-dialog[open] { @apply flex items-center justify-center; }
+  .gl-stage { @apply flex h-full w-full touch-pan-y items-center justify-center p-4 sm:p-16; }
+  .gl-full { @apply max-h-full max-w-full rounded-xl object-contain shadow-2xl; }
+  .gl-close { @apply absolute right-4 top-4; }
+  .gl-prev { @apply absolute left-3 top-1/2 -translate-y-1/2 sm:left-5; }
+  .gl-next { @apply absolute right-3 top-1/2 -translate-y-1/2 sm:right-5; }
+  .gl-counter { @apply absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/50 px-3 py-1 text-xs font-medium text-white; }
+</style>
+
+<script is:inline>
+  (function () {
+    const root = document.querySelector("[data-gallery]");
+    if (!root) return;
+
+    const tabs = Array.from(root.querySelectorAll("[data-tab]"));
+    const panels = Array.from(root.querySelectorAll("[data-panel]"));
+    const dialog = root.querySelector("[data-lightbox]");
+    const fullImage = root.querySelector("[data-full-image]");
+    const counter = root.querySelector("[data-counter]");
+    let items = [];
+    let current = 0;
+
+    // ---------- 横向滚动：渐隐与左右按钮 ----------
+    const updateTrack = (track) => {
+      const max = track.scrollWidth - track.clientWidth;
+      const fade = [];
+      if (track.scrollLeft > 4) fade.push("start");
+      if (track.scrollLeft < max - 4) fade.push("end");
+      track.dataset.fade = fade.join(" ");
+      const controls = track.parentElement.querySelector("[data-track-controls]");
+      controls.hidden = max <= 4;
+      controls.querySelector('[data-scroll="-1"]').disabled = track.scrollLeft <= 4;
+      controls.querySelector('[data-scroll="1"]').disabled = track.scrollLeft >= max - 4;
+    };
+
+    panels.forEach((panel) => {
+      const track = panel.querySelector("[data-track]");
+      track.addEventListener("scroll", () => updateTrack(track), { passive: true });
+      panel.querySelectorAll("[data-scroll]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const item = track.querySelector(".gl-item");
+          const step = item ? item.getBoundingClientRect().width + 24 : track.clientWidth * 0.8;
+          track.scrollBy({ left: Number(button.dataset.scroll) * step, behavior: "smooth" });
+        });
+      });
+    });
+
+    const updateVisibleTrack = () => {
+      const panel = panels.find((candidate) => !candidate.hidden);
+      if (panel) updateTrack(panel.querySelector("[data-track]"));
+    };
+    window.addEventListener("resize", updateVisibleTrack, { passive: true });
+    // 图片懒加载完成后宽度才确定
+    root.querySelectorAll(".gl-item img").forEach((image) => image.addEventListener("load", updateVisibleTrack));
+
+    // ---------- 设备标签（方向键切换） ----------
+    const selectTab = (tab, focus) => {
+      tabs.forEach((candidate) => {
+        const selected = candidate === tab;
+        candidate.setAttribute("aria-selected", selected ? "true" : "false");
+        candidate.tabIndex = selected ? 0 : -1;
+      });
+      panels.forEach((panel) => {
+        panel.hidden = panel.dataset.panel !== tab.dataset.tab;
+      });
+      if (focus) tab.focus();
+      updateVisibleTrack();
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => selectTab(tab, false));
+      tab.addEventListener("keydown", (event) => {
+        const keys = { ArrowRight: index + 1, ArrowLeft: index - 1, Home: 0, End: tabs.length - 1 };
+        if (!(event.key in keys)) return;
+        event.preventDefault();
+        selectTab(tabs[(keys[event.key] + tabs.length) % tabs.length], true);
+      });
+    });
+
+    // ---------- 大图预览 ----------
+    const show = (index) => {
+      current = (index + items.length) % items.length;
+      const item = items[current];
+      fullImage.src = item.dataset.full;
+      fullImage.alt = item.dataset.label;
+      counter.textContent = `${current + 1} / ${items.length}`;
+    };
+
+    const unlockScroll = () => {
+      document.documentElement.style.overflow = "";
+    };
+
+    root.querySelectorAll(".gl-item").forEach((item) => {
+      item.addEventListener("click", () => {
+        items = Array.from(item.closest("[data-track]").querySelectorAll(".gl-item"));
+        show(items.indexOf(item));
+        document.documentElement.style.overflow = "hidden";
+        dialog.showModal();
+      });
+    });
+
+    dialog.addEventListener("close", unlockScroll);
+    dialog.querySelector("[data-close]").addEventListener("click", () => dialog.close());
+    dialog.querySelectorAll("[data-step]").forEach((button) => {
+      button.addEventListener("click", () => show(current + Number(button.dataset.step)));
+    });
+    // 点击图片以外的区域关闭
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog || event.target.matches("[data-stage]")) dialog.close();
+    });
+    dialog.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") show(current - 1);
+      if (event.key === "ArrowRight") show(current + 1);
+    });
+
+    // 触屏左右滑动切换
+    let touchStartX = null;
+    dialog.addEventListener("touchstart", (event) => {
+      touchStartX = event.touches[0].clientX;
+    }, { passive: true });
+    dialog.addEventListener("touchend", (event) => {
+      if (touchStartX === null) return;
+      const deltaX = event.changedTouches[0].clientX - touchStartX;
+      touchStartX = null;
+      if (Math.abs(deltaX) > 50) show(current + (deltaX < 0 ? 1 : -1));
+    });
+
+    updateVisibleTrack();
+  })();
+</script>

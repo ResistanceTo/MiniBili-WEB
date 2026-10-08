@@ -51,6 +51,15 @@ MiniBili 是一个专为苹果生态设计的第三方哔哩哔哩客户端，�
 
 ---
 
+### 🛠️ 官网开发说明
+
+- `npm run dev` 本地预览，`npm run check:geo` 构建并检查 SEO/GEO（canonical、sitemap、结构化数据、llms.txt 等）。
+- 产品事实（平台、系统要求、下载链接、赞助权益）统一写在 `src/config/productFacts.ts`，FAQ、结构化数据和 `llms.txt` 都从这里生成。
+- 截图放在 `public/screenshots/`，构建时会自动生成多尺寸版本到 `public/_img/`（不提交到仓库）。
+- 首页公告在 `src/config/appInfo.ts`，单条可设置 `expires` 到期自动隐藏。
+
+---
+
 ### 🙏 致谢
 
 基于此项目修改，非常感谢： https://github.com/bohd4nx/mobile-landing

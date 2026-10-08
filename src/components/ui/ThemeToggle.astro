@@ -1,8 +1,16 @@
 ---
+import { type Lang, ui } from "../../i18n/ui";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "zh" } = Astro.props;
+const t = ui[lang].theme;
 const themes = [
-  { key: "light", label: "浅色", icon: "sun" },
-  { key: "dark", label: "深色", icon: "moon" },
-  { key: "system", label: "跟随系统", icon: "monitor" },
+  { key: "light", label: t.light, icon: "sun" },
+  { key: "dark", label: t.dark, icon: "moon" },
+  { key: "system", label: t.system, icon: "monitor" },
 ];
 ---
 
@@ -10,7 +18,7 @@ const themes = [
   class="flex items-center gap-0.5 rounded-xl border border-hairline/10 bg-hairline/[0.04] p-1"
   data-theme-toggle
   role="group"
-  aria-label="主题切换"
+  aria-label={t.group}
 >
   {themes.map(({ key, label, icon }) => (
     <button
@@ -19,7 +27,7 @@ const themes = [
       data-theme-option
       data-theme={key}
       title={label}
-      aria-label={`切换到${label}主题`}
+      aria-label={t.switchTo(label)}
       aria-pressed="false"
     >
       {icon === "sun" && (

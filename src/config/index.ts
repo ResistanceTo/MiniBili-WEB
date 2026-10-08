@@ -3,7 +3,6 @@ import { changelog } from "./changelog";
 import { faq } from "./faq";
 import { features } from "./features";
 import { screenshots } from "./screenshots";
-import { socialLinks } from "./socialLinks";
 import type { AppData } from "./types";
 
 export const siteConfig: AppData = {
@@ -11,7 +10,6 @@ export const siteConfig: AppData = {
 	features,
 	faqs: faq,
 	screenshots,
-	socialLinks,
 	changelog,
 };
 

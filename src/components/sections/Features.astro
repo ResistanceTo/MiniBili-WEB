@@ -1,18 +1,37 @@
 ---
 import type { FeaturesProps } from "config";
-import { featureHighlights } from "config/featureHighlights";
+import { featureHighlights, featureHighlightsEn } from "config/featureHighlights";
 import { platformSummaryText } from "config/productFacts";
+import type { Lang } from "../../i18n/ui";
 
-const { items } = Astro.props as FeaturesProps;
+interface Props extends FeaturesProps {
+  lang?: Lang;
+}
+
+const { items, lang = "zh" } = Astro.props;
+const groups = lang === "zh" ? featureHighlights : featureHighlightsEn;
+const linkClass = "font-medium text-brand-ink hover:underline";
 ---
 
 <section id="features" class="scroll-mt-28 py-12 sm:py-20">
   <div class="mb-10 text-center">
-    <p class="mb-2 text-sm font-semibold tracking-[0.15em] text-brand-ink">为什么选择 MiniBili</p>
-    <h2 class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">纯粹且免费</h2>
-    <p class="mx-auto mt-4 max-w-2xl text-balance text-sm leading-relaxed text-ink-muted">
-      MiniBili 是一款免费、无广告、无跟踪器的 B站（哔哩哔哩）第三方客户端，支持 {platformSummaryText}，基于 SwiftUI 原生打造。
-    </p>
+    {lang === "zh" ? (
+      <>
+        <p class="mb-2 text-sm font-semibold tracking-[0.15em] text-brand-ink">为什么选择 MiniBili</p>
+        <h2 class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">纯粹且免费</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-balance text-sm leading-relaxed text-ink-muted">
+          MiniBili 是一款免费、无广告、无跟踪器的 B站（哔哩哔哩）第三方客户端，支持 {platformSummaryText}，基于 SwiftUI 原生打造。
+        </p>
+      </>
+    ) : (
+      <>
+        <p class="mb-2 text-sm font-semibold tracking-[0.15em] text-brand-ink">Why MiniBili</p>
+        <h2 class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">Clean and free</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-balance text-sm leading-relaxed text-ink-muted">
+          MiniBili is a free, ad-free and tracker-free third-party client for Bilibili, built natively with SwiftUI for iOS, iPadOS, watchOS and macOS (tvOS in development, visionOS planned).
+        </p>
+      </>
+    )}
   </div>
 
   <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
@@ -27,16 +46,28 @@ const { items } = Astro.props as FeaturesProps;
     ))}
   </div>
 
-  <div class="mb-8 mt-16 text-center sm:mt-20" id="feature-list">
-    <p class="mb-2 text-sm font-semibold tracking-[0.15em] text-brand-ink">功能一览</p>
-    <h2 class="text-2xl font-bold tracking-tight text-ink sm:text-3xl">常用功能，原生体验</h2>
-    <p class="mx-auto mt-3 max-w-xl text-balance text-sm leading-relaxed text-ink-muted">
-      以下是目前可以使用的主要功能，开发进度见<a href="/roadmap/" class="font-medium text-brand-ink hover:underline">路线图</a>，逐版本变化见<a href="/changelog/" class="font-medium text-brand-ink hover:underline">更新日志</a>。
-    </p>
+  <div class="mb-8 mt-16 scroll-mt-28 text-center sm:mt-20" id="feature-list">
+    {lang === "zh" ? (
+      <>
+        <p class="mb-2 text-sm font-semibold tracking-[0.15em] text-brand-ink">功能一览</p>
+        <h2 class="text-2xl font-bold tracking-tight text-ink sm:text-3xl">常用功能，原生体验</h2>
+        <p class="mx-auto mt-3 max-w-xl text-balance text-sm leading-relaxed text-ink-muted">
+          以下是目前可以使用的主要功能，开发进度见<a href="/roadmap/" class={linkClass}>路线图</a>，逐版本变化见<a href="/changelog/" class={linkClass}>更新日志</a>。
+        </p>
+      </>
+    ) : (
+      <>
+        <p class="mb-2 text-sm font-semibold tracking-[0.15em] text-brand-ink">Features</p>
+        <h2 class="text-2xl font-bold tracking-tight text-ink sm:text-3xl">Everything you use, native</h2>
+        <p class="mx-auto mt-3 max-w-xl text-balance text-sm leading-relaxed text-ink-muted">
+          Highlights of what MiniBili can do today. See the <a href="/changelog/" class={linkClass}>changelog</a> (in Chinese) for every release.
+        </p>
+      </>
+    )}
   </div>
 
   <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-    {featureHighlights.map(({ icon: Icon, title, items: groupItems }) => (
+    {groups.map(({ icon: Icon, title, items: groupItems }) => (
       <div class="glass rounded-3xl p-6">
         <h3 class="mb-4 flex items-center gap-2.5 text-base font-semibold text-ink">
           <span class="flex h-8 w-8 items-center justify-center rounded-xl bg-brand/10 text-brand-ink">

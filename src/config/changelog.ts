@@ -1958,7 +1958,7 @@ export const changelog: ChangelogVersion[] = [
 				"搜索页如果没有关键词则恢复到最初界面",
 				{
 					text: "添加一个颜色选择器，可以自定义多处颜色（例如首页的推荐、热门等等）",
-					images: ["/log/51-颜色选择.gif"]
+					images: ["/log/51-颜色选择.mp4"]
 				}
 			],
 			bugfix: [
@@ -1976,7 +1976,7 @@ export const changelog: ChangelogVersion[] = [
 				"收藏夹弹窗支持拉高显示更多内容",
 				{
 					text: "评论回复的交互界面改版",
-					images: ["/log/50-回复.gif"]
+					images: ["/log/50-回复.mp4"]
 				}
 			],
 		},

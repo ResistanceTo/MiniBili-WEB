@@ -1,5 +1,11 @@
 ---
+import { productFacts } from "config/productFacts";
 import { RiGithubFill, RiMailFill, RiTelegram2Fill } from "react-icons/ri";
+import type { Lang } from "../../i18n/ui";
+
+interface Props {
+  lang?: Lang;
+}
 
 interface CommunityLink {
   icon: typeof RiTelegram2Fill;
@@ -9,33 +15,35 @@ interface CommunityLink {
   primary?: boolean;
 }
 
+const { lang = "zh" } = Astro.props;
+const isZh = lang === "zh";
+
 const communityLinks: CommunityLink[] = [
   {
     icon: RiTelegram2Fill,
-    title: "Telegram 群组",
-    description: "获取最新动态和技术交流",
-    url: "https://t.me/MiniBiliGroup",
+    title: isZh ? "Telegram 群组" : "Telegram group",
+    description: isZh ? "获取最新动态和技术交流" : "News, beta openings and discussion",
+    url: productFacts.telegramUrl,
     primary: true,
   },
   {
     icon: RiGithubFill,
     title: "GitHub Issues",
-    description: "报告问题、提出建议",
+    description: isZh ? "报告问题、提出建议" : "Report bugs and request features",
     url: "https://github.com/ResistanceTo/MiniBili-WEB/issues",
   },
   {
     icon: RiMailFill,
-    title: "电子邮件",
-    description: "发送邮件联系开发者",
+    title: isZh ? "电子邮件" : "Email",
+    description: isZh ? "发送邮件联系开发者" : "Contact the developer",
     url: "mailto:me@zhaohe.org",
   },
 ];
 ---
-
 <section id="community" class="scroll-mt-28 py-12 sm:py-20">
   <div class="mb-10 text-center">
-    <p class="mb-2 text-sm font-semibold tracking-[0.15em] text-brand-ink">交流与支持</p>
-    <h2 class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">社区与反馈</h2>
+    <p class="mb-2 text-sm font-semibold tracking-[0.15em] text-brand-ink">{isZh ? "交流与支持" : "Community"}</p>
+    <h2 class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">{isZh ? "社区与反馈" : "Get in touch"}</h2>
   </div>
 
   <div class="grid grid-cols-1 gap-4 md:grid-cols-3">

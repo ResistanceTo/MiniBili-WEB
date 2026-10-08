@@ -20,3 +20,21 @@ export const features: Feature[] = [
 		icon: TbFreeRights,
 	},
 ];
+
+export const featuresEn: Feature[] = [
+	{
+		title: "Private by design",
+		description: "Nothing is uploaded to any server of ours. Data is cached only on your device, and the app talks directly to Bilibili's servers.",
+		icon: FaShieldAlt,
+	},
+	{
+		title: "No ads",
+		description: "Not a single ad anywhere in the app.",
+		icon: TbAdCircleOff,
+	},
+	{
+		title: "Completely free",
+		description: "Every feature is free. Sponsorship never unlocks extra features.",
+		icon: TbFreeRights,
+	},
+];

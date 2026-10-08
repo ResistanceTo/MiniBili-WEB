@@ -1,11 +1,5 @@
 import type { IconType } from "react-icons";
 
-export interface MediaItem {
-	src: string;
-	type: "image" | "video";
-	poster?: string;
-}
-
 export enum DeviceType {
 	iOS = "iOS",
 	iPadOS = "iPadOS",
@@ -15,14 +9,14 @@ export enum DeviceType {
 	visionOS = "visionOS",
 }
 
-export interface DeviceScreenshots {
-	[DeviceType.iOS]: (string | MediaItem)[];
-	[DeviceType.iPadOS]: (string | MediaItem)[];
-	[DeviceType.macOS]?: (string | MediaItem)[];
-	[DeviceType.tvOS]?: (string | MediaItem)[];
-	[DeviceType.watchOS]?: (string | MediaItem)[];
-	[DeviceType.visionOS]?: (string | MediaItem)[];
+export interface Screenshot {
+	src: string;
+	// 截图说明（用作 alt 文本）
+	zh: string;
+	en: string;
 }
+
+export type DeviceScreenshots = Partial<Record<DeviceType, Screenshot[]>>;
 
 export interface Feature {
 	title: string;
@@ -31,6 +25,8 @@ export interface Feature {
 }
 
 export interface FAQ {
+	// 页面锚点，例如 faq-install
+	id?: string;
 	question: string;
 	answer: string;
 }
@@ -41,12 +37,6 @@ export interface StoreLinks {
 	tvos?: string;
 	watchos?: string;
 	visionOS?: string;
-}
-
-export interface SocialLink {
-	url: string;
-	icon: IconType;
-	label: string;
 }
 
 export interface AppLogo {
@@ -60,13 +50,6 @@ export interface Announcement {
 	type?: "warning" | "info" | "success";
 	dismissible?: boolean;
 	show?: boolean;
-}
-
-export interface Review {
-	author: string;
-	rating: number;
-	text: string;
-	avatar?: string;
 }
 
 export interface ChangelogEntry {
@@ -120,34 +103,13 @@ export interface AppData {
 	features: Feature[];
 	faqs: FAQ[];
 	storeLinks: StoreLinks;
-	socialLinks: SocialLink[];
 	logo: AppLogo;
 	changelog?: ChangelogVersion[];
 	announcement?: Announcement;
 }
 
-export interface WithImages {
-	images: DeviceScreenshots;
-}
-
 export interface WithItems<T> {
 	items: T[];
-}
-
-export interface StoreButtonProps {
-	href: string;
-	label: string;
-	storeName: string;
-	icon?: IconType;
-	className?: string;
-	onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
-}
-
-export interface AppHeroProps {
-	title: string;
-	description: string;
-	storeLinks: StoreLinks;
-	logo: AppLogo;
 }
 
 export interface BreadcrumbsProps {
@@ -157,35 +119,6 @@ export interface BreadcrumbsProps {
 	}[];
 }
 
-export interface DeviceToggleProps {
-	activeDevice: DeviceType;
-	onToggle: (device: DeviceType) => void;
-}
-
-export interface GithubCornerProps {
-	href: string;
-}
-
 export interface FeaturesProps extends WithItems<Feature> { }
 export interface FAQProps extends WithItems<FAQ> { }
-export interface ReviewsProps extends WithItems<Review> { }
-export interface SocialLinksProps extends WithItems<SocialLink> { }
 export interface ChangelogProps extends WithItems<ChangelogVersion> { }
-export interface RoadmapProps extends WithItems<TodoNode> { }
-
-export type ScreenshotsProps = WithImages;
-export type LightboxProps = WithImages;
-
-export function areImagesEqual<T extends WithImages>(
-	prevProps: T,
-	nextProps: T,
-): boolean {
-	return (
-		prevProps.images[DeviceType.iOS] === nextProps.images[DeviceType.iOS] &&
-		prevProps.images[DeviceType.iPadOS] === nextProps.images[DeviceType.iPadOS] &&
-		prevProps.images[DeviceType.macOS] === nextProps.images[DeviceType.macOS] &&
-		prevProps.images[DeviceType.tvOS] === nextProps.images[DeviceType.tvOS] &&
-		prevProps.images[DeviceType.watchOS] === nextProps.images[DeviceType.watchOS] &&
-		prevProps.images[DeviceType.visionOS] === nextProps.images[DeviceType.visionOS]
-	);
-}

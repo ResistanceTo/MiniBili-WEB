@@ -1,0 +1,136 @@
+---
+import BackToTop from "@components/ui/BackToTop.astro";
+import Breadcrumbs from "@components/ui/Breadcrumbs.astro";
+import Layout from "@layouts/Layout.astro";
+import { marked } from "marked";
+
+interface Props {
+  title: string;
+  description: string;
+  label: string;
+  markdownZh: string;
+  markdownEn: string;
+}
+
+const { title, description, label, markdownZh, markdownEn } = Astro.props;
+const htmlZh = marked.parse(markdownZh) as string;
+const htmlEn = marked.parse(markdownEn) as string;
+---
+
+<Layout {title} {description}>
+  <main class="mx-auto min-h-screen max-w-4xl px-4 pb-12 pt-24 sm:px-6 sm:pt-28">
+    <div class="mb-6 flex items-center justify-between gap-3">
+      <Breadcrumbs items={[{ label }]} />
+
+      <!-- 语言切换：?lang=en 可直接打开英文版 -->
+      <div
+        class="inline-flex items-center rounded-2xl border border-hairline/15 bg-hairline/[0.06] p-1 shadow-sm backdrop-blur-md"
+        data-lang-switcher
+        role="group"
+        aria-label="语言 / Language"
+      >
+        <button type="button" class="lang-btn" data-lang-target="zh" aria-pressed="true" lang="zh-CN">中文</button>
+        <button type="button" class="lang-btn" data-lang-target="en" aria-pressed="false" lang="en">English</button>
+      </div>
+    </div>
+
+    <article class="glass rounded-3xl border border-hairline/10 p-6 shadow-glass sm:p-10">
+      <div data-lang-content="zh" class="prose prose-sm prose-gray max-w-none dark:prose-invert sm:prose-base">
+        <div set:html={htmlZh} />
+      </div>
+      <div data-lang-content="en" lang="en" class="prose prose-sm prose-gray hidden max-w-none dark:prose-invert sm:prose-base">
+        <div set:html={htmlEn} />
+      </div>
+    </article>
+  </main>
+  <BackToTop />
+</Layout>
+
+<script is:inline>
+  (function () {
+    const storageKey = "minibili-legal-lang";
+    const switcher = document.querySelector("[data-lang-switcher]");
+    if (!switcher) return;
+
+    const buttons = switcher.querySelectorAll("[data-lang-target]");
+    const contents = document.querySelectorAll("[data-lang-content]");
+
+    const setLanguage = (lang, remember) => {
+      buttons.forEach((button) => {
+        button.setAttribute("aria-pressed", button.dataset.langTarget === lang ? "true" : "false");
+      });
+      contents.forEach((content) => {
+        content.classList.toggle("hidden", content.dataset.langContent !== lang);
+      });
+      if (!remember) return;
+      try {
+        localStorage.setItem(storageKey, lang);
+      } catch (e) {}
+    };
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => setLanguage(button.dataset.langTarget, true));
+    });
+
+    // 优先使用链接里的 ?lang=，其次是上次的选择
+    let initialLang = new URLSearchParams(location.search).get("lang");
+    if (initialLang !== "en" && initialLang !== "zh") {
+      try {
+        initialLang = localStorage.getItem(storageKey);
+      } catch (e) {}
+    }
+    setLanguage(initialLang === "en" ? "en" : "zh", false);
+  })();
+</script>
+
+<style is:global>
+  .lang-btn {
+    @apply rounded-xl px-3 py-1.5 text-xs font-semibold text-ink-muted transition-all duration-200 hover:text-ink;
+  }
+  .lang-btn[aria-pressed="true"] {
+    @apply bg-brand-600 text-white shadow-sm hover:text-white;
+  }
+
+  .prose {
+    --tw-prose-headings: theme(colors.gray.900);
+    --tw-prose-links: rgb(var(--brand-ink));
+    --tw-prose-bold: theme(colors.gray.900);
+    --tw-prose-invert-headings: theme(colors.white);
+    --tw-prose-invert-links: rgb(var(--brand-ink));
+    --tw-prose-invert-bold: theme(colors.white);
+  }
+  
+  .prose a {
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .prose a:hover {
+    text-decoration: underline;
+  }
+
+  .prose h1 {
+    font-size: 1.875rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.5rem;
+  }
+
+  .prose h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+    padding-bottom: 0.4rem;
+  }
+
+  .prose p, .prose li {
+    line-height: 1.75;
+  }
+
+  .dark .prose {
+    h1, h2, h3, h4, h5, h6 { color: theme(colors.white); }
+    p, li { color: theme(colors.gray.300); }
+    strong { color: theme(colors.gray.200); }
+  }
+</style>

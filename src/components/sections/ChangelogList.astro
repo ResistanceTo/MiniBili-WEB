@@ -119,11 +119,15 @@ const statCards = [
                         {text}
                         {images.length > 0 && (
                           <span class="cl-images">
-                            {images.map((image, imageIndex) => (
-                              <a href={image} target="_blank" rel="noopener">
-                                <img src={image} alt={`${text}（示意图 ${imageIndex + 1}）`} loading="lazy" decoding="async" />
-                              </a>
-                            ))}
+                            {images.map((image, imageIndex) =>
+                              image.endsWith(".mp4") ? (
+                                <video src={image} controls muted loop playsinline preload="metadata" aria-label={`${text}（演示视频 ${imageIndex + 1}）`}></video>
+                              ) : (
+                                <a href={image} target="_blank" rel="noopener">
+                                  <img src={image} alt={`${text}（示意图 ${imageIndex + 1}）`} loading="lazy" decoding="async" />
+                                </a>
+                              ),
+                            )}
                           </span>
                         )}
                       </li>
@@ -210,7 +214,9 @@ const statCards = [
 
   .cl-images { @apply mt-2 grid grid-cols-2 gap-2; }
   .cl-images a { @apply block overflow-hidden rounded-xl ring-1 ring-hairline/10 transition-opacity hover:opacity-90; }
-  .cl-images img { @apply w-full; }
+  .cl-images img,
+  .cl-images video { @apply w-full; }
+  .cl-images video { @apply rounded-xl ring-1 ring-hairline/10; }
 
   .cl-filter[aria-pressed="true"] {
     @apply bg-brand-600 text-white shadow-[0_4px_14px_-4px_rgba(251,114,153,0.6)];

@@ -1,17 +1,20 @@
 ---
 import { changelog } from "config/changelog";
-import { featureHighlights } from "config/featureHighlights";
+import { featureHighlights, featureHighlightsEn } from "config/featureHighlights";
 import { productFacts } from "config/productFacts";
 import { screenshots } from "config/screenshots";
+import { htmlLang, type Lang } from "../../i18n/ui";
 
 interface Props {
   includeApplication?: boolean;
+  lang?: Lang;
   title: string;
   description?: string;
 }
 
 const {
   includeApplication = false,
+  lang = "zh",
   title,
   description,
 } = Astro.props;
@@ -56,7 +59,7 @@ const webpage = {
   "url": canonicalUrl,
   "name": title,
   "description": description,
-  "inLanguage": "zh-CN",
+  "inLanguage": htmlLang[lang],
   "isPartOf": { "@id": ids.website },
   "about": includeApplication ? { "@id": ids.app } : undefined,
   "primaryImageOfPage": {
@@ -65,17 +68,18 @@ const webpage = {
   },
 };
 
+const isZh = lang === "zh";
 const releasedPlatforms = Object.values(productFacts.platforms);
 const latestRelease = changelog[0];
-const screenshotUrls = screenshots.iOS
+const screenshotUrls = (screenshots.iOS ?? [])
   .slice(0, 4)
-  .map((item) => new URL(typeof item === "string" ? item : item.src, siteUrl).href);
+  .map((item) => new URL(item.src, siteUrl).href);
 const application = {
   "@type": "SoftwareApplication",
   "@id": ids.app,
   "name": "MiniBili",
   "url": siteUrl,
-  "description": productFacts.description,
+  "description": isZh ? productFacts.description : productFacts.descriptionEn,
   "inLanguage": ["zh-Hans", "zh-Hant", "en"],
   "applicationCategory": "EntertainmentApplication",
   "operatingSystem": releasedPlatforms.map(
@@ -87,14 +91,16 @@ const application = {
     "price": 0,
     "priceCurrency": "CNY",
   },
-  "featureList": [
-    "完全免费",
-    "无广告",
-    "无跟踪器",
-    "无服务器上传，App 数据仅保存在本地设备",
-    "SwiftUI 原生打造",
-    ...featureHighlights.flatMap((group) => group.items),
-  ],
+  "featureList": isZh
+    ? [
+        "完全免费",
+        "无广告",
+        "无跟踪器",
+        "无服务器上传，App 数据仅保存在本地设备",
+        "SwiftUI 原生打造",
+        ...featureHighlights.flatMap((group) => group.items),
+      ]
+    : ["Free", "No ads", "No trackers", "Native SwiftUI app", ...featureHighlightsEn.flatMap((group) => group.items)],
   "softwareVersion": String(latestRelease.build),
   "dateModified": latestRelease.date,
   "releaseNotes": new URL("/changelog/", siteUrl).href,
