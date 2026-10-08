@@ -1,25 +1,20 @@
 # 默认响应头
+# 注意：同一个响应头被多条规则命中时，Cloudflare Pages 会用逗号把值拼接起来，
+# 所以 Cache-Control 只写在具体规则里，HTML 沿用平台默认的 public, max-age=0, must-revalidate
 /*
-  Permissions-Policy: interest-cohort=()
+  Permissions-Policy: browsing-topics=()
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Content-Security-Policy: default-src 'self'; img-src 'self' data:; media-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'
-  Cache-Control: public, max-age=0, must-revalidate
-
-# 静态资源 - 长期缓存
-/assets/*
-  Cache-Control: public, max-age=31536000, immutable
 
 # Astro 打包产物（自带内容 hash）- 长期不可变缓存
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
 
-# 截图资源（图片/视频）— 针对 /screenshots/* 的专属规则
+# 截图资源允许跨域引用（缓存由下方扩展名规则控制）
 /screenshots/*
   Access-Control-Allow-Origin: *
-  X-Content-Type-Options: nosniff
-  Cache-Control: public, max-age=604800
 
 # 图片文件 - 中期缓存
 /*.png
@@ -32,6 +27,9 @@
   Cache-Control: public, max-age=604800, must-revalidate
 
 /*.webp
+  Cache-Control: public, max-age=604800, must-revalidate
+
+/*.gif
   Cache-Control: public, max-age=604800, must-revalidate
 
 /*.svg
@@ -55,13 +53,6 @@
   Cache-Control: public, max-age=31536000, immutable
 
 /*.woff2
-  Cache-Control: public, max-age=31536000, immutable
-
-# JS/CSS 资源 - 长期缓存
-/*.js
-  Cache-Control: public, max-age=31536000, immutable
-
-/*.css
   Cache-Control: public, max-age=31536000, immutable
 
 # Sitemap 短期缓存

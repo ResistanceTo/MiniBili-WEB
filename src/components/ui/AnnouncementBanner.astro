@@ -1,6 +1,8 @@
 ---
+import type { AnnouncementMessage } from "config";
+
 interface Props {
-  message: string | string[];
+  message: AnnouncementMessage | AnnouncementMessage[];
   type?: "warning" | "info" | "success";
   dismissible?: boolean;
   show?: boolean;
@@ -17,7 +19,14 @@ if (!show || !message) {
   return;
 }
 
-const messageLines = (Array.isArray(message) ? message : message.split(/\r?\n/))
+// 带 expires 的公告在该日期（北京时间）结束后不再输出
+const now = Date.now();
+const isActive = (item: AnnouncementMessage) =>
+  typeof item === "string" || !item.expires || now < new Date(`${item.expires}T23:59:59+08:00`).getTime();
+
+const messageLines = (Array.isArray(message) ? message : [message])
+  .filter(isActive)
+  .flatMap((item) => (typeof item === "string" ? item : item.text).split(/\r?\n/))
   .map((line) => line.trim())
   .filter(Boolean);
 
@@ -47,7 +56,9 @@ const dismissKey = `announcement:${messageLines.join("\n")}`;
 ---
 
 <div
-  class="glass mb-8 overflow-hidden rounded-3xl p-4 sm:p-5"
+  class="glass mx-auto mt-10 max-w-3xl overflow-hidden rounded-3xl p-4 sm:mt-14 sm:p-5"
+  role="note"
+  aria-label="公告"
   data-announcement
   data-dismiss-key={dismissKey}
 >
@@ -63,7 +74,7 @@ const dismissKey = `announcement:${messageLines.join("\n")}`;
   <div class="flex items-start gap-3.5">
     <span class:list={["w-1 flex-shrink-0 self-stretch rounded-full", typeStyles.accent]}></span>
     <div class="flex-1">
-      <div class:list={["space-y-1 text-sm font-medium leading-relaxed", typeStyles.text]}>
+      <div class:list={["space-y-1 text-sm leading-relaxed", typeStyles.text]}>
         {messageLines.map((line) => (
           <p>{line}</p>
         ))}

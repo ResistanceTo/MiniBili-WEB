@@ -198,7 +198,8 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
     --surface-muted: 247 247 251;
     --ink: 17 20 27;
     --ink-muted: 82 88 102;
-    --ink-subtle: 130 136 150;
+    --ink-subtle: 105 111 125;
+    --brand-ink: 201 38 91;
     --hairline: 17 20 27;
     --glass-shadow: 30 35 60;
     --page-bg: 246 247 251;
@@ -216,6 +217,7 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
     --ink: 244 245 248;
     --ink-muted: 168 173 186;
     --ink-subtle: 122 127 140;
+    --brand-ink: 251 114 153;
     --hairline: 255 255 255;
     --glass-shadow: 0 0 0;
     --page-bg: 9 10 13;
@@ -304,7 +306,7 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
 
   /* 键盘可访问：统一 focus-visible 焦点环 */
   :where(a, button, summary, input, [tabindex]):focus-visible {
-    outline: 2px solid #fb7299;
+    outline: 2px solid rgb(var(--brand-ink));
     outline-offset: 2px;
     border-radius: 0.5rem;
   }

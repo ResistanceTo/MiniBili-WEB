@@ -70,7 +70,7 @@ const DeviceButton = memo(({ isActive, onClick, label }: {
 		{isActive && (
 			<motion.div
 				layoutId="activeDevice"
-				className="absolute inset-0 rounded-xl bg-brand shadow-[0_4px_14px_-4px_rgba(251,114,153,0.6)]"
+				className="absolute inset-0 rounded-xl bg-brand-600 shadow-[0_4px_14px_-4px_rgba(251,114,153,0.6)]"
 				transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
 			/>
 		)}

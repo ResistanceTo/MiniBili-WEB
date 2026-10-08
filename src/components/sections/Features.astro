@@ -1,22 +1,23 @@
 ---
 import type { FeaturesProps } from "config";
+import { platformSummaryText } from "config/productFacts";
 
 const { items } = Astro.props as FeaturesProps;
 ---
 
 <section id="features" class="scroll-mt-28 py-12 sm:py-20">
   <div class="mb-10 text-center">
-    <p class="mb-2 text-sm font-semibold tracking-[0.15em] text-brand">为什么选择 MiniBili</p>
+    <p class="mb-2 text-sm font-semibold tracking-[0.15em] text-brand-ink">为什么选择 MiniBili</p>
     <h2 class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">纯粹且免费</h2>
     <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-ink-muted">
-      MiniBili 是一款免费、无广告、无跟踪器的哔哩哔哩第三方客户端，支持 iOS、iPadOS、watchOS、macOS（tvOS 开发中、visionOS 规划中），基于 SwiftUI 原生打造。
+      MiniBili 是一款免费、无广告、无跟踪器的 B站（哔哩哔哩）第三方客户端，支持 {platformSummaryText}，基于 SwiftUI 原生打造。
     </p>
   </div>
 
   <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
     {items.map(({ icon: Icon, title, description }) => (
       <div class="glass group rounded-4xl p-7 transition-all duration-300 hover:-translate-y-1">
-        <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand/10 text-brand transition-transform duration-300 group-hover:scale-110">
+        <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand/10 text-brand-ink transition-transform duration-300 group-hover:scale-110">
           <Icon className="h-7 w-7" />
         </div>
         <h3 class="mb-2 text-lg font-semibold text-ink">{title}</h3>

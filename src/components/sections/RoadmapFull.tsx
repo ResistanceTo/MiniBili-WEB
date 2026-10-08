@@ -238,7 +238,7 @@ const RoadmapFull = ({ items }: RoadmapProps) => {
 	return (
 		<div className="space-y-6">
 			<div className="text-center sm:text-left">
-				<p className="mb-2 text-sm font-semibold tracking-[0.15em] text-brand">功能演进</p>
+				<p className="mb-2 text-sm font-semibold tracking-[0.15em] text-brand-ink">功能演进</p>
 				<h1 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl mb-2">
 					开发路线图
 				</h1>
@@ -294,7 +294,7 @@ const RoadmapFull = ({ items }: RoadmapProps) => {
 				{statusFilter.size > 0 && (
 					<button
 						onClick={() => setStatusFilter(new Set())}
-						className="mt-3 text-xs text-brand hover:underline font-medium"
+						className="mt-3 text-xs text-brand-ink hover:underline font-medium"
 					>
 						清除状态筛选
 					</button>

@@ -1,13 +1,16 @@
+import { productFacts, releasedRequirementsText } from "./productFacts";
 import type { FAQ } from "./types";
+
+const { sponsorship, testflightMaxTesters, upcomingPlatforms } = productFacts;
 
 export const faq: FAQ[] = [
 	{
 		question: "TestFlight 名额满了怎么办？怎么加入 MiniBili？",
-		answer: `MiniBili 通过 Apple TestFlight 分发，每个 App 最多可邀请 10,000 名外部测试者。\n如果当前公开名额已满，可以留意社区公告（Telegram 群组），等待后续重新开放。爱发电“大杯”及“股东”档位可长期保留测试资格，不受公测名额清理机制影响。`,
+		answer: `MiniBili 通过 Apple TestFlight 分发，每个 App 最多可邀请 ${testflightMaxTesters} 名外部测试者。\n如果当前公开名额已满，可以留意社区公告（Telegram 群组），等待后续重新开放。爱发电${sponsorship.keepTestingTiers}赞助可长期保留测试资格，不受公测名额清理机制影响。`,
 	},
 	{
 		question: "赞助有什么权益？为什么选择赞助？",
-		answer: `本项目已上线爱发电平台。赞助成为“股东”可加入专属群组，并享受 TestFlight 快速更新；“股东”及旧版“大杯“、“超大杯“赞助长期保留测试资格，不受公测名额清理机制影响。赞助不会解锁额外 App 功能。`,
+		answer: `本项目已上线爱发电平台。赞助成为${sponsorship.perksTier}可加入专属群组，并享受 TestFlight 快速更新；${sponsorship.keepTestingTiers}赞助长期保留测试资格，不受公测名额清理机制影响。赞助不会解锁额外 App 功能。`,
 	},
 	{
 		question: "MiniBili 是免费的吗？会有内购或付费功能吗？",
@@ -19,7 +22,7 @@ export const faq: FAQ[] = [
 	},
 	{
 		question: "MiniBili 会支持更低版本的系统吗？",
-		answer: `目前没有支持更低系统版本的计划。\n最低系统要求为 iOS 26.0+、iPadOS 26.0+、watchOS 26.0+、macOS 26.0+，tvOS 26.0+，visionOS 1.0+。`,
+		answer: `目前没有支持更低系统版本的计划。\n已发布平台的最低系统要求为 ${releasedRequirementsText}。tvOS 版本${upcomingPlatforms.tvos.status}，同样需要 tvOS ${upcomingPlatforms.tvos.minimumVersion}；visionOS 版本${upcomingPlatforms.visionos.status}。`,
 	},
 	{
 		question: "除了 TestFlight，还有 ipa 下载或其他分发渠道吗？",

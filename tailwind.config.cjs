@@ -23,6 +23,8 @@ module.exports = {
 					900: "#761A3A",
 				},
 				// 语义化令牌，映射到 CSS 变量（亮/暗自动切换）
+				// 品牌色文字：浅色模式加深以满足 WCAG AA 对比度
+				"brand-ink": "rgb(var(--brand-ink) / <alpha-value>)",
 				surface: "rgb(var(--surface) / <alpha-value>)",
 				"surface-muted": "rgb(var(--surface-muted) / <alpha-value>)",
 				ink: "rgb(var(--ink) / <alpha-value>)",

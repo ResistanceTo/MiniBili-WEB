@@ -209,7 +209,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 		<div id="screenshots" className="scroll-mt-28 py-12 sm:py-20">
 			<div className="mb-8 flex flex-col items-center gap-5 text-center">
 				<div>
-					<p className="mb-2 text-sm font-semibold tracking-[0.15em] text-brand">界面一览</p>
+					<p className="mb-2 text-sm font-semibold tracking-[0.15em] text-brand-ink">界面一览</p>
 					<h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
 						每一屏都精心打磨
 					</h2>
@@ -339,7 +339,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 						<button
 							type="button"
 							onClick={closeLightbox}
-							className="absolute right-4 top-4 rounded-full glass p-3 text-ink transition-colors hover:text-brand"
+							className="absolute right-4 top-4 rounded-full glass p-3 text-ink transition-colors hover:text-brand-ink"
 							aria-label="关闭预览"
 						>
 							<svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -354,7 +354,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 								event.stopPropagation();
 								showPrevious();
 							}}
-							className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full glass p-3 text-ink transition-colors hover:text-brand"
+							className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full glass p-3 text-ink transition-colors hover:text-brand-ink"
 							aria-label="上一张"
 						>
 							<svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -393,7 +393,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 								event.stopPropagation();
 								showNext();
 							}}
-							className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full glass p-3 text-ink transition-colors hover:text-brand"
+							className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full glass p-3 text-ink transition-colors hover:text-brand-ink"
 							aria-label="下一张"
 						>
 							<svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

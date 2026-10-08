@@ -12,8 +12,8 @@ const htmlEn = marked.parse(privacyEn) as string;
 ---
 
 <Layout
-  title="MiniBili 隐私政策 / Privacy Policy"
-  description="MiniBili 隐私政策 - 了解我们如何保护你的隐私和数据安全"
+  title="隐私政策 Privacy Policy - MiniBili"
+  description="MiniBili 隐私政策：不收集、不存储、不传输任何个人数据，无跟踪 SDK，无中间服务器，App 数据仅保存在本地设备。"
 >
   <main class="min-h-screen max-w-4xl mx-auto px-4 pb-12 pt-24 sm:px-6 sm:pt-28">
     <div class="mb-6 flex items-center justify-between gap-3">
@@ -57,7 +57,7 @@ const htmlEn = marked.parse(privacyEn) as string;
       </div>
 
       <!-- 英文版本内容 -->
-      <div data-lang-content="en" class="prose prose-gray dark:prose-invert prose-sm sm:prose-base max-w-none hidden">
+      <div data-lang-content="en" lang="en" class="prose prose-gray dark:prose-invert prose-sm sm:prose-base max-w-none hidden">
         <div set:html={htmlEn} />
       </div>
     </article>
@@ -79,7 +79,7 @@ const htmlEn = marked.parse(privacyEn) as string;
         buttons.forEach((btn) => {
           const isActive = btn.getAttribute('data-lang-target') === lang;
           btn.classList.toggle('active', isActive);
-          btn.classList.toggle('bg-brand', isActive);
+          btn.classList.toggle('bg-brand-600', isActive);
           btn.classList.toggle('text-white', isActive);
           btn.classList.toggle('shadow-sm', isActive);
           btn.classList.toggle('text-ink-muted', !isActive);
@@ -129,10 +129,10 @@ const htmlEn = marked.parse(privacyEn) as string;
 <style is:global>
   .prose {
     --tw-prose-headings: theme(colors.gray.900);
-    --tw-prose-links: theme(colors.pink.500);
+    --tw-prose-links: rgb(var(--brand-ink));
     --tw-prose-bold: theme(colors.gray.900);
     --tw-prose-invert-headings: theme(colors.white);
-    --tw-prose-invert-links: theme(colors.pink.400);
+    --tw-prose-invert-links: rgb(var(--brand-ink));
     --tw-prose-invert-bold: theme(colors.white);
   }
   

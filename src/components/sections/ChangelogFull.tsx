@@ -201,7 +201,7 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 	return (
 		<div className="space-y-8">
 			<div className="text-center">
-				<p className="mb-2 text-sm font-semibold tracking-[0.15em] text-brand">持续进化</p>
+				<p className="mb-2 text-sm font-semibold tracking-[0.15em] text-brand-ink">持续进化</p>
 				<div className="flex items-center justify-center gap-3">
 					<h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">更新日志</h1>
 					<a
@@ -263,7 +263,7 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 							return (
 								<div key={`${version}-${build}`} id={buildStr} className="relative pl-10 sm:pl-12 scroll-mt-24 sm:scroll-mt-28">
 									<span className="absolute left-0 top-2 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-brand/15 ring-4 ring-[rgb(var(--page-bg))] sm:h-8 sm:w-8">
-										<FiPackage className="h-3.5 w-3.5 text-brand" />
+										<FiPackage className="h-3.5 w-3.5 text-brand-ink" />
 									</span>
 
 									<article className={`glass rounded-3xl p-5 transition-all duration-300 hover:-translate-y-0.5 sm:p-6 target:ring-2 target:ring-brand target:ring-offset-2 target:ring-offset-[rgb(var(--page-bg))] ${isTargeted ? "ring-2 ring-brand ring-offset-2 ring-offset-[rgb(var(--page-bg))]" : ""}`}>
@@ -272,11 +272,11 @@ const ChangelogFull = ({ items }: ChangelogProps) => {
 												<a
 													href={`#${buildStr}`}
 													onClick={(e) => handleCopyAnchor(e, build)}
-													className="group/anchor inline-flex items-center gap-1.5 text-xl font-bold text-ink transition-colors hover:text-brand"
+													className="group/anchor inline-flex items-center gap-1.5 text-xl font-bold text-ink transition-colors hover:text-brand-ink"
 													title={`复制 Build ${build} 锚点链接`}
 												>
 													<span>{build}</span>
-													<FiHash className="h-4 w-4 text-brand/60 opacity-0 transition-all duration-200 group-hover/anchor:opacity-100 group-focus-within/anchor:opacity-100 group-hover/anchor:scale-110" />
+													<FiHash className="h-4 w-4 text-brand-ink/60 opacity-0 transition-all duration-200 group-hover/anchor:opacity-100 group-focus-within/anchor:opacity-100 group-hover/anchor:scale-110" />
 												</a>
 												<span className="rounded-full bg-hairline/[0.06] px-2.5 py-0.5 text-xs font-medium text-ink-muted">{version}</span>
 											</div>
@@ -374,7 +374,7 @@ const PlatformTab = ({ label, icon: Icon, isActive, onClick }: {
 		{isActive && (
 			<motion.div
 				layoutId="activePlatform"
-				className="absolute inset-0 rounded-xl bg-brand shadow-[0_4px_14px_-4px_rgba(251,114,153,0.6)]"
+				className="absolute inset-0 rounded-xl bg-brand-600 shadow-[0_4px_14px_-4px_rgba(251,114,153,0.6)]"
 				transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
 			/>
 		)}
