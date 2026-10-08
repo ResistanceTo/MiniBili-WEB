@@ -1,0 +1,41 @@
+---
+import { TodoStatus, type TodoNode } from "config";
+
+interface Props {
+  node: TodoNode;
+}
+
+const { node } = Astro.props;
+const hasChildren = Boolean(node.children?.length);
+
+// 图标 symbol 定义在 RoadmapTree.astro 中
+const statusMeta = {
+  [TodoStatus.Completed]: { key: "done", label: "已完成" },
+  [TodoStatus.InProgress]: { key: "doing", label: "开发中" },
+  [TodoStatus.Planned]: { key: "planned", label: "计划中" },
+  [TodoStatus.Bug]: { key: "bug", label: "Bug" },
+};
+const meta = node.status !== undefined ? statusMeta[node.status] : undefined;
+---
+
+<li class="rm-node" data-title={node.title.toLowerCase()} data-status={node.status}>
+  {hasChildren ? (
+    <details open>
+      <summary class="rm-group">
+        <svg class="rm-icon rm-chevron" aria-hidden="true"><use href="#rm-i-chevron"></use></svg>
+        {meta && <svg class={`rm-icon rm-${meta.key}`} aria-hidden="true"><use href={`#rm-i-${meta.key}`}></use></svg>}
+        <span>{node.title}</span>
+        {meta && <span class="sr-only">（{meta.label}）</span>}
+      </summary>
+      <ul class="rm-children">
+        {node.children!.map((child) => <Astro.self node={child} />)}
+      </ul>
+    </details>
+  ) : (
+    <div class:list={["rm-leaf", meta && `rm-leaf-${meta.key}`]}>
+      {meta && <svg class={`rm-icon rm-${meta.key}`} aria-hidden="true"><use href={`#rm-i-${meta.key}`}></use></svg>}
+      <span>{node.title}</span>
+      {meta && <span class="sr-only">（{meta.label}）</span>}
+    </div>
+  )}
+</li>

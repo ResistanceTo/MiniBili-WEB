@@ -103,6 +103,28 @@ for (const [canonical, { file, html }] of pages) {
 	}
 }
 
+for (const [, { file, html }] of pages) {
+	// 隐私政策与服务条款按语言各有一个 <h1>，所以只要求至少一个
+	if (!/<h1[\s>]/i.test(html)) errors.push(`${relative(projectRoot, file)} has no <h1>`);
+
+	const ids = [...html.matchAll(/\sid=["']([^"']+)["']/g)].map((match) => match[1]);
+	const duplicateIds = [...new Set(ids.filter((id, index) => ids.indexOf(id) !== index))];
+	if (duplicateIds.length > 0) {
+		errors.push(`${relative(projectRoot, file)} has duplicate element ids: ${duplicateIds.join(", ")}`);
+	}
+}
+
+// llms.txt 由配置生成，需与 RSS 中的最新版本保持一致
+const latestBuild = readFileSync(join(distRoot, "rss.xml"), "utf8").match(/<item><title>[^<]*Build (\d+)<\/title>/)?.[1];
+for (const name of ["llms.txt", "llms-full.txt"]) {
+	const file = join(distRoot, name);
+	if (!existsSync(file)) {
+		errors.push(`${name} is missing`);
+	} else if (latestBuild && !readFileSync(file, "utf8").includes(`Build ${latestBuild}`)) {
+		errors.push(`${name} does not mention the latest build ${latestBuild}`);
+	}
+}
+
 const notFoundHtml = readFileSync(join(distRoot, "404.html"), "utf8");
 if (!/<meta[^>]+name=["']robots["'][^>]+content=["']noindex, follow["']/i.test(notFoundHtml)) {
 	errors.push("dist/404.html must contain robots noindex, follow");

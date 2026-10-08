@@ -1,9 +1,25 @@
 import { productFacts, releasedRequirementsText } from "./productFacts";
 import type { FAQ } from "./types";
 
-const { sponsorship, testflightMaxTesters, upcomingPlatforms } = productFacts;
+const { platforms, sponsorship, testflightMaxTesters, upcomingPlatforms } = productFacts;
 
 export const faq: FAQ[] = [
+	{
+		question: "如何通过 TestFlight 安装 MiniBili？",
+		answer: `1. 在 App Store 安装 Apple 官方的 TestFlight App。\n2. 在要安装的设备上打开官网对应的 TestFlight 链接：iPhone、iPad 与 Apple Watch 使用同一个链接，Mac 使用单独的链接。\n3. 在 TestFlight 中接受邀请并点击“安装”。Apple Watch 版内置在 iOS 版本中。\nTestFlight 测试版本有有效期，过期前请在 TestFlight 中更新到最新版本。`,
+	},
+	{
+		question: "MiniBili 支持 iPad、Mac 和 Apple Watch 吗？",
+		answer: `支持。MiniBili 已发布 ${platforms.ios.device}、${platforms.ipados.device}、${platforms.watchos.device} 和 ${platforms.macos.device} 版本，最低系统要求为 ${releasedRequirementsText}。\niPad 针对宽屏做了左右分栏布局；Apple Watch 版内置在 iOS 版本中；Mac 有单独的 TestFlight 链接。${upcomingPlatforms.tvos.device}（tvOS）版本${upcomingPlatforms.tvos.status}，${upcomingPlatforms.visionos.device}（visionOS）版本${upcomingPlatforms.visionos.status}。`,
+	},
+	{
+		question: "MiniBili 和 B站官方 App 有什么区别？",
+		answer: `MiniBili 是个人开发者维护的非官方第三方客户端，与哔哩哔哩官方无关。\n它基于 SwiftUI 原生开发，没有广告和跟踪器，也没有自己的服务器，所有请求直接发送到 B站官方 API。\n部分官方功能仍在开发或规划中，进度可以在官网的开发路线图查看。`,
+	},
+	{
+		question: "需要登录 B站账号吗？账号安全吗？",
+		answer: `不登录也可以浏览和播放公开视频；登录后可以使用动态、点赞投币、收藏、私信等账号功能。\n登录凭证通过 Apple 钥匙串（Keychain）加密保存在你的设备上，开发者无法获取你的账号密码。MiniBili 不收集任何个人数据，详见隐私政策。`,
+	},
 	{
 		question: "TestFlight 名额满了怎么办？怎么加入 MiniBili？",
 		answer: `MiniBili 通过 Apple TestFlight 分发，每个 App 最多可邀请 ${testflightMaxTesters} 名外部测试者。\n如果当前公开名额已满，可以留意社区公告（Telegram 群组），等待后续重新开放。爱发电${sponsorship.keepTestingTiers}赞助可长期保留测试资格，不受公测名额清理机制影响。`,

@@ -1,10 +1,9 @@
 ---
 import BackToTop from "@components/ui/BackToTop.astro";
 import Breadcrumbs from "@components/ui/Breadcrumbs.astro";
-import ChangelogFull from "@components/sections/ChangelogFull";
+import ChangelogList from "@components/sections/ChangelogList.astro";
 import BreadcrumbSchema from "@components/seo/BreadcrumbSchema.astro";
 import Layout from "@layouts/Layout.astro";
-import { changelog } from "../config/changelog";
 
 const siteBase = Astro.site?.href ?? 'https://minibili.zhaohe.org/';
 const breadcrumbItems = [
@@ -20,7 +19,7 @@ const breadcrumbItems = [
   <BreadcrumbSchema items={breadcrumbItems} slot="head" />
   <main class="mx-auto max-w-3xl px-4 pb-16 pt-24 sm:px-6 sm:pt-28">
     <Breadcrumbs items={[{ label: "更新日志" }]} />
-    <ChangelogFull items={changelog} client:idle />
+    <ChangelogList />
   </main>
   <BackToTop />
 </Layout>

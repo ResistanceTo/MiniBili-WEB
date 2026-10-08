@@ -1,0 +1,302 @@
+---
+import { changelog } from "config/changelog";
+import { FiCheck, FiChevronDown, FiRss } from "react-icons/fi";
+import { countUpdates, normalizeEntry, platformOrder, updateGroups, withAnchors } from "../../lib/changelog";
+
+// 默认显示的版本数，其余版本仍在 HTML 中（便于搜索引擎与无 JS 访问），由脚本折叠
+const INITIAL_COUNT = 20;
+
+const releases = withAnchors(changelog);
+const latest = releases[0];
+
+const filters = [
+  { key: "all", label: "全部" },
+  ...platformOrder
+    .filter((platform) => releases.some((release) => release.platforms.includes(platform)))
+    .map((platform) => ({ key: platform, label: platform })),
+];
+
+const stats = Object.fromEntries(
+  filters.map(({ key }) => [
+    key,
+    countUpdates(key === "all" ? releases : releases.filter((release) => (release.platforms as string[]).includes(key))),
+  ]),
+);
+
+const statCards = [
+  { key: "versions", label: "个版本", color: "text-ink" },
+  { key: "feature", label: "项新功能", color: "text-emerald-700 dark:text-emerald-400" },
+  { key: "improvement", label: "项优化", color: "text-sky-700 dark:text-sky-400" },
+  { key: "bugfix", label: "项修复", color: "text-amber-700 dark:text-amber-400" },
+] as const;
+---
+
+<div class="space-y-8" data-changelog>
+  <!-- 版本列表很长，图标只定义一次，条目里用 <use> 引用，避免 HTML 体积膨胀 -->
+  <svg class="cl-sprite" aria-hidden="true">
+    <symbol id="cl-i-feature" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></symbol>
+    <symbol id="cl-i-improvement" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></symbol>
+    <symbol id="cl-i-bugfix" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></symbol>
+  </svg>
+
+  <header class="text-center">
+    <p class="mb-2 text-sm font-semibold tracking-[0.15em] text-brand-ink">持续进化</p>
+    <div class="flex items-center justify-center gap-3">
+      <h1 class="text-4xl font-bold tracking-tight text-ink sm:text-5xl">更新日志</h1>
+      <a
+        href="/rss.xml"
+        type="application/rss+xml"
+        class="inline-flex h-8 items-center gap-1.5 rounded-full border border-orange-500/20 bg-orange-500/10 px-3 text-xs font-semibold text-orange-700 transition-colors hover:border-orange-500/30 hover:bg-orange-500/15 dark:text-orange-400"
+        title="通过 RSS 订阅 MiniBili 更新"
+      >
+        <FiRss className="h-3.5 w-3.5" />
+        订阅
+      </a>
+    </div>
+    <p class="mx-auto mt-4 max-w-xl text-balance text-sm leading-relaxed text-ink-muted">
+      MiniBili（B站第三方客户端）全部 {releases.length} 个版本的更新记录。最新版本为
+      <a href={`#${latest.anchor}`} class="font-medium text-ink hover:text-brand-ink">Build {latest.build}</a>，发布于
+      <time datetime={latest.date}>{latest.date}</time>。点击版本号可复制该版本的链接。
+    </p>
+  </header>
+
+  <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+    {statCards.map(({ key, label, color }) => (
+      <div class="glass rounded-2xl px-4 py-3 text-center">
+        <div
+          class:list={["text-2xl font-bold", color]}
+          data-stat={key}
+          data-values={JSON.stringify(Object.fromEntries(filters.map((filter) => [filter.key, stats[filter.key][key]])))}
+        >
+          {stats.all[key]}
+        </div>
+        <div class="text-xs text-ink-subtle">{label}</div>
+      </div>
+    ))}
+  </div>
+
+  <div data-js-only hidden>
+    <div class="flex justify-center">
+      <div class="glass flex max-w-full items-center gap-1 overflow-x-auto rounded-2xl p-1 scrollbar-hide" role="group" aria-label="按平台筛选">
+        {filters.map(({ key, label }) => (
+          <button
+            type="button"
+            class="cl-filter whitespace-nowrap rounded-xl px-4 py-2 text-sm font-medium text-ink-muted transition-colors hover:text-ink"
+            data-filter={key}
+            aria-pressed={key === "all" ? "true" : "false"}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <ol class="cl-list" data-changelog-list>
+    {releases.map((release, index) => (
+      <li id={release.anchor} class="cl-item" data-platforms={release.platforms.join(" ")} data-older={index >= INITIAL_COUNT ? "" : undefined}>
+        <article class="cl-card glass">
+          <div class="cl-head">
+            <h2 class="cl-title">
+              <a href={`#${release.anchor}`} data-copy={release.build}><span class="cl-build">Build </span>{release.build}</a>
+            </h2>
+            <span class="cl-chip">{release.version}</span>
+            {release.platforms.map((platform) => <span class="cl-chip cl-chip-brand">{platform}</span>)}
+            <time class="cl-date" datetime={release.date}>{release.date}</time>
+          </div>
+          {release.title && <p class="cl-note">{release.title}</p>}
+          {updateGroups.map(({ key, label }) => {
+            const entries = release.updates[key];
+            if (!entries?.length) return null;
+            return (
+              <section class={`cl-group cl-${key}`}>
+                <h3><svg class="cl-icon" aria-hidden="true"><use href={`#cl-i-${key}`}></use></svg>{label}</h3>
+                <ul>
+                  {entries.map((entry) => {
+                    const { text, images } = normalizeEntry(entry);
+                    return (
+                      <li>
+                        {text}
+                        {images.length > 0 && (
+                          <span class="cl-images">
+                            {images.map((image, imageIndex) => (
+                              <a href={image} target="_blank" rel="noopener">
+                                <img src={image} alt={`${text}（示意图 ${imageIndex + 1}）`} loading="lazy" decoding="async" />
+                              </a>
+                            ))}
+                          </span>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </section>
+            );
+          })}
+        </article>
+      </li>
+    ))}
+  </ol>
+
+  <div data-more-wrap hidden>
+    <div class="flex justify-center pt-2">
+      <button
+        type="button"
+        class="glass inline-flex items-center gap-2 rounded-2xl px-6 py-3 text-sm font-semibold text-ink transition-all hover:-translate-y-0.5 hover:bg-hairline/[0.08] active:scale-[0.98]"
+        data-show-older
+      >
+        <span>显示更早的 <span data-older-count>{Math.max(releases.length - INITIAL_COUNT, 0)}</span> 个版本</span>
+        <FiChevronDown className="h-4 w-4 text-ink-subtle" />
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="cl-toast pointer-events-none fixed bottom-6 left-1/2 z-50 flex items-center gap-2 rounded-full bg-slate-900/90 px-4 py-2 text-sm text-white opacity-0 shadow-xl backdrop-blur-md transition-all duration-200 dark:bg-slate-100/90 dark:text-slate-900"
+    role="status"
+    aria-live="polite"
+    data-toast
+  >
+    <FiCheck className="h-4 w-4 text-emerald-400 dark:text-emerald-600" />
+    <span data-toast-text></span>
+  </div>
+</div>
+
+<style is:global>
+  .cl-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+  .cl-list { @apply relative space-y-5; }
+  .cl-list::before {
+    content: "";
+    @apply absolute left-[7px] top-3 h-[calc(100%-2rem)] w-px bg-hairline/15;
+  }
+  /* 有 JS 时先折叠较早版本，展开或按平台筛选时全部显示 */
+  html.js .cl-list:not(.is-expanded) > [data-older] { display: none; }
+
+  .cl-item {
+    @apply relative scroll-mt-24 pl-8 sm:scroll-mt-28 sm:pl-10;
+  }
+  .cl-item::before {
+    content: "";
+    @apply absolute left-0 top-6 h-[15px] w-[15px] rounded-full border-[3px] border-brand bg-[rgb(var(--page-bg))];
+  }
+  .cl-card { @apply rounded-3xl p-5 sm:p-6; }
+  .cl-item:target .cl-card { box-shadow: 0 0 0 2px rgb(var(--brand-ink)), 0 0 0 5px rgb(var(--page-bg)); }
+
+  .cl-head { @apply mb-4 flex flex-wrap items-center gap-2; }
+  .cl-title { @apply mr-1 text-xl font-bold text-ink; }
+  .cl-title a { @apply transition-colors hover:text-brand-ink; }
+  .cl-build { @apply text-sm font-medium text-ink-subtle; }
+  .cl-chip { @apply rounded-full bg-hairline/[0.06] px-2.5 py-0.5 text-xs font-medium text-ink-muted; }
+  .cl-chip-brand { @apply bg-brand/10 px-2 text-[11px] font-semibold text-brand-ink; }
+  .cl-date { @apply ml-auto text-xs text-ink-subtle; }
+  .cl-note { @apply mb-4 rounded-2xl border border-brand/20 bg-brand/[0.06] px-3.5 py-2.5 text-sm font-medium leading-relaxed text-ink; }
+
+  .cl-group + .cl-group { @apply mt-4; }
+  .cl-group h3 { @apply mb-2 flex items-center gap-2 text-sm font-semibold; }
+  .cl-icon { @apply h-4 w-4 fill-none stroke-current; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .cl-group ul { @apply ml-1 space-y-2.5; }
+  .cl-group li { @apply relative pl-4 text-sm leading-relaxed text-ink-muted; }
+  .cl-group li::before {
+    content: "";
+    @apply absolute left-0 top-[0.6em] h-1.5 w-1.5 rounded-full;
+  }
+  .cl-feature h3 { @apply text-emerald-700 dark:text-emerald-400; }
+  .cl-feature li::before { @apply bg-emerald-500; }
+  .cl-improvement h3 { @apply text-sky-700 dark:text-sky-400; }
+  .cl-improvement li::before { @apply bg-sky-500; }
+  .cl-bugfix h3 { @apply text-amber-700 dark:text-amber-400; }
+  .cl-bugfix li::before { @apply bg-amber-500; }
+
+  .cl-images { @apply mt-2 grid grid-cols-2 gap-2; }
+  .cl-images a { @apply block overflow-hidden rounded-xl ring-1 ring-hairline/10 transition-opacity hover:opacity-90; }
+  .cl-images img { @apply w-full; }
+
+  .cl-filter[aria-pressed="true"] {
+    @apply bg-brand-600 text-white shadow-[0_4px_14px_-4px_rgba(251,114,153,0.6)];
+  }
+
+  .cl-toast { transform: translate(-50%, 0.5rem); }
+  .cl-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+</style>
+
+<script is:inline>
+  (function () {
+    const root = document.querySelector("[data-changelog]");
+    if (!root) return;
+
+    const list = root.querySelector("[data-changelog-list]");
+    const items = Array.from(list.children);
+    const moreWrap = root.querySelector("[data-more-wrap]");
+    const moreButton = root.querySelector("[data-show-older]");
+    const moreCount = root.querySelector("[data-older-count]");
+    const toast = root.querySelector("[data-toast]");
+    const toastText = root.querySelector("[data-toast-text]");
+    const initialCount = items.filter((item) => !item.hasAttribute("data-older")).length;
+    let filter = "all";
+    let expanded = false;
+
+    root.querySelectorAll("[data-js-only]").forEach((element) => element.removeAttribute("hidden"));
+
+    const render = () => {
+      const showAll = expanded || filter !== "all";
+      list.classList.toggle("is-expanded", showAll);
+      items.forEach((item) => {
+        item.hidden = filter !== "all" && !item.dataset.platforms.split(" ").includes(filter);
+      });
+      root.querySelectorAll("[data-filter]").forEach((button) => {
+        button.setAttribute("aria-pressed", button.dataset.filter === filter ? "true" : "false");
+      });
+      root.querySelectorAll("[data-stat]").forEach((stat) => {
+        stat.textContent = JSON.parse(stat.dataset.values)[filter];
+      });
+      const remaining = items.length - initialCount;
+      moreWrap.hidden = showAll || remaining <= 0;
+      moreCount.textContent = String(remaining);
+    };
+
+    const revealHashTarget = () => {
+      const id = decodeURIComponent(location.hash.slice(1));
+      const target = id && document.getElementById(id);
+      if (!target || !list.contains(target)) return;
+      if (target.hidden) filter = "all";
+      expanded = true;
+      render();
+      requestAnimationFrame(() => target.scrollIntoView({ block: "start" }));
+    };
+
+    let toastTimer;
+    const showToast = (message) => {
+      toastText.textContent = message;
+      toast.classList.add("is-visible");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("is-visible"), 2000);
+    };
+
+    root.querySelectorAll("[data-filter]").forEach((button) => {
+      button.addEventListener("click", () => {
+        filter = button.dataset.filter;
+        render();
+      });
+    });
+
+    moreButton.addEventListener("click", () => {
+      expanded = true;
+      render();
+    });
+
+    // 点击版本号：正常跳转到锚点，同时复制该版本链接
+    list.addEventListener("click", (event) => {
+      const link = event.target.closest("[data-copy]");
+      if (!link || !navigator.clipboard) return;
+      navigator.clipboard
+        .writeText(link.href)
+        .then(() => showToast(`已复制 Build ${link.dataset.copy} 的链接`))
+        .catch(() => {});
+    });
+
+    window.addEventListener("hashchange", revealHashTarget);
+    render();
+    revealHashTarget();
+  })();
+</script>
