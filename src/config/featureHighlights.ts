@@ -75,3 +75,72 @@ export const featureHighlights: FeatureGroup[] = [
 		],
 	},
 ];
+
+// 英文页面使用，分组与中文版一一对应
+export const featureHighlightsEn: FeatureGroup[] = [
+	{
+		title: "Playback",
+		icon: FiPlayCircle,
+		items: [
+			"Danmaku (bullet comments): watch and send",
+			"Hold to speed up, Picture in Picture",
+			"Subtitles and Dolby Vision",
+			"Multi-part videos and collections autoplay",
+			"Dynamic Island and Lock Screen controls",
+			"Audio-only mode with sleep timer",
+			"Built-in SponsorBlock-style segment skipping (空降助手)",
+		],
+	},
+	{
+		title: "Browse",
+		icon: FiCompass,
+		items: [
+			"Recommended, trending and category feeds",
+			"Following feed (videos and posts)",
+			"Anime, movies and live streams",
+			"Search across videos, articles and more",
+			"Creator profiles and uploads",
+		],
+	},
+	{
+		title: "Interact",
+		icon: FiHeart,
+		items: [
+			"Like, coin, favorite and share",
+			"Follow creators, Watch Later",
+			"Comments and threaded replies",
+			"Direct messages with stickers, cards and unsend",
+		],
+	},
+	{
+		title: "Downloads & images",
+		icon: FiDownload,
+		items: [
+			"Offline video cache, up to 4K / HDR / 8K",
+			"Download queue with resume",
+			"View and save original images from comments and posts",
+		],
+	},
+	{
+		title: "Personalize",
+		icon: FiSliders,
+		items: [
+			"Custom accent color and Liquid Glass styles",
+			"Separate wallpapers for light and dark mode",
+			"Subscribe to theme packs",
+			"Single or two-column video cards",
+			"English, Simplified and Traditional Chinese",
+		],
+	},
+	{
+		title: "Account & devices",
+		icon: FiSmartphone,
+		items: [
+			"Sign in with SMS code or QR code",
+			"Watch history and progress sync with Bilibili",
+			"Incognito mode (don't sync history)",
+			"Sign-in sync across iPhone, iPad, Mac and Apple Watch",
+			"Split layout on iPad, Safari extension",
+		],
+	},
+];

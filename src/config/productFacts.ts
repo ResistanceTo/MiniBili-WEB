@@ -2,6 +2,7 @@
 export const productFacts = {
 	name: "MiniBili",
 	description: "MiniBili 是一款免费、无广告、无跟踪器的 B站（哔哩哔哩）第三方客户端，基于 SwiftUI 原生打造，支持 iPhone、iPad、Apple Watch 与 Mac，App 数据仅保存在本地设备。",
+	descriptionEn: "MiniBili is a free, ad-free and tracker-free third-party Bilibili client built natively with SwiftUI for iPhone, iPad, Apple Watch and Mac. Your app data stays on your device.",
 	// 已发布平台
 	platforms: {
 		ios: {

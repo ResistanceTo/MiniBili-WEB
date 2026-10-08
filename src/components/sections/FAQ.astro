@@ -1,23 +1,29 @@
 ---
 import type { FAQProps } from "config";
+import type { Lang } from "../../i18n/ui";
 
-const { items } = Astro.props as FAQProps;
+interface Props extends FAQProps {
+  lang?: Lang;
+}
+
+const { items, lang = "zh" } = Astro.props;
+const heading = lang === "zh" ? { eyebrow: "还有疑问", title: "常见问题" } : { eyebrow: "Questions", title: "FAQ" };
 ---
 
-<section id="faq" class="scroll-mt-28 py-12 sm:py-20">
+<section id="faq" class="scroll-mt-28 py-12 sm:py-20" data-faq>
   <div class="mb-10 text-center">
-    <p class="mb-2 text-sm font-semibold tracking-[0.15em] text-brand-ink">还有疑问</p>
-    <h2 class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">常见问题</h2>
+    <p class="mb-2 text-sm font-semibold tracking-[0.15em] text-brand-ink">{heading.eyebrow}</p>
+    <h2 class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">{heading.title}</h2>
   </div>
 
   <div class="mx-auto max-w-3xl space-y-3">
     {items.map((item) => (
-      <div class="glass overflow-hidden rounded-3xl">
+      <div class="glass scroll-mt-28 overflow-hidden rounded-3xl" id={item.id}>
         <details class="group">
           <summary class="flex cursor-pointer list-none items-center justify-between gap-4 p-5 sm:p-6">
             <h3 class="font-semibold text-ink">{item.question}</h3>
-            <span class="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-hairline/[0.06] text-ink-muted transition-transform group-open:rotate-180">
-              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <span class="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-hairline/[0.06] text-ink-muted transition-transform group-open:rotate-180" aria-hidden="true">
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </span>
@@ -45,3 +51,18 @@ const { items } = Astro.props as FAQProps;
 
   details[open] > div { animation: faq-reveal 0.2s ease forwards; }
 </style>
+
+<script is:inline>
+  (function () {
+    // 通过锚点（例如 #faq-testflight-full）进入时自动展开对应问题
+    const openFromHash = () => {
+      const id = decodeURIComponent(location.hash.slice(1));
+      const item = id && document.getElementById(id);
+      if (!item || !item.closest("[data-faq]")) return;
+      const details = item.querySelector("details");
+      if (details) details.open = true;
+    };
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+  })();
+</script>

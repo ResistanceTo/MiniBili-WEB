@@ -1,113 +1,132 @@
 ---
-import type { AppHeroProps } from "config";
+import { changelog } from "config/changelog";
 import { productFacts } from "config/productFacts";
-import { FiChevronDown } from "react-icons/fi";
+import { type Lang, ui } from "../../i18n/ui";
+import { getResponsiveImage } from "../../lib/images";
 
-const { storeLinks, logo } = Astro.props as AppHeroProps;
+interface Props {
+  lang?: Lang;
+}
 
-const platforms = [
-  {
-    name: productFacts.platforms.ios.name,
-    minimumVersion: productFacts.platforms.ios.minimumVersion,
-    url: storeLinks.ios,
-  },
-  {
-    name: productFacts.platforms.macos.name,
-    minimumVersion: productFacts.platforms.macos.minimumVersion,
-    url: storeLinks.macos,
-  },
-  {
-    name: productFacts.platforms.watchos.name,
-    minimumVersion: productFacts.platforms.watchos.minimumVersion,
-    url: storeLinks.ios,
-  },
-].filter((platform) => platform.url);
-
-const badges = ["完全免费", "无广告", "无跟踪器"];
+const { lang = "zh" } = Astro.props;
+const t = ui[lang].hero;
+const { platforms, sponsorship } = productFacts;
+const latest = changelog[0];
+const heroImage = await getResponsiveImage("/screenshots/iphone/home_new.webp");
+const changelogHref = `/changelog/#${latest.build}`;
 ---
 
-<section class="relative flex flex-col items-center pt-6 text-center md:pt-10">
-  <!-- App 图标 + 后方柔光 -->
-  <div class="relative mb-7">
-    <div class="absolute inset-0 -z-10 scale-150 rounded-full bg-brand/25 blur-3xl" aria-hidden="true"></div>
-    <img
-      src={logo.src}
-      alt="MiniBili 应用图标"
-      class="h-24 w-24 rounded-[22px] shadow-glass-lg sm:h-28 sm:w-28"
-      width="112"
-      height="112"
-      fetchpriority="high"
-      decoding="async"
-    />
-  </div>
+<section class="relative grid items-center gap-12 pt-6 md:pt-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16 lg:gap-y-0">
+  <div class="flex flex-col items-center text-center lg:items-start lg:text-left">
+    <div class="relative mb-7">
+      <div class="absolute inset-0 -z-10 scale-150 rounded-full bg-brand/25 blur-3xl" aria-hidden="true"></div>
+      <img
+        src="/MiniBili.png"
+        alt={lang === "zh" ? "MiniBili 应用图标" : "MiniBili app icon"}
+        class="h-24 w-24 rounded-[22px] shadow-glass-lg sm:h-28 sm:w-28"
+        width="112"
+        height="112"
+        decoding="async"
+      />
+    </div>
 
-  <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-hairline/10 bg-hairline/[0.04] px-3 py-1.5 text-xs font-medium text-ink-muted">
-    <span class="relative flex h-2 w-2">
-      <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-60"></span>
-      <span class="relative inline-flex h-2 w-2 rounded-full bg-brand"></span>
-    </span>
-    全苹果平台 · SwiftUI 原生打造
-  </div>
-
-  <h1 class="max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight text-ink sm:text-5xl lg:text-6xl">
-    <span class="mb-3 block text-2xl font-semibold tracking-tight text-ink-muted sm:text-3xl">MiniBili</span>更纯粹的<span class="bg-gradient-to-r from-brand-600 to-brand-700 bg-clip-text text-transparent dark:from-brand-400 dark:to-brand-500">B站</span>体验
-  </h1>
-
-  <p class="mt-5 max-w-xl text-balance text-base leading-relaxed text-ink-muted sm:text-lg">
-    免费、无广告、无跟踪器的哔哩哔哩（B站）第三方客户端。支持 iPhone、iPad、Apple Watch 与 Mac，App 数据只保存在你的设备上。
-  </p>
-
-  <div class="mt-6 flex flex-wrap items-center justify-center gap-2">
-    {badges.map((badge) => (
-      <span class="rounded-full border border-hairline/10 bg-hairline/[0.03] px-3 py-1 text-xs font-medium text-ink-muted">
-        {badge}
+    <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-hairline/10 bg-hairline/[0.04] px-3 py-1.5 text-xs font-medium text-ink-muted">
+      <span class="relative flex h-2 w-2" aria-hidden="true">
+        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-60"></span>
+        <span class="relative inline-flex h-2 w-2 rounded-full bg-brand"></span>
       </span>
-    ))}
+      {t.pill}
+    </div>
+
+    <h1 class="max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight text-ink sm:text-5xl lg:text-6xl">
+      <span class="mb-3 block text-2xl font-semibold tracking-tight text-ink-muted sm:text-3xl">MiniBili</span>{t.slogan[0]}<span class="bg-gradient-to-r from-brand-600 to-brand-700 bg-clip-text text-transparent dark:from-brand-400 dark:to-brand-500">{t.slogan[1]}</span>{t.slogan[2]}
+    </h1>
+
+    <p class="mt-5 max-w-xl text-balance text-base leading-relaxed text-ink-muted sm:text-lg">{t.intro}</p>
+
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-2 lg:justify-start">
+      {t.badges.map((badge) => (
+        <span class="rounded-full border border-hairline/10 bg-hairline/[0.03] px-3 py-1 text-xs font-medium text-ink-muted">{badge}</span>
+      ))}
+    </div>
+
+    <div class="mt-8 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row" data-download>
+      <a
+        href={platforms.ios.downloadUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex w-full items-center justify-center gap-2.5 rounded-2xl bg-brand-600 px-6 py-3.5 font-semibold text-white shadow-[0_8px_28px_-6px_rgba(251,114,153,0.65)] transition-all hover:bg-brand-700 hover:shadow-[0_10px_32px_-6px_rgba(251,114,153,0.75)] active:scale-[0.98] sm:w-auto"
+        data-download-primary
+      >
+        <img src="/TestFlight.png" alt="" class="h-6 w-6 rounded-md" width="24" height="24" />
+        <span data-download-label>{t.download}</span>
+      </a>
+
+      <a
+        href={sponsorship.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="glass flex w-full items-center justify-center gap-2.5 rounded-2xl px-6 py-3.5 font-semibold text-ink transition-all hover:-translate-y-0.5 active:scale-[0.98] sm:w-auto"
+      >
+        <img src="/toubi.svg" alt="" class="h-6 w-6" width="24" height="24" />
+        <span>{t.sponsor}</span>
+      </a>
+    </div>
+
+    <p class="mt-4 max-w-xl text-balance text-xs leading-relaxed text-ink-subtle" data-download-hint>
+      {t.requirement} · {t.otherPlatforms}<a href={platforms.ios.downloadUrl} target="_blank" rel="noopener noreferrer" class="font-medium text-ink-muted underline-offset-2 hover:text-brand-ink hover:underline">{t.iosLinkLabel}</a>
+      · <a href={platforms.macos.downloadUrl} target="_blank" rel="noopener noreferrer" class="font-medium text-ink-muted underline-offset-2 hover:text-brand-ink hover:underline">{t.macLinkLabel}</a>
+      · <a href={t.fullHref} class="font-medium text-ink-muted underline-offset-2 hover:text-brand-ink hover:underline">{t.full}</a>
+    </p>
+    <p class="mt-3 hidden max-w-xl rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-2.5 text-xs leading-relaxed text-ink" data-download-unsupported>
+      {t.unsupported}
+    </p>
+
+    <a href={changelogHref} class="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-ink-subtle transition-colors hover:text-brand-ink">
+      <span class="h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden="true"></span>
+      {t.latest(latest.build, latest.date)}
+    </a>
   </div>
 
-  <div class="mt-8 flex flex-col items-center gap-3 sm:flex-row">
-    <details class="group relative w-full sm:w-auto" data-auto-close>
-      <summary class="flex cursor-pointer list-none items-center justify-center gap-2.5 rounded-2xl bg-brand-600 px-6 py-3.5 font-semibold text-white shadow-[0_8px_28px_-6px_rgba(251,114,153,0.65)] transition-all hover:bg-brand-700 hover:shadow-[0_10px_32px_-6px_rgba(251,114,153,0.75)] active:scale-[0.98]">
-        <img src="/TestFlight.png" alt="" class="h-6 w-6 rounded-md" />
-        <span>通过 TestFlight 下载</span>
-        <FiChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
-      </summary>
-
-      <div class="glass-strong absolute left-1/2 top-full z-50 mt-2 w-60 -translate-x-1/2 overflow-hidden rounded-2xl p-1.5">
-        {platforms.map((platform) => (
-          <a
-            href={platform.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center justify-between rounded-xl px-4 py-2.5 transition-colors hover:bg-hairline/[0.06]"
-          >
-            <span class="text-sm font-medium text-ink">{platform.name}</span>
-            <span class="text-xs text-ink-subtle">{platform.minimumVersion}</span>
-          </a>
-        ))}
-      </div>
-    </details>
-
-    <a
-      href="https://afdian.com/a/ResistanceTo"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="glass flex w-full items-center justify-center gap-2.5 rounded-2xl px-6 py-3.5 font-semibold text-ink transition-all hover:-translate-y-0.5 active:scale-[0.98] sm:w-auto"
-    >
-      <img src="/toubi.svg" alt="" class="h-6 w-6" />
-      <span>爱发电赞助</span>
-    </a>
+  <!-- 窄屏下紧接着就是截图轮播，所以只在宽屏显示；窄屏用 1px 占位源，避免下载 -->
+  <div class="relative mx-auto hidden w-[300px] lg:block">
+    <div class="absolute -inset-8 -z-10 rounded-full bg-gradient-to-br from-brand/30 via-transparent to-sky-400/25 blur-3xl" aria-hidden="true"></div>
+    <picture>
+      <source media="(max-width: 1023px)" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+      <img
+        src={heroImage.src}
+        srcset={heroImage.srcset}
+        sizes="300px"
+        width={heroImage.width}
+        height={heroImage.height}
+        alt={t.screenshotAlt}
+        fetchpriority="high"
+        decoding="async"
+        class="h-auto w-full rounded-[2.25rem] shadow-glass-lg ring-1 ring-hairline/10"
+      />
+    </picture>
   </div>
 </section>
 
-<style>
-  summary::-webkit-details-marker { display: none; }
-</style>
+<script is:inline define:vars={{ links: { ios: platforms.ios.downloadUrl, mac: platforms.macos.downloadUrl }, labels: { iPhone: t.downloadFor("iPhone"), iPad: t.downloadFor("iPad"), Mac: t.downloadFor("Mac") } }}>
+  (function () {
+    const root = document.querySelector("[data-download]");
+    if (!root) return;
 
-<script is:inline>
-  document.addEventListener("click", (e) => {
-    document.querySelectorAll("details[data-auto-close]").forEach((d) => {
-      if (!d.contains(e.target)) d.removeAttribute("open");
-    });
-  });
+    // iPadOS 默认以桌面版 Safari 的身份访问，需要用触控点数量区分 iPad 与 Mac
+    const ua = navigator.userAgent;
+    const touch = navigator.maxTouchPoints > 1;
+    let device = null;
+    if (/iPhone|iPod/.test(ua)) device = "iPhone";
+    else if (/iPad/.test(ua) || (/Macintosh/.test(ua) && touch)) device = "iPad";
+    else if (/Macintosh/.test(ua)) device = "Mac";
+
+    if (device) {
+      const primary = root.querySelector("[data-download-primary]");
+      primary.href = device === "Mac" ? links.mac : links.ios;
+      primary.querySelector("[data-download-label]").textContent = labels[device];
+    } else if (/Android|Windows|Linux|CrOS/.test(ua)) {
+      document.querySelector("[data-download-unsupported]")?.classList.remove("hidden");
+    }
+  })();
 </script>

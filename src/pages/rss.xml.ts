@@ -56,7 +56,9 @@ const getContent = (item: ChangelogRelease, site: URL) => {
 							: (entry.images ?? [])
 									.map((image) => {
 										const imageUrl = new URL(image, site).href;
-										return `<p><img src="${escapeMarkup(imageUrl)}" alt="${text}" /></p>`;
+										return image.endsWith(".mp4")
+											? `<p><video src="${escapeMarkup(imageUrl)}" controls muted loop playsinline></video></p>`
+											: `<p><img src="${escapeMarkup(imageUrl)}" alt="${text}" /></p>`;
 									})
 									.join("");
 

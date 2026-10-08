@@ -2,6 +2,7 @@
 import Footer from "@components/sections/Footer.astro";
 import Navbar from "@components/sections/Navbar.astro";
 import StructuredData from "@components/seo/StructuredData.astro";
+import { htmlLang, type Lang, ogLocale } from "../i18n/ui";
 
 interface Props {
   title: string;
@@ -10,6 +11,9 @@ interface Props {
   showNavbar?: boolean;
   includeApplication?: boolean;
   noindex?: boolean;
+  lang?: Lang;
+  // 其他语言版本，例如 { "zh-CN": "/", en: "/en/" }，会输出 hreflang 与 x-default（第一项）
+  alternates?: Record<string, string>;
 }
 
 const {
@@ -19,14 +23,26 @@ const {
   showNavbar = true,
   includeApplication = false,
   noindex = false,
+  lang = "zh",
+  alternates,
 } = Astro.props;
 const siteUrl = Astro.site ?? Astro.url;
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = new URL("/og_image.png", siteUrl).href;
+const alternateLinks = alternates
+  ? [
+      ...Object.entries(alternates).map(([hreflang, path]) => ({ hreflang, href: new URL(path, siteUrl).href })),
+      { hreflang: "x-default", href: new URL(Object.values(alternates)[0], siteUrl).href },
+    ]
+  : [];
+const isZh = lang === "zh";
+const ogImageAlt = isZh
+  ? "MiniBili：更纯粹的 B站体验。免费、无广告、无跟踪器的第三方客户端，支持 iPhone、iPad、Mac 与 Apple Watch"
+  : "MiniBili: a cleaner Bilibili experience. A free, ad-free, tracker-free client for iPhone, iPad, Mac and Apple Watch";
 ---
 
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang={htmlLang[lang]}>
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,6 +51,7 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalUrl}>
     {noindex && <meta name="robots" content="noindex, follow">}
+    {alternateLinks.map(({ hreflang, href }) => <link rel="alternate" hreflang={hreflang} href={href}>)}
 
     <!-- Favicons -->
     <link rel="icon" href="/favicon.ico" sizes="any">
@@ -44,7 +61,7 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
     <link
       rel="alternate"
       type="application/rss+xml"
-      title="MiniBili 更新日志"
+      title={isZh ? "MiniBili 更新日志" : "MiniBili changelog (Chinese)"}
       href={new URL("/rss.xml", siteUrl).href}
     >
 
@@ -63,16 +80,17 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:type" content="image/png">
-    <meta property="og:image:alt" content="MiniBili：更纯粹的 B站体验。免费、无广告、无跟踪器的第三方客户端，支持 iPhone、iPad、Mac 与 Apple Watch">
+    <meta property="og:image:alt" content={ogImageAlt}>
     <meta property="og:site_name" content="MiniBili">
-    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale" content={ogLocale[lang]}>
+    {alternateLinks.length > 0 && <meta property="og:locale:alternate" content={ogLocale[isZh ? "en" : "zh"]}>}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content={title}>
     {description && <meta name="twitter:description" content={description}>}
     <meta name="twitter:image" content={ogImageUrl}>
-    <meta name="twitter:image:alt" content="MiniBili：更纯粹的 B站体验">
+    <meta name="twitter:image:alt" content={ogImageAlt}>
 
     <!-- Apple Mobile Web App -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -83,6 +101,7 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
     {!noindex && (
       <StructuredData
         {includeApplication}
+        {lang}
         title={title}
         description={description}
       />
@@ -116,12 +135,12 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
       <span class="aurora-grain"></span>
     </div>
 
-    {showNavbar && <Navbar />}
+    {showNavbar && <Navbar {lang} />}
     <div class="relative z-10 flex min-h-screen flex-col">
       <div class="flex-1">
         <slot />
       </div>
-      {showFooter && <Footer />}
+      {showFooter && <Footer {lang} />}
     </div>
 
     <script is:inline>

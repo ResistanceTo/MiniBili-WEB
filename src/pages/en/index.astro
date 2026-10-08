@@ -1,0 +1,27 @@
+---
+import AppHero from "@components/sections/AppHero.astro";
+import Community from "@components/sections/Community.astro";
+import FAQ from "@components/sections/FAQ.astro";
+import Features from "@components/sections/Features.astro";
+import Screenshots from "@components/sections/Screenshots.astro";
+import FAQSchema from "@components/seo/FAQSchema.astro";
+import Layout from "@layouts/Layout.astro";
+import { faqEn } from "../../config/faq";
+import { featuresEn } from "../../config/features";
+
+const title = "MiniBili - Free, Ad-free Bilibili Client for iPhone, iPad, Mac & Apple Watch";
+const description =
+  "MiniBili is a free, ad-free and tracker-free third-party Bilibili client built natively with SwiftUI for iPhone, iPad, Apple Watch and Mac. Install it via TestFlight.";
+---
+
+<Layout {title} {description} includeApplication lang="en" alternates={{ "zh-CN": "/", en: "/en/" }}>
+  <FAQSchema items={faqEn} slot="head" />
+
+  <main class="mx-auto max-w-[1120px] px-4 pb-8 pt-24 sm:px-6 sm:pt-28">
+    <AppHero lang="en" />
+    <div class="mt-10 sm:mt-16"><Screenshots lang="en" /></div>
+    <Features items={featuresEn} lang="en" />
+    <FAQ items={faqEn} lang="en" />
+    <Community lang="en" />
+  </main>
+</Layout>

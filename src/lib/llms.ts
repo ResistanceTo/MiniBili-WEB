@@ -41,6 +41,7 @@ export const sponsorshipFacts = [
 
 export const officialLinks = [
 	`中文官网：${site}/`,
+	`English：${site}/en/`,
 	`更新日志：${site}/changelog/`,
 	`更新日志 RSS：${site}/rss.xml`,
 	`开发路线图：${site}/roadmap/`,

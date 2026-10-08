@@ -1,27 +1,22 @@
 ---
 import ThemeToggle from "@components/ui/ThemeToggle.astro";
+import { type Lang, ui } from "../../i18n/ui";
 
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "zh" } = Astro.props;
+const t = ui[lang];
 // 首页锚点导航；非首页时锚点指向首页对应片段
-const navLinks = [
-  { href: "/#screenshots", label: "截图" },
-  { href: "/#features", label: "功能" },
-  { href: "/#changelog", label: "更新" },
-  { href: "/#faq", label: "FAQ" },
-  { href: "/roadmap/", label: "路线图" },
-];
-
-const utilityLinks = [
-  { href: "/privacy/", label: "隐私" },
-  { href: "/terms/", label: "条款" },
-];
+const { links: navLinks, utility: utilityLinks, switchLang } = t.nav;
 ---
-
 <header class="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-4 sm:pt-4">
   <nav
     class="glass mx-auto flex max-w-[1120px] items-center justify-between gap-3 rounded-2xl px-3 py-2.5 sm:px-4"
-    aria-label="主导航"
+    aria-label={t.nav.label}
   >
-    <a href="/" class="flex flex-shrink-0 items-center gap-2.5" aria-label="MiniBili 首页">
+    <a href={t.homeHref} class="flex flex-shrink-0 items-center gap-2.5" aria-label={t.nav.homeLabel}>
       <img src="/MiniBili.png" alt="MiniBili" class="h-8 w-8 rounded-[10px] shadow-sm" width="32" height="32" />
       <span class="text-base font-semibold tracking-tight text-ink">MiniBili</span>
     </a>
@@ -53,16 +48,29 @@ const utilityLinks = [
         }
       </div>
 
+      <a
+        href={switchLang.href}
+        hreflang={switchLang.hreflang}
+        lang={switchLang.hreflang}
+        title={switchLang.title}
+        class="rounded-lg px-2 py-1.5 text-xs font-semibold text-ink-muted transition-colors hover:bg-hairline/5 hover:text-ink"
+      >
+        {switchLang.label}
+      </a>
+
       <div class="hidden sm:block">
-        <ThemeToggle />
+        <ThemeToggle {lang} />
       </div>
 
       <button
         type="button"
         class="flex h-9 w-9 items-center justify-center rounded-lg text-ink transition-colors hover:bg-hairline/5 lg:hidden"
-        aria-label="打开菜单"
+        aria-label={t.nav.open}
         aria-expanded="false"
+        aria-controls="mobile-nav-menu"
         data-nav-toggle
+        data-label-open={t.nav.open}
+        data-label-close={t.nav.close}
       >
         <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
           <line class="nav-icon-line-1" x1="3" y1="6" x2="21" y2="6"></line>
@@ -76,6 +84,7 @@ const utilityLinks = [
   <!-- 移动端展开菜单 -->
   <div
     class="glass-strong mx-auto mt-2 max-w-[1120px] origin-top overflow-hidden rounded-2xl px-2 py-2 opacity-0 transition-all duration-200 lg:hidden"
+    id="mobile-nav-menu"
     data-nav-menu
     hidden
   >
@@ -105,7 +114,7 @@ const utilityLinks = [
             ))
           }
         </div>
-        <ThemeToggle />
+        <ThemeToggle {lang} />
       </div>
     </div>
   </div>
@@ -123,7 +132,7 @@ const utilityLinks = [
       const setOpen = (next) => {
         open = next;
         toggle.setAttribute("aria-expanded", next ? "true" : "false");
-        toggle.setAttribute("aria-label", next ? "关闭菜单" : "打开菜单");
+        toggle.setAttribute("aria-label", next ? toggle.dataset.labelClose : toggle.dataset.labelOpen);
         toggle.classList.toggle("nav-open", next);
         if (next) {
           menu.hidden = false;
@@ -144,6 +153,12 @@ const utilityLinks = [
       });
       document.addEventListener("click", (e) => {
         if (open && !menu.contains(e.target) && !toggle.contains(e.target)) setOpen(false);
+      });
+      document.addEventListener("keydown", (e) => {
+        if (open && e.key === "Escape") {
+          setOpen(false);
+          toggle.focus();
+        }
       });
     };
     bind();
