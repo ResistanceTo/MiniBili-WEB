@@ -1,5 +1,8 @@
 ---
+import { changelog } from "config/changelog";
+import { featureHighlights } from "config/featureHighlights";
 import { productFacts } from "config/productFacts";
+import { screenshots } from "config/screenshots";
 
 interface Props {
   includeApplication?: boolean;
@@ -41,6 +44,7 @@ const website = {
   "@id": ids.website,
   "url": siteUrl,
   "name": "MiniBili",
+  "alternateName": ["MiniBili B站第三方客户端", "MiniBili 哔哩哔哩客户端"],
   "description": productFacts.description,
   "inLanguage": "zh-CN",
   "publisher": { "@id": ids.developer },
@@ -62,13 +66,17 @@ const webpage = {
 };
 
 const releasedPlatforms = Object.values(productFacts.platforms);
+const latestRelease = changelog[0];
+const screenshotUrls = screenshots.iOS
+  .slice(0, 4)
+  .map((item) => new URL(typeof item === "string" ? item : item.src, siteUrl).href);
 const application = {
   "@type": "SoftwareApplication",
   "@id": ids.app,
   "name": "MiniBili",
   "url": siteUrl,
   "description": productFacts.description,
-  "inLanguage": "zh-CN",
+  "inLanguage": ["zh-Hans", "zh-Hant", "en"],
   "applicationCategory": "EntertainmentApplication",
   "operatingSystem": releasedPlatforms.map(
     (platform) => `${platform.name} ${platform.minimumVersion}`,
@@ -85,8 +93,12 @@ const application = {
     "无跟踪器",
     "无服务器上传，App 数据仅保存在本地设备",
     "SwiftUI 原生打造",
+    ...featureHighlights.flatMap((group) => group.items),
   ],
-  "screenshot": imageUrl,
+  "softwareVersion": String(latestRelease.build),
+  "dateModified": latestRelease.date,
+  "releaseNotes": new URL("/changelog/", siteUrl).href,
+  "screenshot": screenshotUrls,
   "author": { "@id": ids.developer },
   "publisher": { "@id": ids.developer },
   "downloadUrl": [...new Set(releasedPlatforms.map((platform) => platform.downloadUrl))],

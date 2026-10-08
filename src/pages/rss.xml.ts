@@ -1,19 +1,7 @@
 import type { APIContext } from "astro";
 import { changelog } from "../config/changelog";
-import type {
-	ChangelogEntry,
-	ChangelogUpdates,
-	ChangelogVersion,
-} from "../config/types";
-
-const updateGroups: {
-	key: keyof ChangelogUpdates;
-	label: string;
-}[] = [
-	{ key: "feature", label: "新功能" },
-	{ key: "improvement", label: "优化改进" },
-	{ key: "bugfix", label: "问题修复" },
-];
+import type { ChangelogEntry, ChangelogUpdates } from "../config/types";
+import { type ChangelogRelease, updateGroups, withAnchors } from "../lib/changelog";
 
 const feedTitle = "MiniBili 更新日志";
 const feedDescription = "订阅 MiniBili 的新功能、体验改进和问题修复。";
@@ -35,20 +23,15 @@ const asCdata = (value: string) =>
 const getAllEntries = (updates: ChangelogUpdates) =>
 	updateGroups.flatMap(({ key }) => updates[key] ?? []);
 
-const getReleaseLink = (item: ChangelogVersion) => {
+const getReleaseLink = (item: ChangelogRelease) => {
 	const releaseId = encodeURIComponent(
-		[
-			item.date,
-			item.build,
-			item.version,
-			...(item.platforms ?? ["iOS"]),
-		].join("-"),
+		[item.date, item.build, item.version, ...item.platforms].join("-"),
 	);
 
-	return `/changelog/?release=${releaseId}#${item.build}`;
+	return `/changelog/?release=${releaseId}#${item.anchor}`;
 };
 
-const getDescription = ({ title, updates }: ChangelogVersion) => {
+const getDescription = ({ title, updates }: ChangelogRelease) => {
 	const entries = getAllEntries(updates).map(entryText);
 	const preview = entries.slice(0, 3).join("；");
 	const suffix = entries.length > 3 ? `等 ${entries.length} 项更新` : "";
@@ -56,9 +39,9 @@ const getDescription = ({ title, updates }: ChangelogVersion) => {
 	return [title, preview, suffix].filter(Boolean).join("。 ");
 };
 
-const getContent = (item: ChangelogVersion, site: URL) => {
+const getContent = (item: ChangelogRelease, site: URL) => {
 	const itemUrl = new URL(getReleaseLink(item), site).href;
-	const platforms = item.platforms?.join("、") ?? "iOS";
+	const platforms = item.platforms.join("、");
 	const sections = updateGroups
 		.map(({ key, label }) => {
 			const entries = item.updates[key];
@@ -93,14 +76,14 @@ const getContent = (item: ChangelogVersion, site: URL) => {
 	].join("");
 };
 
-const getCategories = (item: ChangelogVersion) => [
-	...(item.platforms ?? ["iOS"]),
+const getCategories = (item: ChangelogRelease) => [
+	...item.platforms,
 	...updateGroups
 		.filter(({ key }) => item.updates[key]?.length)
 		.map(({ label }) => label),
 ];
 
-const renderItem = (item: ChangelogVersion, site: URL) => {
+const renderItem = (item: ChangelogRelease, site: URL) => {
 	const link = new URL(getReleaseLink(item), site).href;
 	const title = `${item.version} · Build ${item.build}`;
 	const pubDate = new Date(`${item.date}T00:00:00+08:00`).toUTCString();
@@ -128,7 +111,7 @@ export function GET(context: APIContext) {
 	const lastBuildDate = latestDate
 		? new Date(`${latestDate}T00:00:00+08:00`).toUTCString()
 		: new Date().toUTCString();
-	const items = changelog
+	const items = withAnchors(changelog)
 		.slice(0, 30)
 		.map((item) => renderItem(item, site))
 		.join("");

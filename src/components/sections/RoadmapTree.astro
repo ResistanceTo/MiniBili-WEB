@@ -1,0 +1,198 @@
+---
+import { TodoStatus, type TodoNode } from "config";
+import { roadmap } from "config/roadmap";
+import { FiAlertCircle, FiCheckCircle, FiCircle, FiClock, FiSearch } from "react-icons/fi";
+import RoadmapNode from "./RoadmapNode.astro";
+
+const countByStatus = (nodes: TodoNode[]) => {
+  const counts = { [TodoStatus.Completed]: 0, [TodoStatus.InProgress]: 0, [TodoStatus.Planned]: 0, [TodoStatus.Bug]: 0 };
+  const visit = (node: TodoNode) => {
+    if (node.status !== undefined) counts[node.status] += 1;
+    node.children?.forEach(visit);
+  };
+  nodes.forEach(visit);
+  return counts;
+};
+
+const counts = countByStatus(roadmap);
+
+const statusFilters = [
+  { status: TodoStatus.Completed, label: "已完成", icon: FiCheckCircle, color: "text-emerald-600 dark:text-emerald-400" },
+  { status: TodoStatus.InProgress, label: "开发中", icon: FiClock, color: "text-sky-600 dark:text-sky-400" },
+  { status: TodoStatus.Planned, label: "计划中", icon: FiCircle, color: "text-ink-subtle" },
+  { status: TodoStatus.Bug, label: "Bug", icon: FiAlertCircle, color: "text-rose-600 dark:text-rose-400" },
+];
+---
+
+<div class="space-y-6" data-roadmap>
+  <!-- 节点很多，图标只定义一次，节点里用 <use> 引用 -->
+  <svg class="rm-sprite" aria-hidden="true">
+    <symbol id="rm-i-chevron" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></symbol>
+    <symbol id="rm-i-done" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></symbol>
+    <symbol id="rm-i-doing" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></symbol>
+    <symbol id="rm-i-planned" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle></symbol>
+    <symbol id="rm-i-bug" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></symbol>
+  </svg>
+
+  <header class="text-center sm:text-left">
+    <p class="mb-2 text-sm font-semibold tracking-[0.15em] text-brand-ink">功能演进</p>
+    <h1 class="mb-2 text-3xl font-bold tracking-tight text-ink sm:text-4xl">开发路线图</h1>
+    <p class="text-balance text-sm text-ink-muted">
+      MiniBili 各功能模块的开发进度：共 {counts[TodoStatus.Completed]} 项已完成、{counts[TodoStatus.InProgress]} 项开发中、{counts[TodoStatus.Planned]} 项计划中。具体发布情况见<a href="/changelog/" class="font-medium text-brand-ink hover:underline">更新日志</a>。
+    </p>
+  </header>
+
+  <div data-js-only hidden>
+    <div class="relative">
+      <label for="roadmap-search" class="sr-only">搜索功能或模块</label>
+      <FiSearch className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-subtle" />
+      <input
+        id="roadmap-search"
+        type="search"
+        placeholder="搜索功能或模块..."
+        autocomplete="off"
+        class="glass w-full rounded-2xl py-2.5 pl-10 pr-4 text-sm text-ink placeholder-ink-subtle transition-all focus:outline-none focus:ring-2 focus:ring-brand-ink"
+        data-search
+      />
+    </div>
+  </div>
+
+  <div class="glass rounded-3xl p-5">
+    <h2 class="mb-3 text-xs font-semibold uppercase tracking-wider text-ink-subtle">状态筛选</h2>
+    <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-4" role="group" aria-label="按状态筛选">
+      {statusFilters.map(({ status, label, icon: Icon, color }) => (
+        <button
+          type="button"
+          class="status-button flex items-center justify-between rounded-xl px-3 py-2 text-xs font-medium text-ink transition-all"
+          data-status-filter={status}
+          aria-pressed="false"
+        >
+          <span class="flex items-center gap-2">
+            <Icon className={`h-3.5 w-3.5 ${color}`} />
+            <span>{label}</span>
+          </span>
+          <span class="font-bold text-ink" data-status-count={status}>{counts[status]}</span>
+        </button>
+      ))}
+    </div>
+    <button type="button" class="mt-3 text-xs font-medium text-brand-ink hover:underline" data-clear-filter hidden>
+      清除状态筛选
+    </button>
+  </div>
+
+  <div class="glass rounded-3xl p-5 text-sm leading-relaxed sm:p-6">
+    <ul class="space-y-0.5" data-roadmap-tree>
+      {roadmap.map((node) => <RoadmapNode node={node} />)}
+    </ul>
+    <p class="py-12 text-center text-sm text-ink-subtle" data-empty hidden>没有找到匹配的功能或模块</p>
+  </div>
+</div>
+
+<style is:global>
+  .rm-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+  .rm-icon { @apply h-4 w-4 flex-shrink-0 fill-none stroke-current; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .rm-done { @apply text-emerald-600 dark:text-emerald-400; }
+  .rm-doing { @apply text-sky-600 dark:text-sky-400; }
+  .rm-planned { @apply text-ink-subtle; }
+  .rm-bug { @apply text-rose-600 dark:text-rose-400; }
+
+  .rm-group { @apply flex cursor-pointer list-none items-center gap-1.5 rounded-lg py-1 pr-2 font-semibold text-ink hover:text-brand-ink; }
+  .rm-group::-webkit-details-marker { display: none; }
+  .rm-chevron { @apply h-3.5 w-3.5 text-ink-subtle transition-transform; }
+  details[open] > .rm-group .rm-chevron { transform: rotate(90deg); }
+  .rm-children { @apply ml-[0.4rem] border-l border-hairline/[0.12] pl-4; }
+
+  .rm-leaf { @apply flex items-start gap-2 py-1 text-ink-muted; }
+  .rm-leaf .rm-icon { @apply mt-0.5; }
+  .rm-leaf-done { @apply text-ink-subtle line-through decoration-ink-subtle/50; }
+</style>
+
+<style>
+  .status-button {
+    background-color: rgb(var(--hairline) / 0.08);
+    box-shadow: inset 0 0 0 1px rgb(var(--hairline) / 0.15);
+  }
+
+  /* 选中部分状态后，未选中的按钮变淡 */
+  [data-roadmap].has-status-filter .status-button[aria-pressed="false"] {
+    background-color: transparent;
+    box-shadow: none;
+    opacity: 0.45;
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const root = document.querySelector("[data-roadmap]");
+    if (!root) return;
+
+    const tree = root.querySelector("[data-roadmap-tree]");
+    const search = root.querySelector("[data-search]");
+    const clearButton = root.querySelector("[data-clear-filter]");
+    const empty = root.querySelector("[data-empty]");
+    const statusButtons = Array.from(root.querySelectorAll("[data-status-filter]"));
+    const selected = new Set();
+
+    root.querySelectorAll("[data-js-only]").forEach((element) => element.removeAttribute("hidden"));
+
+    const childNodes = (li) => {
+      const list = li.querySelector(":scope > details > ul");
+      return list ? Array.from(list.children) : [];
+    };
+
+    // 返回该节点是否可见；祖先标题命中搜索词时，子节点只需满足状态筛选
+    const apply = (li, term, ancestorMatched, counts) => {
+      const selfMatched = !term || li.dataset.title.includes(term);
+      const children = childNodes(li);
+      const status = li.dataset.status;
+      let visible;
+
+      if (children.length > 0) {
+        visible = children
+          .map((child) => apply(child, term, ancestorMatched || selfMatched, counts))
+          .some(Boolean);
+      } else {
+        const textMatched = selfMatched || ancestorMatched;
+        if (textMatched && status !== undefined) counts[status] = (counts[status] || 0) + 1;
+        visible = textMatched && (selected.size === 0 || (status !== undefined && selected.has(status)));
+      }
+
+      li.hidden = !visible;
+      const details = li.querySelector(":scope > details");
+      if (details && (term || selected.size > 0)) details.open = true;
+      return visible;
+    };
+
+    const render = () => {
+      const term = search.value.trim().toLowerCase();
+      const counts = {};
+      const anyVisible = Array.from(tree.children)
+        .map((li) => apply(li, term, false, counts))
+        .some(Boolean);
+
+      empty.hidden = anyVisible;
+      clearButton.hidden = selected.size === 0;
+      root.classList.toggle("has-status-filter", selected.size > 0);
+      statusButtons.forEach((button) => {
+        const status = button.dataset.statusFilter;
+        button.setAttribute("aria-pressed", selected.has(status) ? "true" : "false");
+        root.querySelector(`[data-status-count="${status}"]`).textContent = String(counts[status] || 0);
+      });
+    };
+
+    statusButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const status = button.dataset.statusFilter;
+        selected.has(status) ? selected.delete(status) : selected.add(status);
+        render();
+      });
+    });
+
+    clearButton.addEventListener("click", () => {
+      selected.clear();
+      render();
+    });
+
+    search.addEventListener("input", render);
+  })();
+</script>

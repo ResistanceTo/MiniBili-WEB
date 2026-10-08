@@ -62,7 +62,8 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
     <meta property="og:image" content={ogImageUrl}>
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="MiniBili 应用落地页预览图">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:alt" content="MiniBili：更纯粹的 B站体验。免费、无广告、无跟踪器的第三方客户端，支持 iPhone、iPad、Mac 与 Apple Watch">
     <meta property="og:site_name" content="MiniBili">
     <meta property="og:locale" content="zh_CN">
 
@@ -71,6 +72,7 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
     <meta name="twitter:title" content={title}>
     {description && <meta name="twitter:description" content={description}>}
     <meta name="twitter:image" content={ogImageUrl}>
+    <meta name="twitter:image:alt" content="MiniBili：更纯粹的 B站体验">
 
     <!-- Apple Mobile Web App -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -88,8 +90,12 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
     <slot name="head" />
 
     <script is:inline>
-      const theme = localStorage.getItem('theme') || 'system';
       const root = document.documentElement;
+      root.classList.add('js');
+      let theme = 'system';
+      try {
+        theme = localStorage.getItem('theme') || 'system';
+      } catch (e) {}
       root.classList.remove('light', 'dark');
 
       if (theme === 'system') {
@@ -99,7 +105,6 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
         root.classList.add(theme);
       }
 
-      !localStorage.getItem('theme') && localStorage.setItem('theme', 'system');
     </script>
   </head>
   <body class="min-h-screen bg-transparent text-ink antialiased">
@@ -145,7 +150,13 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
         });
       };
 
-      const getSavedTheme = () => localStorage.getItem(themeStorageKey) || "system";
+      const getSavedTheme = () => {
+        try {
+          return localStorage.getItem(themeStorageKey) || "system";
+        } catch (e) {
+          return "system";
+        }
+      };
 
       const initThemeToggles = () => {
         const savedTheme = getSavedTheme();
@@ -159,7 +170,9 @@ const ogImageUrl = new URL("/og_image.png", siteUrl).href;
             toggle.querySelectorAll("[data-theme-option]").forEach((button) => {
               button.addEventListener("click", () => {
                 const nextTheme = button.getAttribute("data-theme") || "system";
-                localStorage.setItem(themeStorageKey, nextTheme);
+                try {
+                  localStorage.setItem(themeStorageKey, nextTheme);
+                } catch (e) {}
                 applyTheme(nextTheme);
                 syncThemeButtons(nextTheme);
               });
