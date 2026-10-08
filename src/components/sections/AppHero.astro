@@ -14,6 +14,13 @@ const { platforms, sponsorship } = productFacts;
 const latest = changelog[0];
 const heroImage = await getResponsiveImage("/screenshots/iphone/home_new.webp");
 const changelogHref = `/changelog/#${latest.build}`;
+
+const menuItems = [
+  { device: "iPhone", url: platforms.ios.downloadUrl, note: `${platforms.ios.name} ${platforms.ios.minimumVersion}` },
+  { device: "iPad", url: platforms.ipados.downloadUrl, note: `${platforms.ipados.name} ${platforms.ipados.minimumVersion}` },
+  { device: "Apple Watch", url: platforms.watchos.downloadUrl, note: `${platforms.watchos.name} ${platforms.watchos.minimumVersion} · ${t.watchNote}` },
+  { device: "Mac", url: platforms.macos.downloadUrl, note: `${platforms.macos.name} ${platforms.macos.minimumVersion}` },
+];
 ---
 
 <section class="relative grid items-center gap-12 pt-6 md:pt-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16 lg:gap-y-0">
@@ -51,16 +58,46 @@ const changelogHref = `/changelog/#${latest.build}`;
     </div>
 
     <div class="mt-8 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row" data-download>
-      <a
-        href={platforms.ios.downloadUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex w-full items-center justify-center gap-2.5 rounded-2xl bg-brand-600 px-6 py-3.5 font-semibold text-white shadow-[0_8px_28px_-6px_rgba(251,114,153,0.65)] transition-all hover:bg-brand-700 hover:shadow-[0_10px_32px_-6px_rgba(251,114,153,0.75)] active:scale-[0.98] sm:w-auto"
-        data-download-primary
-      >
-        <img src="/TestFlight.png" alt="" class="h-6 w-6 rounded-md" width="24" height="24" />
-        <span data-download-label>{t.download}</span>
-      </a>
+      <!-- 拆分按钮：左侧按设备一键下载，右侧展开全部平台 -->
+      <div class="relative flex w-full rounded-2xl shadow-[0_8px_28px_-6px_rgba(251,114,153,0.65)] sm:w-auto">
+        <a
+          href={platforms.ios.downloadUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex flex-1 items-center justify-center gap-2.5 rounded-l-2xl bg-brand-600 py-3.5 pl-6 pr-5 font-semibold text-white transition-colors hover:bg-brand-700 active:scale-[0.98]"
+          data-download-primary
+        >
+          <img src="/TestFlight.png" alt="" class="h-6 w-6 rounded-md" width="24" height="24" />
+          <span data-download-label>{t.download}</span>
+        </a>
+        <details class="group" data-download-menu>
+          <summary
+            class="flex h-full cursor-pointer list-none items-center rounded-r-2xl border-l border-white/30 bg-brand-600 px-3.5 text-white transition-colors hover:bg-brand-700 group-open:bg-brand-700"
+            aria-label={t.chooseOther}
+            title={t.chooseOther}
+          >
+            <svg class="h-5 w-5 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="absolute left-0 top-full z-50 mt-2 w-full overflow-hidden rounded-2xl border border-hairline/10 bg-surface p-1.5 text-left shadow-glass-lg sm:w-80">
+            <p class="px-4 pb-1 pt-2 text-xs font-medium text-ink-subtle">{t.chooseOther}</p>
+            {menuItems.map((item) => (
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-between gap-4 rounded-xl px-4 py-2.5 transition-colors hover:bg-hairline/[0.06]"
+                data-device={item.device}
+              >
+                <span class="flex items-center gap-2 whitespace-nowrap text-sm font-medium text-ink">
+                  {item.device}
+                  <span class="hidden rounded-full bg-brand/10 px-1.5 py-px text-[10px] font-semibold text-brand-ink" data-current-badge>{t.currentDevice}</span>
+                </span>
+                <span class="text-right text-xs text-ink-subtle">{item.note}</span>
+              </a>
+            ))}
+          </div>
+        </details>
+      </div>
 
       <a
         href={sponsorship.url}
@@ -73,10 +110,8 @@ const changelogHref = `/changelog/#${latest.build}`;
       </a>
     </div>
 
-    <p class="mt-4 max-w-xl text-balance text-xs leading-relaxed text-ink-subtle" data-download-hint>
-      {t.requirement} · {t.otherPlatforms}<a href={platforms.ios.downloadUrl} target="_blank" rel="noopener noreferrer" class="font-medium text-ink-muted underline-offset-2 hover:text-brand-ink hover:underline">{t.iosLinkLabel}</a>
-      · <a href={platforms.macos.downloadUrl} target="_blank" rel="noopener noreferrer" class="font-medium text-ink-muted underline-offset-2 hover:text-brand-ink hover:underline">{t.macLinkLabel}</a>
-      · <a href={t.fullHref} class="font-medium text-ink-muted underline-offset-2 hover:text-brand-ink hover:underline">{t.full}</a>
+    <p class="mt-4 max-w-xl text-balance text-xs leading-relaxed text-ink-subtle">
+      {t.requirement} · <a href={t.fullHref} class="font-medium text-ink-muted underline-offset-2 hover:text-brand-ink hover:underline">{t.full}</a>
     </p>
     <p class="mt-3 hidden max-w-xl rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-2.5 text-xs leading-relaxed text-ink" data-download-unsupported>
       {t.unsupported}
@@ -108,10 +143,18 @@ const changelogHref = `/changelog/#${latest.build}`;
   </div>
 </section>
 
+<style>
+  summary::-webkit-details-marker { display: none; }
+</style>
+
 <script is:inline define:vars={{ links: { ios: platforms.ios.downloadUrl, mac: platforms.macos.downloadUrl }, labels: { iPhone: t.downloadFor("iPhone"), iPad: t.downloadFor("iPad"), Mac: t.downloadFor("Mac") } }}>
   (function () {
     const root = document.querySelector("[data-download]");
     if (!root) return;
+
+    const primary = root.querySelector("[data-download-primary]");
+    const menu = root.querySelector("[data-download-menu]");
+    const summary = menu.querySelector("summary");
 
     // iPadOS 默认以桌面版 Safari 的身份访问，需要用触控点数量区分 iPad 与 Mac
     const ua = navigator.userAgent;
@@ -122,11 +165,29 @@ const changelogHref = `/changelog/#${latest.build}`;
     else if (/Macintosh/.test(ua)) device = "Mac";
 
     if (device) {
-      const primary = root.querySelector("[data-download-primary]");
       primary.href = device === "Mac" ? links.mac : links.ios;
       primary.querySelector("[data-download-label]").textContent = labels[device];
-    } else if (/Android|Windows|Linux|CrOS/.test(ua)) {
-      document.querySelector("[data-download-unsupported]")?.classList.remove("hidden");
+      menu.querySelector(`[data-device="${device}"] [data-current-badge]`)?.classList.remove("hidden");
+    } else {
+      // 识别不出设备时，主按钮直接展开平台菜单
+      primary.addEventListener("click", (event) => {
+        event.preventDefault();
+        menu.open = true;
+        menu.querySelector("[data-device]")?.focus();
+      });
+      if (/Android|Windows|Linux|CrOS/.test(ua)) {
+        document.querySelector("[data-download-unsupported]")?.classList.remove("hidden");
+      }
     }
+
+    document.addEventListener("click", (event) => {
+      if (menu.open && !menu.contains(event.target) && !primary.contains(event.target)) menu.open = false;
+    });
+    document.addEventListener("keydown", (event) => {
+      if (menu.open && event.key === "Escape") {
+        menu.open = false;
+        summary.focus();
+      }
+    });
   })();
 </script>
