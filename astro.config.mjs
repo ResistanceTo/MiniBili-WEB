@@ -2,6 +2,10 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import { defineConfig } from "astro/config";
+import { changelog } from "./src/config/changelog";
+
+// 最新一次版本更新的日期，作为首页与更新日志页的 lastmod
+const latestReleaseDate = changelog[0].date;
 
 export default defineConfig({
   site: 'https://minibili.zhaohe.org',
@@ -14,10 +18,10 @@ export default defineConfig({
       priority: 0.7,
       serialize(item) {
         if (item.url === 'https://minibili.zhaohe.org/') {
-          return { ...item, priority: 1.0, changefreq: 'daily' };
+          return { ...item, priority: 1.0, changefreq: 'daily', lastmod: latestReleaseDate };
         }
         if (item.url.includes('/changelog')) {
-          return { ...item, priority: 0.8 };
+          return { ...item, priority: 0.8, lastmod: latestReleaseDate };
         }
         if (item.url.includes('/roadmap')) {
           return { ...item, priority: 0.6 };

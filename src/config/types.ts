@@ -53,8 +53,10 @@ export interface AppLogo {
 	src: string;
 }
 
+export type AnnouncementMessage = string | { text: string; expires?: string };
+
 export interface Announcement {
-	message: string | string[];
+	message: AnnouncementMessage | AnnouncementMessage[];
 	type?: "warning" | "info" | "success";
 	dismissible?: boolean;
 	show?: boolean;

@@ -26,7 +26,7 @@ const groups = [
 <section id="changelog" class="scroll-mt-28 py-12 sm:py-20">
   <div class="mb-10 flex flex-col items-center gap-3 text-center sm:flex-row sm:items-end sm:justify-between sm:text-left">
     <div>
-      <p class="mb-2 text-sm font-semibold tracking-[0.15em] text-brand">持续进化</p>
+      <p class="mb-2 text-sm font-semibold tracking-[0.15em] text-brand-ink">持续进化</p>
       <h2 class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">最新更新</h2>
     </div>
     <a href="/changelog/" class="glass inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium text-ink transition-all hover:-translate-y-0.5">
@@ -39,13 +39,13 @@ const groups = [
     {recentVersions.map(({ version, build, date, title, updates, platforms }) => (
       <article class="glass flex flex-col rounded-4xl p-6 transition-all duration-300 hover:-translate-y-1" id={String(build)}>
         <div class="mb-4 flex items-center justify-between">
-          <a href={`/changelog/#${build}`} class="group/anchor flex items-baseline gap-1.5 hover:text-brand transition-colors" title={`查看 Build ${build} 详细日志`}>
-            <span class="text-xl font-bold text-ink group-hover/anchor:text-brand">{build}</span>
+          <a href={`/changelog/#${build}`} class="group/anchor flex items-baseline gap-1.5 hover:text-brand-ink transition-colors" title={`查看 Build ${build} 详细日志`}>
+            <span class="text-xl font-bold text-ink group-hover/anchor:text-brand-ink">{build}</span>
             <span class="text-sm text-ink-subtle">{version}</span>
           </a>
           <div class="flex gap-1">
             {(platforms ?? [AppPlatform.iOS]).map((platform) => (
-              <span class="rounded-full bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand">
+              <span class="rounded-full bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand-ink">
                 {platformLabels[platform] ?? platform}
               </span>
             ))}
