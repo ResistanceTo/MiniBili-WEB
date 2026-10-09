@@ -3,6 +3,26 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1033,
+		date: "2026-10-09",
+		updates: {
+			improvement: [
+				"【新增】",
+				"视频详情页不进全屏也能调倍速：Mini 播放器的小窗控件里新增了倍速按钮。",
+				"发弹幕按钮的位置可以自选：留在底部操作栏，或放到「详情 / 评论」切换的右侧（设置 → 播放器与弹幕 → 弹幕）。",
+				"【优化】",
+				"播放器的「正在加载」换成画面中间的玻璃小窗，不再把画面整块盖黑，加载时也能操作播放器。",
+				"动态详情、文章详情往上滑时，内容会从顶部栏下面透过去，和其他页面一致。",
+				"开着空降助手时，视频结尾正好是要跳过的片段会卡在「正在加载」、无法返回，只能杀掉 App。",
+			],
+			bugfix: [
+				"【修复】",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1032,
 		date: "2026-10-07",
 		updates: {
