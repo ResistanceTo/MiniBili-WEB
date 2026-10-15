@@ -3,6 +3,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1036,
+		date: "2026-10-15",
+		updates: {
+			improvement: [
+				"【新增】",
+				"Mini播放器横屏全屏时，可以锁定控件。",
+				"视频详情页的「评论」后面直接带上评论数。",
+				"【优化】",
+				"Mini播放器布局改版，底部控件合并为一行。",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1035,
 		date: "2026-10-13",
 		updates: {
