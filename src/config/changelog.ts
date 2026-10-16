@@ -3,6 +3,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1038,
+		date: "2026-10-16",
+		updates: {
+			improvement: [
+				"部分专栏文章内容不全：更新日志这类文章「新增」「改进」等小节下面的列表、引用和链接现在能完整显示。",
+				"未登录时部分直播间资料加载失败。",
+			],
+			bugfix: [
+				"【修复】",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1037,
 		date: "2026-10-16",
 		updates: {
