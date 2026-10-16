@@ -3,6 +3,23 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1037,
+		date: "2026-10-16",
+		updates: {
+			improvement: [
+				"【优化】",
+				"Mini播放器：画质、音质和播放设置合并到右上角的「…」菜单，底部不再单独放设置按钮。",
+				"Mini播放器：旋转屏幕按钮回到右下角，横屏、竖屏位置一致；底部 4 个自定义按钮不变。",
+				"英文界面下「画质」「播放速度」「拉伸显示」显示成中文。",
+			],
+			bugfix: [
+				"【修复】",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1036,
 		date: "2026-10-15",
 		updates: {
