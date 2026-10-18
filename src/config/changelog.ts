@@ -2,6 +2,24 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 
 export const changelog: ChangelogVersion[] = [
 	{
+		version: "先行版",
+		build: 1039,
+		date: "2026-10-18",
+		updates: {
+			improvement: [
+				"设置了视频 CDN（比如腾讯云）后，打开视频有时还要转圈很久：以前起播前会顺带试一遍接口给的其他线路，要等最慢的那条回来才开始播；现在哪条先好就用哪条，视频本身始终走你选的 CDN。",
+				"番剧不受「视频 CDN」设置影响，一直走默认线路：现在番剧和普通视频一样按设置选线路。",
+				"缓存（下载）视频也按「视频 CDN」设置选线路。",
+				"【优化】",
+				"选了单列样式后，在 iPad 等宽屏上也保持单列，不再自动变成多列（多列时卡片高度对不齐）；想随屏幕变多列可以选双列样式。",
+			],
+			bugfix: [
+				"【修复】",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
 		version: "公测版",
 		build: 7,
 		date: "2026-10-16",
