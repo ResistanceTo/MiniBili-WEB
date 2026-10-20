@@ -3,6 +3,18 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1040,
+		date: "2026-10-20",
+		updates: {
+			improvement: [
+				"使用Mini播放器时，详情页采用沉浸模式",
+				"视频详情页顶部导航栏收起画质切换和弹幕开关按钮",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1039,
 		date: "2026-10-18",
 		updates: {
