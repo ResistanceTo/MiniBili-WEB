@@ -3,6 +3,23 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1041,
+		date: "2026-10-22",
+		updates: {
+			improvement: [
+				"【新功能】",
+				"Mini 播放器新增「裁剪铺满」：全屏播放时，在右上角「…」→「画面比例」里可以选「原始比例」「裁剪铺满」「拉伸铺满」。",
+				"【优化】",
+				"视频详情页的合集 / 分 P 入口改成圆角矩形，和其他卡片统一。",
+				"BGM 不再单独占一行，收进简介标签行的最前面，用主题色标签显示，支持长按复制歌名。",
+				"简介里的标签较多时，标签行两端改为渐隐，不再被生硬截断。",
+				"动态页「全部」的图标跟随设置里选的 App 图标变化。",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1040,
 		date: "2026-10-20",
 		updates: {
