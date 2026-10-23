@@ -3,6 +3,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1042,
+		date: "2026-10-23",
+		updates: {
+			improvement: [
+				"用 Mini 播放器时，从动态页点开的视频、或者在详情页里一层层点进去的页面，滑动返回不了，现在可以了。",
+				"滑动返回时，上一页顶部的工具栏不会再一下子整条冒出来，会跟着手指慢慢显示。",
+			],
+			bugfix: [
+				"【修复】",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1041,
 		date: "2026-10-22",
 		updates: {
