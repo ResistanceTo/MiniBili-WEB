@@ -3,6 +3,23 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1043,
+		date: "2026-10-24",
+		updates: {
+			improvement: [
+				"【优化】",
+				"iPad 横屏模式下点开视频详情页交互",
+				"iPad 上 Mini 播放器全屏时，左边的侧边栏还露着",
+				"iPad 竖着拿时点全屏没反应、转到横屏也不自动全屏",
+			],
+			bugfix: [
+				"【修复】",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1042,
 		date: "2026-10-23",
 		updates: {
