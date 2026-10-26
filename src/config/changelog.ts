@@ -3,6 +3,26 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1044,
+		date: "2026-10-26",
+		updates: {
+			improvement: [
+				"【新功能】",
+				"分P / 合集的视频支持批量缓存：点「下载视频」后可以一次选多集，已经缓存过或正在下载的集会标出来，同时最多下 3 个。",
+				"播放已缓存的视频时，播完会自动接着放下一个已缓存的视频，不用再退回下载管理。顺序、列表循环、随机按设置里的「播放模式」来。",
+				"【优化】",
+				"搜索结果里的视频卡片支持长按菜单，和首页一样可以查看 UP 主、添加到稍后再看、拉黑 UP 主。",
+				"视频详情页简介里的标签行去掉两端的渐隐，标签滑动时直接从简介卡边框处出入。",
+				"进直播间后马上返回，App 偶尔会闪退",
+			],
+			bugfix: [
+				"【修复】",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1043,
 		date: "2026-10-24",
 		updates: {
