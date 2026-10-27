@@ -3,6 +3,18 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1045,
+		date: "2026-10-27",
+		updates: {
+			improvement: [
+				"优化视频页返回到首页时顶部控件和页面状态",
+				"优化发弹幕/评论弹窗交互",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1044,
 		date: "2026-10-26",
 		updates: {
