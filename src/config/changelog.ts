@@ -3,6 +3,17 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1047,
+		date: "2026-10-31",
+		updates: {
+			improvement: [
+				"视频页支持左右滑动切换 详情/评论",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1046,
 		date: "2026-10-30",
 		updates: {
