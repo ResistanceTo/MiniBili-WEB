@@ -3,6 +3,18 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1049,
+		date: "2026-11-01",
+		updates: {
+			bugfix: [
+				"修复评论卡片高度不对、正文压到操作按钮上的问题",
+				"修复部分评论区加载更多时出错的问题",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1048,
 		date: "2026-11-01",
 		updates: {
