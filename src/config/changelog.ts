@@ -3,6 +3,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1052,
+		date: "2026-11-07",
+		updates: {
+			improvement: [
+				"iPad 视频页左右分栏时去掉中间的分隔线，环境光可以一直铺到评论栏。",
+				"iPad 等宽屏上，动态页的视频卡片重新显示标题。",
+			],
+			bugfix: [
+				"修复动态页排成三列时（如 iPad Pro）滑动掉帧。",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1051,
 		date: "2026-11-07",
 		updates: {
