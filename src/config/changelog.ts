@@ -3,6 +3,27 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1051,
+		date: "2026-11-07",
+		updates: {
+			feature: [
+				"直播间可以选 HDR 画质了（如「2K 极清 (HDR 高帧率)」），清晰度名称和官方客户端一致。开着「直播优先 HEVC/HDR」时，进直播间默认播放 HDR。",
+			],
+			improvement: [
+				"动态页卡片更精简：去掉「已关注」按钮和「投稿视频」角标，和视频标题重复的文字不再显示。",
+				"iPad 等宽屏上，动态页按宽度自动排成多列，多列时视频只显示封面。",
+				"从视频页滑动返回首页时，顶部切换栏跟着手指淡入，不再一下子冒出来。",
+				"视频页环境光更流畅。",
+			],
+			bugfix: [
+				"修复Mini 播放器播完后再点播放（包括锁屏、控制中心、耳机），不会从头开始。",
+				"修复直播选了 HDR 但放不了时，自动切回普通画质，不再一直报错。",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1050,
 		date: "2026-11-06",
     updates: {
