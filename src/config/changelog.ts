@@ -3,6 +3,23 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1053,
+		date: "2026-11-08",
+		updates: {
+			feature: [
+				"新增「沉浸式卡片」样式在「设置 · 布局与导航 · 视频卡片样式」里选择。",
+				"沉浸式卡片的标题默认显示一行，可以在「设置 · 首页与推荐 · 卡片信息」里改成两行。",
+				"看过的直播会记入历史记录，和官方客户端一样；隐身模式下不记录。",
+			],
+			improvement: [
+				"iPad 顶部标签栏的「搜索」改成放大镜图标，固定在最右侧。",
+				"补全部分翻译。",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1052,
 		date: "2026-11-07",
 		updates: {
