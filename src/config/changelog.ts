@@ -3,6 +3,26 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1054,
+		date: "2026-11-08",
+		updates: {
+			feature: [
+				"动态页的视频、番剧卡片改成沉浸式卡片的样子：封面在上，下面是标题、播放量、弹幕数和时长。",
+				"进入直播间默认选最高清晰度，有 2K 时直接用 2K，不用再手动切换；HDR 跟随「设置 · 视频源与画质 · 直播优先 HEVC/HDR」，开着时进房就选 HDR 里最高的一档。",
+			],
+			improvement: [
+				"沉浸式卡片的「标题行数」挪到「设置 · 首页与推荐 · 沉浸式卡片」，一直显示，首页和动态页共用。",
+				"首页沉浸式卡片的标题字号调小，和「紧凑型双列」一致。",
+				"沉浸式卡片选两行标题时，只有一行的标题贴着下面的 UP 主一行。",
+			],
+			bugfix: [
+				"修复沉浸式卡片在 iPhone 双列时（如首页「热门」），UP 主名字被挤得不显示。",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1053,
 		date: "2026-11-08",
 		updates: {
