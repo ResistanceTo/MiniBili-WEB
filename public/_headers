@@ -1,14 +1,14 @@
 # 默认响应头
 # 注意：同一个响应头被多条规则命中时，Cloudflare Pages 会用逗号把值拼接起来，
 # 所以 Cache-Control 只写在具体规则里，HTML 沿用平台默认的 public, max-age=0, must-revalidate
-# CSP 中放行的第三方只有 Cloudflare Web Analytics：
-# 脚本来自 static.cloudflareinsights.com，数据上报到 cloudflareinsights.com/cdn-cgi/rum
+# CSP 中放行的第三方只有 Cloudflare Web Analytics 的脚本（static.cloudflareinsights.com）
+# 数据上报走本站的 /cdn-cgi/rum，属于同源请求，所以 connect-src 不需要额外放行
 /*
   Permissions-Policy: browsing-topics=()
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
-  Content-Security-Policy: default-src 'self'; img-src 'self' data:; media-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; media-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'
 
 # Astro 打包产物（自带内容 hash）- 长期不可变缓存
 /_astro/*
