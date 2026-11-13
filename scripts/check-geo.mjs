@@ -20,6 +20,13 @@ const walk = (directory) => readdirSync(directory).flatMap((entry) => {
 const htmlFiles = walk(distRoot).filter((file) => extname(file) === ".html");
 const pages = new Map();
 
+// 同源 URL 必须能在 dist/ 中找到对应文件；站外 URL 不检查
+const resolvesInDist = (value) => {
+	if (!value.startsWith(`${siteOrigin}/`)) return true;
+	const pathname = decodeURIComponent(new URL(value).pathname);
+	return [join(distRoot, pathname), join(distRoot, pathname, "index.html")].some(existsSync);
+};
+
 const extractAttribute = (tag, attribute) => {
 	const match = tag.match(new RegExp(`${attribute}=["']([^"']+)["']`, "i"));
 	return match?.[1];
@@ -55,12 +62,8 @@ for (const file of htmlFiles) {
 		}
 
 		const checkSameOriginResource = (value) => {
-			if (typeof value !== "string" || !value.startsWith(`${siteOrigin}/`)) return;
-			const pathname = new URL(value).pathname;
-			const candidates = [join(distRoot, pathname), join(distRoot, pathname, "index.html")];
-			if (!candidates.some(existsSync)) {
-				errors.push(`${relative(projectRoot, file)} references missing same-origin resource ${value}`);
-			}
+			if (typeof value !== "string" || resolvesInDist(value)) return;
+			errors.push(`${relative(projectRoot, file)} references missing same-origin resource ${value}`);
 		};
 
 		const visit = (value, key = "") => {
@@ -114,14 +117,47 @@ for (const [, { file, html }] of pages) {
 	}
 }
 
-// llms.txt 由配置生成，需与 RSS 中的最新版本保持一致
+// llms.txt 由配置生成，需与 RSS 中的最新版本保持一致，并符合 llmstxt.org 的格式
+// Lighthouse 的 Agentic Browsing 审计要求：有 H1、长度超过 50 个字符、至少有一个 Markdown 链接
 const latestBuild = readFileSync(join(distRoot, "rss.xml"), "utf8").match(/<item><title>[^<]*Build (\d+)<\/title>/)?.[1];
+const markdownLink = /\[[^\]\n]+\]\((https?:\/\/[^)\s]+)\)/g;
 for (const name of ["llms.txt", "llms-full.txt"]) {
 	const file = join(distRoot, name);
 	if (!existsSync(file)) {
 		errors.push(`${name} is missing`);
-	} else if (latestBuild && !readFileSync(file, "utf8").includes(`Build ${latestBuild}`)) {
+		continue;
+	}
+
+	const text = readFileSync(file, "utf8");
+	if (latestBuild && !text.includes(`Build ${latestBuild}`)) {
 		errors.push(`${name} does not mention the latest build ${latestBuild}`);
+	}
+	if (!/^# \S/.test(text)) errors.push(`${name} must start with an H1 title`);
+	if (!/^> \S/m.test(text)) errors.push(`${name} has no blockquote summary`);
+	if (text.length <= 50) errors.push(`${name} is too short`);
+
+	const links = [...text.matchAll(markdownLink)].map((match) => match[1]);
+	if (links.length === 0) errors.push(`${name} contains no Markdown links`);
+	for (const url of links) {
+		if (!resolvesInDist(url)) errors.push(`${name} links to a missing page: ${url}`);
+	}
+
+	// 裸 URL 不会被当作链接解析，必须写成 [名称](URL)
+	const bareUrls = text.replace(markdownLink, "").match(/https?:\/\/[^\s)|，。）]+/g) ?? [];
+	for (const url of bareUrls) errors.push(`${name} contains a bare URL, use [name](url) instead: ${url}`);
+}
+
+// llms.txt 的 H2 段落只放链接列表
+const llmsIndex = join(distRoot, "llms.txt");
+if (existsSync(llmsIndex)) {
+	for (const section of readFileSync(llmsIndex, "utf8").split(/^## /m).slice(1)) {
+		const [heading, ...lines] = section.split("\n").filter((line) => line.trim());
+		if (lines.length === 0) errors.push(`llms.txt section "${heading}" is empty`);
+		for (const line of lines) {
+			if (!/^- \[[^\]]+\]\(https?:\/\/[^)\s]+\)/.test(line)) {
+				errors.push(`llms.txt section "${heading}" has a line that is not a Markdown link item: ${line}`);
+			}
+		}
 	}
 }
 

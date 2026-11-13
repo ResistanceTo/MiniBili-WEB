@@ -13,6 +13,7 @@ export const textResponse = (body: string) =>
 	new Response(body, { headers: { "Content-Type": "text/plain; charset=utf-8" } });
 
 export const disclaimer = "MiniBili 是非官方第三方客户端，与哔哩哔哩官方无关，仅供学习和个人使用。";
+export const disclaimerEn = "MiniBili is an unofficial client and is not affiliated with Bilibili.";
 
 export const keyFacts = [
 	`已发布：${Object.values(platforms).map((p) => p.name).join("、")}，最低系统版本：${releasedRequirementsText}。`,
@@ -27,28 +28,55 @@ export const keyFacts = [
 	`最新版本：Build ${latest.build}（${latest.version}，${latest.date}）。`,
 ];
 
+// llms.txt 规范要求链接写成 Markdown 形式：[名称](URL): 说明。裸 URL 不会被识别为链接
+export const link = (name: string, url: string, note?: string) => `[${name}](${url})${note ? `: ${note}` : ""}`;
+
 export const downloadLinks = [
-	`${platforms.ios.device} / ${platforms.ipados.device} / ${platforms.watchos.device}：${platforms.ios.downloadUrl}`,
-	`${platforms.macos.device}：${platforms.macos.downloadUrl}`,
+	link(
+		`TestFlight（${platforms.ios.device} / ${platforms.ipados.device} / ${platforms.watchos.device}）`,
+		platforms.ios.downloadUrl,
+		`需要 ${platforms.ios.name} ${platforms.ios.minimumVersion}，Apple Watch 版内置在 iOS 版本中`,
+	),
+	link(
+		`TestFlight（${platforms.macos.device}）`,
+		platforms.macos.downloadUrl,
+		`需要 ${platforms.macos.name} ${platforms.macos.minimumVersion}`,
+	),
 ];
 
 export const sponsorshipFacts = [
 	`爱发电${sponsorship.keepTestingTiers}赞助：长期保留测试资格，不受公测名额清理机制影响。`,
 	`爱发电${sponsorship.perksTier}档位：专属群组与 TestFlight 快速更新。`,
 	"赞助不会解锁额外 App 功能。",
-	`赞助页面：${sponsorship.url}`,
 ];
 
-export const officialLinks = [
-	`中文官网：${site}/`,
-	`English：${site}/en/`,
-	`更新日志：${site}/changelog/`,
-	`更新日志 RSS：${site}/rss.xml`,
-	`开发路线图：${site}/roadmap/`,
-	`隐私政策：${site}/privacy/`,
-	`服务条款：${site}/terms/`,
-	`Telegram 社区：${productFacts.telegramUrl}`,
-	"网站源码仓库：https://github.com/ResistanceTo/MiniBili-WEB",
+export const sponsorLink = link(
+	"爱发电赞助页面",
+	sponsorship.url,
+	`${sponsorship.keepTestingTiers}赞助可长期保留 TestFlight 测试资格，${sponsorship.perksTier}档位另有专属群组与快速更新；赞助不会解锁额外 App 功能`,
+);
+
+export const communityLinks = [
+	link("Telegram 社区", productFacts.telegramUrl, "版本公告、问题反馈与 TestFlight 名额开放通知"),
+	sponsorLink,
+];
+
+// 了解 MiniBili 最有用的页面
+export const pageLinks = [
+	link("MiniBili 中文官网", `${site}/`, "产品介绍、截图、功能、常见问题与下载入口"),
+	link("MiniBili English site", `${site}/en/`, "English overview, features and FAQ"),
+	link("更新日志", `${site}/changelog/`, "每个 Build 的新功能、优化改进与问题修复"),
+	link("开发路线图", `${site}/roadmap/`, "各平台的开发进度与计划"),
+	link("隐私政策", `${site}/privacy/`, "App 的数据处理方式与隐私说明"),
+];
+
+export const fullTextLink = link("完整说明 llms-full.txt", `${site}/llms-full.txt`, "平台状态表、全部功能与常见问题全文");
+
+// 次要信息，上下文有限时可以跳过（对应 llms.txt 规范中的 Optional 段）
+export const optionalLinks = [
+	link("服务条款", `${site}/terms/`),
+	link("更新日志 RSS", `${site}/rss.xml`, "订阅版本更新"),
+	link("官网源码仓库", "https://github.com/ResistanceTo/MiniBili-WEB", "仅为官网源码，不代表 MiniBili App 本体开源"),
 ];
 
 export const featureSections = featureHighlights.map(
@@ -59,7 +87,7 @@ export const faqSections = faq.map(({ question, answer }) => `### ${question}\n\
 
 export const recentReleases = withAnchors(changelog).slice(0, 5).map(({ anchor, build, version, date, updates }) => {
 	const count = (updates.feature?.length ?? 0) + (updates.improvement?.length ?? 0) + (updates.bugfix?.length ?? 0);
-	return `- Build ${build}（${version}，${date}）：${count} 项更新，详见 ${site}/changelog/#${anchor}`;
+	return `- ${link(`Build ${build}`, `${site}/changelog/#${anchor}`, `${version}，${date}，${count} 项更新`)}`;
 });
 
 export const list = (items: string[]) => items.map((item) => `- ${item}`).join("\n");
