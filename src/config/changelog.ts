@@ -3,6 +3,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1057,
+		date: "2026-11-14",
+		updates: {
+			feature: [
+				"Mini 播放器顶栏新增「下一个」按钮：有分 P、合集或播放队列时出现。",
+				"Mini 播放器顶栏新增「章节」按钮。",
+			],
+			improvement: [
+				"视频详情页顶部的状态栏模糊。",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1056,
 		date: "2026-11-13",
 		updates: {
