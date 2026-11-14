@@ -3,6 +3,19 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1058,
+		date: "2026-11-14",
+		updates: {
+			improvement: [
+				"视频详情页延伸到状态栏的画面可以选样式：清晰倒影、渐进模糊、整体模糊（设置 · 播放器与弹幕 · 视频页氛围）。",
+				"视频「更多」菜单里的稍后再看、下载视频、听视频改为横排按钮。",
+				"没有评论时，评论页顶部不再重复显示提示。",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1057,
 		date: "2026-11-14",
 		updates: {
