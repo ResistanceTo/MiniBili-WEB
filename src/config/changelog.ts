@@ -3,6 +3,21 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1060,
+		date: "2026-11-15",
+		updates: {
+			improvement: [
+				"搜索出结果后，滑动列表就会收起键盘，不用再点键盘上的「搜索」。",
+				"「我的」页右上角的消息未读角标换成系统样式。",
+			],
+			bugfix: [
+				"修复英文界面下动态页顶部的分类名称显示不全的问题。",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1059,
 		date: "2026-11-15",
 		updates: {
