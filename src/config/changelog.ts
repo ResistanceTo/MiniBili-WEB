@@ -3,6 +3,37 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1062,
+		date: "2026-11-15",
+		updates: {
+			feature: [
+				"Apple Watch 版首页改成入口列表：推荐、搜索、稍后再看、历史记录、我的收藏都在第一屏，登录后最上面显示「继续观看」。",
+				"Apple Watch 版视频列表里左滑一条就能加入稍后再看，详情页也有「稍后再看」按钮；在稍后再看里左滑可以移除。",
+				"Apple Watch 版搜索会记住最近搜过的词。",
+				"Apple Watch 版详情页的「播放」支持双指互点（Series 9 / Ultra 2 及以上）。",
+			],
+			improvement: [
+				"Apple Watch 版打开就能用，不用再等「正在初始化」。",
+				"Apple Watch 版视频列表一屏显示三条，滑到底自动加载下一页；封面加载更快、更省流量。",
+				"Apple Watch 版详情页重新排版：播放按钮更大，简介默认收起。",
+				"Apple Watch 版搜索框直接显示在页面顶部，不用下拉才看得到。",
+				"在 iPhone 上登录、退出或换号后，Apple Watch 版会自动跟上；未登录时会提示可以直接在 iPhone 上登录。",
+				"Apple Watch 版扫码登录打开就出二维码，二维码更大、更好扫。",
+				"Apple Watch 版退出登录前会先确认，并说明 iPhone、iPad、Mac 上也会一起退出。",
+			],
+			bugfix: [
+				"修复 Apple Watch 版点「播放」后卡住没反应的问题。",
+				"修复 Apple Watch 版历史记录里看不到多 P 视频的问题。",
+				"修复 Apple Watch 版稍后再看显示不全的问题。",
+				"修复 Apple Watch 版按钮发灰、看起来像不能点的问题。",
+				"修复 Apple Watch 版断网时已登录却显示成未登录的问题。",
+				"修复 Apple Watch 版英文界面下部分文字仍显示中文的问题。",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1060,
 		date: "2026-11-15",
 		updates: {
