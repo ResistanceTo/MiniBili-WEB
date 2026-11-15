@@ -3,6 +3,22 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1059,
+		date: "2026-11-15",
+		updates: {
+			improvement: [
+				"视频页「更多」菜单按用途分组。",
+				"搜索框右侧的关闭按钮现在总是回到搜索历史页，不管当时是在输入还是已经出了结果。",
+			],
+			bugfix: [
+				"修复从视频页返回时，视频画面和状态栏交界处出现一条细线的问题。",
+				"修复长按沉浸式卡片时，封面和文字之间隐约有一条细线的问题。",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1058,
 		date: "2026-11-14",
 		updates: {
