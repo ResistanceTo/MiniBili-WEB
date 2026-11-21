@@ -3,6 +3,22 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1064,
+		date: "2026-11-21",
+		updates: {
+			feature: [
+				"视频页「延伸样式」新增「光晕」：状态栏底下不再铺画面，只有从画面顶边往上晕开的光，越往上越淡。在「设置 · 播放器与弹幕 · 视频页氛围」里选，默认样式不变。",
+			],
+			improvement: [
+				"视频环境光重做：光从画面边缘往四周晕开，颜色和紧挨着的画面对得上，范围更大、过渡更柔和。",
+				"画面偏暗或带黑边时，浅色背景上不再出现一片灰影。",
+				"竖屏视频的环境光只从画面本身发出，两侧黑边下面不再有光。",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1063,
 		date: "2026-11-20",
 		updates: {
