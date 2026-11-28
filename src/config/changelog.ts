@@ -3,6 +3,25 @@ import { type ChangelogVersion, AppPlatform } from "./types";
 export const changelog: ChangelogVersion[] = [
 	{
 		version: "先行版",
+		build: 1066,
+		date: "2026-11-28",
+		updates: {
+			improvement: [
+				"弹幕多的视频里，双击快进不会再误点到弹幕了。现在只有单独点一下弹幕才会出气泡。",
+				"暂停后播放器收上去了，再切到「详情」或「评论」也会保持收起，不会又自己弹出来。",
+			],
+			bugfix: [
+				"修复长按选中评论文字、拖动选择范围时，页面会跟着左右滑，甚至把回复面板滑走。",
+				"修复在评论区看完图片返回，列表会上下跳一下。",
+				"修复评论回复面板打开、关闭时卡顿。",
+				"修复播放器收起后，「继续播放」和下面的「详情 / 评论」之间有一条很明显的分割线。",
+				"修复点开评论回复时会先闪一下「暂无回复」。",
+			],
+		},
+		platforms: [AppPlatform.iOS],
+	},
+	{
+		version: "先行版",
 		build: 1065,
 		date: "2026-11-26",
 		updates: {
